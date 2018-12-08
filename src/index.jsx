@@ -12,12 +12,10 @@ import './index.css';
 
 const store = configureStore();
 
-const venueId = process.env.REACT_APP_VENUE_ID || window.VENUEX_VENUE_ID;
-
 ReactDOM.render(
   <Router>
     <Provider store={store}>
-      <App venueId={venueId} />
+      <App />
     </Provider>
   </Router>,
   document.getElementById('root')

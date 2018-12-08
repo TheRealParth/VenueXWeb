@@ -1,31 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
-import auth0 from 'auth0-js';
-import firebase from 'firebase';
-import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
-import { createHashHistory } from 'history';
 
-const auth1 = new auth0.WebAuth({
-  domain: 'venuex-ds-test',
-  clientID: '3f6HzzVeEtLDRMYT7Lb2cMDX97884GFD',
-  redirectUri: 'http://localhost:3000/callback',
-  responseType: 'token id_token',
-  scope: 'openid'
-});
-class App extends Component {
-  constructor(...args) {
-    super(...args);
+import { Route, Switch } from 'react-router';
+import Header from './components/Header';
 
-    const history = createHashHistory();
+import Top from './components/Top';
+import Private from './components/Private';
+import Login from './Auth/Login';
+import Logout from './Auth/Logout';
 
-    this.state = {};
-  }
-  componentDidMount() {}
-
-  render() {
-    return <h1>fuck the world</h1>;
-  }
-}
+const App = () => (
+  <div>
+    <Header />
+    <main>
+      <Switch>
+        <Route exact path="/" component={Top} />
+        <Route path="/private" component={Private} />
+        <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
+      </Switch>
+    </main>
+  </div>
+);
 
 export default App;
