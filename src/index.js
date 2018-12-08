@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker from './serviceWorker';
 import urlToVenueId from './utils/urlToVenueId';
 import './index.css';
 
