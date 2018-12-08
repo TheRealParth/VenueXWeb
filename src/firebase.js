@@ -3,6 +3,8 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
 import 'firebase/functions';
+import 'firebase/firestore'; // 👈 If you're using firestore
+import ReduxSagaFirebase from 'redux-saga-firebase';
 
 export default memoize(() => {
   firebase.initializeApp({
@@ -14,5 +16,6 @@ export default memoize(() => {
     messagingSenderId: process.env.REACT_APP_FIREBASE_MESSANGING_SENDER_ID
   });
 
-  return firebase;
+  const reduxSagaFirebase = new ReduxSagaFirebase(firebase);
+  return reduxSagaFirebase;
 });
