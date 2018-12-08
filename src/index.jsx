@@ -8,14 +8,11 @@ import configureStore from './store/configureStore';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import urlToVenueId from './utils/urlToVenueId';
 import './index.css';
 
 const store = configureStore();
 
-const venueId =
-  // eslint-disable-next-line no-undef
-  process.env.REACT_APP_VENUE_ID || window.VENUEX_VENUE_ID || urlToVenueId(window.location.href);
+const venueId = process.env.REACT_APP_VENUE_ID || window.VENUEX_VENUE_ID;
 
 ReactDOM.render(
   <Router>
@@ -26,4 +23,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-serviceWorker();
+serviceWorker.unregister();
