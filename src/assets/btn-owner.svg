@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="94" height="20" viewBox="0 0 94 20">
+    <g fill="none" fill-rule="evenodd">
+        <rect width="94" height="20" fill="#7D7D7D" rx="10"/>
+        <text fill="#FFF" font-family="Montserrat-Bold, Montserrat" font-size="10" font-weight="bold" letter-spacing="-.1">
+            <tspan x="6" y="13">ASSIGN OWNER</tspan>
+        </text>
+    </g>
+</svg>

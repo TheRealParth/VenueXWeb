@@ -1,12 +1,17 @@
+import './assets/styles/normalize.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
+
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import registerServiceWorker from './registerServiceWorker';
+import urlToVenueId from './utils/urlToVenueId';
+import './index.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const venueId =
+  // eslint-disable-next-line no-undef
+  process.env.REACT_APP_VENUE_ID || window.VENUEX_VENUE_ID || urlToVenueId(window.location.href);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(<App venueId={venueId} />, document.getElementById('root'));
+
+registerServiceWorker();
