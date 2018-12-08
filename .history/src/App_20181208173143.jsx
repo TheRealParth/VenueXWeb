@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import auth0 from 'auth0-js';
-import firebase from 'firebase';
-import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
-import { createHashHistory } from 'history';
+import routes from '../routes';
+import firebase from '../firebase';
 
 const auth1 = new auth0.WebAuth({
   domain: 'venuex-ds-test',
@@ -17,9 +15,17 @@ class App extends Component {
   constructor(...args) {
     super(...args);
 
+    const initialState = {};
     const history = createHashHistory();
 
-    this.state = {};
+    this.state = {
+      store: configureStore({
+        initialState,
+        firebase: firebase(),
+        history
+      }),
+      history
+    };
   }
   componentDidMount() {}
 

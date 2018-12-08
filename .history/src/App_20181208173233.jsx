@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import auth0 from 'auth0-js';
-import firebase from 'firebase';
+import routes from '../routes';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { createHashHistory } from 'history';
@@ -17,9 +17,17 @@ class App extends Component {
   constructor(...args) {
     super(...args);
 
+    const initialState = {};
     const history = createHashHistory();
 
-    this.state = {};
+    this.state = {
+      store: configureStore({
+        initialState,
+        firebase: firebase(),
+        history
+      }),
+      history
+    };
   }
   componentDidMount() {}
 

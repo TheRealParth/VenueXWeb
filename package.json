@@ -5,14 +5,21 @@
   "dependencies": {
     "firebase": "^5.7.0",
     "memoizee": "^0.4.14",
+    "auth0-js": "^9.8.2",
+    "connected-react-router": "^5.0.1",
+    "firebase": "^5.7.0",
+    "memoizee": "^0.4.14",
+    "parse-domain": "^2.1.7",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",
+    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2",
-    "redux-saga-firebase": "^0.14.1"
+    "redux-saga-firebase": "^0.14.1",
+    "reselect": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -9,8 +9,6 @@
     "plugin:import/recommended",
     "plugin:react/recommended"
   ],
-
-  "plugins": ["import", "prettier", "react"],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -19,6 +17,7 @@
       "experimentalObjectRestSpread": true
     }
   },
+  "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": ["error"],
     "valid-jsdoc": 2,

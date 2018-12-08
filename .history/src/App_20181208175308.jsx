@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import auth0 from 'auth0-js';
+import routes from '../routes';
 import firebase from 'firebase';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';

@@ -1,4 +1,3 @@
-
 export function humanize(str) {
   return str
     .replace(/^[\s_]+|[\s_]+$/g, '')
@@ -6,7 +5,6 @@ export function humanize(str) {
     .replace(/^[a-z]/, m => m.toUpperCase());
 }
 
-
 export default {
-  humanize,
+  humanize
 };
