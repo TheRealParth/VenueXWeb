@@ -4,7 +4,6 @@ import 'firebase/database';
 import 'firebase/auth';
 import 'firebase/functions';
 
-
 export default memoize(() => {
   firebase.initializeApp({
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
