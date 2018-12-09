@@ -1,10 +1,23 @@
-import { createStore } from 'redux';
-import rootReducer from '../reducers/rootReducer';
+import { compose, createStore, applyMiddleware } from 'redux';
+import { createLogger } from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import createSagaMiddleware from 'redux-saga';
+import root from './sagas';
+import { rootReducer } from '../reducers';
 
-export default function configureStore() {
-  return createStore(
+const sagas = createSagaMiddleware();
+let middleware = [sagas];
+
+const configureStore = initialState => {
+  const logger = createLogger();
+  middleware.push(logger);
+  const store = createStore(
     rootReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    // applyMiddleware(thunk)
+    initialState,
+    composeWithDevTools(applyMiddleware(...middleware))
   );
-}
+  sagas.run(root);
+  return store;
+};
+
+export default configureStore;
