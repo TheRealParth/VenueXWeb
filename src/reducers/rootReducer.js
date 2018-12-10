@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
 // import stuff from './stuffReducer';
 
-export const rootReducer = combineReducers({
-  // stuff
+export default combineReducers({
+  //
 });

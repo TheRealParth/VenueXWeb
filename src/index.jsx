@@ -3,22 +3,24 @@ import './assets/styles/normalize.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
-import configureStore from './store/configureStore';
-
+import { ConnectedRouter } from 'connected-react-router';
+import store from './store/store.jsx';
+import { createBrowserHistory } from 'history';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
+import { history } from './store/history';
+const historyStore = store(history);
 
-const store = configureStore();
-
-ReactDOM.render(
-  <Router>
-    <Provider store={store}>
+const render = () => {
+  console.log('FDSJKLJKL');
+  ReactDOM.render(
+    <Provider store={historyStore}>
       <App />
-    </Provider>
-  </Router>,
-  document.getElementById('root')
-);
+    </Provider>,
+    document.getElementById('root')
+  );
+};
 
+render();
 serviceWorker.unregister();

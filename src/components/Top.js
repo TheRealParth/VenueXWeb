@@ -1,14 +1,30 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import isAuthenticated from '../Auth/isAuthenticated';
 
 const Top = () => (
   <div>
-    <h2>Top Page</h2>
-    <p>Hi,</p>
-    <p>
-      If you are seeing this message, your authentication app is properly running. Please keep on
-      checking by clicking the link buttons inside the header, which were generated from the{' '}
-      <em>Link</em> element of React Router.
-    </p>
+    <h1>React Auth0 App</h1>
+    <nav>
+      <ul>
+        <li>
+          <Link to="/">Top</Link>
+        </li>
+        <li>
+          <Link to="/private">Private</Link>
+        </li>
+        {!isAuthenticated() && (
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        )}
+        {isAuthenticated() && (
+          <li>
+            <Link to="/logout">Logout</Link>
+          </li>
+        )}
+      </ul>
+    </nav>
   </div>
 );
 

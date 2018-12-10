@@ -9,6 +9,12 @@ class Lock extends Component {
       responseType: 'token id_token',
       sso: false
     },
+    additionalSignUpFields: [
+      {
+        name: 'venueId',
+        placeholder: 'venue Id'
+      }
+    ],
     container: AUTH_CONFIG.container,
     theme: {
       primaryColor: '#3a99d8'

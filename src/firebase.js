@@ -15,11 +15,7 @@ export default memoize(() => {
     storageBucket: 'venuex-dreamstack.appspot.com',
     messagingSenderId: '1091768111084'
   });
-<<<<<<< Updated upstream
 
   const reduxSagaFirebase = new ReduxSagaFirebase(firebase);
   return reduxSagaFirebase;
-=======
-  return firebase;
->>>>>>> Stashed changes
 });

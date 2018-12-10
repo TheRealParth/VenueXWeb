@@ -2,20 +2,19 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import calendarWhiteIcon from 'assets/calendar-white.svg';
-import peopleWhiteIcon from 'assets/people-white.svg';
-import billingWhiteIcon from 'assets/bill-white.svg';
-
+import calendarWhiteIcon from '../assets/calendar-white.svg';
+import peopleWhiteIcon from '../assets/people-white.svg';
+import billingWhiteIcon from '../assets/bill-white.svg';
 
 const Container = styled.div`
   width: 226px;
   height: 100%;
   background-color: #000000;
-  color: #FFF;
+  color: #fff;
 `;
 
 const Item = styled(Link)`
-  color: #FFF;
+  color: #fff;
   text-decoration: none;
   height: 70px;
   cursor: pointer;
@@ -29,28 +28,30 @@ const Item = styled(Link)`
   transition-duration: 0.3s;
 
   &:hover {
-    background-color: ${props => props.theme.colors.primary}4D;
+    background-color: ${props => '#333333'}4D;
   }
 
-  ${props => props.isActive && css`
-    background-color: ${props => props.theme.colors.primary}99;
+  ${props =>
+    props.isActive &&
+    css`
+      background-color: ${props => '#333333'}99;
 
-    &:hover {
-      background-color: ${props => props.theme.colors.primary}99;
-    }
+      &:hover {
+        background-color: ${props => '#333333'}99;
+      }
 
-    &:before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      height: 100%;
-      width: 5px;
-      background-color: ${props => props.theme.colors.primary};
-      box-shadow: 3px 0 4px 0 rgba(0, 0, 0, 0.1);
-    }
-  `}
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        width: 5px;
+        background-color: ${props => '#333333'};
+        box-shadow: 3px 0 4px 0 rgba(0, 0, 0, 0.1);
+      }
+    `}
 `;
 
 const ItemIcon = styled.img`
@@ -64,7 +65,7 @@ const Layout = styled.div`
   height: 100vh;
 `;
 
-export default withRouter(({ children, match }) => (
+export const Sidebar = withRouter(({ children, match }) => (
   <Layout>
     <Container>
       <Item isActive={match.path.indexOf('/events') !== -1} to="/events">
