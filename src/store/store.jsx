@@ -18,13 +18,11 @@ const sagas = createSagaMiddleware();
 const loggerMiddleware = createLogger();
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = history => {
-  const store = createStore(
-    connectRouter(history)(rootReducer),
-    composeEnhancer(applyMiddleware(sagas, loggerMiddleware, routerMiddleware(history)))
-  );
-  sagas.run(root);
-  return store;
-};
+const store = createStore(
+  rootReducer(history),
+  composeEnhancer(applyMiddleware(sagas, loggerMiddleware, routerMiddleware(history)))
+);
+
+sagas.run(root);
 
 export default store;

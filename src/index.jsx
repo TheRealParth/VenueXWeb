@@ -9,13 +9,11 @@ import { createBrowserHistory } from 'history';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
-import { history } from './store/history';
-const historyStore = store(history);
 
 const render = () => {
   console.log('FDSJKLJKL');
   ReactDOM.render(
-    <Provider store={historyStore}>
+    <Provider store={store}>
       <App />
     </Provider>,
     document.getElementById('root')
