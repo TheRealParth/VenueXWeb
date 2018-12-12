@@ -3,6 +3,8 @@ import { connectRouter } from 'connected-react-router';
 import { alert } from './alert';
 import { auth } from './auth';
 import { events } from './events';
+import { users } from './users';
+import { venues } from './venues';
 import { reducer as formReducer } from 'redux-form';
 
 export default history =>
@@ -11,5 +13,7 @@ export default history =>
     router: connectRouter(history),
     alert,
     auth,
-    events
+    events,
+    users,
+    venues
   });

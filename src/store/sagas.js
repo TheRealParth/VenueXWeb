@@ -1,6 +1,6 @@
 import { takeLatest, put, fork, spawn, call, all, takeEvery } from 'redux-saga/effects';
 import * as types from '../types';
-import { syncEvents } from '../actions';
+import { syncEvents, syncUsers, syncVenues } from '../actions';
 import rsf from '../firebase';
 
 export function* loginWatcher() {
@@ -11,15 +11,8 @@ export function* loginFlow(action) {
     const { email, password } = action.user;
     console.log(email, password);
     yield put({
-      type: types.eventTypes.GET_EVENTS_REQUEST
+      type: types.dashboardTypes.GET_DASHBOARD_REQUEST
     });
-    // const user = yield call(AuthService.login, email, password);
-    // yield put({ type: types.authTypes.LOGIN_SUCCESS, user });
-    // yield put({ type: types.SET_TOKEN_INFO, user });
-    // yield call(httpUtils.setUser, user);
-    // yield put({
-    //   type: types.projectTypes.GET_DASHBOARD_REQUEST
-    //});
   } catch (error) {
     yield put({
       type: types.authTypes.LOGIN_FAILURE,
@@ -28,17 +21,38 @@ export function* loginFlow(action) {
   }
 }
 
-const eventsTransformer = events => {
+const itemsTransformer = items => {
   const res = [];
-  events.forEach(event =>
+  items.forEach(item =>
     res.push({
-      id: event.id,
-      ...event.data()
+      id: item.id,
+      ...item.data()
     })
   );
   return res;
 };
 
+export function* dashboardWatcher() {
+  yield takeLatest(types.dashboardTypes.GET_DASHBOARD_REQUEST, loadDashboard);
+}
+
+export function* loadDashboard() {
+  try {
+    yield put({
+      type: types.eventTypes.GET_EVENTS_REQUEST
+    });
+    yield put({
+      type: types.venueTypes.GET_VENUES_REQUEST
+    });
+    yield put({
+      type: types.userTypes.GET_USERS_REQUEST
+    });
+  } catch (error) {
+    yield put({
+      type: types.dashboardTypes.GET_DASHBOARD_FAILURE
+    });
+  }
+}
 export function* syncEventsWatcher() {
   yield takeLatest(types.eventTypes.GET_EVENTS_REQUEST, syncEventsForDashboard);
 }
@@ -46,10 +60,38 @@ export function* syncEventsWatcher() {
 export function* syncEventsForDashboard() {
   yield fork(rsf.firestore.syncCollection, 'events', {
     successActionCreator: syncEvents,
-    transform: eventsTransformer
+    transform: itemsTransformer
+  });
+}
+
+export function* syncVenuesWatcher() {
+  yield takeLatest(types.venueTypes.GET_VENUES_REQUEST, syncVenuesForDashboard);
+}
+
+export function* syncVenuesForDashboard() {
+  yield fork(rsf.firestore.syncCollection, 'venues', {
+    successActionCreator: syncVenues,
+    transform: itemsTransformer
+  });
+}
+
+export function* syncUsersWatcher() {
+  yield takeLatest(types.userTypes.GET_USERS_REQUEST, syncUsersForDashboard);
+}
+
+export function* syncUsersForDashboard() {
+  yield fork(rsf.firestore.syncCollection, 'users', {
+    successActionCreator: syncUsers,
+    transform: itemsTransformer
   });
 }
 
 export default function* root() {
-  yield all([loginWatcher(), syncEventsWatcher()]);
+  yield all([
+    loginWatcher(),
+    dashboardWatcher(),
+    syncEventsWatcher(),
+    syncVenuesWatcher(),
+    syncUsersWatcher()
+  ]);
 }

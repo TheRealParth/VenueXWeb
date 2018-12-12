@@ -3,8 +3,27 @@ export const authTypes = {
   LOGIN_SUCCESS: 'USERS_LOGIN_SUCCESS',
   LOGIN_FAILURE: 'USERS_LOGIN_FAILURE'
 };
+export const dashboardTypes = {
+  GET_DASHBOARD_REQUEST: 'GET_DASHBOARD_REQUEST',
+  GET_DASHBOARD_FAILURE: 'GET_DASHBOARD_FAILURE'
+};
+export const venueTypes = {
+  VENUES: {
+    SYNC: 'VENUES.SYNC'
+  },
+  GET_VENUES_REQUEST: 'GET_VENUES_REQUEST',
+  GET_VENUES_SUCCESS: 'GET_VENUES_SUCCESS',
+  GET_VENUES_FAILURE: 'GET_VENUES_FAILURE'
+};
 
-export const venueTypes = {};
+export const userTypes = {
+  USERS: {
+    SYNC: 'USERS.SYNC'
+  },
+  GET_USERS_REQUEST: 'GET_USERS_REQUEST',
+  GET_USERS_SUCCESS: 'GET_USERS_SUCCESS',
+  GET_USERS_FAILURE: 'GET_USERS_FAILURE'
+};
 
 export const eventTypes = {
   EVENTS: {
