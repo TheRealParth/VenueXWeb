@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import { alert } from './alert';
 import { auth } from './auth';
+import { events } from './events';
 import { reducer as formReducer } from 'redux-form';
 
 export default history =>
@@ -9,5 +10,6 @@ export default history =>
     form: formReducer,
     router: connectRouter(history),
     alert,
-    auth
+    auth,
+    events
   });

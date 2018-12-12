@@ -1,6 +1,6 @@
 import { alertTypes } from '../types';
 
-export function alert(state = {}, action) {
+export const alert = (state = {}, action) => {
   switch (action.type) {
     case alertTypes.SUCCESS:
       return {
@@ -17,4 +17,4 @@ export function alert(state = {}, action) {
     default:
       return state;
   }
-}
+};
