@@ -6,7 +6,14 @@ export const authTypes = {
 
 export const venueTypes = {};
 
-export const eventTypes = {};
+export const eventTypes = {
+  EVENTS: {
+    SYNC: 'EVENTS.SYNC'
+  },
+  GET_EVENTS_REQUEST: 'GET_EVENTS_REQUEST',
+  GET_EVENTS_SUCCESS: 'GET_EVENTS_SUCCESS',
+  GET_EVENTS_FAILURE: 'GET_EVENTS_FAILURE'
+};
 
 export const alertTypes = {
   SUCCESS: 'ALERT_SUCCESS',
