@@ -1,9 +1,13 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import { history } from '../store/history';
-// import stuff from './stuffReducer';
+import { alert } from './alert';
+import { auth } from './auth';
+import { reducer as formReducer } from 'redux-form';
 
 export default history =>
   combineReducers({
-    router: connectRouter(history)
+    form: formReducer,
+    router: connectRouter(history),
+    alert,
+    auth
   });

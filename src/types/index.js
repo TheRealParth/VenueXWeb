@@ -7,3 +7,9 @@ export const authTypes = {
 export const venueTypes = {};
 
 export const eventTypes = {};
+
+export const alertTypes = {
+  SUCCESS: 'ALERT_SUCCESS',
+  ERROR: 'ALERT_ERROR',
+  CLEAR: 'ALERT_CLEAR'
+};

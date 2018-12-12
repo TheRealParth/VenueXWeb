@@ -11,6 +11,7 @@ import Logout from './Auth/Logout';
 import Dashboard from './components/Dashboard/Dashboard';
 import { PrivateRoute } from './components/PrivateRoute';
 import ManageStaff from './components/ManageStaff/ManageStaff.jsx';
+import { SignInPage } from './pages/SignIn';
 
 const App = () => (
   <div>
@@ -18,7 +19,7 @@ const App = () => (
       <Router>
         <Switch>
           <Route exact path="/" component={Top} />
-          <Route path="/login" component={Login} />
+          <Route path="/login" component={SignInPage} />
           <Route path="/logout" component={Logout} />
           <Dashboard>
             <Switch>

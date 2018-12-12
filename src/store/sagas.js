@@ -6,7 +6,8 @@ export function* loginWatcher() {
 }
 export function* loginFlow(action) {
   try {
-    // const { email, password } = action.user;
+    const { email, password } = action.user;
+    console.log(email, password);
     // const user = yield call(AuthService.login, email, password);
     // yield put({ type: types.authTypes.LOGIN_SUCCESS, user });
     // yield put({ type: types.SET_TOKEN_INFO, user });
