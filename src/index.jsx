@@ -8,17 +8,13 @@ import store from './store/store.jsx';
 import { createBrowserHistory } from 'history';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import './index.css';
+import './index.scss';
 
-const render = () => {
-  console.log('FDSJKLJKL');
-  ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.getElementById('root')
-  );
-};
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
 
-render();
 serviceWorker.unregister();
