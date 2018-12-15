@@ -5,7 +5,7 @@ import * as userActions from '../../actions';
 
 function mapStateToProps({ events, users }) {
   return {
-    events,
+    events: events.list,
     users: users.list
   };
 }
