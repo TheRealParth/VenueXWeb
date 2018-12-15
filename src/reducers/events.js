@@ -1,4 +1,5 @@
 import { eventTypes } from '../types';
+import { createSelector } from 'reselect';
 
 const initialState = {
   list: []

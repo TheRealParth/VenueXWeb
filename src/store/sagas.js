@@ -13,13 +13,7 @@ export function* loginFlow(action) {
     const { email, password } = action.user;
     console.log(email, password);
     const venueId = 'demo';
-    const results = yield axios.post(
-      `${baseURL}/api/auth/login`,
-      {
-        email,
-        password,
-        venueId,
-      });
+    //const results = yield call(AuthService.login, email, password, venueId);
     yield put({
       type: types.dashboardTypes.GET_DASHBOARD_REQUEST
     });
@@ -90,7 +84,7 @@ export function* syncUsersWatcher() {
 }
 
 export function* syncUsersForDashboard() {
-  yield fork(rsf.firestore.syncCollection, 'users', {
+  yield fork(rsf.firestore.syncCollection, 'venues/demo/users', {
     successActionCreator: syncUsers,
     transform: itemsTransformer
   });
