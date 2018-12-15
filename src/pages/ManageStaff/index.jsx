@@ -16,7 +16,7 @@ const styles = {
 function mapStateToProps({ events, users }) {
   return {
     events,
-    users
+    users: users.list
   };
 }
 function mapDispatchToProps(dispatch) {

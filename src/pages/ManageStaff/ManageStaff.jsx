@@ -26,34 +26,31 @@ class ManageStaff extends Component {
     this.props.getUsersRequest();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log(this.props);
-  }
-
   render() {
+    const { users, classes } = this.props;
+    const { root, table } = classes;
+    console.log(users, classes);
     return (
-      <Paper className={this.props.classes.root}>
-        <Table className={this.props.classes.table}>
+      <Paper className={root}>
+        <Table className={table}>
           <TableHead>
             <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell numeric>Calories</TableCell>
-              <TableCell numeric>Fat (g)</TableCell>
-              <TableCell numeric>Carbs (g)</TableCell>
-              <TableCell numeric>Protein (g)</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell numeric>Email</TableCell>
+              <TableCell numeric>Permission</TableCell>
+              <TableCell numeric>Date Added</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map(n => {
+            {users.map(({ id, email, fullName, permissions, updated }) => {
               return (
-                <TableRow key={n.id}>
+                <TableRow key={id}>
                   <TableCell component="th" scope="row">
-                    {n.name}
+                    {fullName}
                   </TableCell>
-                  <TableCell numeric>{n.calories}</TableCell>
-                  <TableCell numeric>{n.fat}</TableCell>
-                  <TableCell numeric>{n.carbs}</TableCell>
-                  <TableCell numeric>{n.protein}</TableCell>
+                  <TableCell numeric>{email}</TableCell>
+                  <TableCell numeric>Permissions</TableCell>
+                  <TableCell numeric>Updated</TableCell>
                 </TableRow>
               );
             })}
@@ -66,6 +63,10 @@ class ManageStaff extends Component {
 
 ManageStaff.propTypes = {
   classes: PropTypes.object.isRequired
+};
+
+ManageStaff.defaultProps = {
+  users: []
 };
 
 export { ManageStaff };
