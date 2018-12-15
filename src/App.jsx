@@ -8,7 +8,7 @@ import Top from './components/Top';
 import Logout from './Auth/Logout';
 import Dashboard from './components/Dashboard/Dashboard';
 import { PrivateRoute } from './components/PrivateRoute';
-import ManageStaff from './components/ManageStaff/ManageStaff.jsx';
+import ManageStaff from './pages/ManageStaff';
 import Events from './pages/Events';
 import { SignInPage } from './pages/SignIn';
 
