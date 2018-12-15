@@ -13,13 +13,15 @@ export function* loginFlow(action) {
     const { email, password } = action.user;
     console.log(email, password);
     const venueId = 'demo';
-    const results = yield axios.post(
+    const results = yield call(
+      axios.post,
       `${baseURL}/api/auth/login`,
       {
         email,
         password,
         venueId,
-      });
+      }
+    );
     yield put({
       type: types.dashboardTypes.GET_DASHBOARD_REQUEST
     });

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import DatePicker from 'components/DatePicker';
-import BaseInput from 'components/form/BaseInput';
+import DatePicker from '../DatePicker';
+import BaseInput from '../form/BaseInput';
 
 const Spacing = styled.div`
   padding: 0px 5px;

@@ -4,20 +4,20 @@ import { compose } from 'redux';
 import { withFirebase, firebaseConnect } from 'react-redux-firebase';
 import moment from 'moment';
 import styled from 'styled-components';
-import Modal from 'components/Modal';
-import ConfirmationModal from 'components/ConfirmationModal';
-import Button from 'components/Button';
-import SideTabs from 'components/SideTabs';
-import ConsultantLabel from 'components/Consultant';
-import Switch from 'components/Switch';
-import EventModalForm from 'components/events/EventModalForm';
-import { withVenueConfig } from 'containers/VenueConfigProvider';
-import { humanize } from 'utils';
-import ringsImage from 'assets/rings.svg';
-import calendarIcon from 'assets/calendar-gray.svg';
-import notesIcon from 'assets/notes-icon.svg';
-import clientDetailsIcon from 'assets/client-details-icon.svg';
-import grayRoomIcon from 'assets/room-gray.svg';
+import Modal from '../Modal';
+import ConfirmationModal from '../ConfirmationModal';
+import Button from '../Button';
+import SideTabs from '../SideTabs';
+import ConsultantLabel from '../Consultant';
+import Switch from '../Switch';
+import EventModalForm from '../events/EventModalForm';
+import { withVenueConfig } from '../../containers/VenueConfigProvider';
+import { humanize } from '../../utils';
+import ringsImage from '../../assets/rings.svg';
+import calendarIcon from '../../assets/calendar-gray.svg';
+import notesIcon from '../../assets/notes-icon.svg';
+import clientDetailsIcon from '../../assets/client-details-icon.svg';
+import grayRoomIcon from '../../assets/room-gray.svg';
 
 
 const Header = styled.div`
