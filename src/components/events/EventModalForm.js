@@ -3,21 +3,21 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import styled from 'styled-components';
-import Switch from 'components/form/Switch';
-import Button from 'components/Button';
-import Modal from 'components/Modal';
-import ConsultantsPicker from 'components/form/ConsultantsPicker';
+import Switch from '../form/Switch';
+import Button from '../Button';
+import Modal from '../Modal';
+import ConsultantsPicker from '../form/ConsultantsPicker';
 import {
   DateTimeDurationFilled,
   OwnerSelectedValidator,
   NotEmptyValidator,
-} from 'utils/formValidators';
-import Select from 'components/form/Select';
-import Textarea from 'components/form/Textarea';
-import DateTimeDurationField from 'components/form/DateTimeDurationField';
-import { withVenueConfig } from 'containers/VenueConfigProvider';
-import DatePickerField from 'components/form/DatePickerField';
-import Input from 'components/form/Input';
+} from '../../utils/formValidators';
+import Select from '../form/Select';
+import Textarea from '../form/Textarea';
+import DateTimeDurationField from '../form/DateTimeDurationField';
+import { withVenueConfig } from '../../containers/VenueConfigProvider';
+import DatePickerField from '../form/DatePickerField';
+import Input from '../form/Input';
 
 const Header = styled.div`
   background-color: ${props => props.theme.colors.primary}66;

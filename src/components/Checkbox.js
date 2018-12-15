@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import checkmarkWhite from '../checkmark-white.svg';
+import checkmarkWhite from '../assets/checkmark-white.svg';
 
 const Root = styled.div`
   border: solid 1px #b0b0b0;

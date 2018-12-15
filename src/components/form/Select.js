@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import BaseInput from 'components/form/BaseInput';
-import dropdownCaretDown from 'assets/caret-down-custom.svg';
+import BaseInput from '../form/BaseInput';
+import dropdownCaretDown from '../../assets/caret-down-custom.svg';
 
 const Select = styled.select`
   border: none;
