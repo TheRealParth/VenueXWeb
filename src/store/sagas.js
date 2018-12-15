@@ -16,7 +16,7 @@ export function* loginFlow(action) {
     const results = yield axios.post(
       `${baseURL}/api/auth/login`,
       {
-        username: email,
+        email,
         password,
         venueId,
       });

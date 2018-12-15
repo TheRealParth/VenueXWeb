@@ -10,17 +10,14 @@ import moment from 'moment';
 import styles from './index.module.scss';
 const weekDayNums = [1, 2, 3, 4, 5, 6, 7];
 class Calendar extends PureComponent {
-
   state = {
     expandedDate: null,
   };
-
   handleMoreClicked = (actualDate) => {
     this.setState({
       expandedDate: actualDate.format('YYYY-MM-DD'),
     });
   }
-
   render() {
     const {
       events = [],
@@ -137,14 +134,6 @@ class Calendar extends PureComponent {
                 </div>
               );
             })}
-            <style>{
-              `
-              .${styles.calItem}:hover {
-                background-color: black;
-              }
-              `
-            }
-            </style>
           </div>
         ))}
       </div>
