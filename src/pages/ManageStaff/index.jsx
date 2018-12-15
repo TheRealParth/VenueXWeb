@@ -13,9 +13,10 @@ const styles = {
     minWidth: 700
   }
 };
-function mapStateToProps({ events }) {
+function mapStateToProps({ events, users }) {
   return {
-    events
+    events,
+    users
   };
 }
 function mapDispatchToProps(dispatch) {

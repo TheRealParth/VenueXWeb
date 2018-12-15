@@ -23,7 +23,7 @@ const data = [
 
 class ManageStaff extends Component {
   componentDidMount() {
-    this.props.getEventsRequest();
+    this.props.getUsersRequest();
   }
 
   componentDidUpdate(prevProps, prevState) {
