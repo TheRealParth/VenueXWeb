@@ -23,9 +23,7 @@ const App = () => (
           <Dashboard>
             <Route path="/events" component={Events} />
             <Route path="/manageStaff" component={ManageStaff} />
-            <Switch>
-              {/* <PrivateRoute path="/events" component={Events} /> */}
-            </Switch>
+            <Switch>{/* <PrivateRoute path="/events" component={Events} /> */}</Switch>
           </Dashboard>
         </Switch>
       </Router>
