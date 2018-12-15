@@ -8,7 +8,7 @@ import store from './store/store.jsx';
 import { createBrowserHistory } from 'history';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import './index.css';
+import './index.scss';
 
 const render = () => {
   ReactDOM.render(

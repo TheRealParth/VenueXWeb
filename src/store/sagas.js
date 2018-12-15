@@ -62,7 +62,7 @@ export function* syncEventsWatcher() {
 }
 
 export function* syncEventsForDashboard() {
-  yield fork(rsf.firestore.syncCollection, 'events', {
+  yield fork(rsf.firestore.syncCollection, 'venues/demo/events', {
     successActionCreator: syncEvents,
     transform: itemsTransformer
   });
