@@ -137,6 +137,14 @@ class Calendar extends PureComponent {
                 </div>
               );
             })}
+            <style>{
+              `
+              .${styles.calItem}:hover {
+                background-color: black;
+              }
+              `
+            }
+            </style>
           </div>
         ))}
       </div>

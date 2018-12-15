@@ -40,10 +40,6 @@ class Dashboard extends React.Component {
           {children}
           <div className={classes.tableContainer} />
         </main>
-        <style>{`
-        .item{
-          background-color: red;
-        }`}</style>
       </div>
     );
   }

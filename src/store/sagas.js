@@ -2,6 +2,8 @@ import { takeLatest, put, fork, spawn, call, all, takeEvery } from 'redux-saga/e
 import * as types from '../types';
 import { syncEvents, syncUsers, syncVenues } from '../actions';
 import rsf from '../firebase';
+import axios from 'axios';
+const baseURL = 'https://us-central1-venuex-dreamstack.cloudfunctions.net';
 
 export function* loginWatcher() {
   yield takeLatest(types.authTypes.LOGIN_REQUEST, loginFlow);
@@ -10,6 +12,14 @@ export function* loginFlow(action) {
   try {
     const { email, password } = action.user;
     console.log(email, password);
+    const venueId = 'demo';
+    const results = yield axios.post(
+      `${baseURL}/api/auth/login`,
+      {
+        username: email,
+        password,
+        venueId,
+      });
     yield put({
       type: types.dashboardTypes.GET_DASHBOARD_REQUEST
     });
