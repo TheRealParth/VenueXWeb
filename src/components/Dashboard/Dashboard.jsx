@@ -4,18 +4,7 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems } from './ListItems';
-import { Sidebar } from '../Sidebar.jsx';
+import Sidebar from '../Sidebar';
 const drawerWidth = 220;
 
 class Dashboard extends React.Component {
@@ -32,7 +21,7 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, children } = this.props;
 
     return (
       <div className={classes.root}>
@@ -48,15 +37,13 @@ class Dashboard extends React.Component {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Typography variant="h4" gutterBottom component="h2">
-            Orders
-          </Typography>
-          <Typography component="div" className={classes.chartContainer} />
-          <Typography variant="h4" gutterBottom component="h2">
-            Products
-          </Typography>
+          {children}
           <div className={classes.tableContainer} />
         </main>
+        <style>{`
+        .item{
+          background-color: red;
+        }`}</style>
       </div>
     );
   }

@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getUser } from 'reducers/core';
+
 import styled from 'styled-components';
-import Dropdown from 'components/Dropdown';
-import LogOut from 'assets/icons/LogOut';
-import Camera from 'assets/icons/Camera';
-import Key from 'assets/icons/Key';
+import Dropdown from './Dropdown';
+import LogOut from '../assets/icons/LogOut';
+import Camera from '../assets/icons/Camera';
+import Key from '../assets/icons/Key';
 
 const ProfilePicture = styled.img`
   width: 50px;
@@ -71,5 +71,5 @@ const PersonalMenu = ({ currentUser }) => (
 );
 
 export default connect(state => ({
-  currentUser: getUser(state),
+  currentUser: () => { },
 }))(PersonalMenu);

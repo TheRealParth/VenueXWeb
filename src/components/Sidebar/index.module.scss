@@ -1,0 +1,51 @@
+.container {
+  width: 226px;
+  height: 100%;
+  background-color: #000000;
+  color: #fff;
+}
+.layout {
+  display: flex;
+  height: 100vh;
+}
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+.item {
+  color: #fff;
+  text-decoration: none;
+  height: 70px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+  position: relative;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
+  transition-duration: 0.3s;
+
+  &:hover {
+    background-color: #3333334d;
+  }
+  &.active {
+    background-color: #33333399;
+    &:hover {
+      background-color: #33333399;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+      width: 5px;
+      background-color: '#333333';
+      box-shadow: 3px 0 4px 0 rgba(0, 0, 0, 0.1);
+    }
+  }
+}

@@ -8,8 +8,11 @@
     "plugin:import/recommended",
     "plugin:react/recommended"
   ],
-
-  "plugins": ["import", "prettier", "react"],
+  "plugins": [
+    "import",
+    "prettier",
+    "react"
+  ],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -19,7 +22,9 @@
     }
   },
   "rules": {
-    "prettier/prettier": ["error"],
+    "prettier/prettier": [
+      "error"
+    ],
     "valid-jsdoc": 2,
     "react/jsx-uses-react": 1,
     "react/jsx-no-undef": 2,

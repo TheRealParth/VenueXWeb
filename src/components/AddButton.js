@@ -6,11 +6,11 @@ const AddIcon = styled.img`
   height: 17px;
   width: 17px;
 `;
-
+//   background-color: ${props => props.theme.colors.primary};
 const AddButton = styled.div`
   height: 50px;
   width: 50px;
-  background-color: ${props => props.theme.colors.primary};
+
   border-radius: 50%;
   display: flex;
   justify-content: center;

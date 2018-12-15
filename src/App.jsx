@@ -5,12 +5,11 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import Header from './components/Header';
 
 import Top from './components/Top';
-import Private from './components/Private';
-import Login from './Auth/Login';
 import Logout from './Auth/Logout';
 import Dashboard from './components/Dashboard/Dashboard';
 import { PrivateRoute } from './components/PrivateRoute';
 import ManageStaff from './components/ManageStaff/ManageStaff.jsx';
+import Events from './pages/Events';
 import { SignInPage } from './pages/SignIn';
 
 const App = () => (
@@ -22,8 +21,10 @@ const App = () => (
           <Route path="/login" component={SignInPage} />
           <Route path="/logout" component={Logout} />
           <Dashboard>
+            <Route path="/events" component={Events} />
+            <Route path="/manageStaff" component={ManageStaff} />
             <Switch>
-              <PrivateRoute path="/events" component={ManageStaff} />
+              {/* <PrivateRoute path="/events" component={Events} /> */}
             </Switch>
           </Dashboard>
         </Switch>
