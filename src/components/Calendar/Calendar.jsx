@@ -8,7 +8,7 @@ import rightArrowIcon from '../../assets/caret-right-custom.svg';
 import closeIcon from '../../assets/close.svg';
 import moment from 'moment';
 import styles from './index.module.scss';
-
+const weekDayNums = [1, 2, 3, 4, 5, 6, 7];
 class Calendar extends PureComponent {
 
   state = {
@@ -24,14 +24,14 @@ class Calendar extends PureComponent {
   render() {
     const {
       events = [],
-      date = { format: () => { } },
+      date = moment(),
       onNextMonth,
       onPreviousMonth,
       onAdd,
       onEventClicked,
       onToday,
     } = this.props;
-    const weekdays = [1, 2, 3, 4, 5, 6, 7].map(dateNumber => (
+    const weekdays = weekDayNums.map(dateNumber => (
       moment(date).set('date', dateNumber).format('ddd')
     ));
     let displayingDate = 1;
@@ -63,7 +63,7 @@ class Calendar extends PureComponent {
         </div>
         {[1, 2, 3, 4, 5].map(() => (
           <div className={styles.calRow}>
-            {[1, 2, 3, 4, 5, 6, 7].map(() => {
+            {weekDayNums.map(() => {
               const currentDate = displayingDate++;
               const actualDate = moment(date).set('hour', 0).set('date', currentDate);
 
