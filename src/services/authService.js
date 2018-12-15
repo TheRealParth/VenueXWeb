@@ -3,13 +3,13 @@ import { httpUtils } from '../helpers';
 import { apiConfig } from './apiConfig';
 
 export class AuthService {
-  static login(email, password) {
+  static login(username, password) {
     return axios
       .post(
         `${apiConfig.baseURL}/auth/login`,
         //DATA
         {
-          username: email,
+          username,
           password,
           venueId: apiConfig.venueId
         },

@@ -10,8 +10,8 @@ export function* loginWatcher() {
 
 export function* loginFlow(action) {
   try {
-    const { email, password } = action.user;
-    const user = yield call(AuthService.login, email, password);
+    const { username, password } = action.user;
+    const user = yield call(AuthService.login, username, password);
     console.log(user);
     yield put({
       type: types.dashboardTypes.GET_DASHBOARD_REQUEST
