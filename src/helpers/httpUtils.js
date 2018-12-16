@@ -14,20 +14,33 @@ class httpUtils {
       return Promise.reject(errors);
     }
   }
+  static setUser = async newUser => {
+    try {
+      const oldUser = await localStorage.getItem('user');
+      const parsedOldUser = JSON.parse(oldUser);
+      const mergedUser = {
+        ...parsedOldUser,
+        ...newUser
+      };
+      localStorage.setItem('user', JSON.stringify(mergedUser));
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   static async authHeaders() {
     // return authorization header with token
     //extracted from user in asyncstorage
     let user = await localStorage.getItem('user');
-    //let token = JSON.parse(user).access_token;
-    // if (token) {
-    //   const AuthStr = 'Bearer '.concat(String(token));
-    //   let headers = apiConfig.headers;
-    //   headers = { ...headers, Authorization: AuthStr };
-    //   return headers;
-    // } else {
-    //   return {};
-    // }
+    let token = JSON.parse(user).access_token;
+    if (token) {
+      const AuthStr = 'Bearer '.concat(String(token));
+      let headers = apiConfig.headers;
+      headers = { ...headers, Authorization: AuthStr };
+      return headers;
+    } else {
+      return {};
+    }
   }
 }
 
