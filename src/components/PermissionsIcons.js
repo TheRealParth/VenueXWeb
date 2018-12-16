@@ -1,5 +1,5 @@
 import React from 'react';
-import Icons from 'assets/icons';
+import Icons from '../assets/icons';
 import styled from 'styled-components';
 
 const PermissionIcons = styled.div`
@@ -9,20 +9,14 @@ const PermissionIcons = styled.div`
   min-width: 110px;
 `;
 
-export default ({ ...restProps }) => (
-  <PermissionIcons {...restProps}>
-    <Icons.CalendarEdit
-      {...restProps}
-      color={restProps.edit ? '' : '#D8D8D8'}
-    />
-    <Icons.CalendarDelete
-      {...restProps}
-      color={restProps.delete ? '' : '#D8D8D8'}
-    />
-    <Icons.Billing {...restProps} color={restProps.billing ? '' : '#D8D8D8'} />
-    <Icons.ManageStaff
-      {...restProps}
-      color={restProps.manageStaff ? '' : '#D8D8D8'}
-    />
-  </PermissionIcons>
-);
+export default props => {
+  console.log(props);
+  return (
+    <PermissionIcons {...props}>
+      <Icons.CalendarEdit {...props} color={props.events.create ? '#c0b69b' : '#D8D8D8'} />
+      <Icons.CalendarDelete {...props} color={props.events.delete ? '#c0b69b' : '#D8D8D8'} />
+      <Icons.Billing {...props} color={props.billing.create ? '#c0b69b' : '#D8D8D8'} />
+      <Icons.ManageStaff {...props} color={props.staff.create ? '#c0b69b' : '#D8D8D8'} />
+    </PermissionIcons>
+  );
+};

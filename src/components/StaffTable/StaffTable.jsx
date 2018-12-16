@@ -7,6 +7,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import moment from 'moment';
+import UserAvatar from './UserAvatar';
+import PermissionsIcons from '../PermissionsIcons';
+
 const StaffTable = props => {
   console.log(props);
   const { users, classes } = props;
@@ -23,16 +26,19 @@ const StaffTable = props => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map((user, { id, email, fullName, permissions, created }) => {
+          {users.map(user => {
             console.log(user);
-            const formattedDate = moment(created).format('MM/DD/YYYY');
+            const formattedDate = moment(user.created).format('MM/DD/YYYY');
+
             return (
-              <TableRow key={id}>
+              <TableRow key={user.id}>
                 <TableCell component="th" scope="row">
-                  {fullName}
+                  <UserAvatar user={user} />
                 </TableCell>
-                <TableCell numeric>{email}</TableCell>
-                <TableCell numeric>Permissions</TableCell>
+                <TableCell numeric>{user.email}</TableCell>
+                <TableCell numeric>
+                  <PermissionsIcons {...user.permissions} />
+                </TableCell>
                 <TableCell numeric>{formattedDate}</TableCell>
               </TableRow>
             );
