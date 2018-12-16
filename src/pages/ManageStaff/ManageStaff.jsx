@@ -18,7 +18,11 @@ class ManageStaff extends Component {
   }
   componentDidMount() {
     this.props.getUsersRequest();
+<<<<<<< HEAD
     this.props.setUsersSortKey('email', 'asc');
+=======
+    this.props.setUsersSortKey('created', 'asc');
+>>>>>>> c9ae4da4f38cd4d41367cbe7f9b93449f00a301a
   }
 
   componentDidUpdate(prevProps, prevState) {
