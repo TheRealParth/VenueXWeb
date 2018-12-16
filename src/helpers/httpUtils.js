@@ -32,9 +32,13 @@ class httpUtils {
     // return authorization header with token
     //extracted from user in asyncstorage
     let user = await localStorage.getItem('user');
+    //use JWT or
+    //instead of token , go fetch firestore rule to determine
+    // 1) are they authenticated
+    // 2) are they admin
     let token = JSON.parse(user).access_token;
     if (token) {
-      const AuthStr = 'Bearer '.concat(String(token));
+      const AuthStr = `JWT ${token}`;
       let headers = apiConfig.headers;
       headers = { ...headers, Authorization: AuthStr };
       return headers;
