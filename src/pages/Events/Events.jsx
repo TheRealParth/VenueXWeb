@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import BigCalendar from 'react-big-calendar';
+import BigCalendar from '../../components/BigCalendar';
 import moment from 'moment';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import '../../components/BigCalendar/less/styles.scss';
 
 const localizer = BigCalendar.momentLocalizer(moment);
 class Events extends Component {
@@ -35,19 +35,7 @@ class Events extends Component {
           endAccessor="end"
         />
         <style>{`
-        .rbc-btn-group:nth-child(3){
-          5: none;
-        }
-        div.rbc-header {
-          width: 167px;
-          height: 15px;
-        }
-        div.rbc-header > span  {
-          font-family: Montserrat;
-          font-size: 12px;
-          font-weight: bold;
-          font-style: normal;
-        }
+
         `}</style>
       </>
     );

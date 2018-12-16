@@ -13,24 +13,23 @@ export default props => {
   const handleChangeDate = newDate => {
     props.input.onChange({
       ...value,
-      date: newDate,
+      date: newDate
     });
   };
 
   const handleChangeStartTime = newTime => {
     props.input.onChange({
       ...value,
-      startTime: newTime,
+      startTime: newTime
     });
   };
 
   const handleChangeEndTime = newTime => {
     props.input.onChange({
       ...value,
-      endTime: newTime,
+      endTime: newTime
     });
   };
-
 
   return (
     <BaseInput {...props}>
