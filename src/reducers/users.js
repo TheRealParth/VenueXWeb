@@ -20,8 +20,8 @@ export const sortUsersSelector = createSelector(
   (list, sortKey) => {
     console.log(list);
     console.log(sortKey);
-    const orderByColumn = Object.keys(sortKey).filter(key => sortKey[key] !== null);
-
+    const orderByColumns = Object.keys(sortKey).filter(key => sortKey[key] !== null);
+    orderBy(list, orderByColumns);
     switch (Object.keys(sortKey)) {
       case 'created':
         orderBy(
