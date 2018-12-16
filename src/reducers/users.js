@@ -14,36 +14,11 @@ const initialState = {
 
 const usersSelector = users => users.list;
 const sortKeySelector = users => users.sortKey;
+const orderBySelector = users => users.orderBy;
 
 export const sortUsersSelector = createSelector(
-  [usersSelector, sortKeySelector],
-  (list, sortKey) => {
-    console.log(list);
-    console.log(sortKey);
-    const orderByColumn = Object.keys(sortKey).filter(key => sortKey[key] !== null);
-
-    switch (Object.keys(sortKey)) {
-      case 'created':
-        orderBy(
-          list,
-          record => {
-            return new moment(record.date);
-          },
-          sortKey['created']
-        );
-        break;
-
-      default:
-        const orderedList = orderBy(
-          list,
-          item => {
-            return item.fullName;
-          },
-          sortKey[`${Object.keys(sortKey)[0]}`]
-        );
-        return orderedList;
-    }
-  }
+  [usersSelector, sortKeySelector, orderBySelector],
+  orderBy
 );
 
 export const users = (state = initialState, action) => {
@@ -56,10 +31,8 @@ export const users = (state = initialState, action) => {
     case userTypes.SET_SORT_KEY:
       return {
         ...state,
-        sortKey: {
-          ...state.sortKey,
-          [action.sortKey]: { order: action.value }
-        }
+        sortKey: action.sortKey,
+        orderBy: action.value
       };
     default:
       return state;
