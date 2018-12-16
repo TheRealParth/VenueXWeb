@@ -5,6 +5,17 @@ import rsf from '../firebase';
 import { AuthService } from '../services/';
 import { httpUtils } from '../helpers';
 
+
+const itemsTransformer = items => {
+  const res = [];
+  items.forEach(item =>
+    res.push({
+      id: item.id,
+      ...item.data()
+    })
+  );
+  return res;
+};
 export function* loginWatcher() {
   yield takeLatest(types.authTypes.LOGIN_REQUEST, loginFlow);
 }
@@ -31,15 +42,12 @@ export function* loginFlow(action) {
 
 export function* loginWithToken({ payload }) {
   try {
-
     const { user } = yield call(httpUtils.signInWithCustomToken, payload);
-
     yield put({
       type: types.authTypes.LOGIN_SUCCESS,
       user
     });
     yield call(syncUserWatcher);
-
   } catch (error) {
     yield put({
       type: types.authTypes.LOGIN_FAILURE,
@@ -53,7 +61,6 @@ export function* loginWithTokensWatcher() {
 export function* syncUserWatcher() {
   yield takeLatest(types.authTypes.LOGIN_REQUEST, syncUserSaga);
 }
-
 export function* syncUserSaga() {
   const channel = yield call(rsf.auth.channel);
   console.log(channel);
@@ -70,16 +77,6 @@ export function* syncUserSaga() {
 }
 
 
-const itemsTransformer = items => {
-  const res = [];
-  items.forEach(item =>
-    res.push({
-      id: item.id,
-      ...item.data()
-    })
-  );
-  return res;
-};
 
 export function* dashboardWatcher() {
   yield takeLatest(types.dashboardTypes.GET_DASHBOARD_REQUEST, loadDashboard);
