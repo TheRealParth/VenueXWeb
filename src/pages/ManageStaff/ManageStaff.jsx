@@ -7,13 +7,25 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import StaffTable from '../../components/StaffTable';
+import { get } from 'lodash';
 class ManageStaff extends Component {
+  constructor(props) {
+    super(props);
+    console.log(this.props);
+  }
   componentDidMount() {
     this.props.getUsersRequest();
+    this.props.setUsersSortKey('fullName');
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { list } = get(this, 'props.users', []);
+    if (prevProps.sortedUsers !== list) {
+      console.log(this.props);
+    }
+  }
   render() {
-    const { users } = this.props;
+    const { users } = get(this, 'props', {});
     return <StaffTable users={users} />;
   }
 }

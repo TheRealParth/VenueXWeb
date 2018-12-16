@@ -4,6 +4,7 @@ import { StaffTable } from './StaffTable';
 const styles = theme => ({
   root: {
     width: '100%',
+    flexGrow: 1,
     overflowX: 'auto'
   },
   table: {
@@ -17,10 +18,11 @@ const styles = theme => ({
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  fab: {
-    margin: theme.spacing.unit
-  },
-  extendedIcon: theme.spacing.unit
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary
+  }
 });
 
 export default withStyles(styles)(StaffTable);

@@ -21,6 +21,9 @@ export function* loginFlow(action) {
       type: types.authTypes.LOGIN_SUCCESS,
       user
     });
+    yield put({
+      type: types.dashboardTypes.GET_DASHBOARD_REQUEST
+    });
   } catch (error) {
     yield put({
       type: types.authTypes.LOGIN_FAILURE,
@@ -31,7 +34,6 @@ export function* loginFlow(action) {
 
 export function* loginWithToken({ payload }) {
   try {
-
     const { user } = yield call(httpUtils.signInWithCustomToken, payload);
 
     yield put({
@@ -39,7 +41,6 @@ export function* loginWithToken({ payload }) {
       user
     });
     yield call(syncUserWatcher);
-
   } catch (error) {
     yield put({
       type: types.authTypes.LOGIN_FAILURE,
@@ -68,7 +69,6 @@ export function* syncUserSaga() {
     // else yield put(syncError(error));
   }
 }
-
 
 const itemsTransformer = items => {
   const res = [];

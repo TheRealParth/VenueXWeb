@@ -34,13 +34,20 @@ const styles = theme => ({
   extendedIcon: theme.spacing.unit
 });
 
-const ManageStaffHeader = ({ label, classes, ...rest }) => {
+const ManageStaffHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 120px;
+`;
+export default ({ label, classes, ...rest }) => {
   console.log(classes);
   return (
     <>
       <Button
+        {...rest}
         label={
-          <FilterLabel>
+          <FilterLabel {...rest}>
             <FilterIcon />
             Filter
           </FilterLabel>
@@ -48,7 +55,7 @@ const ManageStaffHeader = ({ label, classes, ...rest }) => {
         kind="white"
       />
 
-      <Fab color="primary" aria-label="Add" className={classes.fab}>
+      <Fab {...rest} color="primary" aria-label="Add" className={classes.fab}>
         <AddIcon />
       </Fab>
 
@@ -62,4 +69,3 @@ const ManageStaffHeader = ({ label, classes, ...rest }) => {
 ManageStaffHeader.propTypes = {
   classes: PropTypes.object.isRequired
 };
-export default withStyles(styles)(ManageStaffHeader);

@@ -10,3 +10,10 @@ export const getEventsRequest = () => {
     type: eventTypes.GET_EVENTS_REQUEST
   };
 };
+
+export const setEventsSortKey = sortKey => {
+  return {
+    type: eventTypes.SET_SORT_KEY,
+    sortKey
+  };
+};

@@ -1,8 +1,10 @@
 import { eventTypes } from '../types';
 import { createSelector } from 'reselect';
+import { sortBy } from 'lodash';
 
 const initialState = {
-  list: []
+  list: [],
+  sortKey: ''
 };
 
 export const events = (state = initialState, action) => {
@@ -12,6 +14,13 @@ export const events = (state = initialState, action) => {
         ...state,
         list: action.events
       };
+    case eventTypes.SET_SORT_KEY:
+      return {
+        ...state,
+        sortKey: action.sortKey
+      };
+    case eventTypes.default:
+      return state;
     default:
       return state;
   }
