@@ -11,26 +11,39 @@ import { get } from 'lodash';
 class ManageStaff extends Component {
   constructor(props) {
     super(props);
+    const { list } = props.users;
+    this.state = {
+      users: list
+    };
   }
   componentDidMount() {
     this.props.getUsersRequest();
-    this.props.setUsersSortKey('fullName', 1);
+    this.props.setUsersSortKey('fullName', 'desc');
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { list } = get(this, 'props.users', []);
-    if (prevProps.sortedUsers !== list) {
-      console.log(this.props);
+    if (this.props.sortedUsers !== prevState.users) {
+      this.setState(
+        {
+          ...this.state,
+          users: this.props.sortedUsers
+        },
+        () => {
+          console.log(prevState.users);
+          console.log(this.state.users);
+        }
+      );
     }
   }
   render() {
-    const { users } = get(this, 'props', {});
+    const { users } = get(this, 'state', []);
     return <StaffTable users={users} />;
   }
 }
 
 ManageStaff.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  users: PropTypes.array.isRequired
 };
 
 ManageStaff.defaultProps = {

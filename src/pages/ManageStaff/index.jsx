@@ -8,7 +8,7 @@ function mapStateToProps({ events, users }) {
   return {
     events: events.list,
     users: users.list,
-    sortedUsers: sortUsersSelector(users)
+    sortedUsers: [...sortUsersSelector(users)]
   };
 }
 function mapDispatchToProps(dispatch) {
