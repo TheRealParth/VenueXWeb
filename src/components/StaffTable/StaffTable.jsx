@@ -6,7 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
+import moment from 'moment';
 const StaffTable = props => {
   console.log(props);
   const { users, classes } = props;
@@ -23,7 +23,9 @@ const StaffTable = props => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map(({ id, email, fullName, permissions, updated, created }) => {
+          {users.map((user, { id, email, fullName, permissions, created }) => {
+            console.log(user);
+            const formattedDate = moment(created).format('MM/DD/YYYY');
             return (
               <TableRow key={id}>
                 <TableCell component="th" scope="row">
@@ -31,7 +33,7 @@ const StaffTable = props => {
                 </TableCell>
                 <TableCell numeric>{email}</TableCell>
                 <TableCell numeric>Permissions</TableCell>
-                <TableCell numeric>{created.toString()}</TableCell>
+                <TableCell numeric>{formattedDate}</TableCell>
               </TableRow>
             );
           })}

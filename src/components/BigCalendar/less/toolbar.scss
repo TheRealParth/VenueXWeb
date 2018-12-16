@@ -96,6 +96,10 @@ $active-border: darken($btn-border, 12%);
     margin-right: 50px;
   }
   & > button {
+    background:none;
+    outline:none;
+    border: 0;
+    box-shadow: none;
     border-color: rgba(0,0,0,0);
        &:hover, &:focus, &:active {
       background:none;
