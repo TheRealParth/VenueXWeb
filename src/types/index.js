@@ -25,6 +25,15 @@ export const userTypes = {
   GET_USERS_FAILURE: 'GET_USERS_FAILURE'
 };
 
+export const configTypes = {
+  CONFIG: {
+    SYNC: 'CONFIG.SYNC'
+  },
+  GET_CONFIG_REQUEST: 'GET_CONFIG_REQUEST',
+  GET_CONFIG_SUCCESS: 'GET_CONFIG_SUCCESS',
+  GET_CONFIG_FAILURE: 'GET_CONFIG_FAILURE'
+};
+
 export const eventTypes = {
   EVENTS: {
     SYNC: 'EVENTS.SYNC'

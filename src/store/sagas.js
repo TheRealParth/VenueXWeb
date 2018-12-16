@@ -1,6 +1,6 @@
 import { takeLatest, put, fork, all, call } from 'redux-saga/effects';
 import * as types from '../types';
-import { syncEvents, syncUsers, syncVenues } from '../actions';
+import { syncEvents, syncUsers, syncVenues, syncConfig } from '../actions';
 import rsf from '../firebase';
 import { AuthService } from '../services/';
 
@@ -42,6 +42,9 @@ export function* dashboardWatcher() {
 
 export function* loadDashboard() {
   try {
+    yield put({
+      type: types.venueTypes.GET_CONFIG_REQUEST
+    });
     yield put({
       type: types.eventTypes.GET_EVENTS_REQUEST
     });
@@ -90,12 +93,24 @@ export function* syncUsersForDashboard() {
   });
 }
 
+export function* syncConfigWatcher() {
+  yield takeLatest(types.configTypes.GET_CONFIG_REQUEST, syncVenueConfig);
+}
+
+export function* syncVenueConfig() {
+  yield fork(rsf.firestore.syncCollection, 'venues/demo/config', {
+    successActionCreator: syncConfig,
+    transform: itemsTransformer
+  });
+}
+
 export default function* root() {
   yield all([
     loginWatcher(),
     dashboardWatcher(),
     syncEventsWatcher(),
     syncVenuesWatcher(),
-    syncUsersWatcher()
+    syncUsersWatcher(),
+    syncVenuesWatcher()
   ]);
 }

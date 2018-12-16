@@ -4,7 +4,7 @@ import { alert } from './alert';
 import { auth } from './auth';
 import { events } from './events';
 import { users } from './users';
-import { venues } from './venues';
+import { venues, config } from './venues';
 import { reducer as formReducer } from 'redux-form';
 
 export default history =>
@@ -15,5 +15,6 @@ export default history =>
     auth,
     events,
     users,
-    venues
+    venues,
+    config
   });
