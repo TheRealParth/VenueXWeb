@@ -3,7 +3,7 @@ import * as types from '../types';
 import { syncEvents, syncUsers, syncVenues, syncConfig } from '../actions';
 import rsf from '../firebase';
 import { AuthService } from '../services/';
-
+import { httpUtils } from '../helpers';
 export function* loginWatcher() {
   yield takeLatest(types.authTypes.LOGIN_REQUEST, loginFlow);
 }

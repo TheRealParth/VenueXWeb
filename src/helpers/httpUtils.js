@@ -14,7 +14,7 @@ class httpUtils {
       return Promise.reject(errors);
     }
   }
-  static setUser = async newUser => {
+  static async newUser() {
     try {
       const oldUser = await localStorage.getItem('user');
       const parsedOldUser = JSON.parse(oldUser);
@@ -26,7 +26,7 @@ class httpUtils {
     } catch (e) {
       console.log(e);
     }
-  };
+  }
 
   static async authHeaders() {
     // return authorization header with token
