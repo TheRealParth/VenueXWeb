@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Modal from 'components/Modal';
-import Button from 'components/Button';
+import Modal from './Modal';
+import Button from './Button';
 
 const Container = styled.div`
   padding: 20px;
@@ -22,21 +22,21 @@ export default ({
   onConfirm,
   onCancel,
 }) => (
-  <Modal top="45%" bottom="initial" isOpen={isOpen}>
-    <Container>
-      <Text>{label}</Text>
-      <div>
+    <Modal top="45%" bottom="initial" isOpen={isOpen}>
+      <Container>
+        <Text>{label}</Text>
+        <div>
+          <Button
+            label="Cancel"
+            onClick={onCancel}
+          />
+          &nbsp;
         <Button
-          label="Cancel"
-          onClick={onCancel}
-        />
-        &nbsp;
-        <Button
-          kind="danger"
-          label="Yes, Delete"
-          onClick={onConfirm}
-        />
-      </div>
-    </Container>
-  </Modal>
-);
+            kind="danger"
+            label="Yes, Delete"
+            onClick={onConfirm}
+          />
+        </div>
+      </Container>
+    </Modal>
+  );

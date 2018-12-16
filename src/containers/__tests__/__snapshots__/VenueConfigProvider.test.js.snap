@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VenueConfigProvider config not loaded 1`] = `
+<styled.div>
+  <__styled-spinkit__FoldingCube
+    color="#333"
+    size={40}
+  />
+</styled.div>
+`;
+
+exports[`VenueConfigProvider empty config 1`] = `
+<styled.div>
+  <h2>
+    Aw, snap! Venue config was not found :(
+  </h2>
+  <div>
+    Please double-check your venue ID ("
+    test_venue
+    ")
+  </div>
+</styled.div>
+`;
+
+exports[`VenueConfigProvider loaded config 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "id": "test_venue",
+      "name": "Test Venue",
+      "theme": Object {
+        "colors": Object {
+          "primary": "#f0f0f0",
+        },
+      },
+    }
+  }
+>
+  <withVenueConfig(Component) />
+</ContextProvider>
+`;
+
+exports[`VenueConfigProvider withVenueConfig 1`] = `
+<div>
+  {"id":"test_venue","name":"Test Venue","theme":{"colors":{"primary":"#f0f0f0"}}}
+</div>
+`;

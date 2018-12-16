@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import styled, { css } from 'styled-components';
-import dropdownCaretDown from 'assets/caret-down-custom.svg';
-import dropdownCaretUp from 'assets/caret-up-custom.svg';
-import btnOwnerImage from 'assets/btn-owner.svg';
-import ownerImage from 'assets/owner.svg';
-import Checkbox from 'components/Checkbox';
-import BaseInput from 'components/form/BaseInput';
-import ConsultantLabel from 'components/Consultant';
+import dropdownCaretDown from '../../assets/caret-down-custom.svg';
+import dropdownCaretUp from '../../assets/caret-up-custom.svg';
+import btnOwnerImage from '../../assets/btn-owner.svg';
+import ownerImage from '../../assets/owner.svg';
+import Checkbox from '../Checkbox';
+import BaseInput from '../form/BaseInput';
+import ConsultantLabel from '../Consultant';
 
 const Container = styled.div`
   border-bottom: solid 1px #d8d8d8;

@@ -3,24 +3,21 @@ import './assets/styles/normalize.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
-import configureStore from './store/configureStore';
-
+import { ConnectedRouter } from 'connected-react-router';
+import store from './store/store.jsx';
+import { createBrowserHistory } from 'history';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import './index.css';
+import './index.scss';
 
-const store = configureStore();
-
-const venueId = process.env.REACT_APP_VENUE_ID || window.VENUEX_VENUE_ID;
-
-ReactDOM.render(
-  <Router>
+const render = () => {
+  ReactDOM.render(
     <Provider store={store}>
-      <App venueId={venueId} />
-    </Provider>
-  </Router>,
-  document.getElementById('root')
-);
+      <App />
+    </Provider>,
+    document.getElementById('root')
+  );
+};
 
+render();
 serviceWorker.unregister();

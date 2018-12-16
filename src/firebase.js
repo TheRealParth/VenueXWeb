@@ -3,16 +3,17 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
 import 'firebase/functions';
+import 'firebase/firestore'; // 👈 If you're using firestore
+import ReduxSagaFirebase from 'redux-saga-firebase';
 
-export default memoize(() => {
-  firebase.initializeApp({
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
-    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSANGING_SENDER_ID
-  });
-
-  return firebase;
+const firebaseApp = firebase.initializeApp({
+  apiKey: 'AIzaSyDbULyOjlTP2uL2IVYIj4NhE9CjvCzX4AU',
+  authDomain: 'venuex-dreamstack.firebaseapp.com',
+  databaseURL: 'https://venuex-dreamstack.firebaseio.com',
+  projectId: 'venuex-dreamstack',
+  storageBucket: 'venuex-dreamstack.appspot.com',
+  messagingSenderId: '1091768111084'
 });
+
+const rsf = new ReduxSagaFirebase(firebaseApp);
+export default rsf;

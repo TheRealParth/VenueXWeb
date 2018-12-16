@@ -6,3 +6,5 @@ export function loginUserRequest(user) {
     user
   };
 }
+
+export function otherFunc() {}

@@ -1,6 +1,6 @@
 import React from 'react';
-import DatePicker from 'components/DatePicker';
-import BaseInput from 'components/form/BaseInput';
+import DatePicker from '../DatePicker';
+import BaseInput from '../form/BaseInput';
 
 
 export default props => (

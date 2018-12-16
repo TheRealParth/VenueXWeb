@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import plusIcon from 'assets/plus.svg';
-import filterIcon from 'assets/filter.svg';
-import Icons from 'assets/icons';
+import plusIcon from '../assets/plus.svg';
+import filterIcon from '../assets/filter.svg';
+import Icons from '../assets/icons';
 import Button from './Button';
 import RoundButton from './RoundButton';
 
@@ -13,11 +13,11 @@ const ManageStaffHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center
-    ${props =>
-    props.kind === 'primary' &&
-    css`
+    ${'' /* ${props =>
+      props.kind === 'primary' &&
+      css`
         color: red;
-      `};
+      `}; */};
 `;
 
 const FilterLabel = styled.div` 

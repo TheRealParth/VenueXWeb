@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { withFirebase } from 'react-redux-firebase';
 import styled from 'styled-components';
-import Dropdown from 'components/Dropdown';
-import Button from 'components/Button';
-import Checkbox from 'components/Checkbox';
+import Dropdown from '../Dropdown';
+import Button from '../Button';
+import Checkbox from '../Checkbox';
 import calendarViewBlackIcon from 'assets/calendar-view-black.svg';
 import calendarEditBlackIcon from 'assets/calendar-edit-black.svg';
 import calendarDeleteBlackIcon from 'assets/calendar-delete-black.svg';

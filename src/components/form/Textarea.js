@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import BaseInput from 'components/form/BaseInput';
+import BaseInput from '../form/BaseInput';
 
 
 const Textarea = styled.textarea`

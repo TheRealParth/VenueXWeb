@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import DatePicker from 'components/DatePicker';
-import BaseInput from 'components/form/BaseInput';
+import DatePicker from '../DatePicker';
+import BaseInput from '../form/BaseInput';
 
 const Spacing = styled.div`
   padding: 0px 5px;
@@ -13,24 +13,23 @@ export default props => {
   const handleChangeDate = newDate => {
     props.input.onChange({
       ...value,
-      date: newDate,
+      date: newDate
     });
   };
 
   const handleChangeStartTime = newTime => {
     props.input.onChange({
       ...value,
-      startTime: newTime,
+      startTime: newTime
     });
   };
 
   const handleChangeEndTime = newTime => {
     props.input.onChange({
       ...value,
-      endTime: newTime,
+      endTime: newTime
     });
   };
-
 
   return (
     <BaseInput {...props}>
