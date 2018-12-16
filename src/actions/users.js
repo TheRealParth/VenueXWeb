@@ -5,6 +5,16 @@ export const syncUsers = users => ({
   users
 });
 
+export const syncUser = user => ({
+  type: userTypes.USER.SYNC,
+  user
+});
+
+export const loginWithTokenRequest = payload => ({
+  type: userTypes.LOGIN_WITH_TOKEN,
+  payload
+});
+
 export const getUsersRequest = () => {
   return {
     type: userTypes.GET_USERS_REQUEST

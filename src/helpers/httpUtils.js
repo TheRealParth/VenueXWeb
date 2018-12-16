@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import axios from 'axios';
 import { apiConfig } from '../services/apiConfig';
 
@@ -15,36 +16,14 @@ class httpUtils {
     }
   }
 
-  static async setUser(newUser) {
+  static async signInWithCustomToken(user) {
+    // eslint-disable-next-line no-undef
+    localStorage.setItem('access_token', user.access_token);
     try {
-      const oldUser = await localStorage.getItem('user');
-      const parsedOldUser = JSON.parse(oldUser);
-      const mergedUser = {
-        ...parsedOldUser,
-        ...newUser
-      };
-      localStorage.setItem('user', JSON.stringify(mergedUser));
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  static async authHeaders() {
-    // return authorization header with token
-    //extracted from user in asyncstorage
-    let user = await localStorage.getItem('user');
-    //use JWT or
-    //instead of token , go fetch firestore rule to determine
-    // 1) are they authenticated
-    // 2) are they admin
-    let token = JSON.parse(user).access_token;
-    if (token) {
-      const AuthStr = `JWT ${token}`;
-      let headers = apiConfig.headers;
-      headers = { ...headers, Authorization: AuthStr };
-      return headers;
-    } else {
-      return {};
+      return await firebase.auth().signInWithCustomToken(user.access_token);
+    } catch (error) {
+      console.log(error);
+      return Promise.reject(error);
     }
   }
 }

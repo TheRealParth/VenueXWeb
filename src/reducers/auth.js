@@ -1,25 +1,28 @@
-import { authTypes } from '../types';
+import { authTypes, userTypes } from '../types';
 
-let user = JSON.parse(localStorage.getItem('user'));
-
-const initialState = user
-  ? { loggingIn: false, error: false, loggedIn: true, user }
-  : {
-      loggingIn: false,
-      loggedIn: false,
-      user: null,
-      error: false
-    };
+const initialState = {
+  loggingIn: false,
+  loggedIn: false,
+  user: null,
+  error: false
+};
 
 export function auth(state = initialState, action) {
   switch (action.type) {
+    case userTypes.USER.SYNC:
+      return {
+        ...state,
+        user: action.user
+      };
     case authTypes.LOGIN_REQUEST:
       return {
+        ...state,
         loggingIn: true,
         user: action.user
       };
     case authTypes.LOGIN_SUCCESS:
       return {
+        ...state,
         loggedIn: true,
         user: action.user
       };
