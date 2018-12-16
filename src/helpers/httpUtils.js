@@ -18,8 +18,9 @@ class httpUtils {
 
   static async signInWithCustomToken(user) {
     try {
-      await firebase.auth().signInWithCustomToken(user.access_token);
+      return await firebase.auth().signInWithCustomToken(user.access_token);
     } catch (error) {
+      console.log(error);
       return Promise.reject(error);
     }
   }

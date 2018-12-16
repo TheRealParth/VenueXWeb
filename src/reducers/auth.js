@@ -1,4 +1,4 @@
-import { authTypes } from '../types';
+import { authTypes, userTypes } from '../types';
 
 let user = null;
 
@@ -13,13 +13,20 @@ const initialState = user
 
 export function auth(state = initialState, action) {
   switch (action.type) {
+    case userTypes.USER.SYNC:
+      return {
+        ...state,
+        user: action.user
+      };
     case authTypes.LOGIN_REQUEST:
       return {
+        ...state,
         loggingIn: true,
         user: action.user
       };
     case authTypes.LOGIN_SUCCESS:
       return {
+        ...state,
         loggedIn: true,
         user: action.user
       };

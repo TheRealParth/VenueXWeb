@@ -1,9 +1,10 @@
-import { takeLatest, put, fork, all, call } from 'redux-saga/effects';
+import { takeLatest, take, put, fork, all, call } from 'redux-saga/effects';
 import * as types from '../types';
-import { syncEvents, syncUsers, syncVenues, syncConfig } from '../actions';
+import { syncEvents, syncUsers, syncUser, syncVenues, syncConfig } from '../actions';
 import rsf from '../firebase';
 import { AuthService } from '../services/';
 import { httpUtils } from '../helpers';
+
 export function* loginWatcher() {
   yield takeLatest(types.authTypes.LOGIN_REQUEST, loginFlow);
 }
@@ -15,9 +16,10 @@ export function* loginFlow(action) {
     const venueId = 'demo';
     const user = yield call(AuthService.login, email, password, venueId);
     yield call(httpUtils.signInWithCustomToken, user);
-    yield call(httpUtils.setUser, user);
+    yield call(syncUserWatcher);
     yield put({
-      type: types.dashboardTypes.GET_DASHBOARD_REQUEST
+      type: types.authTypes.LOGIN_SUCCESS,
+      user
     });
   } catch (error) {
     yield put({
@@ -26,6 +28,26 @@ export function* loginFlow(action) {
     });
   }
 }
+
+export function* syncUserWatcher() {
+  yield takeLatest(types.authTypes.LOGIN_REQUEST, syncUserSaga);
+}
+
+export function* syncUserSaga() {
+  const channel = yield call(rsf.auth.channel);
+  console.log(channel);
+
+  while (true) {
+    const { error, user } = yield take(channel);
+
+    console.log(error);
+    console.log(user);
+
+    if (user) yield put(syncUser(user));
+    // else yield put(syncError(error));
+  }
+}
+
 
 const itemsTransformer = items => {
   const res = [];
@@ -113,6 +135,7 @@ export default function* root() {
     syncEventsWatcher(),
     syncVenuesWatcher(),
     syncUsersWatcher(),
+    syncUserWatcher(),
     syncVenuesWatcher()
   ]);
 }
