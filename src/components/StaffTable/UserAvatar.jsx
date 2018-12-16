@@ -5,29 +5,28 @@ import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import PersonIcon from '@material-ui/icons/Person';
 import { get } from 'lodash';
+import styled from 'styled-components';
 
-const styles = {
-  container: {
-    direction: 'row',
-    alignItems: 'center'
-  },
-  avatar: {
-    margin: 10
-  }
-};
+const UserAvatar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 110px;
+`;
 
-const UserAvatar = ({ user, classes }) => {
+export default ({ user, classes }) => {
+  console.log(classes);
   return (
-    <Grid styles={classes.container}>
+    <>
       {user.picture ? (
-        <Avatar src={user.picture} className={classes.avatar} />
+        <Avatar src={user.picture} />
       ) : (
-        <Avatar className={classes.avatar}>
+        <Avatar>
           <PersonIcon />
         </Avatar>
       )}
       {get(user, 'fullName', 'Full Name')}
-    </Grid>
+    </>
   );
 };
 
@@ -35,5 +34,3 @@ UserAvatar.propTypes = {
   user: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired
 };
-
-export default withStyles(styles)(UserAvatar);

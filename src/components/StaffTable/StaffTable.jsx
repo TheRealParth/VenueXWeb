@@ -9,13 +9,16 @@ import Paper from '@material-ui/core/Paper';
 import moment from 'moment';
 import UserAvatar from './UserAvatar';
 import PermissionsIcons from '../PermissionsIcons';
+import ManageStaffHeader from './ManageStaffHeader';
 
 const StaffTable = props => {
   console.log(props);
   const { users, classes } = props;
   const { root, table } = classes;
+  console.log(classes);
   return (
     <Paper className={root}>
+      <ManageStaffHeader className={classes} />
       <Table className={table}>
         <TableHead>
           <TableRow>

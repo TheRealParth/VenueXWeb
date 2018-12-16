@@ -7,7 +7,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import StaffTable from '../../components/StaffTable';
-import ManageStaffHeader from '../../components/ManageStaffHeader';
 class ManageStaff extends Component {
   componentDidMount() {
     this.props.getUsersRequest();
@@ -15,12 +14,7 @@ class ManageStaff extends Component {
 
   render() {
     const { users } = this.props;
-    return (
-      <>
-        <ManageStaffHeader />
-        <StaffTable users={users} />;
-      </>
-    );
+    return <StaffTable users={users} />;
   }
 }
 
