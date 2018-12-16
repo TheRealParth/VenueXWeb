@@ -1,130 +1,64 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-
-import SidebarLayout from '../../components/Sidebar';
-import Calendar from '../../components/Calendar';
-import AddEventModal from '../../components/events/AddEventModal';
-import EventDetailModal from '../../components/events/EventDetailModal';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-const LegendItem = styled.div`
-  margin-top: 15px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 10px;
-  &:first-child {
-    margin-left: 0px;
-  }
-
-  div {
-    display: inline-block;
-    background-color: ${props =>
-    `${props.theme.colors.primary}${props.opacity}`};
-    width: 30px;
-    border-radius: 2px;
-    margin-right: 5px;
-    height: 20px;
-  }
-`;
-
-// const events = {
-//   '2018-10-19': [
-//     {
-//       label: 'It\'s luis birthday!',
-//       opacity: 'A6',
-//     },
-//     {
-//       label: 'It\'s luis birthday!',
-//       opacity: 'FF',
-//     },
-//     {
-//       label: 'Something else',
-//       opacity: '59'
-//     },
-//     {
-//       label: 'It\'s luis birthday!',
-//       opacity: 'A6',
-//     },
-//   ],
-//   '2018-10-13': [
-//     {
-//       label: 'Graduation time',
-//       opacity: 'A6',
-//     },
-//   ],
-// };
-
-class Events extends PureComponent {
-
+const localizer = BigCalendar.momentLocalizer(moment);
+class Events extends Component {
   state = {
-    date: moment(),
-    isAddingEvent: false,
-  };
-
-  handleNextMonth = () => {
-    this.setState({
-      date: moment(this.state.date.add(1, 'M')),
-    });
-  };
-
-  handlePreviousMonth = () => {
-    this.setState({
-      date: moment(this.state.date.subtract(1, 'M')),
-    });
+    events: []
   }
-
-  handleToday = () => {
-    this.setState({
-      date: moment(),
-    });
-  };
-
-  handleAdd = () => {
-    this.setState({
-      isAddingEvent: true,
-    });
+  componentDidMount() {
+    this.props.getEventsRequest();
   }
-
-  render() {
-    const { eventsByDate, match } = this.props;
-    let event;
-    if (this.props.allEvents && match.params.id) {
-      event = {
-        ...this.props.allEvents[match.params.id],
-        id: match.params.id,
-      };
+  componentDidUpdate({ events: prevEvents }) {
+    const { events } = this.props;
+    if (prevEvents !== events) {
+      console.log('EVENT UPDATED')
+      console.log(events)
+      this.setState({ events })
     }
+  }
+  selectEventHandler = (event) => {
+    console.log(event)
+  }
+  render() {
+    const { events } = this.state;
     return (
-      <SidebarLayout>
-        <div style={{ flex: 1, padding: 20 }}>
-          <AddEventModal
-            isOpen={this.state.isAddingEvent}
-            onClose={() => this.setState({ isAddingEvent: false })}
-          />
-          <EventDetailModal
-            event={event}
-            top={100}
-            bottom="initial"
-          />
-          <Calendar
-            events={eventsByDate}
-            date={this.state.date}
-            onNextMonth={this.handleNextMonth}
-            onPreviousMonth={this.handlePreviousMonth}
-            onAdd={this.handleAdd}
-            onEventClicked={event => this.props.history.push(`/events/${event.data.id}`)}
-            onToday={this.handleToday}
-          />
-          <div>
-            <LegendItem opacity="FF"><div /> = 1st payment</LegendItem>
-            <LegendItem opacity="A6"><div /> = 2nd payment</LegendItem>
-            <LegendItem opacity="59"><div /> = 3rd payment</LegendItem>
-          </div>
-        </div>
-      </SidebarLayout>
+      <>
+        <BigCalendar
+          onSelectEvent={this.selectEventHandler}
+          localizer={localizer}
+          events={events}
+          startAccessor="start"
+          endAccessor="end"
+        />
+        <style>{`
+        .rbc-btn-group:nth-child(3){
+          5: none;
+        }
+        div.rbc-header {
+          width: 167px;
+          height: 15px;
+        }
+        div.rbc-header > span  {
+          font-family: Montserrat;
+          font-size: 12px;
+          font-weight: bold;
+          font-style: normal;
+        }
+        `}</style>
+      </>
     );
   }
 }
-
+Events.propTypes = {
+  events: PropTypes.object.isRequired,
+  getEventsRequest: PropTypes.func.isRequired
+};
+Events.defaultProps = {
+  events: [],
+  getEventsRequest: () => ({})
+};
 export { Events };

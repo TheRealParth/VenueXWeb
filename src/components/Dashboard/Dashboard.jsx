@@ -36,9 +36,7 @@ class Dashboard extends React.Component {
           <Sidebar />
         </Drawer>
         <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
           {children}
-          <div className={classes.tableContainer} />
         </main>
       </div>
     );
