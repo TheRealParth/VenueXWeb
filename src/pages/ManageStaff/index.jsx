@@ -1,7 +1,7 @@
 import { ManageStaff } from './ManageStaff';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as userActions from '../../actions';
+import * as actions from '../../actions';
 
 function mapStateToProps({ events, users }) {
   return {
@@ -10,7 +10,7 @@ function mapStateToProps({ events, users }) {
   };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ ...userActions }, dispatch);
+  return bindActionCreators(actions, dispatch);
 }
 
 export default connect(

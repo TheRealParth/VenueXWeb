@@ -23,7 +23,7 @@ const StaffTable = props => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map(({ id, email, fullName, permissions, updated }) => {
+          {users.map(({ id, email, fullName, permissions, updated, created }) => {
             return (
               <TableRow key={id}>
                 <TableCell component="th" scope="row">
@@ -31,7 +31,7 @@ const StaffTable = props => {
                 </TableCell>
                 <TableCell numeric>{email}</TableCell>
                 <TableCell numeric>Permissions</TableCell>
-                <TableCell numeric>Updated</TableCell>
+                <TableCell numeric>{created.toString()}</TableCell>
               </TableRow>
             );
           })}
