@@ -6,8 +6,8 @@ import { get } from 'lodash';
 
 import * as actions from '../actions';
 
-function mapStateToProps(props) {
-  return props;
+function mapStateToProps({ auth }) {
+  return { auth };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -17,11 +17,10 @@ function mapDispatchToProps(dispatch) {
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props => {
-      console.log(props.user);
-      return get(props, 'user.uid', false) ? (
-          <Component {...props} />
-        ) : (
+    render={props => (
+      get(rest, 'auth.user.uid', false) ? (
+        <Component {...props} />
+      ) : (
           <Redirect
             to={{
               pathname: '/login'
@@ -29,7 +28,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
           />
           //  state: { from: props.location }
         )
-      }
+    )
     }
   />
 );

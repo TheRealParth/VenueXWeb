@@ -14,26 +14,46 @@ import Events from './pages/Events';
 // import Billing from './pages/Billing';
 import { SignInPage } from './pages/SignIn';
 import FirebaseApp from './firebase';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actions from './actions';
 
-const App = () => (
-  <div>
-    <main>
-      <Router>
-        <Switch>
-          <PublicRoute exact path="/" component={Top} />
-          <PublicRoute path="/login" component={SignInPage} />
-          <PrivateRoute path="/logout" component={Logout} />
-          <Dashboard>
+class App extends React.Component {
+  componentDidMount() {
+    const access_token = localStorage.getItem('access_token');
+    if (access_token) this.props.loginWithTokenRequest({ access_token });
+  }
+  render() {
+    return (
+      <div>
+        <main>
+          <Router>
             <Switch>
-               <PrivateRoute path="/events" component={Events} />
-               <PrivateRoute path="/manageStaff" component={ManageStaff} />
-               {/*<PrivateRoute path="/billing" component={Billing} />*/}
+              <PublicRoute exact path="/" component={Top} />
+              <PublicRoute path="/login" component={SignInPage} />
+              <PrivateRoute path="/logout" component={Logout} />
+              <Dashboard>
+                <Switch>
+                  <PrivateRoute path="/events" component={Events} />
+                  <PrivateRoute path="/manageStaff" component={ManageStaff} />
+                  {/*<PrivateRoute path="/billing" component={Billing} />*/}
+                </Switch>
+              </Dashboard>
             </Switch>
-          </Dashboard>
-        </Switch>
-      </Router>
-    </main>
-  </div>
-);
+          </Router>
+        </main>
+      </div>
+    );
+  }
 
-export default App;
+
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+
+export default connect(() => { },
+  mapDispatchToProps
+)(App);
+

@@ -1,15 +1,11 @@
 import { authTypes, userTypes } from '../types';
 
-let user = null;
-
-const initialState = user
-  ? { loggingIn: false, error: false, loggedIn: true, user }
-  : {
-      loggingIn: false,
-      loggedIn: false,
-      user: null,
-      error: false
-    };
+const initialState = {
+  loggingIn: false,
+  loggedIn: false,
+  user: null,
+  error: false
+};
 
 export function auth(state = initialState, action) {
   switch (action.type) {

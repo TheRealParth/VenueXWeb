@@ -17,6 +17,8 @@ class httpUtils {
   }
 
   static async signInWithCustomToken(user) {
+    // eslint-disable-next-line no-undef
+    localStorage.setItem('access_token', user.access_token);
     try {
       return await firebase.auth().signInWithCustomToken(user.access_token);
     } catch (error) {

@@ -12,7 +12,7 @@ export function* loginWatcher() {
 export function* loginFlow(action) {
   try {
     const { email, password } = action.user;
-    console.log(email, password);
+
     const venueId = 'demo';
     const user = yield call(AuthService.login, email, password, venueId);
     yield call(httpUtils.signInWithCustomToken, user);
@@ -24,11 +24,32 @@ export function* loginFlow(action) {
   } catch (error) {
     yield put({
       type: types.authTypes.LOGIN_FAILURE,
-      error: error
+      error
     });
   }
 }
 
+export function* loginWithToken({ payload }) {
+  try {
+
+    const { user } = yield call(httpUtils.signInWithCustomToken, payload);
+
+    yield put({
+      type: types.authTypes.LOGIN_SUCCESS,
+      user
+    });
+    yield call(syncUserWatcher);
+
+  } catch (error) {
+    yield put({
+      type: types.authTypes.LOGIN_FAILURE,
+      error
+    });
+  }
+}
+export function* loginWithTokensWatcher() {
+  yield takeLatest(types.userTypes.LOGIN_WITH_TOKEN, loginWithToken);
+}
 export function* syncUserWatcher() {
   yield takeLatest(types.authTypes.LOGIN_REQUEST, syncUserSaga);
 }
@@ -132,6 +153,7 @@ export default function* root() {
   yield all([
     loginWatcher(),
     dashboardWatcher(),
+    loginWithTokensWatcher(),
     syncEventsWatcher(),
     syncVenuesWatcher(),
     syncUsersWatcher(),

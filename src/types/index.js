@@ -17,6 +17,7 @@ export const venueTypes = {
 };
 
 export const userTypes = {
+  LOGIN_WITH_TOKEN: 'LOGIN_WITH_TOKEN',
   USERS: {
     SYNC: 'USERS.SYNC'
   },
