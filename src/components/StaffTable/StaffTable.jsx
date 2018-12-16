@@ -23,8 +23,8 @@ const StaffTable = props => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map(({ id, email, fullName, permissions, updated, created }) => {
-            console.log(created);
+          {users.map((user, { id, email, fullName, permissions, created }) => {
+            console.log(user);
             const formattedDate = moment(created).format('MM/DD/YYYY');
             return (
               <TableRow key={id}>
