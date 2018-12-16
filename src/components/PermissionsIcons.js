@@ -10,7 +10,6 @@ const PermissionIcons = styled.div`
 `;
 
 export default props => {
-  console.log(props);
   return (
     <PermissionIcons {...props}>
       <Icons.CalendarEdit {...props} color={props.events.create ? '#c0b69b' : '#D8D8D8'} />

@@ -13,10 +13,8 @@ import PermissionsIcons from '../PermissionsIcons';
 import ManageStaffHeader from './ManageStaffHeader';
 
 const StaffTable = props => {
-  console.log(props);
   const { users, classes } = props;
   const { root, table } = classes;
-  console.log(classes);
   return (
     <>
       <Grid container spacing={24}>
@@ -36,7 +34,6 @@ const StaffTable = props => {
           </TableHead>
           <TableBody>
             {users.map(user => {
-              console.log(user);
               const formattedDate = moment(user.created).format('MM/DD/YYYY');
 
               return (

@@ -11,11 +11,10 @@ import { get } from 'lodash';
 class ManageStaff extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
   }
   componentDidMount() {
     this.props.getUsersRequest();
-    this.props.setUsersSortKey('fullName');
+    this.props.setUsersSortKey('fullName', 1);
   }
 
   componentDidUpdate(prevProps, prevState) {
