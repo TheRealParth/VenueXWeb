@@ -1,12 +1,19 @@
-import { connect } from 'react-redux';
 import { Events } from './Events';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
-const mapStateToProps = state => {
-  console.log(state)
+function mapStateToProps({ events, users }) {
   return {
-    eventsByDate: {},
-    allEvents: []
+    events: events.list,
+    users: users.list
   };
-};
+}
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
 
-export default connect(mapStateToProps)(Events);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Events);
