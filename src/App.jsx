@@ -9,7 +9,7 @@ import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import ManageStaff from './pages/ManageStaff';
 import Events from './pages/Events';
-// import Billing from './pages/Billing';
+import Billing from './pages/Billing';
 import { SignInPage } from './pages/SignIn';
 import * as actions from './actions';
 import './App.scss';
@@ -32,7 +32,8 @@ class App extends React.Component {
                 <Switch>
                   <PrivateRoute path="/events" component={Events} />
                   <PrivateRoute path="/manageStaff" component={ManageStaff} />
-                  {/*<PrivateRoute path="/billing" component={Billing} />*/}
+                  <PrivateRoute path="/billing" component={Billing} />
+                  */}
                 </Switch>
               </Dashboard>
             </Switch>
@@ -49,6 +50,6 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(
   // eslint-disable-next-line prettier/prettier
-  () => { },
+  () => {},
   mapDispatchToProps
 )(App);
