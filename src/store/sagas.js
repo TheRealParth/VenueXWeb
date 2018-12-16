@@ -14,6 +14,7 @@ export function* loginFlow(action) {
     console.log(email, password);
     const venueId = 'demo';
     const user = yield call(AuthService.login, email, password, venueId);
+    yield call(httpUtils.signInWithCustomToken, user);
     yield call(httpUtils.setUser, user);
     yield put({
       type: types.dashboardTypes.GET_DASHBOARD_REQUEST

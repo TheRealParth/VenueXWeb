@@ -1,5 +1,5 @@
 export const apiConfig = {
-  baseURL: 'https://us-central1-venuex-dreamstack.cloudfunctions.net/api',
+  baseURL: 'http://localhost:5000/venuex-dreamstack/us-central1/api',
   venueId: 'demo',
   headers: {
     Accept: 'application/json',

@@ -1,6 +1,6 @@
 import { authTypes } from '../types';
 
-let user = JSON.parse(localStorage.getItem('user'));
+let user = null;
 
 const initialState = user
   ? { loggingIn: false, error: false, loggedIn: true, user }
