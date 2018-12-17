@@ -10,7 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import moment from 'moment';
 import UserAvatar from './UserAvatar';
 import PermissionsIcons from '../PermissionsIcons';
-import ManageStaffHeader from './ManageStaffHeader';
+import ManageStaffHeader from './ManageStaffHeader.jsx';
+import AddEmployeeModal from './AddEmployeeModal';
 
 const StaffTable = props => {
   const { users, classes } = props;

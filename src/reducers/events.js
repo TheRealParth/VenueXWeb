@@ -4,7 +4,8 @@ import { sortBy } from 'lodash';
 
 const initialState = {
   list: [],
-  sortKey: ''
+  sortKey: '',
+  addEmployee: { isOpen: false }
 };
 
 export const events = (state = initialState, action) => {
@@ -18,6 +19,14 @@ export const events = (state = initialState, action) => {
       return {
         ...state,
         sortKey: action.sortKey
+      };
+    case eventTypes.SET_ADD_EMPLOYEE_OPEN:
+      return {
+        ...state,
+        addEmployee: {
+          isOpen: false
+          //theoppopsite
+        }
       };
     case eventTypes.default:
       return state;

@@ -18,6 +18,9 @@ export function* loginFlow(action) {
     yield call(httpUtils.signInWithCustomToken, user);
     yield call(syncUserWatcher);
     yield put({
+      type: types.dashboardTypes.GET_DASHBOARD_REQUEST
+    });
+    yield put({
       type: types.authTypes.LOGIN_SUCCESS,
       user
     });
@@ -35,7 +38,9 @@ export function* loginFlow(action) {
 export function* loginWithToken({ payload }) {
   try {
     const { user } = yield call(httpUtils.signInWithCustomToken, payload);
-
+    yield put({
+      type: types.dashboardTypes.GET_DASHBOARD_REQUEST
+    });
     yield put({
       type: types.authTypes.LOGIN_SUCCESS,
       user

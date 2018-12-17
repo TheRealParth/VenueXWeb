@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import filterIcon from '../../assets/filter.svg';
 import Icons from '../../assets/icons';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import FilterIcon from '@material-ui/icons/Filter';
@@ -29,6 +30,7 @@ justify-content: space-around
 const styles = theme => ({
   fab: {
     size: 25,
+    backgroundColor: '#c0b69b',
     margin: theme.spacing.unit
   },
   extendedIcon: theme.spacing.unit
@@ -54,11 +56,11 @@ export default ({ label, classes, ...rest }) => {
         }
         kind="white"
       />
-
-      <Fab {...rest} color="primary" aria-label="Add" className={classes.fab}>
-        <AddIcon />
-      </Fab>
-
+      <Link to="/manageStaff/add">
+        <Fab backgroundColor="#c0b69b" {...rest} aria-label="Add" className={classes.fab}>
+          <AddIcon />
+        </Fab>
+      </Link>
       <Avatar>
         <PersonIcon />
       </Avatar>
