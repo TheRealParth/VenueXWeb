@@ -4,27 +4,22 @@ import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import PersonIcon from '@material-ui/icons/Person';
 import { get } from 'lodash';
-import styled from 'styled-components';
 
-const UserAvatar = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-width: 110px;
-`;
 
-export default ({ user, classes }) => {
+const UserAvatar = ({ user, classes }) => {
   return (
-    <>
+    <div className={classes.userInfo}>
       {user.picture ? (
         <Avatar src={user.picture} />
       ) : (
-        <Avatar>
-          <PersonIcon />
-        </Avatar>
-      )}
-      {get(user, 'fullName', 'Full Name')}
-    </>
+          <Avatar>
+            <PersonIcon />
+          </Avatar>
+        )}
+      <span className={classes.fullName}>
+        {get(user, 'fullName', 'Full Name')}
+      </span>
+    </div>
   );
 };
 
@@ -32,3 +27,5 @@ UserAvatar.propTypes = {
   user: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired
 };
+
+export default UserAvatar;

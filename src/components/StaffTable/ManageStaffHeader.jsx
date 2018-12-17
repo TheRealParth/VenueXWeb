@@ -42,31 +42,29 @@ const ManageStaffHeader = styled.div`
   justify-content: space-between;
   height: 120px;
 `;
-export default ({ label, classes, ...rest }) => {
-  console.log(classes);
-  return (
-    <>
-      <Button
-        {...rest}
-        label={
-          <FilterLabel {...rest}>
-            <FilterIcon />
-            Filter
+export default ({ label, classes, ...rest }) => (
+  <>
+    <Button
+      {...rest}
+      label={
+        <FilterLabel {...rest}>
+          <FilterIcon />
+          Filter
           </FilterLabel>
-        }
-        kind="white"
-      />
-      <Link to="/manageStaff/add">
-        <Fab backgroundColor="#c0b69b" {...rest} aria-label="Add" className={classes.fab}>
-          <AddIcon />
-        </Fab>
-      </Link>
-      <Avatar>
-        <PersonIcon />
-      </Avatar>
-    </>
-  );
-};
+      }
+      kind="white"
+    />
+    <Avatar className={classes.avatar}>
+      <PersonIcon />
+    </Avatar>
+    <Link to="/manageStaff/add">
+      <Fab backgroundColor="#c0b69b" {...rest} aria-label="Add" className={classes.fab}>
+        <AddIcon />
+      </Fab>
+    </Link>
+
+  </>
+);
 
 ManageStaffHeader.propTypes = {
   classes: PropTypes.object.isRequired

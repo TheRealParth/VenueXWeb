@@ -5,10 +5,25 @@ const styles = theme => ({
   root: {
     width: '100%',
     flexGrow: 1,
-    overflowX: 'auto'
+    overflowX: 'auto',
+    marginTop: 20
   },
   table: {
     minWidth: 700
+  },
+  tableCell: {
+    textAlign: 'center'
+  },
+  userInfo: {
+    display: 'flex',
+  },
+  fullName: {
+    margin: 'auto',
+    marginLeft: 10,
+    fontFamily: 'Montserrat',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    letterSpacing: -0.3
   },
   container: {
     height: 30 /* not sure what to set this as */,
@@ -16,7 +31,20 @@ const styles = theme => ({
     paddingLeft: 20,
     paddingRight: 15,
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+
+  },
+  avatar: {
+    float: 'right',
+    height: '50px',
+    width: '50px',
+    marginLeft: '10px'
+  },
+  fab: {
+    float: 'right',
+    height: '50px',
+    width: '50px',
+    marginLeft: '10px'
   },
   paper: {
     padding: theme.spacing.unit * 2,

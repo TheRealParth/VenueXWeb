@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Table from '@material-ui/core/Table';
 import Grid from '@material-ui/core/Grid';
@@ -11,11 +11,10 @@ import moment from 'moment';
 import UserAvatar from './UserAvatar';
 import PermissionsIcons from '../PermissionsIcons';
 import ManageStaffHeader from './ManageStaffHeader.jsx';
-import AddEmployeeModal from './AddEmployeeModal';
 
 const StaffTable = props => {
   const { users, classes } = props;
-  const { root, table } = classes;
+  const { root, table, tableCell, ...rest } = classes;
   return (
     <>
       <Grid container spacing={24}>
@@ -27,10 +26,10 @@ const StaffTable = props => {
         <Table className={table}>
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell numeric>Email</TableCell>
-              <TableCell numeric>Permission</TableCell>
-              <TableCell numeric>Date Added</TableCell>
+              <TableCell className={tableCell}>Name</TableCell>
+              <TableCell className={tableCell} numeric>Email</TableCell>
+              <TableCell className={tableCell} numeric>Permission</TableCell>
+              <TableCell className={tableCell} numeric>Date Added</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -40,7 +39,7 @@ const StaffTable = props => {
               return (
                 <TableRow key={user.id}>
                   <TableCell component="th" scope="row">
-                    <UserAvatar user={user} />
+                    <UserAvatar classes={rest} user={user} />
                   </TableCell>
                   <TableCell numeric>{user.email}</TableCell>
                   <TableCell numeric>
