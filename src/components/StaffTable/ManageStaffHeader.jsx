@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
-import FilterIcon from '@material-ui/icons/Filter';
+import FilterListIcon from '@material-ui/icons/FilterList';
 import AddIcon from '@material-ui/icons/Add';
 import Icon from '@material-ui/core/Icon';
 import Button from '../Button';
@@ -48,9 +48,9 @@ export default ({ label, classes, ...rest }) => (
       {...rest}
       label={
         <FilterLabel {...rest}>
-          <FilterIcon />
+          <FilterListIcon />
           Filter
-          </FilterLabel>
+        </FilterLabel>
       }
       kind="white"
     />
@@ -62,7 +62,6 @@ export default ({ label, classes, ...rest }) => (
         <AddIcon />
       </Fab>
     </Link>
-
   </>
 );
 
