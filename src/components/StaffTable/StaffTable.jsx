@@ -38,14 +38,14 @@ const StaffTable = props => {
 
               return (
                 <TableRow key={user.id}>
-                  <TableCell component="th" scope="row">
+                  <TableCell className={tableCell} component="th" scope="row">
                     <UserAvatar classes={rest} user={user} />
                   </TableCell>
-                  <TableCell numeric>{user.email}</TableCell>
-                  <TableCell numeric>
+                  <TableCell className={tableCell} numeric>{user.email}</TableCell>
+                  <TableCell className={tableCell} numeric>
                     <PermissionsIcons {...user.permissions} />
                   </TableCell>
-                  <TableCell numeric>{formattedDate}</TableCell>
+                  <TableCell className={tableCell} numeric>{formattedDate}</TableCell>
                 </TableRow>
               );
             })}
