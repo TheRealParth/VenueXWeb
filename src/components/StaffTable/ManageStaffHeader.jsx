@@ -45,6 +45,7 @@ const ManageStaffHeader = styled.div`
 export default ({ label, classes, ...rest }) => (
   <>
     <Button
+      style={{ borderColor: '#c0b69b' }}
       {...rest}
       label={
         <FilterLabel {...rest}>
@@ -58,7 +59,7 @@ export default ({ label, classes, ...rest }) => (
       <PersonIcon />
     </Avatar>
     <Link to="/manageStaff/add">
-      <Fab backgroundColor="#c0b69b" {...rest} aria-label="Add" className={classes.fab}>
+      <Fab {...rest} aria-label="Add" className={classes.fab}>
         <AddIcon />
       </Fab>
     </Link>

@@ -15,7 +15,7 @@ const styles = theme => ({
     textAlign: 'center'
   },
   userInfo: {
-    display: 'flex',
+    display: 'flex'
   },
   fullName: {
     margin: 'auto',
@@ -31,20 +31,21 @@ const styles = theme => ({
     paddingLeft: 20,
     paddingRight: 15,
     justifyContent: 'space-between',
-    alignItems: 'center',
-
+    alignItems: 'center'
   },
   avatar: {
     float: 'right',
     height: '50px',
     width: '50px',
-    marginLeft: '10px'
+    marginLeft: '10px',
+    backgroundColor: '#c0b69b'
   },
   fab: {
     float: 'right',
     height: '50px',
     width: '50px',
-    marginLeft: '10px'
+    marginLeft: '10px',
+    backgroundColor: '#c0b69b'
   },
   paper: {
     padding: theme.spacing.unit * 2,
