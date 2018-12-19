@@ -29,8 +29,14 @@ export function* loginFlow(action) {
     yield call(httpUtils.signInWithCustomToken, user);
     yield call(syncUserWatcher);
     yield put({
+      type: types.dashboardTypes.GET_DASHBOARD_REQUEST
+    });
+    yield put({
       type: types.authTypes.LOGIN_SUCCESS,
       user
+    });
+    yield put({
+      type: types.dashboardTypes.GET_DASHBOARD_REQUEST
     });
   } catch (error) {
     yield put({
@@ -43,6 +49,9 @@ export function* loginFlow(action) {
 export function* loginWithToken({ payload }) {
   try {
     const { user } = yield call(httpUtils.signInWithCustomToken, payload);
+    yield put({
+      type: types.dashboardTypes.GET_DASHBOARD_REQUEST
+    });
     yield put({
       type: types.authTypes.LOGIN_SUCCESS,
       user
@@ -75,8 +84,6 @@ export function* syncUserSaga() {
     // else yield put(syncError(error));
   }
 }
-
-
 
 export function* dashboardWatcher() {
   yield takeLatest(types.dashboardTypes.GET_DASHBOARD_REQUEST, loadDashboard);

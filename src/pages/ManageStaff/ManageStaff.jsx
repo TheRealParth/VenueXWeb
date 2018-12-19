@@ -1,35 +1,64 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import StaffTable from '../../components/StaffTable';
-import ManageStaffHeader from '../../components/ManageStaffHeader';
+import AddEmployeeModal from '../../components/StaffTable/AddEmployeeModal';
+
 class ManageStaff extends Component {
+  constructor(props) {
+    super(props);
+    const { list } = props.users;
+    this.state = {
+      users: list,
+      isOpen: false
+    };
+  }
   componentDidMount() {
     this.props.getUsersRequest();
+    this.props.setUsersSortKey('email', 'asc');
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.sortedUsers !== prevProps.sortedUsers) {
+      this.setState({ users: this.props.sortedUsers });
+    }
+  }
+
+  openModal = () => {
+    this.setState({
+      isOpen: true,
+    });
+    console.log(this.state)
+  }
+  closeModal = () => {
+    this.setState({
+      isOpen: true,
+    })
   }
 
   render() {
-    const { users } = this.props;
+    const { isOpen, users } = this.state;
     return (
       <>
-        <ManageStaffHeader />
-        <StaffTable users={users} />;
+        <AddEmployeeModal isOpen={isOpen} onRequestClose={this.closeModal} />
+        <StaffTable
+          openModal={this.openModal}
+          users={users} />
       </>
     );
   }
 }
 
 ManageStaff.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  users: PropTypes.array.isRequired,
+  isOpen: PropTypes.bool,
+  sortedUsers: PropTypes.array.isRequired
 };
 
 ManageStaff.defaultProps = {
-  users: []
+  users: [],
+  isOpen: false,
+  sortedUsers: []
 };
 
 export { ManageStaff };

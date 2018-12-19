@@ -17,43 +17,45 @@ const Button = styled.div`
   cursor: pointer;
   white-space: nowrap;
 
-  ${props => props.kind === 'primary' && css`
-    background-color: ${props.theme.colors.primary};
-    color: #FFF;
-    border: solid 1px ${props.theme.colors.primary};
-  `}
+  ${props =>
+    props.kind === 'primary' &&
+    css`
+      background-color: rgba 188 172 150, 0.4;
+      color: #fff;
+      border: solid 1px rgba 188 172 150, 0.4;
+    `}
 
-  ${props => props.kind === 'success' && css`
-    background-color: #2cb070;
-    color: #FFF;
-  `}
+  ${props =>
+    props.kind === 'success' &&
+    css`
+      background-color: #2cb070;
+      color: #fff;
+    `}
 
-  ${props => props.size === 'small' && css`
-    padding: 0px 15px;
-    height: 40px;
-  `}
+  ${props =>
+    props.size === 'small' &&
+    css`
+      padding: 0px 15px;
+      height: 40px;
+    `}
 
-  ${props => props.kind === 'danger' && css`
-    color: #c02026;
-  `}
+  ${props =>
+    props.kind === 'danger' &&
+    css`
+      color: #c02026;
+    `}
 
-  ${props => props.kind === 'white' && css`
-    background-color: #ffffff;
-    color: #fff;
-    border: solid 1px #ededed;
-  `}
+  ${props =>
+    props.kind === 'white' &&
+    css`
+      background-color: #ffffff;
+      color: #fff;
+      border: solid 1px #ededed;
+    `}
 `;
 
-export default ({
-  label,
-  onClick,
-  disabled,
-  ...restProps
-}) => (
-  <Button
-    {...restProps}
-    onClick={disabled ? null : onClick}
-  >
+export default ({ label, onClick, disabled, ...restProps }) => (
+  <Button {...restProps} onClick={disabled ? null : onClick}>
     {label}
   </Button>
 );
