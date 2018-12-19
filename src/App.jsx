@@ -1,9 +1,7 @@
 import React from 'react';
-import './App.scss';
-
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
-import Header from './components/Header';
-
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import Top from './components/Top';
 import Logout from './Auth/Logout';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -14,10 +12,8 @@ import AddEmployeeModal from './components/StaffTable/AddEmployeeModal';
 import Events from './pages/Events';
 // import Billing from './pages/Billing';
 import { SignInPage } from './pages/SignIn';
-import FirebaseApp from './firebase';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import * as actions from './actions';
+import './App.scss';
 
 class App extends React.Component {
   componentDidMount() {
@@ -56,6 +52,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  () => {},
+  // eslint-disable-next-line prettier/prettier
+  () => { },
   mapDispatchToProps
 )(App);
