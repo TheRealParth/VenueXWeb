@@ -8,21 +8,21 @@ const localizer = BigCalendar.momentLocalizer(moment);
 class Events extends Component {
   state = {
     events: []
-  }
+  };
   componentDidMount() {
     this.props.getEventsRequest();
   }
   componentDidUpdate({ events: prevEvents }) {
     const { events } = this.props;
     if (prevEvents !== events) {
-      console.log('EVENT UPDATED')
-      console.log(events)
-      this.setState({ events })
+      console.log('EVENT UPDATED');
+      console.log(events);
+      this.setState({ events });
     }
   }
-  selectEventHandler = (event) => {
-    console.log(event)
-  }
+  selectEventHandler = event => {
+    console.log(event);
+  };
   render() {
     const { events } = this.state;
     return (

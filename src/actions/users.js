@@ -20,3 +20,11 @@ export const getUsersRequest = () => {
     type: userTypes.GET_USERS_REQUEST
   };
 };
+
+export const setUsersSortKey = (sortKey, value) => {
+  return {
+    type: userTypes.SET_SORT_KEY,
+    sortKey,
+    value
+  };
+};

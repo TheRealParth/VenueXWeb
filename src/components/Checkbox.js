@@ -16,7 +16,7 @@ const Root = styled.div`
   ${props =>
     props.checked &&
     css`
-      background-color: ${props.theme.colors.primary};
+      background-color: rgba 188 172 150, 0.4;
     `};
 `;
 
