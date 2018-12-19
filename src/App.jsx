@@ -32,9 +32,10 @@ class App extends React.Component {
               <Dashboard>
                 <Switch>
                   <PrivateRoute path="/events" component={Events} />
+                  <PrivateRoute path="/billing" component={Billing} />
                   <PrivateRoute path="/manageStaff" component={ManageStaff}>
                     <Switch>
-                      <PrivateRoute path="/manageStaff/add" component={AddEmployeeModal} />} />
+                      <PrivateRoute path="/manageStaff/add" component={AddEmployeeModal} />
                     </Switch>
                   </PrivateRoute>
                 </Switch>

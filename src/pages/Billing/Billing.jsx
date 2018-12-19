@@ -6,8 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import StaffTable from '../../components/StaffTable';
-import ManageStaffHeader from '../../components/ManageStaffHeader';
+import BillingTable from '../../components/BillingTable';
 class Billing extends Component {
   componentDidMount() {
     this.props.getUsersRequest();
@@ -17,8 +16,7 @@ class Billing extends Component {
     const { users } = this.props;
     return (
       <>
-        <ManageStaffHeader />
-        <StaffTable users={users} />;
+        <BillingTable users={users} />;
       </>
     );
   }

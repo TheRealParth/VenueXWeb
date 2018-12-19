@@ -10,28 +10,45 @@ import Paper from '@material-ui/core/Paper';
 import moment from 'moment';
 import UserAvatar from '../UserAvatar';
 import PermissionsIcons from '../PermissionsIcons';
-import ManageStaffHeader from './ManageStaffHeader.jsx';
+import BillingSubHeader from './BillingSubHeader';
+import MonthHeader from '../MonthHeader';
 
-const StaffTable = ({ users, classes: { paper, root, table, tableCell, ...classes }, ...rest }) => (
+const BillingTable = ({
+  users,
+  classes: { paper, root, table, tableCell, ...classes },
+  ...rest
+}) => (
   <>
     <Grid container spacing={24}>
       <Grid item xs={12}>
-        <ManageStaffHeader {...rest} classes={classes} className={paper} />
+        <MonthHeader monthLabel="SEptma" />
+        <UserAvatar />
+        <BillingSubHeader {...rest} classes={classes} className={paper} />
       </Grid>
     </Grid>
     <Paper className={root}>
       <Table className={table}>
         <TableHead>
           <TableRow>
-            <TableCell className={tableCell}>Name</TableCell>
             <TableCell className={tableCell} numeric>
-              Email
+              Client
             </TableCell>
             <TableCell className={tableCell} numeric>
-              Permission
+              Event
             </TableCell>
             <TableCell className={tableCell} numeric>
-              Date Added
+              Event Type
+            </TableCell>
+            <TableCell className={tableCell} numeric>
+              Guests
+            </TableCell>
+
+            <TableCell className={tableCell} numeric>
+              Event Date
+            </TableCell>
+
+            <TableCell className={tableCell} numeric>
+              Created By
             </TableCell>
           </TableRow>
         </TableHead>
@@ -50,6 +67,12 @@ const StaffTable = ({ users, classes: { paper, root, table, tableCell, ...classe
               <TableCell className={tableCell} numeric>
                 {`${moment(user.created).format('MM/DD/YYYY')}`}
               </TableCell>
+              <TableCell className={tableCell} numeric>
+                {`${moment(user.created).format('MM/DD/YYYY')}`}
+              </TableCell>
+              <TableCell className={tableCell} numeric>
+                {`${moment(user.created).format('MM/DD/YYYY')}`}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -58,13 +81,13 @@ const StaffTable = ({ users, classes: { paper, root, table, tableCell, ...classe
   </>
 );
 
-StaffTable.propTypes = {
+BillingTable.propTypes = {
   classes: PropTypes.object.isRequired,
   users: PropTypes.array.isRequired
 };
 
-StaffTable.defaultProps = {
+BillingTable.defaultProps = {
   users: []
 };
 
-export { StaffTable };
+export { BillingTable };
