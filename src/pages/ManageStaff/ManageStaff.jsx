@@ -22,12 +22,27 @@ class ManageStaff extends Component {
       this.setState({ users: this.props.sortedUsers });
     }
   }
+
+  openModal = () => {
+    this.setState({
+      isOpen: true,
+    });
+    console.log(this.state)
+  }
+  closeModal = () => {
+    this.setState({
+      isOpen: true,
+    })
+  }
+
   render() {
     const { isOpen, users } = this.state;
     return (
       <>
-        {isOpen && <AddEmployeeModal />}
-        <StaffTable users={users} />
+        <AddEmployeeModal isOpen={isOpen} onRequestClose={this.closeModal} />
+        <StaffTable
+          openModal={this.openModal}
+          users={users} />
       </>
     );
   }

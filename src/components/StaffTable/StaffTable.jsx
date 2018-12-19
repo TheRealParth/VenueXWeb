@@ -12,49 +12,51 @@ import UserAvatar from './UserAvatar';
 import PermissionsIcons from '../PermissionsIcons';
 import ManageStaffHeader from './ManageStaffHeader.jsx';
 
-const StaffTable = props => {
-  const { users, classes } = props;
-  const { root, table, tableCell, ...rest } = classes;
-  return (
-    <>
-      <Grid container spacing={24}>
-        <Grid item xs={12}>
-          <ManageStaffHeader {...props} className={classes.paper} />
-        </Grid>
+const StaffTable = ({ users, classes: { paper, root, table, tableCell, ...classes }, ...rest }) => (
+  <>
+    <Grid container spacing={24}>
+      <Grid item xs={12}>
+        <ManageStaffHeader {...rest} classes={classes} className={paper} />
       </Grid>
-      <Paper className={root}>
-        <Table className={table}>
-          <TableHead>
-            <TableRow>
-              <TableCell className={tableCell}>Name</TableCell>
-              <TableCell className={tableCell} numeric>Email</TableCell>
-              <TableCell className={tableCell} numeric>Permission</TableCell>
-              <TableCell className={tableCell} numeric>Date Added</TableCell>
+    </Grid>
+    <Paper className={root}>
+      <Table className={table}>
+        <TableHead>
+          <TableRow>
+            <TableCell className={tableCell}>Name</TableCell>
+            <TableCell className={tableCell} numeric>
+              Email
+            </TableCell>
+            <TableCell className={tableCell} numeric>
+              Permission
+            </TableCell>
+            <TableCell className={tableCell} numeric>
+              Date Added
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {users.map(user => (
+            <TableRow key={user.id}>
+              <TableCell className={tableCell} component="th" scope="row">
+                <UserAvatar classes={rest} user={user} />
+              </TableCell>
+              <TableCell className={tableCell} numeric>
+                {user.email}
+              </TableCell>
+              <TableCell className={tableCell} numeric>
+                <PermissionsIcons {...user.permissions} />
+              </TableCell>
+              <TableCell className={tableCell} numeric>
+                {`${moment(user.created).format('MM/DD/YYYY')}`}
+              </TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {users.map(user => {
-              const formattedDate = moment(user.created).format('MM/DD/YYYY');
-
-              return (
-                <TableRow key={user.id}>
-                  <TableCell className={tableCell} component="th" scope="row">
-                    <UserAvatar classes={rest} user={user} />
-                  </TableCell>
-                  <TableCell className={tableCell} numeric>{user.email}</TableCell>
-                  <TableCell className={tableCell} numeric>
-                    <PermissionsIcons {...user.permissions} />
-                  </TableCell>
-                  <TableCell className={tableCell} numeric>{formattedDate}</TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </Paper>
-    </>
-  );
-};
+          ))}
+        </TableBody>
+      </Table>
+    </Paper>
+  </>
+);
 
 StaffTable.propTypes = {
   classes: PropTypes.object.isRequired,

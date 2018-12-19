@@ -42,7 +42,7 @@ const ManageStaffHeader = styled.div`
   justify-content: space-between;
   height: 120px;
 `;
-export default ({ label, classes, ...rest }) => (
+export default ({ label, classes, openModal, closeModal, ...rest }) => (
   <>
     <Button
       style={{ borderColor: '#c0b69b' }}
@@ -58,11 +58,11 @@ export default ({ label, classes, ...rest }) => (
     <Avatar className={classes.avatar}>
       <PersonIcon />
     </Avatar>
-    <Link to="/manageStaff/add">
+    <a onClick={openModal}>
       <Fab {...rest} aria-label="Add" className={classes.fab}>
         <AddIcon />
       </Fab>
-    </Link>
+    </a>
   </>
 );
 
