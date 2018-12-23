@@ -4,7 +4,6 @@ import Avatar from '@material-ui/core/Avatar';
 import PersonIcon from '@material-ui/icons/Person';
 import { get } from 'lodash';
 
-
 const UserAvatar = ({ user, classes }) => {
   return (
     <div className={classes.userInfo}>

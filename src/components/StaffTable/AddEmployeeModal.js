@@ -83,12 +83,7 @@ class AddEmployeeModal extends PureComponent {
         <Header>
           <div>Add New Employee</div>
         </Header>
-
         <Content>
-          {/* <Field name="fullName" label="Full name:" component={Input} />
-
-          <Field name="email" label="Email:" component={Input} type="email" /> */}
-
           <BaseInput label="Permissions:">
             <PermissionItem>
               <Checkbox
@@ -143,7 +138,7 @@ class AddEmployeeModal extends PureComponent {
           <StyledButton
             label={this.state.isLoading ? 'Creating account...' : 'Create account'}
             kind="primary"
-            // onClick={this.props.handleSubmit(this.handleCreateEmpoyee)}
+          // onClick={this.props.handleSubmit(this.handleCreateEmpoyee)}
           />
         </Modal.Footer>
       </Modal>

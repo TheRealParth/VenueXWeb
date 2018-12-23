@@ -42,7 +42,7 @@ const ManageStaffHeader = styled.div`
   justify-content: space-between;
   height: 120px;
 `;
-export default ({ label, classes, openModal, closeModal, ...rest }) => (
+export default ({ label, classes, openModal, ...rest }) => (
   <>
     <Button
       style={{ borderColor: '#c0b69b' }}

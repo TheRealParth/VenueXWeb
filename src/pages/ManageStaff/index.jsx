@@ -8,6 +8,10 @@ function mapStateToProps({ events, users }) {
   return {
     events: events.list,
     users: users.list,
+    sort: {
+      sortKey: users.sortKey,
+      orderBy: users.orderBy
+    },
     sortedUsers: sortUsersSelector(users)
   };
 }

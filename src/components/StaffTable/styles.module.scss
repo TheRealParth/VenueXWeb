@@ -1,0 +1,16 @@
+.rowHeaderTitle {
+  display: inline-block;
+  min-width: 100px;
+}
+
+.caretContainer {
+  display: inline-block;
+}
+
+.hide {
+  opacity: 0;
+}
+
+.reverse {
+  transform: rotate(180deg);
+}

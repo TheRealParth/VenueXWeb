@@ -41,8 +41,10 @@ class ManageStaff extends Component {
       <>
         <AddEmployeeModal isOpen={isOpen} onRequestClose={this.closeModal} />
         <StaffTable
+          {...this.props}
           openModal={this.openModal}
-          users={users} />
+          users={users}
+        />
       </>
     );
   }
