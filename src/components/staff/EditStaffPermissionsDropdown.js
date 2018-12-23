@@ -42,7 +42,7 @@ const SaveSection = styled.div`
   .save {
     text-transform: uppercase;
     cursor: pointer;
-    color: ${props => props.theme.colors.primary};
+    color: #000000;
   }
 `;
 
