@@ -14,6 +14,7 @@ function mapStateToProps({ events, users, auth }) {
     }) : {},
     anyChecked: users.anyChecked,
     allChecked: users.allChecked,
+    selectedCount: users.selectedCount,
     sort: {
       sortKey: users.sortKey,
       orderBy: users.orderBy

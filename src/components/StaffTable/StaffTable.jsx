@@ -126,7 +126,8 @@ const StaffTable = ({ users, ...rest }) => {
     selectAllUsers,
     unSelectAllUsers,
     selectSingleUser,
-    unSelectSingleUser
+    unSelectSingleUser,
+    selectedCount
   } = rest;
   return (
     <>

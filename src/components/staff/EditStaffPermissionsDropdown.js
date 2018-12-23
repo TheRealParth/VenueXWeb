@@ -10,7 +10,6 @@ import calendarDeleteBlackIcon from '../../assets/calendar-delete-black.svg';
 import billBlackIcon from '../../assets/bill-black.svg';
 import peopleBlackIcon from '../../assets/people-black.svg';
 
-
 const StyledDropdown = styled(Dropdown)`
   right: 0px;
   left: 0px;
@@ -43,19 +42,17 @@ const SaveSection = styled.div`
   .save {
     text-transform: uppercase;
     cursor: pointer;
-    color: ${props => props.theme.colors.primary};
+    color: #000000;
   }
 `;
 
-
 class EditStaffPermissionsDropdown extends PureComponent {
-
   state = {
     viewEventsOnly: false,
     createAndEditEvents: false,
     deleteEvents: false,
     viewBilling: false,
-    manageStaffPermissions: false,
+    manageStaffPermissions: false
   };
 
   handleSave = async () => {
@@ -66,18 +63,17 @@ class EditStaffPermissionsDropdown extends PureComponent {
       });
     });
 
-    await this.props.firebase.database().ref().update(updates);
+    await this.props.firebase
+      .database()
+      .ref()
+      .update(updates);
   };
 
   render() {
-    const { selectedEmployees } = this.props;
+    const { selectedCount } = this.props;
     return (
       <StyledDropdown
-        toggle={
-          <Button
-            label={`Edit permission for ${selectedEmployees.length} staff members`}
-          />
-        }
+        toggle={<Button label={`Edit permission for ${selectedCount} staff members`} />}
       >
         <Container>
           <PermissionItem>
