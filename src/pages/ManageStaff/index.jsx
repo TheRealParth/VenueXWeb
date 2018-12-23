@@ -10,6 +10,7 @@ function mapStateToProps({ events, users }) {
     users: users.list,
     anyChecked: users.anyChecked,
     allChecked: users.allChecked,
+    selectedCount: users.selectedCount,
     sort: {
       sortKey: users.sortKey,
       orderBy: users.orderBy

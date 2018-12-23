@@ -2,6 +2,7 @@ import { userTypes } from '../types';
 import { orderBy } from 'lodash';
 import { createSelector } from 'reselect';
 import { some } from 'lodash';
+import { select } from 'redux-saga/effects';
 const {
   USERS,
   SET_SORT_KEY,
@@ -15,6 +16,7 @@ const initialState = {
   list: [],
   anyChecked: false,
   allChecked: false,
+  selectedCount: 0,
   sortKey: {
     fullName: null,
     email: null,
@@ -50,6 +52,7 @@ export const users = (state = initialState, action) => {
         ...state,
         allChecked: true,
         anyChecked: true,
+        selectedCount: state.list.length,
         list: state.list.map(user => ({ ...user, checked: true }))
       };
     case UNSELECT_ALL_USERS:
@@ -57,10 +60,8 @@ export const users = (state = initialState, action) => {
         ...state,
         allChecked: false,
         anyChecked: false,
-        list: state.list.map(user => ({
-          ...user,
-          checked: false
-        }))
+        selectedCount: 0,
+        list: state.list.map(user => ({ ...user, checked: false }))
       };
     case UNSELECT_SINGLE_USER: {
       const list = state.list.map(user => {
@@ -73,6 +74,7 @@ export const users = (state = initialState, action) => {
         ...state,
         anyChecked: some(list, 'checked'),
         allChecked: !some(list, ['checked', false]),
+        selectedCount: state.selectedCount - 1,
         list
       };
     }
@@ -83,10 +85,12 @@ export const users = (state = initialState, action) => {
         }
         return user;
       });
+
       return {
         ...state,
         anyChecked: some(list, 'checked'),
         allChecked: !some(list, ['checked', false]),
+        selectedCount: state.selectedCount + 1,
         list
       };
     }

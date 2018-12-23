@@ -121,7 +121,6 @@ const DueLabel = styled.span`
 `;
 
 const StaffTable = ({ users, classes: { paper, root, table, tableCell, ...classes }, ...rest }) => {
-  console.log(rest);
   const {
     sort,
     setUsersSortKey,
@@ -130,7 +129,8 @@ const StaffTable = ({ users, classes: { paper, root, table, tableCell, ...classe
     selectAllUsers,
     unSelectAllUsers,
     selectSingleUser,
-    unSelectSingleUser
+    unSelectSingleUser,
+    selectedCount
   } = rest;
   return (
     <>
@@ -190,9 +190,9 @@ const StaffTable = ({ users, classes: { paper, root, table, tableCell, ...classe
             ) : (
               <>
                 <Table.Cell width="80%">
-                  <EditStaffPermissionsDropdown selectedEmployees={[]} />
+                  <EditStaffPermissionsDropdown {...rest} selectedEmployees={[]} />
                   &nbsp;
-                  <Button label="Delete 2 staff members" kind="danger" />
+                  <Button label={`Delete ${selectedCount} staff members`} kind="danger" />
                 </Table.Cell>
               </>
             )}
