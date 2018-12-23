@@ -8,6 +8,8 @@ function mapStateToProps({ events, users }) {
   return {
     events: events.list,
     users: users.list,
+    anyChecked: users.anyChecked,
+    allChecked: users.allChecked,
     sort: {
       sortKey: users.sortKey,
       orderBy: users.orderBy

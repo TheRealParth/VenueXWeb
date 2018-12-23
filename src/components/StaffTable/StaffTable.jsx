@@ -122,7 +122,16 @@ const DueLabel = styled.span`
 
 const StaffTable = ({ users, classes: { paper, root, table, tableCell, ...classes }, ...rest }) => {
   console.log(rest);
-  const { sort, setUsersSortKey } = rest;
+  const {
+    sort,
+    setUsersSortKey,
+    anyChecked,
+    allChecked,
+    selectAllUsers,
+    unSelectAllUsers,
+    selectSingleUser,
+    unSelectSingleUser
+  } = rest;
   return (
     <>
       <Grid container spacing={24}>
@@ -135,130 +144,138 @@ const StaffTable = ({ users, classes: { paper, root, table, tableCell, ...classe
           <Table.Row>
             <Table.Cell width="5%">
               <Table.HeaderCell
-                title={<Checkbox onCheck={() => { }} onUncheck={() => { }} checked={true} />}
+                title={
+                  <Checkbox
+                    onCheck={selectAllUsers}
+                    onUncheck={unSelectAllUsers}
+                    checked={allChecked}
+                  />
+                }
               />
             </Table.Cell>
-            {false ?
+            {!anyChecked ? (
               <>
                 <Table.Cell width="20%">
                   <Table.HeaderCell
-                    onClick={() => setUsersSortKey('fullName', sort.orderBy === 'asc' ? 'desc' : 'asc')}
+                    onClick={() =>
+                      setUsersSortKey('fullName', sort.orderBy === 'asc' ? 'desc' : 'asc')
+                    }
                     className={tableCell}
                     title={'Name'}
                   />
                 </Table.Cell>
                 <Table.Cell width="20%">
                   <Table.HeaderCell
-                    onClick={() => setUsersSortKey('email', sort.orderBy === 'asc' ? 'desc' : 'asc')}
+                    onClick={() =>
+                      setUsersSortKey('email', sort.orderBy === 'asc' ? 'desc' : 'asc')
+                    }
                     className={tableCell}
                     numeric
                     title="Email"
                   />
                 </Table.Cell>
                 <Table.Cell width="20%">
-                  <Table.HeaderCell onClick={() => { }} className={tableCell} title="Permissions" />
+                  <Table.HeaderCell onClick={() => {}} className={tableCell} title="Permissions" />
                 </Table.Cell>
                 <Table.Cell width="20%">
                   <Table.HeaderCell
-                    onClick={() => setUsersSortKey('created', sort.orderBy === 'asc' ? 'desc' : 'asc')}
+                    onClick={() =>
+                      setUsersSortKey('created', sort.orderBy === 'asc' ? 'desc' : 'asc')
+                    }
                     className={tableCell}
                     title="Date Added"
                   />
                 </Table.Cell>
-   
-              </> 
-              :
-            <>
-              <Table.Cell width="80%">
-                <EditStaffPermissionsDropdown
-                  selectedEmployees={[]}
-                />
-
-                &nbsp;
-  
-            <Button
-                  label="Delete 2 staff members"
-                  kind="danger"
-                />
-              </Table.Cell>
-            </>
-            }
-                       </Table.Row>
+              </>
+            ) : (
+              <>
+                <Table.Cell width="80%">
+                  <EditStaffPermissionsDropdown selectedEmployees={[]} />
+                  &nbsp;
+                  <Button label="Delete 2 staff members" kind="danger" />
+                </Table.Cell>
+              </>
+            )}
+          </Table.Row>
           <Table.Body>
-              {users.map(user => (
-                <StyledTableRow key={user.id}>
-                  <Table.Cell width="5%">
-                    <Checkbox onCheck={() => { }} onUncheck={() => { }} checked={false} />
-                  </Table.Cell>
-                  <Table.Cell width="20%">
-                    <ConsultantLabel name={user.fullName} picture={user.picture} />
-                  </Table.Cell>
+            {users.map(user => (
+              <StyledTableRow key={user.id}>
+                <Table.Cell width="5%">
+                  <Checkbox
+                    onCheck={() => selectSingleUser(user.id)}
+                    onUncheck={() => unSelectSingleUser(user.id)}
+                    checked={user.checked}
+                  />
+                </Table.Cell>
+                <Table.Cell width="20%">
+                  <ConsultantLabel name={user.fullName} picture={user.picture} />
+                </Table.Cell>
 
-                  <Table.Cell width="20%">{user.email}</Table.Cell>
+                <Table.Cell width="20%">{user.email}</Table.Cell>
 
-                  <Table.Cell width="20%">
-                    <IconsContainer>
-                      <Icons.CalendarEdit
-                        size={24}
-                        color={!user.permissions.createAndEditEvents ? '#d8d8d8' : undefined}
-                      />
-                      <Icons.CalendarDelete
-                        size={24}
-                        color={!user.permissions.deleteEvents ? '#d8d8d8' : undefined}
-                      />
-                      <Icons.Billing
-                        size={24}
-                        color={!user.permissions.viewBilling ? '#d8d8d8' : undefined}
-                      />
-                      <Icons.ManageStaff
-                        size={24}
-                        color={!user.permissions.manageStaffPermissions ? '#d8d8d8' : undefined}
-                      />
-                    </IconsContainer>
-                  </Table.Cell>
+                <Table.Cell width="20%">
+                  <IconsContainer>
+                    <Icons.CalendarEdit
+                      size={24}
+                      color={!user.permissions.createAndEditEvents ? '#d8d8d8' : undefined}
+                    />
+                    <Icons.CalendarDelete
+                      size={24}
+                      color={!user.permissions.deleteEvents ? '#d8d8d8' : undefined}
+                    />
+                    <Icons.Billing
+                      size={24}
+                      color={!user.permissions.viewBilling ? '#d8d8d8' : undefined}
+                    />
+                    <Icons.ManageStaff
+                      size={24}
+                      color={!user.permissions.manageStaffPermissions ? '#d8d8d8' : undefined}
+                    />
+                  </IconsContainer>
+                </Table.Cell>
 
-                  <Table.Cell width="20%">{moment(user.createdAt).format('MM/DD/YYYY')}</Table.Cell>
+                <Table.Cell width="20%">{moment(user.createdAt).format('MM/DD/YYYY')}</Table.Cell>
 
-                  <Table.Cell width="15%">
-                    <div className="actions">
-                      <Icons.Delete size={24} color="#7d7d7d" />
-                      <Icons.Delete size={24} color="#7d7d7d" />
-                    </div>
-                  </Table.Cell>
-                </StyledTableRow>
-                // <Table.Row key={user.id}>
-                //   <Table.Cell
-                //     className={classnames([tableCell, rowValue])}
-                //     component="th"
-                //     scope="row"
-                //   >
-                //     <UserAvatar classes={rest} user={user} />
-                //   </Table.Cell>
-                //   <Table.Cell className={classnames([tableCell, rowValue])} numeric>
-                //     {user.email}
-                //   </Table.Cell>
-                //   <Table.Cell className={classnames([tableCell, rowValue])} numeric>
-                //     <PermissionsIcons {...user.permissions} />
-                //   </Table.Cell>
-                //   <Table.Cell className={classnames([tableCell, rowValue])} numeric>
-                //     {`${moment(user.created).format('MM/DD/YYYY')}`}
-                //   </Table.Cell>
-                // </Table.Row>
-              ))}
-            </Table.Body>
+                <Table.Cell width="15%">
+                  <div className="actions">
+                    <Icons.Delete size={24} color="#7d7d7d" />
+                    <Icons.Delete size={24} color="#7d7d7d" />
+                  </div>
+                </Table.Cell>
+              </StyledTableRow>
+              // <Table.Row key={user.id}>
+              //   <Table.Cell
+              //     className={classnames([tableCell, rowValue])}
+              //     component="th"
+              //     scope="row"
+              //   >
+              //     <UserAvatar classes={rest} user={user} />
+              //   </Table.Cell>
+              //   <Table.Cell className={classnames([tableCell, rowValue])} numeric>
+              //     {user.email}
+              //   </Table.Cell>
+              //   <Table.Cell className={classnames([tableCell, rowValue])} numeric>
+              //     <PermissionsIcons {...user.permissions} />
+              //   </Table.Cell>
+              //   <Table.Cell className={classnames([tableCell, rowValue])} numeric>
+              //     {`${moment(user.created).format('MM/DD/YYYY')}`}
+              //   </Table.Cell>
+              // </Table.Row>
+            ))}
+          </Table.Body>
         </Table>
       </TableContainer>
     </>
-      );
-    };
-    
+  );
+};
+
 StaffTable.propTypes = {
-        classes: PropTypes.object.isRequired,
-      users: PropTypes.array.isRequired
-    };
-    
+  classes: PropTypes.object.isRequired,
+  users: PropTypes.array.isRequired
+};
+
 StaffTable.defaultProps = {
-        users: []
-    };
-    
-export {StaffTable};
+  users: []
+};
+
+export { StaffTable };
