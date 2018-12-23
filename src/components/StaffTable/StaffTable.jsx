@@ -171,7 +171,7 @@ const StaffTable = ({ users, classes: { paper, root, table, tableCell, ...classe
             <>
               <Table.Cell width="80%">
                 <EditStaffPermissionsDropdown
-                  selectedEmployees={this.getSelectedEmployees()}
+                  selectedEmployees={[]}
                 />
 
                 &nbsp;

@@ -4,15 +4,15 @@ import { compose } from 'redux';
 import { reduxForm, Field } from 'redux-form';
 import styled from 'styled-components';
 import Checkbox from 'components/Checkbox';
-import Modal from 'components/Modal';
-import Button from 'components/Button';
-import Input from 'components/form/Input';
-import BaseInput from 'components/form/BaseInput';
-import calendarViewBlackIcon from 'assets/calendar-view-black.svg';
-import calendarEditBlackIcon from 'assets/calendar-edit-black.svg';
-import calendarDeleteBlackIcon from 'assets/calendar-delete-black.svg';
-import billBlackIcon from 'assets/bill-black.svg';
-import peopleBlackIcon from 'assets/people-black.svg';
+import Modal from '../Modal';
+import Button from '../Button';
+import Input from '../form/Input';
+import BaseInput from '../form/BaseInput';
+import calendarViewBlackIcon from '../../assets/calendar-view-black.svg';
+import calendarEditBlackIcon from '../../assets/calendar-edit-black.svg';
+import calendarDeleteBlackIcon from '../../assets/calendar-delete-black.svg';
+import billBlackIcon from '../../assets/bill-black.svg';
+import peopleBlackIcon from '../../assets/people-black.svg';
 
 const Header = styled.div`
   background-color: ${props => props.theme.colors.primary}66;
