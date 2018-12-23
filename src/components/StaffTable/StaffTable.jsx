@@ -13,9 +13,11 @@ import PermissionsIcons from '../PermissionsIcons';
 import ManageStaffHeader from './ManageStaffHeader.jsx';
 import CaretDown from '../../assets/icons/CaretDown';
 import Button from '../Button';
+import PersonalMenu from '../PersonalMenu';
+
 import EditStaffPermissionsDropdown from '../staff/EditStaffPermissionsDropdown';
 
-import { rowHeaderTitle, rowValue, hide, reverse, caretContainer } from './styles.module.scss';
+// import { rowHeaderTitle, rowValue, hide, reverse, caretContainer } from './styles.module.scss';
 import classnames from 'classnames';
 import Icons from '../../assets/icons';
 import ConsultantLabel from '../Consultant';
@@ -66,12 +68,6 @@ const ArrowIcon = styled.img`
   cursor: pointer;
 `;
 
-const Header = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
-`;
 
 const Stats = styled.div`
   background-color: #fff;
@@ -120,7 +116,7 @@ const DueLabel = styled.span`
   color: ${props => props.color || '#b0b0b0'};
 `;
 
-const StaffTable = ({ users, classes: { paper, root, table, tableCell, ...classes }, ...rest }) => {
+const StaffTable = ({ users, ...rest }) => {
   console.log(rest);
   const {
     sort,
@@ -134,13 +130,9 @@ const StaffTable = ({ users, classes: { paper, root, table, tableCell, ...classe
   } = rest;
   return (
     <>
-      <Grid container spacing={24}>
-        <Grid item xs={12}>
-          <ManageStaffHeader {...rest} classes={classes} className={paper} />
-        </Grid>
-      </Grid>
+
       <TableContainer>
-        <Table className={table}>
+        <Table>
           <Table.Row>
             <Table.Cell width="5%">
               <Table.HeaderCell
@@ -160,7 +152,6 @@ const StaffTable = ({ users, classes: { paper, root, table, tableCell, ...classe
                     onClick={() =>
                       setUsersSortKey('fullName', sort.orderBy === 'asc' ? 'desc' : 'asc')
                     }
-                    className={tableCell}
                     title={'Name'}
                   />
                 </Table.Cell>
@@ -169,33 +160,32 @@ const StaffTable = ({ users, classes: { paper, root, table, tableCell, ...classe
                     onClick={() =>
                       setUsersSortKey('email', sort.orderBy === 'asc' ? 'desc' : 'asc')
                     }
-                    className={tableCell}
                     numeric
                     title="Email"
                   />
                 </Table.Cell>
                 <Table.Cell width="20%">
-                  <Table.HeaderCell onClick={() => {}} className={tableCell} title="Permissions" />
+                  <Table.HeaderCell onClick={() => { }} title="Permissions" />
                 </Table.Cell>
                 <Table.Cell width="20%">
                   <Table.HeaderCell
                     onClick={() =>
                       setUsersSortKey('created', sort.orderBy === 'asc' ? 'desc' : 'asc')
                     }
-                    className={tableCell}
+
                     title="Date Added"
                   />
                 </Table.Cell>
               </>
             ) : (
-              <>
-                <Table.Cell width="80%">
-                  <EditStaffPermissionsDropdown selectedEmployees={[]} />
-                  &nbsp;
+                <>
+                  <Table.Cell width="80%">
+                    <EditStaffPermissionsDropdown selectedEmployees={[]} />
+                    &nbsp;
                   <Button label="Delete 2 staff members" kind="danger" />
-                </Table.Cell>
-              </>
-            )}
+                  </Table.Cell>
+                </>
+              )}
           </Table.Row>
           <Table.Body>
             {users.map(user => (
@@ -243,24 +233,6 @@ const StaffTable = ({ users, classes: { paper, root, table, tableCell, ...classe
                   </div>
                 </Table.Cell>
               </StyledTableRow>
-              // <Table.Row key={user.id}>
-              //   <Table.Cell
-              //     className={classnames([tableCell, rowValue])}
-              //     component="th"
-              //     scope="row"
-              //   >
-              //     <UserAvatar classes={rest} user={user} />
-              //   </Table.Cell>
-              //   <Table.Cell className={classnames([tableCell, rowValue])} numeric>
-              //     {user.email}
-              //   </Table.Cell>
-              //   <Table.Cell className={classnames([tableCell, rowValue])} numeric>
-              //     <PermissionsIcons {...user.permissions} />
-              //   </Table.Cell>
-              //   <Table.Cell className={classnames([tableCell, rowValue])} numeric>
-              //     {`${moment(user.created).format('MM/DD/YYYY')}`}
-              //   </Table.Cell>
-              // </Table.Row>
             ))}
           </Table.Body>
         </Table>

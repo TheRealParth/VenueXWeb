@@ -1,17 +1,24 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import plusIcon from '../../assets/plus.svg';
 import filterIcon from '../../assets/filter.svg';
 import Icons from '../../assets/icons';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
-import Fab from '@material-ui/core/Fab';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
-import Button from '../Button';
-import Avatar from '@material-ui/core/Avatar';
-import PersonIcon from '@material-ui/icons/Person';
+import Button from '../../components/Button';
+import RoundButton from '../../components/RoundButton';
+
+const ManageStaffHeader = styled.div`
+  height: 40px; /* not sure what to set this as */
+  background-color: #fcfbfc;
+  padding: 20px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+    ${props =>
+    props.kind === 'primary' &&
+    css`
+        color: red;
+      `};
+`;
 
 const FilterLabel = styled.div` 
 font-family: Montserrat;
@@ -27,45 +34,41 @@ display: flex;
 align-items: center;
 justify-content: space-around
 }`;
-const styles = theme => ({
-  fab: {
-    size: 25,
-    backgroundColor: '#c0b69b',
-    margin: theme.spacing.unit
-  },
-  extendedIcon: theme.spacing.unit
-});
 
-const ManageStaffHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 120px;
+const AddIcon = styled.img`
+  height: 17px;
+  width: 17px;
 `;
-export default ({ label, classes, openModal, ...rest }) => (
-  <>
+
+const ActionButtonGroup = styled.div`
+  display: flex;
+  width: 111px;
+  justify-content: space-between;
+`;
+
+export default ({ label, ...restProps }) => (
+  <ManageStaffHeader {...restProps}>
     <Button
-      style={{ borderColor: '#c0b69b' }}
-      {...rest}
       label={
-        <FilterLabel {...rest}>
-          <FilterListIcon />
+        <FilterLabel>
+          <AddIcon src={filterIcon} />
           Filter
         </FilterLabel>
       }
       kind="white"
     />
-    <Avatar className={classes.avatar}>
-      <PersonIcon />
-    </Avatar>
-    <a onClick={openModal}>
-      <Fab {...rest} aria-label="Add" className={classes.fab}>
-        <AddIcon />
-      </Fab>
-    </a>
-  </>
-);
+    <div>
+      <Icons.Rings size="75" />
+      <Icons.Plus size="40" color="#fff" />
+    </div>
 
-ManageStaffHeader.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+    <Icons.Delete />
+    <Icons.Bell />
+    <ActionButtonGroup>
+      <RoundButton>
+        <AddIcon src={plusIcon} />
+      </RoundButton>
+      <RoundButton label="U" />
+    </ActionButtonGroup>
+  </ManageStaffHeader>
+);

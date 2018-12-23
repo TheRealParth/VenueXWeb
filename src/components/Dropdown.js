@@ -13,7 +13,7 @@ const Content = styled.div`
   z-index: 10;
   background-color: #FFF;
   top: calc(100% + 5px);
-  right: -65px;
+  right: 0px;
   padding: 5px;
 `;
 

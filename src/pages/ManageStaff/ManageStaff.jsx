@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import StaffTable from '../../components/StaffTable';
 import AddEmployeeModal from '../../components/StaffTable/AddEmployeeModal';
+import PersonalMenu from '../../components/PersonalMenu';
+import AddButton from '../../components/AddButton';
+
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+`;
 
 class ManageStaff extends Component {
   constructor(props) {
@@ -16,13 +26,11 @@ class ManageStaff extends Component {
     this.props.getUsersRequest();
     this.props.setUsersSortKey('email', 'asc');
   }
-
   componentDidUpdate(prevProps) {
     if (this.props.sortedUsers !== prevProps.sortedUsers) {
       this.setState({ users: this.props.sortedUsers });
     }
   }
-
   openModal = () => {
     this.setState({
       isOpen: true,
@@ -40,9 +48,16 @@ class ManageStaff extends Component {
     return (
       <>
         <AddEmployeeModal isOpen={isOpen} onRequestClose={this.closeModal} />
+        <Header>
+          <div />
+          <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+            <PersonalMenu {...this.props.currentUser} />
+            <AddButton onClick={this.openModal} />
+          </div>
+        </Header>
+
         <StaffTable
           {...this.props}
-          openModal={this.openModal}
           users={users}
         />
       </>

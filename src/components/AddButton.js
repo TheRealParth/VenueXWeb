@@ -9,8 +9,8 @@ const AddIcon = styled.img`
 //   background-color: ${props => props.theme.colors.primary};
 const AddButton = styled.div`
   height: 50px;
+  background-color: #c0b69b;
   width: 50px;
-
   border-radius: 50%;
   display: flex;
   justify-content: center;
