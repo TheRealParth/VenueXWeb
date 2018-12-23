@@ -2,7 +2,10 @@
   display: inline-block;
   min-width: 100px;
 }
-
+.rowValue, .rowValue > div, .rowValue > div > span {
+  font-family: Montserrat;
+  font-size: 15px;
+}
 .caretContainer {
   display: inline-block;
 }
