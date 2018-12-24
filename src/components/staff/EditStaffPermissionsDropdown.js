@@ -73,7 +73,7 @@ class EditStaffPermissionsDropdown extends PureComponent {
     const { selectedCount } = this.props;
     return (
       <StyledDropdown
-        toggle={<Button label={`Edit permission for ${selectedCount} staff members`} />}
+        toggle={<Button label={`Edit permission for ${selectedCount} staff member${selectedCount > 1 ? 's' : ''}`} />}
       >
         <Container>
           <PermissionItem>

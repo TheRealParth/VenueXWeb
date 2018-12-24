@@ -68,7 +68,6 @@ const ArrowIcon = styled.img`
   cursor: pointer;
 `;
 
-
 const Stats = styled.div`
   background-color: #fff;
   margin: 15px 0px;
@@ -131,7 +130,6 @@ const StaffTable = ({ users, ...rest }) => {
   } = rest;
   return (
     <>
-
       <TableContainer>
         <Table>
           <Table.Row>
@@ -173,7 +171,6 @@ const StaffTable = ({ users, ...rest }) => {
                     onClick={() =>
                       setUsersSortKey('created', sort.orderBy === 'asc' ? 'desc' : 'asc')
                     }
-
                     title="Date Added"
                   />
                 </Table.Cell>
@@ -181,9 +178,15 @@ const StaffTable = ({ users, ...rest }) => {
             ) : (
                 <>
                   <Table.Cell width="80%">
-                    <EditStaffPermissionsDropdown selectedEmployees={[]} />
+                    <EditStaffPermissionsDropdown
+                      selectedCount={selectedCount}
+                      selectedEmployees={[]}
+                    />
                     &nbsp;
-                  <Button label="Delete 2 staff members" kind="danger" />
+                  <Button
+                      label={`Delete ${selectedCount} staff member${selectedCount > 1 ? 's' : ''}`}
+                      kind="danger"
+                    />
                   </Table.Cell>
                 </>
               )}
