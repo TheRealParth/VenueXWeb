@@ -6,9 +6,9 @@ $active-border: darken($btn-border, 12%);
 .rbc-toolbar {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin: 15px 20px;
   font-size: 16px;
 
   .rbc-toolbar-label {
@@ -70,8 +70,6 @@ $active-border: darken($btn-border, 12%);
 .today-button {
   width: 100px;
   height: 50px;
-  position: absolute;
-  left: 250px;
   border-radius: 4px !important;
   font-family: Montserrat;
   font-size: 12px;
