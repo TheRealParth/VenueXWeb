@@ -30,7 +30,6 @@
 
 .rbc-month-view {
   position: relative;
-  border: 1px solid $calendar-border;
   display: flex;
   flex-direction: column;
   flex: 1 0 0;
@@ -71,9 +70,20 @@
   min-width: 0;
   padding-right: 5px;
   text-align: right;
+  margin-top: 13px;
 
   &.rbc-now {
-    font-weight: bold;
+    > a {
+      background-color: #222222;
+      color: #ffffff !important;
+      width: 22px;
+      height: 22px;
+      border-radius: 100%;
+      display: inline-block;
+      text-align: center;
+      padding: 2px;
+      padding-bottom: 1px;
+    }
   }
 
   > a {
