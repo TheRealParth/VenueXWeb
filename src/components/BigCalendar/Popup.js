@@ -4,7 +4,7 @@ import getOffset from 'dom-helpers/query/offset';
 import getScrollTop from 'dom-helpers/query/scrollTop';
 import getScrollLeft from 'dom-helpers/query/scrollLeft';
 import dates from './utils/dates';
-
+import Icons from '../../assets/icons';
 import EventCell from './EventCell';
 import { isSelected } from './utils/selection';
 
@@ -80,22 +80,27 @@ class Popup extends React.Component {
     return (
       <div ref="root" style={style} className="rbc-overlay">
         <div className="rbc-overlay-header">
-          <span style={{ fontWeight: 600, fontSize: '24px', color: '#7d7d7d' }}>
-            {localizer.format(slotStart, 'dateFormat')}{' '}
-          </span>
-          &nbsp;
-          <span
-            style={{
-              fontSize: '12px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.3px',
-              color: '#888888',
-              display: ' inline-block',
-              marginTop: '1.1px'
-            }}
-          >
-            {localizer.format(slotStart, 'ddd')}{' '}
-          </span>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <span style={{ fontWeight: 600, fontSize: '24px', color: '#7d7d7d' }}>
+              {localizer.format(slotStart, 'dateFormat')}{' '}
+            </span>
+            &nbsp;
+            <span
+              style={{
+                fontSize: '12px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.3px',
+                color: '#888888',
+                display: ' inline-block',
+                marginTop: '1.1px'
+              }}
+            >
+              {localizer.format(slotStart, 'ddd')}{' '}
+            </span>
+          </div>
+          <div>
+            <Icons.Close size={10} onClick={this.props.hide} color="#7d7d7d" />
+          </div>
         </div>
         {events.map((event, idx) => (
           <EventCell
