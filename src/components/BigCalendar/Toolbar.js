@@ -35,7 +35,7 @@ class Toolbar extends React.Component {
             className={'rbc-btn-navi-left'}
             onClick={this.navigate.bind(null, navigate.PREVIOUS)}
           >
-            <CaretLeft height={25} color="#c0b69b" />
+            <CaretLeft size={16} color="#c0b69b" />
           </button>
 
           <div className="rbc-toolbar-label">{label}</div>
@@ -45,7 +45,7 @@ class Toolbar extends React.Component {
             className={'rbc-btn-navi-right'}
             onClick={this.navigate.bind(null, navigate.NEXT)}
           >
-            <CaretRight height={25} color="#c0b69b" />
+            <CaretRight size={16} color="#c0b69b" />
           </button>
         </div>
         <div>Button Group</div>
