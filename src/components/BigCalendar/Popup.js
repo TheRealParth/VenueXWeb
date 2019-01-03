@@ -83,7 +83,17 @@ class Popup extends React.Component {
           <span style={{ fontWeight: 600, fontSize: '24px', color: '#7d7d7d' }}>
             {localizer.format(slotStart, 'dateFormat')}{' '}
           </span>
-          <span style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
+          &nbsp;
+          <span
+            style={{
+              fontSize: '12px',
+              textTransform: 'uppercase',
+              letterSpacing: '0.3px',
+              color: '#888888',
+              display: ' inline-block',
+              marginTop: '1.1px'
+            }}
+          >
             {localizer.format(slotStart, 'ddd')}{' '}
           </span>
         </div>
