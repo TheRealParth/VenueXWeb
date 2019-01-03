@@ -211,19 +211,19 @@ const StaffTable = ({ users, ...rest }) => {
                   <IconsContainer>
                     <Icons.CalendarEdit
                       size={24}
-                      color={!user.permissions.createAndEditEvents ? '#d8d8d8' : undefined}
+                      color={!user.permissions.createAndEditEvents ? '#d8d8d8' : 'rgba(0,0,0,.5)'}
                     />
                     <Icons.CalendarDelete
                       size={24}
-                      color={!user.permissions.deleteEvents ? '#d8d8d8' : undefined}
+                      color={!user.permissions.deleteEvents ? '#d8d8d8' : 'rgba(0,0,0,0.5)'}
                     />
                     <Icons.Billing
                       size={24}
-                      color={!user.permissions.viewBilling ? '#d8d8d8' : undefined}
+                      color={!user.permissions.viewBilling ? '#d8d8d8' : 'rgba(0,0,0,0.5)'}
                     />
                     <Icons.ManageStaff
                       size={24}
-                      color={!user.permissions.manageStaffPermissions ? '#d8d8d8' : undefined}
+                      color={!user.permissions.manageStaffPermissions ? '#d8d8d8' : 'rgba(0,0,0,0.5)'}
                     />
                   </IconsContainer>
                 </Table.Cell>
