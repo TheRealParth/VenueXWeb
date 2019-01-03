@@ -33,7 +33,11 @@ class Events extends Component {
           events={events}
           startAccessor="start"
           endAccessor="end"
+          views={['month']}
           popup
+          formats={{
+            dateFormat: 'D'
+          }}
         />
         <style>{`
 

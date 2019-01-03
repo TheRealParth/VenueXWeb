@@ -75,17 +75,19 @@ $active-border: darken($btn-border, 12%);
   border-radius: 4px !important;
   font-family: Montserrat;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
   text-align: center;
-  color: #7d7d7d;
+  color: #7d7d7d !important;
   box-shadow: 0 2px 4px 0 rgba(125, 125, 125, 0.2);
-  border-color: rgba(0, 0, 0, 0);
   background-color: #ffffff;
-  border: 0;
+  padding: 0px 30px;
+  text-transform: uppercase;
+  border: solid 1px #ededed !important;
+  padding: 0px 30px !important;
 }
 .rbc-btn-group {
   display: inline-block;
