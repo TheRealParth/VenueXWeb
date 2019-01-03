@@ -8,6 +8,7 @@
   flex-direction: column;
   align-items: stretch;
   border: solid 1px #ededed;
+  padding: 0.11px;
 }
 
 .rbc-calendar *,
@@ -99,7 +100,6 @@
 }
 
 .rbc-today {
-  background-color: $today-highlight-bg;
 }
 
 @import './toolbar.scss';
