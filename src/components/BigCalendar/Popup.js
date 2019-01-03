@@ -80,7 +80,7 @@ class Popup extends React.Component {
     return (
       <div ref="root" style={style} className="rbc-overlay">
         <div className="rbc-overlay-header">
-          <span style={{ fontWeight: 500, fontSize: '24px', color: '#7d7d7d' }}>
+          <span style={{ fontWeight: 600, fontSize: '24px', color: '#7d7d7d' }}>
             {localizer.format(slotStart, 'dateFormat')}{' '}
           </span>
           <span style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
