@@ -1,9 +1,22 @@
 import { userTypes } from '../types';
 import { orderBy } from 'lodash';
 import { createSelector } from 'reselect';
+import { some } from 'lodash';
+import { select } from 'redux-saga/effects';
+const {
+  USERS,
+  SET_SORT_KEY,
+  SELECT_ALL_USERS,
+  UNSELECT_ALL_USERS,
+  UNSELECT_SINGLE_USER,
+  SELECT_SINGLE_USER
+} = userTypes;
 
 const initialState = {
   list: [],
+  anyChecked: false,
+  allChecked: false,
+  selectedCount: 0,
   sortKey: {
     fullName: null,
     email: null,
@@ -23,17 +36,64 @@ export const sortUsersSelector = createSelector(
 
 export const users = (state = initialState, action) => {
   switch (action.type) {
-    case userTypes.USERS.SYNC:
+    case USERS.SYNC:
       return {
         ...state,
-        list: action.users
+        list: action.users.map(user => ({ ...user, checked: false }))
       };
-    case userTypes.SET_SORT_KEY:
+    case SET_SORT_KEY:
       return {
         ...state,
         sortKey: action.sortKey,
         orderBy: action.value
       };
+    case SELECT_ALL_USERS:
+      return {
+        ...state,
+        allChecked: true,
+        anyChecked: true,
+        selectedCount: state.list.length,
+        list: state.list.map(user => ({ ...user, checked: true }))
+      };
+    case UNSELECT_ALL_USERS:
+      return {
+        ...state,
+        allChecked: false,
+        anyChecked: false,
+        selectedCount: 0,
+        list: state.list.map(user => ({ ...user, checked: false }))
+      };
+    case UNSELECT_SINGLE_USER: {
+      const list = state.list.map(user => {
+        if (user.id === action.userId) {
+          return { ...user, checked: false };
+        }
+        return user;
+      });
+      return {
+        ...state,
+        anyChecked: some(list, 'checked'),
+        allChecked: !some(list, ['checked', false]),
+        selectedCount: state.selectedCount - 1,
+        list
+      };
+    }
+    case SELECT_SINGLE_USER: {
+      const list = state.list.map(user => {
+        if (user.id === action.userId) {
+          return { ...user, checked: true };
+        }
+        return user;
+      });
+
+      return {
+        ...state,
+        anyChecked: some(list, 'checked'),
+        allChecked: !some(list, ['checked', false]),
+        selectedCount: state.selectedCount + 1,
+        list
+      };
+    }
     default:
       return state;
   }

@@ -11,7 +11,7 @@ const ProfilePicture = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, .10);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   margin: 0px 5px;
   cursor: pointer;
 `;
@@ -37,19 +37,11 @@ const Item = styled.div`
   }
 `;
 
-const PersonalMenu = ({ currentUser }) => (
+const PersonalMenu = ({ picture, fullName }) => (
   <div>
-    <Dropdown
-      toggle={
-        <ProfilePicture
-          src="https://placehold.it/100x100"
-        />
-      }
-    >
+    <Dropdown toggle={<ProfilePicture src={picture} />}>
       <div>
-        <NameSection>
-          Hi, {currentUser.displayName}
-        </NameSection>
+        <NameSection>{`Hi, ${fullName}`}</NameSection>
 
         <Item>
           <Camera color="#b0b0b0" />
@@ -70,6 +62,4 @@ const PersonalMenu = ({ currentUser }) => (
   </div>
 );
 
-export default connect(state => ({
-  currentUser: () => { },
-}))(PersonalMenu);
+export default PersonalMenu;

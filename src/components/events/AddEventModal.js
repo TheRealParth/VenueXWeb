@@ -51,7 +51,4 @@ class AddEventModal extends PureComponent {
   }
 }
 
-export default compose(
-  withFirebase,
-  withVenueConfig,
-)(AddEventModal);
+export default AddEventModal;

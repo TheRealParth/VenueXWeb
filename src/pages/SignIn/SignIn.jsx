@@ -62,11 +62,9 @@ class SignInScreen extends Component {
               />
               <Field
                 component={GenericInput}
-                type="text"
                 className="form-control"
                 type="password"
                 name="password"
-                type="password"
                 label="Password"
                 autoComplete="current-password"
               />
