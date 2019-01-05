@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
+import { withFirebase } from 'react-redux-firebase';
+import { compose } from 'redux';
+import { reduxForm, Field } from 'redux-form';
 import styled from 'styled-components';
-import Checkbox from '../Checkbox';
+import Checkbox from 'components/Checkbox';
 import Modal from '../Modal';
 import Button from '../Button';
 import Input from '../form/Input';
@@ -10,10 +13,9 @@ import calendarEditBlackIcon from '../../assets/calendar-edit-black.svg';
 import calendarDeleteBlackIcon from '../../assets/calendar-delete-black.svg';
 import billBlackIcon from '../../assets/bill-black.svg';
 import peopleBlackIcon from '../../assets/people-black.svg';
-import PropTypes from 'prop-types';
 
 const Header = styled.div`
-  background-color: rgba(188 172 150, 0.4);
+  background-color: ${props => props.theme.colors.primary}66;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   padding: 30px 0px;
   font-size: 24px;
@@ -42,39 +44,35 @@ const Icon = styled.img`
 `;
 
 class AddEmployeeModal extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      viewEventsOnly: false,
-      createAndEditEvents: false,
-      deleteEvents: false,
-      viewBilling: false,
-      manageStaffPermissions: false,
-      isLoading: false
-    };
-  }
 
-  componentDidMount() {
-    console.log(this.props);
-  }
+  state = {
+    viewEventsOnly: false,
+    createAndEditEvents: false,
+    deleteEvents: false,
+    viewBilling: false,
+    manageStaffPermissions: false,
+    isLoading: false,
+  };
 
-  // handleCreateEmpoyee = async ({ fullName, email }) => {
-  //   const { firebase } = this.props;
-  //   const createEmployee = firebase.functions().httpsCallable('createEmployee');
+  handleCreateEmpoyee = async ({ fullName, email }) => {
+    const { firebase } = this.props;
+    const createEmployee = firebase
+      .functions()
+      .httpsCallable('createEmployee');
 
-  //   const { isLoading, ...permissions } = this.state;
+    const { isLoading, ...permissions } = this.state;
 
-  //   this.setState({ isLoading: true });
+    this.setState({ isLoading: true });
 
-  //   await createEmployee({
-  //     fullName,
-  //     email,
-  //     permissions
-  //   });
+    await createEmployee({
+      fullName,
+      email,
+      permissions,
+    });
 
-  //   this.setState({ isLoading: false });
-  //   this.props.onRequestClose();
-  // };
+    this.setState({ isLoading: false });
+    this.props.onRequestClose();
+  };
 
   render() {
     const { isOpen, onRequestClose } = this.props;
@@ -83,7 +81,21 @@ class AddEmployeeModal extends PureComponent {
         <Header>
           <div>Add New Employee</div>
         </Header>
+
         <Content>
+          <Field
+            name="fullName"
+            label="Full name:"
+            component={Input}
+          />
+
+          <Field
+            name="email"
+            label="Email:"
+            component={Input}
+            type="email"
+          />
+
           <BaseInput label="Permissions:">
             <PermissionItem>
               <Checkbox
@@ -134,11 +146,16 @@ class AddEmployeeModal extends PureComponent {
         </Content>
 
         <Modal.Footer>
-          <StyledButton label="Discard" onClick={onRequestClose} />
           <StyledButton
-            label={this.state.isLoading ? 'Creating account...' : 'Create account'}
+            label="Discard"
+            onClick={onRequestClose}
+          />
+          <StyledButton
+            label={this.state.isLoading ?
+              'Creating account...' :
+              'Create account'}
             kind="primary"
-          // onClick={this.props.handleSubmit(this.handleCreateEmpoyee)}
+            onClick={this.props.handleSubmit(this.handleCreateEmpoyee)}
           />
         </Modal.Footer>
       </Modal>
@@ -146,12 +163,9 @@ class AddEmployeeModal extends PureComponent {
   }
 }
 
-export default AddEmployeeModal;
-
-AddEmployeeModal.propTypes = {
-  isOpen: PropTypes.boolean
-};
-
-AddEmployeeModal.defaultProps = {
-  isOpen: false
-};
+export default compose(
+  reduxForm({
+    form: 'AddEmployeeModal',
+  }),
+  withFirebase,
+)(AddEmployeeModal);

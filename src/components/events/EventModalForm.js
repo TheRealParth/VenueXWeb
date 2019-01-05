@@ -15,19 +15,18 @@ import {
 import Select from '../form/Select';
 import Textarea from '../form/Textarea';
 import DateTimeDurationField from '../form/DateTimeDurationField';
-import { withVenueConfig } from '../../containers/VenueConfigProvider';
 import DatePickerField from '../form/DatePickerField';
 import Input from '../form/Input';
 
 const Header = styled.div`
-  background-color: ${props => props.theme.colors.primary}66;
+  
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   padding: 30px 0px;
   font-size: 24px;
   text-align: center;
   color: #181818;
 `;
-
+//background-color: ${props => props.theme.colors.primary}66;
 const Content = styled.div`
   padding: 50px;
   overflow: scroll;
@@ -62,14 +61,7 @@ class EventModalForm extends PureComponent {
       if (!this.props.selectedLayout) {
         this.props.change('guestsPerTable', '');
       } else {
-        this.props.change(
-          'guestsPerTable',
-          this.props.venueConfig.rooms[
-            this.props.selectedRoom
-          ].layouts[
-            this.props.selectedLayout
-          ].perTable
-        );
+
       }
     }
   }
@@ -106,16 +98,8 @@ class EventModalForm extends PureComponent {
   }
 
   render() {
-    const { venueConfig } = this.props;
     const { selectedRoom } = this.props;
-    const customFields = (
-      Object.keys(venueConfig.eventsExtraFields).map(fieldId => ({
-        id: fieldId,
-        label: venueConfig.eventsExtraFields[fieldId].label,
-        kind: venueConfig.eventsExtraFields[fieldId].kind,
-        options: venueConfig.eventsExtraFields[fieldId].options,
-      }))
-    );
+
 
     return (
       <Modal
@@ -171,9 +155,9 @@ class EventModalForm extends PureComponent {
             label="Room"
             component={Select}
             validate={NotEmptyValidator}
-            options={Object.keys(venueConfig.rooms).map(roomId => ({
-              label: venueConfig.rooms[roomId].name,
-              value: roomId,
+            options={[].map(roomId => ({
+              // label: venueConfig.rooms[roomId].name,
+              // value: roomId,
             }))}
           />
 
@@ -185,8 +169,8 @@ class EventModalForm extends PureComponent {
                   label="Table Layout"
                   component={Select}
                   options={
-                    Object.keys(venueConfig.rooms[selectedRoom].layouts).map(layoutId => ({
-                      label: `${venueConfig.rooms[selectedRoom].layouts[layoutId].numberOfTables} tables`,
+                    [].map(layoutId => ({
+                      label: `0 tables`,
                       value: layoutId,
                     }))
                   }
@@ -257,7 +241,6 @@ class EventModalForm extends PureComponent {
             ]}
           />
 
-          {customFields.map(this.renderCustomField)}
 
         </Content>
 
@@ -277,15 +260,7 @@ class EventModalForm extends PureComponent {
   }
 }
 
-const selector = formValueSelector('Event form');
 
-export default compose(
-  withVenueConfig,
-  connect(state => ({
-    selectedRoom: selector(state, 'room'),
-    selectedLayout: selector(state, 'tableLayout'),
-  })),
-  reduxForm({
-    form: 'Event form',
-  })
-)(EventModalForm);
+export default reduxForm({
+  form: 'Event form',
+})(EventModalForm);

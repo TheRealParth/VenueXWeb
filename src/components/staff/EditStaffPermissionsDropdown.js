@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import Dropdown from '../Dropdown';
 import Button from '../Button';
 import Checkbox from '../Checkbox';
-import calendarViewBlackIcon from 'assets/calendar-view-black.svg';
-import calendarEditBlackIcon from 'assets/calendar-edit-black.svg';
-import calendarDeleteBlackIcon from 'assets/calendar-delete-black.svg';
-import billBlackIcon from 'assets/bill-black.svg';
-import peopleBlackIcon from 'assets/people-black.svg';
+import calendarViewBlackIcon from '../../assets/calendar-view-black.svg';
+import calendarEditBlackIcon from '../../assets/calendar-edit-black.svg';
+import calendarDeleteBlackIcon from '../../assets/calendar-delete-black.svg';
+import billBlackIcon from '../../assets/bill-black.svg';
+import peopleBlackIcon from '../../assets/people-black.svg';
 
 const StyledDropdown = styled(Dropdown)`
   right: 0px;
@@ -70,10 +70,10 @@ class EditStaffPermissionsDropdown extends PureComponent {
   };
 
   render() {
-    const { selectedEmployees } = this.props;
+    const { selectedCount } = this.props;
     return (
       <StyledDropdown
-        toggle={<Button label={`Edit permission for ${selectedEmployees.length} staff members`} />}
+        toggle={<Button label={`Edit permission for ${selectedCount} staff member${selectedCount > 1 ? 's' : ''}`} />}
       >
         <Container>
           <PermissionItem>
@@ -133,4 +133,4 @@ class EditStaffPermissionsDropdown extends PureComponent {
   }
 }
 
-export default withFirebase(EditStaffPermissionsDropdown);
+export default EditStaffPermissionsDropdown;

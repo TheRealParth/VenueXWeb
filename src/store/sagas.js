@@ -5,7 +5,6 @@ import rsf from '../firebase';
 import { AuthService } from '../services/';
 import { httpUtils } from '../helpers';
 
-
 const itemsTransformer = items => {
   const res = [];
   items.forEach(item =>
