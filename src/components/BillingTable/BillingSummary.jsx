@@ -85,7 +85,7 @@ export default ({ label, classes, openModal, closeModal, ...rest }) => (
       </BillingSummaryItem>
       <BillingSummaryItem>
         <div className="label">Due date:&nbsp;</div>
-        <div className="value">asd</div>
+        <div className="value">Jan 8</div>
       </BillingSummaryItem>
       <div>
         <Button kind="success" label="Make A Payment" />
