@@ -8,6 +8,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import ManageStaff from './pages/ManageStaff';
+import Billing from './pages/Billing';
 import AddEmployeeModal from './components/StaffTable/AddEmployeeModal';
 import Events from './pages/Events';
 // import Billing from './pages/Billing';
@@ -32,7 +33,12 @@ class App extends React.Component {
               <Dashboard>
                 <Switch>
                   <PrivateRoute path="/events" component={Events} />
-                  <Route path="/manageStaff" component={ManageStaff} />
+                  <PrivateRoute path="/manageStaff" component={ManageStaff}>
+                    <Switch>
+                      <PrivateRoute path="/manageStaff/add" component={AddEmployeeModal} />} />
+                    </Switch>
+                  </PrivateRoute>
+                  <PrivateRoute path="/billing" component={Billing} />
                 </Switch>
               </Dashboard>
             </Switch>
@@ -49,6 +55,6 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(
   // eslint-disable-next-line prettier/prettier
-  () => { },
+  () => {},
   mapDispatchToProps
 )(App);
