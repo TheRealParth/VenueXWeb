@@ -33,6 +33,7 @@ class Events extends Component {
           events={events}
           startAccessor="start"
           endAccessor="end"
+          popup
         />
         <style>{`
 
