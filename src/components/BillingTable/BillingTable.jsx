@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import Table from '@material-ui/core/Table';
 import Grid from '@material-ui/core/Grid';
@@ -28,7 +29,6 @@ const BillingTable = ({
       <Table className={table}>
         <TableHead>
           <TableRow>
-            <TableCell className={tableCell}>Name</TableCell>
             <TableCell className={tableCell} numeric>
               Client
             </TableCell>
@@ -53,7 +53,22 @@ const BillingTable = ({
           {events.map(event => (
             <TableRow key={event.id}>
               <TableCell className={tableCell} component="th" scope="row">
+                {event.client}
+              </TableCell>
+              <TableCell className={tableCell} component="th" scope="row">
                 {event.title}
+              </TableCell>
+              <TableCell className={tableCell} component="th" scope="row">
+                {event.eventType}
+              </TableCell>
+              <TableCell className={tableCell} component="th" scope="row">
+                {event.guests}
+              </TableCell>
+              <TableCell className={tableCell} component="th" scope="row">
+                {moment(event.start).format('MM/DD/YYYY')}
+              </TableCell>
+              <TableCell className={tableCell} component="th" scope="row">
+                {event.createdBy}
               </TableCell>
             </TableRow>
           ))}
