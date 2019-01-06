@@ -48,7 +48,7 @@ class Toolbar extends React.Component {
             <CaretRight size={16} color="#c0b69b" />
           </button>
         </div>
-        <div>Button Group</div>
+        <div style={{ opacity: 0 }}>placeholder</div>
 
         {/* <span className="rbc-btn-group">{this.viewNamesGroup(messages)}</span> */}
       </div>

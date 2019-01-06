@@ -4,6 +4,7 @@ import { alert } from './alert';
 import { auth } from './auth';
 import { events } from './events';
 import { users } from './users';
+import { billing } from './billing';
 import { venues, config } from './venues';
 import { reducer as formReducer } from 'redux-form';
 

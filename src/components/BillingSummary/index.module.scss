@@ -1,0 +1,35 @@
+.BillingSummaryContainer {
+  background-color: #fff;
+  margin: 15px 0px;
+  border: solid 1px #fafafa;
+  border-radius: 2px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.BillingSummaryItem {
+  color: #181818;
+  font-size: 15px;
+  padding-left: 30px;
+  margin-left: 30px;
+  border-left: solid 1px #b0b0b0;
+  font-family: Lora;
+  font-weight: 500;
+
+  &:first-child {
+    border-left: none;
+    margin-left: 0px;
+    padding-left: 0px;
+  }
+
+  .label {
+    color: #b0b0b0;
+    font-weight: 500;
+  }
+
+  .value {
+    font-size: 40px;
+  }
+}

@@ -1,81 +1,78 @@
 import React from 'react';
 import moment from 'moment';
-import PropTypes from 'prop-types';
-import Table from '@material-ui/core/Table';
-import Grid from '@material-ui/core/Grid';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import BillingHeader from './BillingHeader.jsx';
-import BillingSummary from './BillingSummary.jsx';
+import Table from '../Table';
+import styled from 'styled-components';
+const TableContainer = styled.div`
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  color: #222222;
+  margin-bottom: 20px;
+`;
+const StyledTableRow = styled(Table.Row)`
+  .actions {
+    display: none;
 
-const BillingTable = ({
-  events,
-  classes: { paper, root, table, tableCell, ...classes },
-  ...rest
-}) => (
-  <>
-    <Grid container spacing={24}>
-      <Grid item xs={12}>
-        <BillingHeader {...rest} classes={classes} />
-      </Grid>
-      <Grid item xs={12}>
-        <BillingSummary {...rest} classes={classes} />
-      </Grid>
-    </Grid>
-    <Paper className={root}>
-      <Table className={table}>
-        <TableHead>
-          <TableRow>
-            <TableCell className={tableCell} numeric>
-              Client
-            </TableCell>
-            <TableCell className={tableCell} numeric>
-              Event
-            </TableCell>
-            <TableCell className={tableCell} numeric>
-              Event Type
-            </TableCell>
-            <TableCell className={tableCell} numeric>
-              Guests
-            </TableCell>
-            <TableCell className={tableCell} numeric>
-              Event Date
-            </TableCell>
-            <TableCell className={tableCell} numeric>
-              Created By
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {events.map(event => (
-            <TableRow key={event.id}>
-              <TableCell className={tableCell} component="th" scope="row">
-                {event.client}
-              </TableCell>
-              <TableCell className={tableCell} component="th" scope="row">
-                {event.title}
-              </TableCell>
-              <TableCell className={tableCell} component="th" scope="row">
-                {event.eventType}
-              </TableCell>
-              <TableCell className={tableCell} component="th" scope="row">
-                {event.guests}
-              </TableCell>
-              <TableCell className={tableCell} component="th" scope="row">
-                {moment(event.start).format('MM/DD/YYYY')}
-              </TableCell>
-              <TableCell className={tableCell} component="th" scope="row">
-                {event.createdBy}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Paper>
-  </>
+    svg {
+      margin: 0px 3px;
+    }
+  }
+
+  &:hover {
+    .actions {
+      display: block;
+    }
+  }
+`;
+
+const BillingTable = ({ events }) => (
+  <TableContainer>
+    <Table>
+      <Table.Row>
+        <Table.Cell width="16%">
+          <Table.HeaderCell onClick={() => { }} title="Client" />
+        </Table.Cell>
+        <Table.Cell width="16%">
+          <Table.HeaderCell onClick={() => { }} title="Event" />
+        </Table.Cell>
+        <Table.Cell width="16%">
+          <Table.HeaderCell onClick={() => { }} title="Event Type" />
+        </Table.Cell>
+        <Table.Cell width="16%">
+          <Table.HeaderCell onClick={() => { }} title="Guests" />
+        </Table.Cell>
+        <Table.Cell width="16%">
+          <Table.HeaderCell onClick={() => { }} title="Event Date" />
+        </Table.Cell>
+        <Table.Cell width="16%">
+          <Table.HeaderCell onClick={() => { }} title="Created By" />
+        </Table.Cell>
+      </Table.Row>
+      <Table.Body>
+        {events.map(event => (
+          <StyledTableRow key={event.id}>
+            <Table.Cell width="16%" component="th" scope="row">
+              {event.client}
+            </Table.Cell>
+            <Table.Cell width="16%" component="th" scope="row">
+              {event.title}
+            </Table.Cell>
+            <Table.Cell width="16%" component="th" scope="row">
+              {event.eventType}
+            </Table.Cell>
+            <Table.Cell width="16%" component="th" scope="row">
+              {event.guests}
+            </Table.Cell>
+            <Table.Cell width="16%" component="th" scope="row">
+              {moment(event.start).format('MM/DD/YYYY')}
+            </Table.Cell>
+            <Table.Cell width="16%" component="th" scope="row">
+              {event.createdBy}
+            </Table.Cell>
+          </StyledTableRow>
+        ))}
+      </Table.Body>
+    </Table>
+  </TableContainer>
 );
 
 export { BillingTable };

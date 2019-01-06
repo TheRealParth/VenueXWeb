@@ -1,26 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import Table from '@material-ui/core/Table';
-import Grid from '@material-ui/core/Grid';
 import Checkbox from '../Checkbox.js';
-import AddButton from '../AddButton.js';
 import Table from '../Table';
-import Paper from '@material-ui/core/Paper';
 import styled from 'styled-components';
 import moment from 'moment';
-import UserAvatar from './UserAvatar';
-import PermissionsIcons from '../PermissionsIcons';
-import ManageStaffHeader from './ManageStaffHeader.jsx';
-import CaretDown from '../../assets/icons/CaretDown';
 import Button from '../Button';
-import PersonalMenu from '../PersonalMenu';
-
-import EditStaffPermissionsDropdown from '../staff/EditStaffPermissionsDropdown';
-
-// import { rowHeaderTitle, rowValue, hide, reverse, caretContainer } from './styles.module.scss';
-import classnames from 'classnames';
 import Icons from '../../assets/icons';
 import ConsultantLabel from '../Consultant';
+import EditStaffPermissionsDropdown from '../staff/EditStaffPermissionsDropdown';
 
 const Container = styled.div`
   border: solid 1px #ededed;
@@ -115,20 +102,18 @@ const DueLabel = styled.span`
   color: ${props => props.color || '#b0b0b0'};
 `;
 
-const StaffTable = ({ users, ...rest }) => {
-  console.log(rest);
-  const {
-    sort,
-    setUsersSortKey,
-    anyChecked,
-    allChecked,
-    selectAllUsers,
-    unSelectAllUsers,
-    selectSingleUser,
-    unSelectSingleUser,
-    selectedCount
-  } = rest;
-  return (
+const StaffTable = ({
+  users,
+  sort,
+  setUsersSortKey,
+  anyChecked,
+  allChecked,
+  selectAllUsers,
+  unSelectAllUsers,
+  selectSingleUser,
+  unSelectSingleUser,
+  selectedCount
+}) => (
     <>
       <TableContainer>
         <Table>
@@ -156,9 +141,7 @@ const StaffTable = ({ users, ...rest }) => {
                 </Table.Cell>
                 <Table.Cell width="20%">
                   <Table.HeaderCell
-                    onClick={() =>
-                      setUsersSortKey('email', sort.orderBy === 'asc' ? 'desc' : 'asc')
-                    }
+                    onClick={() => setUsersSortKey('email', sort.orderBy === 'asc' ? 'desc' : 'asc')}
                     numeric
                     title="Email"
                   />
@@ -183,7 +166,7 @@ const StaffTable = ({ users, ...rest }) => {
                       selectedEmployees={[]}
                     />
                     &nbsp;
-                  <Button
+                <Button
                       label={`Delete ${selectedCount} staff member${selectedCount > 1 ? 's' : ''}`}
                       kind="danger"
                     />
@@ -243,7 +226,6 @@ const StaffTable = ({ users, ...rest }) => {
       </TableContainer>
     </>
   );
-};
 
 StaffTable.propTypes = {
   classes: PropTypes.object.isRequired,

@@ -56,3 +56,8 @@ export const alertTypes = {
   ERROR: 'ALERT_ERROR',
   CLEAR: 'ALERT_CLEAR'
 };
+
+export const billingTypes = {
+  INCREMENT_MONTH: 'INCREMENT_MONTH',
+  DECREMENT_MONTH: 'DECREMENT_MONTH',
+};
