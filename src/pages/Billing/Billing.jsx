@@ -18,7 +18,7 @@ class Billing extends Component {
   }
 
   render() {
-    const { events } = this.state;
+    const { events } = this.props;
     return (
       <>
         <div className="rbc-btn-group" style={{ width: '100%', textAlign: 'center' }}>

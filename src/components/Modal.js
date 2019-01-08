@@ -12,10 +12,11 @@ const ModalFooter = styled.div`
 const MModal = props => {
   const customStyles = {
     overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.40)'
+      backgroundColor: '#000000aa',
+      zIndex: 1500
     },
     content: {
-      width: 580,
+      width: props.width ? props.width : 580,
       margin: '0 auto',
       borderRadius: 0,
       border: 'none',

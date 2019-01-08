@@ -15,9 +15,13 @@ const Container = styled.div`
   border-bottom: solid 1px #d8d8d8;
   position: relative;
 
-  ${props => props.meta && props.meta.error && props.meta.touched && css`
-    border-bottom: solid 1px #c02026;
-  `}
+  ${props =>
+    props.meta &&
+    props.meta.error &&
+    props.meta.touched &&
+    css`
+      border-bottom: solid 1px #c02026;
+    `}
 `;
 
 const PickContainer = styled.div`
@@ -43,7 +47,7 @@ const Dropdown = styled.div`
   left: 0px;
   right: 0px;
   top: calc(100% + 5px);
-  background-color: #FFF;
+  background-color: #fff;
   box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.2);
   border-radius: 2px;
   z-index: 10;
@@ -64,13 +68,15 @@ const Consultant = styled.div`
     }
   }
 
-  ${props => props.picked && css`
-    background-color: ${props.theme.colors.primary}33;
+  ${props =>
+    props.picked &&
+    css`
+      background-color: #c0b59d33;
 
-    &:hover {
-      background-color: ${props.theme.colors.primary}33;
-    }
-  `}
+      &:hover {
+        background-color: #c0b59d33;
+      }
+    `}
 
   .assign-badge {
     height: 20px;
@@ -79,13 +85,14 @@ const Consultant = styled.div`
     display: none;
   }
 
-  ${props => props.isOwner && css`
-    .assign-badge {
-      display: inline-block;
-    }
-  `}
+  ${props =>
+    props.isOwner &&
+    css`
+      .assign-badge {
+        display: inline-block;
+      }
+    `}
 `;
-
 
 const Group = styled.div`
   display: flex;
@@ -95,32 +102,28 @@ const Group = styled.div`
 const Img = styled.img``;
 
 class ConsultantsPicker extends PureComponent {
-
   state = {
-    isOpen: false,
+    isOpen: false
   };
 
-  getEmployeeById = (id) => this.props.employees.filter(emp => emp.id === id)[0] || {};
+  getEmployeeById = id => this.props.employees.filter(emp => emp.id === id)[0] || {};
 
   handleToggle = () => {
     this.setState(({ isOpen }) => ({
-      isOpen: !isOpen,
+      isOpen: !isOpen
     }));
   };
 
   handleEmployeeChecked = (employeeId, owner = false) => {
     const value = this.props.input.value || {
       picked: [],
-      owner: null,
+      owner: null
     };
 
     this.props.input.onChange({
       ...value,
-      picked: [
-        ...value.picked.filter(id => id !== employeeId),
-        employeeId,
-      ],
-      owner: owner ? employeeId : value.owner,
+      picked: [...value.picked.filter(id => id !== employeeId), employeeId],
+      owner: owner ? employeeId : value.owner
     });
   };
 
@@ -129,21 +132,21 @@ class ConsultantsPicker extends PureComponent {
 
     this.props.input.onChange({
       picked: value.picked.filter(id => id !== employeeId),
-      owner: value.owner === employeeId ? null : value.owner,
+      owner: value.owner === employeeId ? null : value.owner
     });
   };
 
   handleAssignClicked = employeeId => {
     const value = this.props.input.value || {
       picked: [],
-      owner: null,
+      owner: null
     };
     const isOwner = employeeId === value.owner;
     if (isOwner) {
       // Remove from owner
       this.props.input.onChange({
         picked: [...value.picked],
-        owner: null,
+        owner: null
       });
     } else {
       // Make owner
@@ -154,29 +157,28 @@ class ConsultantsPicker extends PureComponent {
   render() {
     const value = this.props.input.value || {
       picked: [],
-      owner: null,
+      owner: null
     };
     return (
       <BaseInput label="Consultant:" {...this.props}>
         <Container {...this.props}>
           <PickContainer onClick={this.handleToggle}>
             <Placeholder>
-              {value.picked.length === 0 ? 'Pick a staff' : value.picked.map(id => (
-                <Group key={id} style={{ margin: '10px 0px' }}>
-                  <ConsultantLabel
-                    name={this.getEmployeeById(id).name}
-                    picture={this.getEmployeeById(id).picture}
-                  />
-                  {value.owner === id && <Img src={ownerImage} />}
-                </Group>
-              ))}
+              {value.picked.length === 0
+                ? 'Pick a staff'
+                : value.picked.map(id => (
+                    <Group key={id} style={{ margin: '10px 0px' }}>
+                      <ConsultantLabel
+                        name={this.getEmployeeById(id).name}
+                        picture={this.getEmployeeById(id).picture}
+                      />
+                      {value.owner === id && <Img src={ownerImage} />}
+                    </Group>
+                  ))}
             </Placeholder>
-            <ArrowIcon
-              src={this.state.isOpen ?
-                dropdownCaretUp : dropdownCaretDown}
-            />
+            <ArrowIcon src={this.state.isOpen ? dropdownCaretUp : dropdownCaretDown} />
           </PickContainer>
-          {this.state.isOpen &&
+          {this.state.isOpen && (
             <Dropdown>
               {this.props.employees.map(employee => {
                 const { value } = this.props.input;
@@ -187,15 +189,10 @@ class ConsultantsPicker extends PureComponent {
                     <Group>
                       <Checkbox
                         checked={isPicked}
-                        onUncheck={() =>
-                          this.handleEmployeeUnchecked(employee.id)}
-                        onCheck={() =>
-                          this.handleEmployeeChecked(employee.id)}
+                        onUncheck={() => this.handleEmployeeUnchecked(employee.id)}
+                        onCheck={() => this.handleEmployeeChecked(employee.id)}
                       />
-                      <ConsultantLabel
-                        picture={employee.picture}
-                        name={employee.name}
-                      />
+                      <ConsultantLabel picture={employee.picture} name={employee.name} />
                     </Group>
                     <Group>
                       <Img
@@ -208,7 +205,8 @@ class ConsultantsPicker extends PureComponent {
                   </Consultant>
                 );
               })}
-            </Dropdown>}
+            </Dropdown>
+          )}
         </Container>
       </BaseInput>
     );
@@ -216,20 +214,19 @@ class ConsultantsPicker extends PureComponent {
 }
 
 export default compose(
-  firebaseConnect(() => [{
-    path: 'employees',
-    queryParams: [
-      'orderByChild=venueId',
-      'equalTo=test_venue'
-    ],
-  }]),
+  firebaseConnect(() => [
+    {
+      path: 'employees',
+      queryParams: ['orderByChild=venueId', 'equalTo=test_venue']
+    }
+  ]),
   connect(state => ({
-    employees: state.firebase.data.employees ? (
-      Object.keys(state.firebase.data.employees).map(key => ({
-        id: key,
-        name: state.firebase.data.employees[key].fullName,
-        picture: state.firebase.data.employees[key].picture,
-      }))
-    ) : [],
-  })),
+    employees: state.firebase.data.employees
+      ? Object.keys(state.firebase.data.employees).map(key => ({
+          id: key,
+          name: state.firebase.data.employees[key].fullName,
+          picture: state.firebase.data.employees[key].picture
+        }))
+      : []
+  }))
 )(ConsultantsPicker);

@@ -4,6 +4,10 @@ import cn from 'classnames';
 import { navigate } from './utils/constants';
 import CaretLeft from '../../assets/icons/CaretLeft';
 import CaretRight from '../../assets/icons/CaretRight';
+import PersonalMenu from '../../components/PersonalMenu';
+import AddButton from '../../components/AddButton';
+import AddEventModal from '../events/AddEventModal';
+
 class Toolbar extends React.Component {
   static propTypes = {
     view: PropTypes.string.isRequired,
@@ -48,7 +52,15 @@ class Toolbar extends React.Component {
             <CaretRight size={16} color="#c0b69b" />
           </button>
         </div>
-        <div style={{ opacity: 0 }}>placeholder</div>
+        <div>
+          {' '}
+          {/* <AddEventModal isOpen={this.state.isAddingEvent} onClose={() => this.setState({ isAddingEvent: false })} /> */}
+          <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+            <PersonalMenu {...this.props.currentUser} />
+            <AddButton onClick={() => console.log('start here')} />
+            <AddEventModal isOpen={true} />
+          </div>
+        </div>
 
         {/* <span className="rbc-btn-group">{this.viewNamesGroup(messages)}</span> */}
       </div>
