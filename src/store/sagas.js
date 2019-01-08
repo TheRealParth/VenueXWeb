@@ -75,10 +75,6 @@ export function* syncUserSaga() {
 
   while (true) {
     const { error, user } = yield take(channel);
-
-    console.log(error);
-    console.log(user);
-
     if (user) yield put(syncUser(user));
     // else yield put(syncError(error));
   }
@@ -107,6 +103,10 @@ export function* loadDashboard() {
       type: types.dashboardTypes.GET_DASHBOARD_FAILURE
     });
   }
+}
+
+export function* syncBillingWatcher() {
+  yield takeLatest(types.billingTypes.INCREMENT_MONTH)
 }
 export function* syncEventsWatcher() {
   yield takeLatest(types.eventTypes.GET_EVENTS_REQUEST, syncEventsForDashboard);

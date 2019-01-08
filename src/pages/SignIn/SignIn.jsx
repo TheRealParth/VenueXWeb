@@ -31,6 +31,7 @@ class SignInScreen extends Component {
   }
 
   render() {
+
     const { classes } = this.props;
     const { auth, alert, form } = this.props;
     const { loggingIn } = auth;

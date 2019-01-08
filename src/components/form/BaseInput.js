@@ -6,10 +6,16 @@ const Container = styled.div`
   font-weight: 500;
   align-items: center;
   padding: 15px 0px;
+  margin-right: 15px;
+  width: 100%;
+  align-self: center;
+  margin: auto;
 
-  ${props => props.alignItems && css`
-    align-items: ${props.alignItems};
-  `}
+  ${props =>
+    props.alignItems &&
+    css`
+      align-items: ${props.alignItems};
+    `}
 `;
 
 const Right = styled.div`
@@ -23,21 +29,26 @@ const ErrorText = styled.div`
   font-size: 11px;
 `;
 
-export default ({
-  label,
-  children,
-  alignItems,
-  ...props
-}) => (
+const Label = styled.div`
+  font-family: Montserrat;
+  font-size: 15px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.3px;
+  color: #7d7d7d;
+  padding-right: 10px;
+  white-space: noWrap;
+`;
+
+export default ({ label, children, alignItems, ...props }) => (
   <Container alignItems={alignItems}>
-    <div style={{ whiteSpace: 'nowrap', color: '#7d7d7d', paddingRight: 20 }}>
-      {label}
-    </div>
+    <Label>{label}</Label>
     <Right>
-      {props.meta && props.meta.touched && props.meta.error &&
-        <ErrorText>
-          {props.meta.error}
-        </ErrorText>}
+      {props.meta && props.meta.touched && props.meta.error && (
+        <ErrorText>{props.meta.error}</ErrorText>
+      )}
       {children}
     </Right>
   </Container>

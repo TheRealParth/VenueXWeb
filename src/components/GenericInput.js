@@ -1,5 +1,4 @@
 import React from 'react';
-import Fade from '@material-ui/core/Fade';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';

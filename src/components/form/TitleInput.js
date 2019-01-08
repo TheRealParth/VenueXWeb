@@ -1,14 +1,32 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import BaseInput from '../form/BaseInput';
+import BaseInput from './BaseInput';
 
 const Input = styled.input`
   border: none;
-  border-bottom: solid 1px #d8d8d8;
   display: block;
   width: 100%;
+  padding: 5px;
   transition-duration: 0.3s;
-  margin-right: 20px;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 600;
+  color: #c0b59d;
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #c0b59d;
+    opacity: 1; /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #c0b59d;
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #c0b59d;
+  }
 
   &:focus {
     outline: none;
