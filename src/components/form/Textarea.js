@@ -2,7 +2,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import BaseInput from '../form/BaseInput';
 
-
 const Textarea = styled.textarea`
   border: solid 1px #d8d8d8;
   border-radius: 2px;
@@ -11,12 +10,16 @@ const Textarea = styled.textarea`
 
   &:focus {
     outline: 0;
-    border: solid 1px ${props => props.theme.colors.primary};
+    border: solid 1px #c0b59d;
   }
 
-  ${props => props.meta && props.meta.error && props.meta.touched && css`
-    border-bottom: solid 1px #c02026;
-  `}
+  ${props =>
+    props.meta &&
+    props.meta.error &&
+    props.meta.touched &&
+    css`
+      border-bottom: solid 1px #c02026;
+    `}
 `;
 
 export default props => (
@@ -24,4 +27,3 @@ export default props => (
     <Textarea {...props.input} rows={6} />
   </BaseInput>
 );
-

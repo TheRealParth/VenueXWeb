@@ -20,7 +20,7 @@ const Button = styled.div`
   ${props =>
     props.kind === 'primary' &&
     css`
-      background-color: rgba 188 172 150, 0.4;
+      background-color: #c0b59d;
       color: #fff;
       border: solid 1px rgba 188 172 150, 0.4;
     `}
