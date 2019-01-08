@@ -3,14 +3,19 @@ import styled, { css } from 'styled-components';
 import BaseInput from '../form/BaseInput';
 
 const Textarea = styled.textarea`
-  border: solid 1px #d8d8d8;
+  border: none;
   border-radius: 2px;
   resize: none;
   width: 100%;
 
   &:focus {
     outline: 0;
-    border: solid 1px #c0b59d;
+    border: none;
+    background-color: #c0b59d26;
+
+     {
+      /* TO-DO make background color expand to whole box, fix spacing */
+    }
   }
 
   ${props =>

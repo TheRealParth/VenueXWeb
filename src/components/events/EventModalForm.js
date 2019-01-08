@@ -46,27 +46,18 @@ const Content = styled.div`
   overflow: scroll;
 `;
 
+//may want to add help text, tbd, leaving for now
 const Help = styled.div`
   text-align: right;
   color: #b0b0b0;
 `;
 
-const PaymentSchedule = styled.div`
-  display: flex;
-`;
-
-const Label = styled.div`
-  font-size: 15px;
-  color: #7d7d7d;
-  font-weight: 500;
-  padding-top: 20px;
-  padding-right: 15px;
-`;
-
+//from old code, not sure if needed
 const StyledButton = styled(Button)`
   margin: 0px 5px;
 `;
 
+//Individual section styling
 const Section = styled.div`
   display: flex;
   flex-direction: column;
@@ -75,6 +66,7 @@ const Section = styled.div`
   margin: 20px 0 70px 0px;
 `;
 
+// section title styling,
 const SectionTitle = styled.div`
   background-color: white;
   margin-top: -27px;
@@ -87,10 +79,13 @@ const SectionTitle = styled.div`
   letter-spacing: 2px;
 `;
 
+//bad naming, used also for payment fields
+
 const User = styled.div`
   display: flex;
 `;
-
+//bad naming, used also for payment fields
+//TO-DO: make real circle, current version is uneven
 const UserNumber = styled.div`
   background-color: #c0b59d;
   height: 25px !important;
@@ -104,6 +99,8 @@ const UserNumber = styled.div`
   margin-right: 10px;
 `;
 
+//styling plus button for the add more of users & payment fields
+// TO-DO: add space on left and right
 const AddMore = styled.div`
   align-self: center;
   margin-bottom: -29px;
@@ -118,7 +115,6 @@ const AddMore = styled.div`
 class EventModalForm extends PureComponent {
   constructor(props) {
     super(props);
-
     this.state = { users: 1, payments: 1 };
     this.addUsers = this.addUsers.bind(this);
     this.addPayment = this.addPayment.bind(this);
@@ -133,12 +129,17 @@ class EventModalForm extends PureComponent {
     }
   }
 
+  // function to add additional user lines
   addUsers() {
     let { users } = this.state;
     users++;
-    this.setState({ users: users });
-    console.log('new');
+    this.setState({ users: users++ });
   }
+
+  // function to render user lines
+  //TO-DO: Add Space between Client Name & Email.
+  // Make it so if client Name is entered, email is required.
+  // allow deleting of specific row
 
   renderNewUserFields() {
     let { users } = this.state;
@@ -147,35 +148,38 @@ class EventModalForm extends PureComponent {
     for (let i = 0; i < users; i++) {
       userFields.push(i);
     }
-    console.log('LOOK HERE', userFields);
     return userFields.map(user => {
       return (
         <User>
           <UserNumber>{user + 1}</UserNumber>
           <Field
-            name="clientName"
+            name={'clientName' + user + 1}
             label="Client Name:"
             component={Input}
-            validate={NotEmptyValidator}
+            validate={user === 0 ? NotEmptyValidator : ''}
+            // only first one is needed
           />
           <Field
-            name="clientEmail"
+            name={'clientEmail' + user + 1}
             label="Client Email:"
             component={Input}
-            validate={NotEmptyValidator}
+            validate={user === 0 ? NotEmptyValidator : ''}
+            /* current validator is set to require a minimum of one client, but needs to validate email if client Name is entered */
           />
         </User>
       );
     });
   }
 
+  // function to add additional user lines
   addPayment() {
     let { payments } = this.state;
     payments++;
     this.setState({ payments: payments });
-    console.log('new');
   }
 
+  // function to render additional payment fields
+  // TO-DO: make date picker, not regular input. Style to fit better.
   renderPaymentFields() {
     let { payments } = this.state;
     let paymentFields = [];
@@ -186,12 +190,13 @@ class EventModalForm extends PureComponent {
       return (
         <User>
           <UserNumber>{payment + 1}</UserNumber>
-          <Field name="firstPaymentDue" component={Input} validate={NotEmptyValidator} />
+          <Field name={'payment' + payment + 1} component={Input} validate={NotEmptyValidator} />
         </User>
       );
     });
   }
 
+  // from old code, renders custom fields, not a current priority, but will want to add soon
   renderCustomField = field => {
     let FieldComponent;
     let validators;
@@ -224,7 +229,7 @@ class EventModalForm extends PureComponent {
   };
 
   render() {
-    const { selectedRoom } = this.props;
+    const { selectedRoom, type } = this.props;
 
     return (
       <Modal isOpen={this.props.isOpen} onRequestClose={this.props.onClose} width="700px">
@@ -232,13 +237,6 @@ class EventModalForm extends PureComponent {
           <div>Add New Event</div>
         </Header>
         <Content>
-          {/* <Help>* All fields are required except the Notes.</Help> */}
-
-          {/* <Field
-            name="consultants"
-            component={ConsultantsPicker}
-            validate={OwnerSelectedValidator}
-          /> */}
           <Field
             name="name"
             component={TitleInput}
@@ -300,22 +298,26 @@ class EventModalForm extends PureComponent {
               options={[{ value: 'wedding', label: 'Wedding' }]}
             />
 
-            <Field
-              name="ceremonyKind"
-              label="Ceremony:"
-              component={Select}
-              validate={NotEmptyValidator}
-              options={[
-                {
-                  label: 'Onsite',
-                  value: 'onsite'
-                },
-                {
-                  label: 'Offsite',
-                  value: 'offsite'
-                }
-              ]}
-            />
+            {type === 'wedding' ? (
+              <Field
+                name="ceremonyKind"
+                label="Ceremony:"
+                component={Select}
+                validate={NotEmptyValidator}
+                options={[
+                  {
+                    label: 'Onsite',
+                    value: 'onsite'
+                  },
+                  {
+                    label: 'Offsite',
+                    value: 'offsite'
+                  }
+                ]}
+              />
+            ) : (
+              ''
+            )}
 
             <Field
               name="room"
