@@ -19,6 +19,7 @@ export const venues = (state = initialState, action) => {
 };
 
 export const config = (state = {}, action) => {
+
   switch (action.type) {
     case configTypes.CONFIG.SYNC:
       return {

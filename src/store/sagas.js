@@ -4,7 +4,10 @@ import { syncEvents, syncUsers, syncUser, syncVenues, syncConfig } from '../acti
 import rsf from '../firebase';
 import { AuthService } from '../services/';
 import { httpUtils } from '../helpers';
-
+import venueId from '../config/venueId';
+const configTransformer = (data) => {
+  return data
+}
 const itemsTransformer = items => {
   const res = [];
   items.forEach(item =>
@@ -28,9 +31,6 @@ export function* loginFlow(action) {
     yield call(httpUtils.signInWithCustomToken, user);
     yield call(syncUserWatcher);
     yield put({
-      type: types.dashboardTypes.GET_DASHBOARD_REQUEST
-    });
-    yield put({
       type: types.authTypes.LOGIN_SUCCESS,
       user
     });
@@ -49,11 +49,11 @@ export function* loginWithToken({ payload }) {
   try {
     const { user } = yield call(httpUtils.signInWithCustomToken, payload);
     yield put({
-      type: types.dashboardTypes.GET_DASHBOARD_REQUEST
-    });
-    yield put({
       type: types.authTypes.LOGIN_SUCCESS,
       user
+    });
+    yield put({
+      type: types.dashboardTypes.GET_DASHBOARD_REQUEST
     });
     yield call(syncUserWatcher);
   } catch (error) {
@@ -76,6 +76,7 @@ export function* syncUserSaga() {
   while (true) {
     const { error, user } = yield take(channel);
     if (user) yield put(syncUser(user));
+
     // else yield put(syncError(error));
   }
 }
@@ -87,7 +88,7 @@ export function* dashboardWatcher() {
 export function* loadDashboard() {
   try {
     yield put({
-      type: types.venueTypes.GET_CONFIG_REQUEST
+      type: types.configTypes.GET_CONFIG_REQUEST
     });
     yield put({
       type: types.eventTypes.GET_EVENTS_REQUEST
@@ -106,14 +107,14 @@ export function* loadDashboard() {
 }
 
 export function* syncBillingWatcher() {
-  yield takeLatest(types.billingTypes.INCREMENT_MONTH)
+  yield takeLatest(types.billingTypes.INCREMENT_MONTH);
 }
 export function* syncEventsWatcher() {
   yield takeLatest(types.eventTypes.GET_EVENTS_REQUEST, syncEventsForDashboard);
 }
 
 export function* syncEventsForDashboard() {
-  yield fork(rsf.firestore.syncCollection, 'venues/demo/events', {
+  yield fork(rsf.firestore.syncCollection, `venues/${venueId}/events`, {
     successActionCreator: syncEvents,
     transform: itemsTransformer
   });
@@ -135,7 +136,7 @@ export function* syncUsersWatcher() {
 }
 
 export function* syncUsersForDashboard() {
-  yield fork(rsf.firestore.syncCollection, 'venues/demo/users', {
+  yield fork(rsf.firestore.syncCollection, `venues/${venueId}/users`, {
     successActionCreator: syncUsers,
     transform: itemsTransformer
   });
@@ -146,9 +147,8 @@ export function* syncConfigWatcher() {
 }
 
 export function* syncVenueConfig() {
-  yield fork(rsf.firestore.syncCollection, 'venues/demo/config', {
-    successActionCreator: syncConfig,
-    transform: itemsTransformer
+  yield fork(rsf.database.sync, `venues/${venueId}`, {
+    successActionCreator: syncConfig
   });
 }
 
@@ -161,6 +161,6 @@ export default function* root() {
     syncVenuesWatcher(),
     syncUsersWatcher(),
     syncUserWatcher(),
-    syncVenuesWatcher()
+    syncConfigWatcher()
   ]);
 }
