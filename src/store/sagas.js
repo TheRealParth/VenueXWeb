@@ -147,17 +147,8 @@ export function* syncConfigWatcher() {
 }
 
 export function* syncVenueConfig() {
-
-  console.log('SYNC CALLERR')
-  console.log('SYNC CALLERR')
-  console.log('SYNC CALLERR')
-  console.log('SYNC CALLERR')
-  console.log('SYNC CALLERR')
-  console.log('SYNC CALLERR')
-  console.log('SYNC CALLERR')
-  yield fork(rsf.database.sync, `venues`, {
-    successActionCreator: syncConfig,
-    transform: itemsTransformer
+  yield fork(rsf.database.sync, `venues/${venueId}`, {
+    successActionCreator: syncConfig
   });
 }
 
@@ -170,6 +161,6 @@ export default function* root() {
     syncVenuesWatcher(),
     syncUsersWatcher(),
     syncUserWatcher(),
-    syncVenuesWatcher()
+    syncConfigWatcher()
   ]);
 }
