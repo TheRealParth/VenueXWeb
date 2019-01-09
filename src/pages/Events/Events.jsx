@@ -6,6 +6,7 @@ import '../../components/BigCalendar/less/styles.scss';
 import PersonalMenu from '../../components/PersonalMenu';
 import AddButton from '../../components/AddButton';
 import AddEventModal from '../../components/events/AddEventModal';
+import InjectStyles from '../../components/InjectStyles';
 
 const localizer = BigCalendar.momentLocalizer(moment);
 class Events extends Component {
@@ -48,9 +49,7 @@ class Events extends Component {
             dateFormat: 'D'
           }}
         />
-        <style>{`
-
-        `}</style>
+        <InjectStyles />
       </>
     );
   }

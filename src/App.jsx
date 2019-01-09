@@ -11,9 +11,7 @@ import ManageStaff from './pages/ManageStaff';
 import Billing from './pages/Billing';
 import AddEmployeeModal from './components/StaffTable/AddEmployeeModal';
 import Events from './pages/Events';
-// import Billing from './pages/Billing';
 import { SignInPage } from './pages/SignIn';
-import venueId from './config/venueId';
 import * as actions from './actions';
 import './App.scss';
 

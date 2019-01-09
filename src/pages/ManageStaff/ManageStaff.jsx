@@ -5,6 +5,7 @@ import StaffTable from '../../components/StaffTable';
 import AddEmployeeModal from '../../components/StaffTable/AddEmployeeModal';
 import PersonalMenu from '../../components/PersonalMenu';
 import AddButton from '../../components/AddButton';
+import InjectStyles from '../../components/InjectStyles';
 
 const Header = styled.div`
   display: flex;
@@ -60,6 +61,7 @@ class ManageStaff extends Component {
           {...this.props}
           users={users}
         />
+        <InjectStyles />
       </>
     );
   }
