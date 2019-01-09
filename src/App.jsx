@@ -13,13 +13,16 @@ import AddEmployeeModal from './components/StaffTable/AddEmployeeModal';
 import Events from './pages/Events';
 // import Billing from './pages/Billing';
 import { SignInPage } from './pages/SignIn';
+import venueId from './config/venueId';
 import * as actions from './actions';
 import './App.scss';
 
 class App extends React.Component {
   componentDidMount() {
+    console.log(this.props)
     const access_token = localStorage.getItem('access_token');
     if (access_token) this.props.loginWithTokenRequest({ access_token });
+
   }
   render() {
     return (
@@ -55,6 +58,6 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(
   // eslint-disable-next-line prettier/prettier
-  () => {},
+  () => { },
   mapDispatchToProps
 )(App);
