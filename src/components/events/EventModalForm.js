@@ -143,7 +143,6 @@ class EventModalForm extends PureComponent {
 
   renderNewUserFields() {
     let { users } = this.state;
-    console.log(users);
     let userFields = [];
     for (let i = 0; i < users; i++) {
       userFields.push(i);
@@ -229,7 +228,19 @@ class EventModalForm extends PureComponent {
   };
 
   render() {
-    const { selectedRoom, type } = this.props;
+    const { selectedRoom, type, config } = this.props;
+    console.log('HERE', config, config.eventTypese);
+    let rooms = [];
+    let eventTypes = [];
+    if (config) {
+      for (let room in config.rooms) {
+        rooms.push(config.rooms[room]);
+      }
+      for (let type in config.eventTypes) {
+        eventTypes.push(config.eventTypes[type]);
+      }
+    }
+    console.log(eventTypes);
 
     return (
       <Modal isOpen={this.props.isOpen} onRequestClose={this.props.onClose} width="700px">
@@ -295,7 +306,14 @@ class EventModalForm extends PureComponent {
               label="Event Type:"
               component={Select}
               validate={NotEmptyValidator}
-              options={[{ value: 'wedding', label: 'Wedding' }]}
+              options={
+                config
+                  ? eventTypes.map(type => ({
+                      label: type.name,
+                      value: type.typeId
+                    }))
+                  : []
+              }
             />
 
             {type === 'wedding' ? (
@@ -324,10 +342,14 @@ class EventModalForm extends PureComponent {
               label="Room:"
               component={Select}
               validate={NotEmptyValidator}
-              options={[].map(roomId => ({
-                // label: venueConfig.rooms[roomId].name,
-                // value: roomId,
-              }))}
+              options={
+                config
+                  ? rooms.map(room => ({
+                      label: room.name,
+                      value: room.roomId
+                    }))
+                  : []
+              }
             />
 
             {selectedRoom && (
