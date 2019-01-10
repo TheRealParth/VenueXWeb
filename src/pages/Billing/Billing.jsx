@@ -4,6 +4,8 @@ import BillingSummary from '../../components/BillingSummary';
 import BillingTable from '../../components/BillingTable';
 import CaretLeft from '../../assets/icons/CaretLeft';
 import CaretRight from '../../assets/icons/CaretRight';
+import InjectStyles from '../../components/InjectStyles';
+
 class Billing extends Component {
   constructor(props) {
     super(props);
@@ -45,6 +47,7 @@ class Billing extends Component {
         <div style={{ backgroundColor: '#fafafa' }}>
           <BillingTable events={events} />
         </div>
+        <InjectStyles />
       </>
     );
   }

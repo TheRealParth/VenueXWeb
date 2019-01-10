@@ -5,20 +5,7 @@ export const syncVenues = venues => ({
   venues
 });
 
-export const syncConfig = config => {
-  console.log('HERE HERE HERHEERE RER ER')
-  console.log('HERE HERE HERHEERE RER ER')
-  console.log('HERE HERE HERHEERE RER ER')
-  console.log('HERE HERE HERHEERE RER ER')
-  console.log('HERE HERE HERHEERE RER ER')
-  console.log('HERE HERE HERHEERE RER ER')
-  console.log('HERE HERE HERHEERE RER ER')
-  console.log('HERE HERE HERHEERE RER ER')
-  console.log('HERE HERE HERHEERE RER ER')
-  console.log('HERE HERE HERHEERE RER ER')
-  console.log(config)
-  return ({
-    type: configTypes.CONFIG.SYNC,
-    config
-  });
-}
+export const syncConfig = config => ({
+  type: configTypes.CONFIG.SYNC,
+  config
+});

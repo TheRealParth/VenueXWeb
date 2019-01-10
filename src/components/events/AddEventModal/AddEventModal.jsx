@@ -1,11 +1,7 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
-import { withFirebase } from 'react-redux-firebase';
-import { compose } from 'redux';
-import EventModalForm from './EventModalForm';
-import { withVenueConfig } from '../../containers/VenueConfigProvider';
-import generateId from '../../utils/generateId';
-
+import EventModalForm from '../EventModalForm';
+import generateId from '../../../utils/generateId';
 
 class AddEventModal extends PureComponent {
 
@@ -51,4 +47,4 @@ class AddEventModal extends PureComponent {
   }
 }
 
-export default AddEventModal;
+export { AddEventModal };
