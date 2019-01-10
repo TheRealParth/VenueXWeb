@@ -7,9 +7,8 @@ const Container = styled.div`
   align-items: center;
   padding: 15px 0px;
   margin-right: 15px;
-  width: 100%;
   align-self: center;
-  margin: auto;
+  width: fill-available;
 
   ${props =>
     props.alignItems &&

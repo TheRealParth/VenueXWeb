@@ -18,6 +18,7 @@ import DateTimeDurationField from '../form/DateTimeDurationField';
 import DatePickerField from '../form/DatePickerField';
 import Input from '../form/Input';
 import TitleInput from '../form/TitleInput';
+import SmallInput from '../form/SmallInput';
 import AddButton from '../AddButton';
 import Icons from '../../assets/icons';
 
@@ -26,7 +27,7 @@ const Header = styled.div`
   font-size: 24px;
   text-align: center;
   color: #181818;
-  width: 700px;
+  width: 610px;
   height: 110px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   background-color: rgba(188, 172, 150, 0.4);
@@ -42,7 +43,7 @@ const Header = styled.div`
 `;
 //background-color: ${props => props.theme.colors.primary}66;
 const Content = styled.div`
-  padding: 20px 50px;
+  padding: 20px 30px;
   overflow: scroll;
 `;
 
@@ -61,9 +62,9 @@ const StyledButton = styled(Button)`
 const Section = styled.div`
   display: flex;
   flex-direction: column;
-  border: 2px solid #c0b59d;
+  border: 1px dotted #c0b59d;
   padding: 16px 20px;
-  margin: 20px 0 70px 0px;
+  margin: 20px 0 45px 0px;
 `;
 
 // section title styling,
@@ -73,8 +74,8 @@ const SectionTitle = styled.div`
   padding: 0px 10px;
   width: fit-content;
   align-self: center;
-  color: #c0b59d;
-  font-weight: 600;
+  color: #424242;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 2px;
 `;
@@ -83,6 +84,17 @@ const SectionTitle = styled.div`
 
 const User = styled.div`
   display: flex;
+  animation: fadeIn 1s;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      diplay: none;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `;
 //bad naming, used also for payment fields
 //TO-DO: make real circle, current version is uneven
@@ -151,16 +163,16 @@ class EventModalForm extends PureComponent {
       return (
         <User>
           <UserNumber>{user + 1}</UserNumber>
-          <Field
+          <SmallInput
             name={'clientName' + user + 1}
-            label="Client Name:"
+            placeholder="Client Name"
             component={Input}
             validate={user === 0 ? NotEmptyValidator : ''}
             // only first one is needed
           />
-          <Field
+          <SmallInput
             name={'clientEmail' + user + 1}
-            label="Client Email:"
+            placeholder="Client Email"
             component={Input}
             validate={user === 0 ? NotEmptyValidator : ''}
             /* current validator is set to require a minimum of one client, but needs to validate email if client Name is entered */
@@ -243,7 +255,7 @@ class EventModalForm extends PureComponent {
     console.log(eventTypes);
 
     return (
-      <Modal isOpen={this.props.isOpen} onRequestClose={this.props.onClose} width="700px">
+      <Modal isOpen={this.props.isOpen} onRequestClose={this.props.onClose} width="610px">
         <Header>
           <div>Add New Event</div>
         </Header>
@@ -267,22 +279,25 @@ class EventModalForm extends PureComponent {
           </Section>
           <Section>
             <SectionTitle>Event Staff</SectionTitle>
-            <Field
-              name="consultant"
-              label="Consultant:"
-              component={Select}
-              validate={NotEmptyValidator}
-              options={[
-                { value: 'consultant', label: 'Any one selection With Create Event Permissions' }
-              ]}
-            />
-            <Field
-              name="eventTeam"
-              label="Event Team:"
-              component={Select}
-              validate={NotEmptyValidator}
-              options={[{ value: 'consultant', label: 'Any number of staff in the database' }]}
-            />
+            <User>
+              <Field
+                name="consultant"
+                label="Consultant:"
+                component={Select}
+                placeholder="Current User"
+                validate={NotEmptyValidator}
+                options={[
+                  { value: 'consultant', label: 'Any one selection With Create Event Permissions' }
+                ]}
+              />
+              <Field
+                name="eventTeam"
+                label="Event Team:"
+                component={Select}
+                validate={NotEmptyValidator}
+                options={[{ value: 'consultant', label: 'Any number of staff in the database' }]}
+              />
+            </User>
           </Section>
           <Section>
             <SectionTitle>Event Details</SectionTitle>

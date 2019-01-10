@@ -26,6 +26,6 @@ const Input = styled.input`
 
 export default props => (
   <BaseInput {...props}>
-    <Input type="text" {...props.input} {...props} />
+    <Input type="text" {...props.input} {...props} autoComplete="off" />
   </BaseInput>
 );

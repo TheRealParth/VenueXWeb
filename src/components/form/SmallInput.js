@@ -3,38 +3,37 @@ import styled, { css } from 'styled-components';
 import BaseInput from './BaseInput';
 
 const Input = styled.input`
-  border: none;
   display: block;
-  width: 100%;
+  width: 211px;
   padding: 0px;
   transition-duration: 0.3s;
-  text-align: center;
-  font-size: 25px;
-  font-weight: 500;
-  color: #c0b59d
-  letter-spacing: 0.8px;
 
+  font-size: 14px;
+  font-weight: 500;
+  color: #222222;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border: none;
+  border-bottom: 1px solid #c0b59d;
   ::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: ${props =>
-      props.meta && props.meta.touched && props.meta.error ? '#c02026' : '#b0b0b0'}
+    color: #b0b0b0;
     opacity: 1; /* Firefox */
-    text-transform: uppercase;
   }
 
   :-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: #b0b0b0;
+    color: #color: #b0b0b0;;
   }
 
   ::-ms-input-placeholder {
     /* Microsoft Edge */
-    color: #b0b0b0;
+    color: #color: #b0b0b0;;
   }
 
   &:focus {
     outline: none;
-    border-bottom: solid 1px #b0b0b0;
+    border-bottom: solid 1px #c0b59d;
   }
 
   ${props =>
