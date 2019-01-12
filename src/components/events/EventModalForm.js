@@ -40,6 +40,7 @@ const Header = styled.div`
   letter-spacing: -0.6px;
   text-align: center;
   color: #181818;
+  z-index: 1200;
 `;
 //background-color: ${props => props.theme.colors.primary}66;
 const Content = styled.div`
@@ -62,7 +63,7 @@ const StyledButton = styled(Button)`
 const Section = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px dotted #c0b59d;
+  border: 1px solid #c0b59d66;
   padding: 16px 20px;
   margin: 20px 0 45px 0px;
 `;
@@ -74,7 +75,7 @@ const SectionTitle = styled.div`
   padding: 0px 10px;
   width: fit-content;
   align-self: center;
-  color: #424242;
+  color: #222222;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -99,16 +100,20 @@ const User = styled.div`
 //bad naming, used also for payment fields
 //TO-DO: make real circle, current version is uneven
 const UserNumber = styled.div`
-  background-color: #c0b59d;
+  border: 1px solid #7d7d7d;
   height: 25px !important;
   width: 25px !important;
+  min-width: 25px;
   border-radius: 50%;
   padding: 5px;
   text-align: center;
-  color: white;
+  color: #7d7d7d;
   font-weight: 600;
   align-self: center;
   margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 //styling plus button for the add more of users & payment fields
@@ -162,7 +167,18 @@ class EventModalForm extends PureComponent {
     return userFields.map(user => {
       return (
         <User>
-          <UserNumber>{user + 1}</UserNumber>
+          <Icons.User
+            style={{
+              alignSelf: 'center',
+              backgroundColor: '#c4c4c4',
+              borderRadius: '50%',
+              minWidth: '25px',
+              padding: '3px',
+              marginRight: '10px'
+            }}
+            size={25}
+            color="#fff"
+          />
           <SmallInput
             name={'clientName' + user + 1}
             placeholder="Client Name"
@@ -200,8 +216,12 @@ class EventModalForm extends PureComponent {
     return paymentFields.map(payment => {
       return (
         <User>
-          <UserNumber>{payment + 1}</UserNumber>
-          <Field name={'payment' + payment + 1} component={Input} validate={NotEmptyValidator} />
+          <Field
+            label={payment + 1 + 'st' + ' Payment Date:'}
+            name={'payment' + payment + 1}
+            component={Input}
+            validate={NotEmptyValidator}
+          />
         </User>
       );
     });
@@ -266,6 +286,7 @@ class EventModalForm extends PureComponent {
             validate={NotEmptyValidator}
             placeholder="Event Name"
           />
+
           <Section>
             <SectionTitle>Users</SectionTitle>
 
@@ -279,25 +300,24 @@ class EventModalForm extends PureComponent {
           </Section>
           <Section>
             <SectionTitle>Event Staff</SectionTitle>
-            <User>
-              <Field
-                name="consultant"
-                label="Consultant:"
-                component={Select}
-                placeholder="Current User"
-                validate={NotEmptyValidator}
-                options={[
-                  { value: 'consultant', label: 'Any one selection With Create Event Permissions' }
-                ]}
-              />
-              <Field
-                name="eventTeam"
-                label="Event Team:"
-                component={Select}
-                validate={NotEmptyValidator}
-                options={[{ value: 'consultant', label: 'Any number of staff in the database' }]}
-              />
-            </User>
+
+            <Field
+              name="consultant"
+              label="Consultant:"
+              component={Select}
+              placeholder="Current User"
+              validate={NotEmptyValidator}
+              options={[
+                { value: 'consultant', label: 'Any one selection With Create Event Permissions' }
+              ]}
+            />
+            <Field
+              name="eventTeam"
+              label="Event Team:"
+              component={Select}
+              validate={NotEmptyValidator}
+              options={[{ value: 'consultant', label: 'Any number of staff in the database' }]}
+            />
           </Section>
           <Section>
             <SectionTitle>Event Details</SectionTitle>
@@ -307,29 +327,29 @@ class EventModalForm extends PureComponent {
               component={DateTimeDurationField}
               validate={DateTimeDurationFilled}
             />
-
-            <Field
-              name="minimumGuests"
-              label="Guest Minimum:"
-              component={Input}
-              type="number"
-              validate={NotEmptyValidator}
-            />
-
-            <Field
-              name="type"
-              label="Event Type:"
-              component={Select}
-              validate={NotEmptyValidator}
-              options={
-                config
-                  ? eventTypes.map(type => ({
-                      label: type.name,
-                      value: type.typeId
-                    }))
-                  : []
-              }
-            />
+            <User>
+              <Field
+                name="type"
+                label="Event Type:"
+                component={Select}
+                validate={NotEmptyValidator}
+                options={
+                  config
+                    ? eventTypes.map(type => ({
+                        label: type.name,
+                        value: type.typeId
+                      }))
+                    : []
+                }
+              />
+              <Field
+                name="minimumGuests"
+                label="Guest Minimum:"
+                component={Input}
+                type="number"
+                validate={NotEmptyValidator}
+              />
+            </User>
 
             {type === 'wedding' ? (
               <Field
@@ -351,21 +371,36 @@ class EventModalForm extends PureComponent {
             ) : (
               ''
             )}
-
-            <Field
-              name="room"
-              label="Room:"
-              component={Select}
-              validate={NotEmptyValidator}
-              options={
-                config
-                  ? rooms.map(room => ({
-                      label: room.name,
-                      value: room.roomId
-                    }))
-                  : []
-              }
-            />
+            <User>
+              <Field
+                name="room"
+                label="Room:"
+                component={Select}
+                validate={NotEmptyValidator}
+                options={
+                  config
+                    ? rooms.map(room => ({
+                        label: room.name,
+                        value: room.roomId
+                      }))
+                    : []
+                }
+              />
+              <Field
+                name="layout"
+                label="Layout:"
+                component={Select}
+                validate={NotEmptyValidator}
+                options={
+                  config
+                    ? rooms.map(room => ({
+                        label: room.name,
+                        value: room.roomId
+                      }))
+                    : []
+                }
+              />
+            </User>
 
             {selectedRoom && (
               <div style={{ display: 'flex' }}>
@@ -389,10 +424,6 @@ class EventModalForm extends PureComponent {
           </Section>
 
           <Section>
-            <SectionTitle>Notes</SectionTitle>
-            <Field name="notes" component={Textarea} />
-          </Section>
-          <Section>
             <SectionTitle>Payment Schedule</SectionTitle>
             {this.renderPaymentFields()}
             <AddMore onClick={this.addPayment}>
@@ -400,6 +431,10 @@ class EventModalForm extends PureComponent {
                 <Icons.Plus />
               </div>
             </AddMore>
+          </Section>
+          <Section>
+            <SectionTitle>Notes</SectionTitle>
+            <Field name="notes" component={Textarea} />
           </Section>
         </Content>
 

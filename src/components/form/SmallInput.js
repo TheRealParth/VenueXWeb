@@ -5,16 +5,16 @@ import BaseInput from './BaseInput';
 const Input = styled.input`
   display: block;
   width: 211px;
-  padding: 0px;
+  padding-bottom: 3px;
   transition-duration: 0.3s;
-
+  background: none;
   font-size: 14px;
   font-weight: 500;
   color: #222222;
-  text-transform: uppercase;
+  
   letter-spacing: 0.8px;
   border: none;
-  border-bottom: 1px solid #c0b59d;
+  border-bottom: 1px solid #d8d8d8;
   ::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #b0b0b0;

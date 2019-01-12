@@ -11,15 +11,17 @@ const Input = styled.input`
   text-align: center;
   font-size: 25px;
   font-weight: 500;
-  color: #c0b59d
+  color: #222222
   letter-spacing: 0.8px;
+  margin-left: -1px;
+  background: none;
 
   ::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: ${props =>
       props.meta && props.meta.touched && props.meta.error ? '#c02026' : '#b0b0b0'}
     opacity: 1; /* Firefox */
-    text-transform: uppercase;
+  
   }
 
   :-ms-input-placeholder {
@@ -34,7 +36,7 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-bottom: solid 1px #b0b0b0;
+    border-bottom: solid 1px #c0b59d;
   }
 
   ${props =>
