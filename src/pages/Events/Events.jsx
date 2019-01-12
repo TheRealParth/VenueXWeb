@@ -7,12 +7,13 @@ import PersonalMenu from '../../components/PersonalMenu';
 import AddButton from '../../components/AddButton';
 import AddEventModal from '../../components/events/AddEventModal';
 import InjectStyles from '../../components/InjectStyles';
+import Toolbar from '../../components/BigCalendar/Toolbar';
 
 const localizer = BigCalendar.momentLocalizer(moment);
 class Events extends Component {
   state = {
     events: [],
-    isAddingEvent: false
+    showModal: false
   };
   componentDidMount() {
     this.props.getEventsRequest();
@@ -25,21 +26,26 @@ class Events extends Component {
       this.setState({ events });
     }
   }
+  openModal = () => this.setState({ showModal: true });
+  closeModal = () => this.setState({ showModal: false });
   selectEventHandler = event => {
     console.log(event);
   };
   render() {
-    const { events } = this.state;
+    const { events, showModal } = this.state;
+    const { currentUser } = this.props;
     return (
       <>
-        {/* <AddEventModal isOpen={this.state.isAddingEvent} onClose={() => this.setState({ isAddingEvent: false })} /> 
-        <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-          <PersonalMenu {...this.props.currentUser} />
-          <AddButton onClick={() => console.log('start here')} /> 
-        </div> */}
+        <AddEventModal
+          isOpen={showModal}
+          onClose={this.closeModal}
+        />
         <BigCalendar
           onSelectEvent={this.selectEventHandler}
           localizer={localizer}
+          components={{
+            toolbar: (props) => <Toolbar {...props} openModal={this.openModal} />
+          }}
           events={events}
           startAccessor="start"
           endAccessor="end"

@@ -5,9 +5,7 @@ import rsf from '../firebase';
 import { AuthService } from '../services/';
 import { httpUtils } from '../helpers';
 import venueId from '../config/venueId';
-const configTransformer = (data) => {
-  return data
-}
+
 const itemsTransformer = items => {
   const res = [];
   items.forEach(item =>
