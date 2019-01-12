@@ -6,10 +6,8 @@ const Container = styled.div`
   font-weight: 500;
   align-items: center;
   padding: 15px 0px;
-  margin-right: 15px;
-  width: 100%;
   align-self: center;
-  margin: auto;
+  width: fill-available;
 
   ${props =>
     props.alignItems &&
@@ -38,7 +36,6 @@ const Label = styled.div`
   line-height: normal;
   letter-spacing: -0.3px;
   color: #7d7d7d;
-  padding-right: 10px;
   white-space: noWrap;
 `;
 

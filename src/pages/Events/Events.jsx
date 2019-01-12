@@ -13,7 +13,7 @@ const localizer = BigCalendar.momentLocalizer(moment);
 class Events extends Component {
   state = {
     events: [],
-    isAddingEvent: false
+    isAddingEvent: true
   };
   componentDidMount() {
     this.props.getEventsRequest();
@@ -37,9 +37,20 @@ class Events extends Component {
     return (
       <>
         <AddEventModal
+<<<<<<< HEAD
           isOpen={isAddingEvent}
           onClose={this.closeAddingModal}
         />
+=======
+          isOpen={this.state.isAddingEvent}
+          onClose={() => this.setState({ isAddingEvent: false })}
+        />
+        <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+          <PersonalMenu {...this.props.currentUser} />
+          <AddButton onClick={() => console.log('start here')} />
+        </div>
+
+>>>>>>> cc636a3b2b5fc4b0cdd4bee4f7f1be47e8b31b21
         <BigCalendar
           onSelectEvent={this.selectEventHandler}
           localizer={localizer}

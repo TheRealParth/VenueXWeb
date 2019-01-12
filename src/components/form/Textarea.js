@@ -7,11 +7,13 @@ const Textarea = styled.textarea`
   border-radius: 2px;
   resize: none;
   width: 100%;
-
+  margin-bottom: -9px;
+  background: none;
   &:focus {
     outline: 0;
     border: none;
     background-color: #c0b59d26;
+    padding: 8px;
 
      {
       /* TO-DO make background color expand to whole box, fix spacing */
