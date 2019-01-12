@@ -13,7 +13,7 @@ const localizer = BigCalendar.momentLocalizer(moment);
 class Events extends Component {
   state = {
     events: [],
-    showModal: false
+    isAddingEvent: false
   };
   componentDidMount() {
     this.props.getEventsRequest();
@@ -26,25 +26,25 @@ class Events extends Component {
       this.setState({ events });
     }
   }
-  openModal = () => this.setState({ showModal: true });
-  closeModal = () => this.setState({ showModal: false });
+  openAddingModal = () => this.setState({ isAddingEvent: true });
+  closeAddingModal = () => this.setState({ isAddingEvent: false });
   selectEventHandler = event => {
     console.log(event);
   };
   render() {
-    const { events, showModal } = this.state;
+    const { events, isAddingEvent } = this.state;
     const { currentUser } = this.props;
     return (
       <>
         <AddEventModal
-          isOpen={showModal}
-          onClose={this.closeModal}
+          isOpen={isAddingEvent}
+          onClose={this.closeAddingModal}
         />
         <BigCalendar
           onSelectEvent={this.selectEventHandler}
           localizer={localizer}
           components={{
-            toolbar: (props) => <Toolbar {...props} openModal={this.openModal} />
+            toolbar: (props) => <Toolbar {...props} openModal={this.openAddingModal} />
           }}
           events={events}
           startAccessor="start"
