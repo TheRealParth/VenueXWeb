@@ -10,6 +10,8 @@ import PublicRoute from './components/PublicRoute';
 import ManageStaff from './pages/ManageStaff';
 import Billing from './pages/Billing';
 import AddEmployeeModal from './components/StaffTable/AddEmployeeModal';
+
+
 import Events from './pages/Events';
 import { SignInPage } from './pages/SignIn';
 import * as actions from './actions';

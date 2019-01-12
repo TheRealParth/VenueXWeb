@@ -10,7 +10,7 @@ const menuItems = [
     icon: calendarWhiteIcon
   },
   {
-    id: 'events',
+    id: 'manageStaff',
     route: '/managestaff',
     label: 'Manage Staff',
     icon: peopleWhiteIcon
