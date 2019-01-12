@@ -35,20 +35,19 @@ class Billing extends Component {
     return eventsThisMonth;
   };
   render() {
-
     const { events } = this.props;
-    const { label, currentDate } = this.state;
+    const { currentDate } = this.state;
     const eventsThisMonth = this.eventsThisMonth();
 
-    const total = eventsThisMonth.reduce((accumulator, currentValue) =>
-      accumulator + parseInt((currentValue.minimumGuests || 0), 10)
+    const totalGuests = eventsThisMonth.reduce((accumulator, currentValue) =>
+      accumulator + parseInt((currentValue.guests || 0), 10)
       , 0);
 
     const dueDate = moment(currentDate).add(1, 'M');
 
     const balance = (
       this.props.config.billingMethod === 'payPerGuest' ?
-        total : 250 * eventsThisMonth.length
+        totalGuests : 250 * eventsThisMonth.length
     );
 
 
@@ -63,7 +62,8 @@ class Billing extends Component {
           label={currentDate.format('MMMM YYYY')}
         />
         <BillingSummary
-          total={total}
+          totalGuests={totalGuests}
+          totalEvents={eventsThisMonth.length}
           dueDate={dueDate}
           balance={balance}
           daysUntilDue={daysUntilDue}

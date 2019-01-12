@@ -7,11 +7,11 @@ const BillingSummary = props => (
     <div className={BillingSummaryContainer}>
       <div className={BillingSummaryItem}>
         <div className={label}>Total Events</div>
-        <div className={value}>{props.total}</div>
+        <div className={value}>{props.totalEvents}</div>
       </div>
       <div className={BillingSummaryItem}>
         <div className={label}>Total Guests</div>
-        <div className={value}>{props.total}</div>
+        <div className={value}>{props.totalGuests}</div>
       </div>
       <div className={BillingSummaryItem}>
         <div className={label}>Current Balance</div>
