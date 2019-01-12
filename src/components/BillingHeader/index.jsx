@@ -41,7 +41,6 @@ const BillingHeader = ({
             {' '}
             <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
               <PersonalMenu {...currentUser} />
-              <AddButton onClick={openModal} />
             </div>
           </div>
         </div>
