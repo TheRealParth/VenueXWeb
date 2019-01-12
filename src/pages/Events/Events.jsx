@@ -6,12 +6,13 @@ import '../../components/BigCalendar/less/styles.scss';
 import PersonalMenu from '../../components/PersonalMenu';
 import AddButton from '../../components/AddButton';
 import AddEventModal from '../../components/events/AddEventModal';
+import InjectStyles from '../../components/InjectStyles';
 
 const localizer = BigCalendar.momentLocalizer(moment);
 class Events extends Component {
   state = {
     events: [],
-    isAddingEvent: false
+    isAddingEvent: true
   };
   componentDidMount() {
     this.props.getEventsRequest();
@@ -31,11 +32,15 @@ class Events extends Component {
     const { events } = this.state;
     return (
       <>
-        {/* <AddEventModal isOpen={this.state.isAddingEvent} onClose={() => this.setState({ isAddingEvent: false })} /> 
+        <AddEventModal
+          isOpen={this.state.isAddingEvent}
+          onClose={() => this.setState({ isAddingEvent: false })}
+        />
         <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
           <PersonalMenu {...this.props.currentUser} />
-          <AddButton onClick={() => console.log('start here')} /> 
-        </div> */}
+          <AddButton onClick={() => console.log('start here')} />
+        </div>
+
         <BigCalendar
           onSelectEvent={this.selectEventHandler}
           localizer={localizer}
@@ -48,9 +53,7 @@ class Events extends Component {
             dateFormat: 'D'
           }}
         />
-        <style>{`
-
-        `}</style>
+        <InjectStyles />
       </>
     );
   }
