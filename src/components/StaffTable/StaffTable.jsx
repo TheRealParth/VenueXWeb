@@ -113,7 +113,8 @@ const StaffTable = ({
   selectSingleUser,
   unSelectSingleUser,
   selectedCount
-}) => (
+}) => {
+  return (
     <>
       <TableContainer>
         <Table>
@@ -141,7 +142,9 @@ const StaffTable = ({
                 </Table.Cell>
                 <Table.Cell width="20%">
                   <Table.HeaderCell
-                    onClick={() => setUsersSortKey('email', sort.orderBy === 'asc' ? 'desc' : 'asc')}
+                    onClick={() =>
+                      setUsersSortKey('email', sort.orderBy === 'asc' ? 'desc' : 'asc')
+                    }
                     numeric
                     title="Email"
                   />
@@ -163,10 +166,10 @@ const StaffTable = ({
                   <Table.Cell width="80%">
                     <EditStaffPermissionsDropdown
                       selectedCount={selectedCount}
-                      selectedEmployees={[]}
+                      selectedEmployees={users.filter(user => user.checked)}
                     />
                     &nbsp;
-                <Button
+                 <Button
                       label={`Delete ${selectedCount} staff member${selectedCount > 1 ? 's' : ''}`}
                       kind="danger"
                     />
@@ -206,7 +209,9 @@ const StaffTable = ({
                     />
                     <Icons.ManageStaff
                       size={24}
-                      color={!user.permissions.manageStaffPermissions ? '#d8d8d8' : 'rgba(0,0,0,0.5)'}
+                      color={
+                        !user.permissions.manageStaffPermissions ? '#d8d8d8' : 'rgba(0,0,0,0.5)'
+                      }
                     />
                   </IconsContainer>
                 </Table.Cell>
@@ -226,6 +231,7 @@ const StaffTable = ({
       </TableContainer>
     </>
   );
+};
 
 StaffTable.propTypes = {
   classes: PropTypes.object.isRequired,

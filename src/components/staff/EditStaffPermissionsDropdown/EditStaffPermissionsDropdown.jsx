@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react';
 import { withFirebase } from 'react-redux-firebase';
 import styled from 'styled-components';
-import Dropdown from '../Dropdown';
-import Button from '../Button';
-import Checkbox from '../Checkbox';
-import calendarViewBlackIcon from '../../assets/calendar-view-black.svg';
-import calendarEditBlackIcon from '../../assets/calendar-edit-black.svg';
-import calendarDeleteBlackIcon from '../../assets/calendar-delete-black.svg';
-import billBlackIcon from '../../assets/bill-black.svg';
-import peopleBlackIcon from '../../assets/people-black.svg';
+import Dropdown from '../../Dropdown';
+import Button from '../../Button';
+import Checkbox from '../../Checkbox';
+import calendarViewBlackIcon from '../../../assets/calendar-view-black.svg';
+import calendarEditBlackIcon from '../../../assets/calendar-edit-black.svg';
+import calendarDeleteBlackIcon from '../../../assets/calendar-delete-black.svg';
+import billBlackIcon from '../../../assets/bill-black.svg';
+import peopleBlackIcon from '../../../assets/people-black.svg';
 
 const StyledDropdown = styled(Dropdown)`
   right: 0px;
@@ -56,17 +56,10 @@ class EditStaffPermissionsDropdown extends PureComponent {
   };
 
   handleSave = async () => {
-    const updates = {};
-    this.props.selectedEmployees.forEach(empId => {
-      Object.keys(this.state).forEach(permissionKey => {
-        updates[`/employees/${empId}/permissions/${permissionKey}`] = this.state[permissionKey];
-      });
+    this.props.updateUsersPermissions({
+      users: this.props.selectedEmployees,
+      permissions: this.state
     });
-
-    await this.props.firebase
-      .database()
-      .ref()
-      .update(updates);
   };
 
   render() {
@@ -133,4 +126,4 @@ class EditStaffPermissionsDropdown extends PureComponent {
   }
 }
 
-export default EditStaffPermissionsDropdown;
+export { EditStaffPermissionsDropdown };

@@ -1,7 +1,7 @@
 import { takeLatest, take, put, fork, all, call } from 'redux-saga/effects';
 import * as types from '../types';
 import { syncEvents, syncUsers, syncUser, syncVenues, syncConfig } from '../actions';
-import rsf from '../firebase';
+import rsf, { firebaseApp } from '../firebase';
 import { AuthService } from '../services/';
 import { httpUtils } from '../helpers';
 import venueId from '../config/venueId';
@@ -69,7 +69,6 @@ export function* syncUserWatcher() {
 }
 export function* syncUserSaga() {
   const channel = yield call(rsf.auth.channel);
-  console.log(channel);
 
   while (true) {
     const { error, user } = yield take(channel);
@@ -128,7 +127,25 @@ export function* syncVenuesForDashboard() {
     transform: itemsTransformer
   });
 }
+export function* syncUpdateUsersPermissionsSaga({ payload }) {
+  const { users, permissions } = payload;
+  const db = firebaseApp.firestore();
+  const batch = db.batch();
+  const collRef = db.collection(`venues/${venueId}/users`);
 
+  const userIds = users.map(user => user.id);
+  yield fork(rsf.firestore.syncCollection, `venues/${venueId}/users`, {
+    successActionCreator: 'PERMISSIONS_UPDATE_SUCCESS',
+    transform: async (items) => {
+      items.forEach(item => {
+        if (userIds.indexOf(item.id) == -1) return;
+        const docRef = collRef.doc(item.id);
+        batch.update(docRef, { permissions });
+      });
+      batch.commit().catch(err => console.error(err));
+    }
+  });
+}
 export function* syncUsersWatcher() {
   yield takeLatest(types.userTypes.GET_USERS_REQUEST, syncUsersForDashboard);
 }
@@ -143,7 +160,9 @@ export function* syncUsersForDashboard() {
 export function* syncConfigWatcher() {
   yield takeLatest(types.configTypes.GET_CONFIG_REQUEST, syncVenueConfig);
 }
-
+export function* updatePermissionsWatcher() {
+  yield takeLatest(types.userTypes.USERS.PERMISSIONS_UPDATE, syncUpdateUsersPermissionsSaga);
+}
 export function* syncVenueConfig() {
   yield fork(rsf.database.sync, `venues/${venueId}`, {
     successActionCreator: syncConfig
@@ -159,6 +178,7 @@ export default function* root() {
     syncVenuesWatcher(),
     syncUsersWatcher(),
     syncUserWatcher(),
-    syncConfigWatcher()
+    syncConfigWatcher(),
+    updatePermissionsWatcher()
   ]);
 }

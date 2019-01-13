@@ -5,7 +5,7 @@ import 'firebase/functions';
 import 'firebase/firestore'; // 👈 If you're using firestore
 import ReduxSagaFirebase from 'redux-saga-firebase';
 
-const firebaseApp = firebase.initializeApp({
+export const firebaseApp = firebase.initializeApp({
   apiKey: 'AIzaSyDbULyOjlTP2uL2IVYIj4NhE9CjvCzX4AU',
   authDomain: 'venuex-dreamstack.firebaseapp.com',
   databaseURL: 'https://venuex-dreamstack.firebaseio.com',

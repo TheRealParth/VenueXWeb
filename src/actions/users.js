@@ -21,6 +21,11 @@ export const syncUser = user => ({
   user
 });
 
+export const updateUsersPermissions = payload => ({
+  type: USERS.PERMISSIONS_UPDATE,
+  payload
+});
+
 export const loginWithTokenRequest = payload => ({
   type: LOGIN_WITH_TOKEN,
   payload
