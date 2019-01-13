@@ -44,7 +44,11 @@ class Events extends Component {
           onSelectEvent={this.selectEventHandler}
           localizer={localizer}
           components={{
-            toolbar: (props) => <Toolbar {...props} currentUser={currentUser} openModal={this.openAddingModal} />
+            toolbar: (props) => <Toolbar
+              {...props}
+              currentUser={currentUser}
+              openModal={this.openAddingModal}
+            />
           }}
           events={events}
           startAccessor="start"
