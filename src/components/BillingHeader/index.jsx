@@ -16,7 +16,7 @@ const BillingHeader = ({
     <>
       <div className={BillingHeaderContainer}>
 
-        <div className="rbc-toolbar">
+        <div className="rbc-toolbar" style={{ width: '100%' }}>
           <div className="rbc-btn-group">
             <div className={ContactInfo}>VenueX: 201-448-9419 | billing@teamvenuex.com</div>
             <button

@@ -7,7 +7,7 @@ import moment from 'moment';
 import Button from '../Button';
 import Icons from '../../assets/icons';
 import ConsultantLabel from '../Consultant';
-import EditStaffPermissionsDropdown from '../staff/EditStaffPermissionsDropdown';
+import EditStaffPermissionsDropdown from './EditStaffPermissionsDropdown';
 
 const Container = styled.div`
   border: solid 1px #ededed;
@@ -112,7 +112,9 @@ const StaffTable = ({
   unSelectAllUsers,
   selectSingleUser,
   unSelectSingleUser,
-  selectedCount
+  selectedCount,
+  deleteUsers,
+
 }) => {
   return (
     <>
@@ -172,6 +174,7 @@ const StaffTable = ({
                  <Button
                       label={`Delete ${selectedCount} staff member${selectedCount > 1 ? 's' : ''}`}
                       kind="danger"
+                      onClick={() => deleteUsers({ users: users.filter(user => user.checked) })}
                     />
                   </Table.Cell>
                 </>

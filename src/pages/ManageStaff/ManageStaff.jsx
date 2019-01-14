@@ -40,7 +40,7 @@ class ManageStaff extends Component {
   }
   closeModal = () => {
     this.setState({
-      isOpen: true,
+      isOpen: false,
     })
   }
 

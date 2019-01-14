@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import BigCalendar from '../../components/BigCalendar';
 import moment from 'moment';
 import '../../components/BigCalendar/less/styles.scss';
-import PersonalMenu from '../../components/PersonalMenu';
-import AddButton from '../../components/AddButton';
 import AddEventModal from '../../components/events/AddEventModal';
 import InjectStyles from '../../components/InjectStyles';
 import Toolbar from '../../components/BigCalendar/Toolbar';
@@ -13,7 +11,7 @@ const localizer = BigCalendar.momentLocalizer(moment);
 class Events extends Component {
   state = {
     events: [],
-    isAddingEvent: true
+    isAddingEvent: false
   };
   componentDidMount() {
     this.props.getEventsRequest();

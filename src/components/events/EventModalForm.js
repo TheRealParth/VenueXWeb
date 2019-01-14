@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import styled from 'styled-components';
@@ -19,7 +18,6 @@ import DatePickerField from '../form/DatePickerField';
 import Input from '../form/Input';
 import TitleInput from '../form/TitleInput';
 import SmallInput from '../form/SmallInput';
-import AddButton from '../AddButton';
 import Icons from '../../assets/icons';
 
 const Header = styled.div`

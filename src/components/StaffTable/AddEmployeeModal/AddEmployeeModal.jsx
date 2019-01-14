@@ -1,21 +1,22 @@
 import React, { PureComponent } from 'react';
-import { withFirebase } from 'react-redux-firebase';
-import { compose } from 'redux';
-import { reduxForm, Field } from 'redux-form';
+import { Field } from 'redux-form';
 import styled from 'styled-components';
-import Checkbox from 'components/Checkbox';
-import Modal from '../Modal';
-import Button from '../Button';
-import Input from '../form/Input';
-import BaseInput from '../form/BaseInput';
-import calendarViewBlackIcon from '../../assets/calendar-view-black.svg';
-import calendarEditBlackIcon from '../../assets/calendar-edit-black.svg';
-import calendarDeleteBlackIcon from '../../assets/calendar-delete-black.svg';
-import billBlackIcon from '../../assets/bill-black.svg';
-import peopleBlackIcon from '../../assets/people-black.svg';
+import { get } from 'lodash';
+import Checkbox from '../../Checkbox';
+import Modal from '../../Modal';
+import Button from '../../Button';
+import Input from '../../form/Input';
+import BaseInput from '../../form/BaseInput';
+import calendarViewBlackIcon from '../../../assets/calendar-view-black.svg';
+import calendarEditBlackIcon from '../../../assets/calendar-edit-black.svg';
+import calendarDeleteBlackIcon from '../../../assets/calendar-delete-black.svg';
+import billBlackIcon from '../../../assets/bill-black.svg';
+import peopleBlackIcon from '../../../assets/people-black.svg';
 
+
+//background-color: ${props => props.theme.colors.primary}66;
 const Header = styled.div`
-  background-color: ${props => props.theme.colors.primary}66;
+  
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   padding: 30px 0px;
   font-size: 24px;
@@ -54,23 +55,15 @@ class AddEmployeeModal extends PureComponent {
     isLoading: false,
   };
 
-  handleCreateEmpoyee = async ({ fullName, email }) => {
-    const { firebase } = this.props;
-    const createEmployee = firebase
-      .functions()
-      .httpsCallable('createEmployee');
-
+  handleCreateEmpoyee = () => {
     const { isLoading, ...permissions } = this.state;
-
-    this.setState({ isLoading: true });
-
-    await createEmployee({
-      fullName,
+    const { email, fullName } = this.props;
+    this.props.createUser({
       email,
+      fullName,
       permissions,
-    });
-
-    this.setState({ isLoading: false });
+      password: 'Welcome123'
+    })
     this.props.onRequestClose();
   };
 
@@ -95,7 +88,6 @@ class AddEmployeeModal extends PureComponent {
             component={Input}
             type="email"
           />
-
           <BaseInput label="Permissions:">
             <PermissionItem>
               <Checkbox
@@ -151,11 +143,11 @@ class AddEmployeeModal extends PureComponent {
             onClick={onRequestClose}
           />
           <StyledButton
-            label={this.state.isLoading ?
+            label={this.props.isLoading ?
               'Creating account...' :
               'Create account'}
             kind="primary"
-            onClick={this.props.handleSubmit(this.handleCreateEmpoyee)}
+            onClick={this.handleCreateEmpoyee}
           />
         </Modal.Footer>
       </Modal>
@@ -163,9 +155,4 @@ class AddEmployeeModal extends PureComponent {
   }
 }
 
-export default compose(
-  reduxForm({
-    form: 'AddEmployeeModal',
-  }),
-  withFirebase,
-)(AddEmployeeModal);
+export { AddEmployeeModal };
