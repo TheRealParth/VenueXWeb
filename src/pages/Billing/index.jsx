@@ -3,12 +3,15 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { sortUsersSelector } from '../../reducers/users';
+import { get } from 'lodash';
 
-function mapStateToProps({ events, users }) {
+function mapStateToProps({ events, users, config, auth }) {
   return {
     events: events.list,
     users: users.list,
-    sortedUsers: sortUsersSelector(users)
+    currentUser: users && users.list.find(user => user.id === auth.user.uid),
+    sortedUsers: sortUsersSelector(users),
+    config: get(config, 'config', {})
   };
 }
 function mapDispatchToProps(dispatch) {

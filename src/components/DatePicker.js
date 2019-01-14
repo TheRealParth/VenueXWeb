@@ -11,8 +11,8 @@ const DatePickerWrapper = styled.div`
     font-family: inherit;
 
     ${props =>
-      props.showTimeSelect &&
-      css`
+    props.showTimeSelect &&
+    css`
         padding: 0px;
       `}
   }
@@ -41,6 +41,7 @@ const DatePickerWrapper = styled.div`
     width: 2.1rem;
     color: #7d7d7d;
     font-size: 14px;
+    display: inline-block;
   }
 
   .react-datepicker__day--today {
@@ -72,10 +73,10 @@ const DatePickerWrapper = styled.div`
       border-bottom: solid 1px #d8d8d8;
 
       ${props =>
-        props.meta &&
-        props.meta.error &&
-        props.meta.touched &&
-        css`
+    props.meta &&
+    props.meta.error &&
+    props.meta.touched &&
+    css`
           border-bottom: solid 1px #c02026;
         `}
 

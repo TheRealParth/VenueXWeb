@@ -29,22 +29,22 @@ const BillingTable = ({ events }) => (
     <Table>
       <Table.Row>
         <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => { }} title="Client" />
+          <Table.HeaderCell onClick={() => ''} title="Client" />
         </Table.Cell>
         <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => { }} title="Event" />
+          <Table.HeaderCell onClick={() => ''} title="Event" />
         </Table.Cell>
         <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => { }} title="Event Type" />
+          <Table.HeaderCell onClick={() => ''} title="Event Type" />
         </Table.Cell>
         <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => { }} title="Guests" />
+          <Table.HeaderCell onClick={() => ''} title="Guests" />
         </Table.Cell>
         <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => { }} title="Event Date" />
+          <Table.HeaderCell onClick={() => ''} title="Event Date" />
         </Table.Cell>
         <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => { }} title="Created By" />
+          <Table.HeaderCell onClick={() => ''} title="Created By" />
         </Table.Cell>
       </Table.Row>
       <Table.Body>

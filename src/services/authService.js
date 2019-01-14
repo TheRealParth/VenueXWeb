@@ -11,7 +11,20 @@ export class AuthService {
         {
           email,
           password,
-          venueId: apiConfig.venueId
+          venueId
+        }
+      )
+      .then(httpUtils.handleResponse);
+  }
+  static createUser(user) {
+    console.log('INSIDE OF AUTH SERVICE');
+    console.log(user);
+    return axios
+      .post(
+        `${apiConfig.baseURL}/auth/signup`,
+        //DATA
+        {
+          ...user
         }
       )
       .then(httpUtils.handleResponse);

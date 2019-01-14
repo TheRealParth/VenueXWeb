@@ -8,7 +8,10 @@ const {
   SELECT_ALL_USERS,
   UNSELECT_ALL_USERS,
   SELECT_SINGLE_USER,
-  UNSELECT_SINGLE_USER
+  UNSELECT_SINGLE_USER,
+  CREATE_USER_FAILURE,
+  CREATE_USER_SUCCESS,
+  CREATE_USER_REQUEST
 } = userTypes;
 
 export const syncUsers = users => ({
@@ -19,6 +22,21 @@ export const syncUsers = users => ({
 export const syncUser = user => ({
   type: USER.SYNC,
   user
+});
+
+export const createUser = user => ({
+  type: CREATE_USER_REQUEST,
+  user
+});
+
+export const updateUsersPermissions = payload => ({
+  type: USERS.PERMISSIONS_UPDATE,
+  payload
+});
+
+export const deleteUsers = payload => ({
+  type: USERS.DELETE_USERS,
+  payload
 });
 
 export const loginWithTokenRequest = payload => ({

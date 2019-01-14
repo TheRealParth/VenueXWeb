@@ -18,4 +18,4 @@ ManageStaffIcon.defaultProps = {
   size: 24
 };
 
-export default withTheme(ManageStaffIcon);
+export default ManageStaffIcon;

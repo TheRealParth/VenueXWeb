@@ -1,13 +1,12 @@
 import { takeLatest, take, put, fork, all, call } from 'redux-saga/effects';
+import axios from 'axios';
 import * as types from '../types';
 import { syncEvents, syncUsers, syncUser, syncVenues, syncConfig } from '../actions';
-import rsf from '../firebase';
+import rsf, { firebaseApp } from '../firebase';
 import { AuthService } from '../services/';
 import { httpUtils } from '../helpers';
 import venueId from '../config/venueId';
-const configTransformer = (data) => {
-  return data
-}
+
 const itemsTransformer = items => {
   const res = [];
   items.forEach(item =>
@@ -26,7 +25,6 @@ export function* loginFlow(action) {
   try {
     const { email, password } = action.user;
 
-    const venueId = 'demo';
     const user = yield call(AuthService.login, email, password, venueId);
     yield call(httpUtils.signInWithCustomToken, user);
     yield call(syncUserWatcher);
@@ -71,7 +69,6 @@ export function* syncUserWatcher() {
 }
 export function* syncUserSaga() {
   const channel = yield call(rsf.auth.channel);
-  console.log(channel);
 
   while (true) {
     const { error, user } = yield take(channel);
@@ -130,7 +127,62 @@ export function* syncVenuesForDashboard() {
     transform: itemsTransformer
   });
 }
-
+export function* syncUpdateUsersPermissionsSaga({ payload }) {
+  const { users, permissions } = payload;
+  const db = firebaseApp.firestore();
+  const batch = db.batch();
+  const collRef = db.collection(`venues/${venueId}/users`);
+  const userIds = users.map(user => user.id);
+  yield fork(rsf.firestore.syncCollection, `venues/${venueId}/users`, {
+    successActionCreator: 'PERMISSIONS_UPDATE_SUCCESS',
+    transform: items => {
+      items.forEach(item => {
+        if (userIds.indexOf(item.id) == -1) return;
+        const docRef = collRef.doc(item.id);
+        batch.update(docRef, { permissions });
+      });
+      batch.commit().catch(err => console.error(err));
+    }
+  });
+}
+export function* syncDeleteUserSaga({ payload }) {
+  const { users } = payload;
+  const db = firebaseApp.firestore();
+  const batch = db.batch();
+  const collRef = db.collection(`venues/${venueId}/users`);
+  const userIds = users.map(user => user.id);
+  yield fork(rsf.firestore.syncCollection, `venues/${venueId}/users`, {
+    successActionCreator: 'PERMISSIONS_UPDATE_SUCCESS',
+    transform: items => {
+      items.forEach(item => {
+        if (userIds.indexOf(item.id) == -1) return;
+        const docRef = collRef.doc(item.id);
+        batch.delete(docRef);
+      });
+      batch.commit().catch(err => console.error(err));
+    }
+  });
+}
+export function* syncCreateEventSaga({ payload }) {
+  yield fork(rsf.firestore.addDocument, `venues/${venueId}/events`, {
+    //TODO
+  });
+}
+export function* createUserSaga({ user }) {
+  console.log(user)
+  try {
+    yield call(AuthService.createUser, { ...user, venueId });
+    yield put({
+      type: types.userTypes.CREATE_USER_SUCCESS,
+      user
+    });
+  } catch (error) {
+    yield put({
+      type: types.userTypes.CREATE_USER_FAILURE,
+      error
+    });
+  }
+}
 export function* syncUsersWatcher() {
   yield takeLatest(types.userTypes.GET_USERS_REQUEST, syncUsersForDashboard);
 }
@@ -141,15 +193,25 @@ export function* syncUsersForDashboard() {
     transform: itemsTransformer
   });
 }
-
+export function* createEventRequestWatcher() {
+  yield takeLatest(types.eventTypes.CREATE_EVENT_REQUEST, syncCreateEventSaga);
+}
 export function* syncConfigWatcher() {
   yield takeLatest(types.configTypes.GET_CONFIG_REQUEST, syncVenueConfig);
 }
-
+export function* updatePermissionsWatcher() {
+  yield takeLatest(types.userTypes.USERS.PERMISSIONS_UPDATE, syncUpdateUsersPermissionsSaga);
+}
+export function* deleteUsersWatcher() {
+  yield takeLatest(types.userTypes.USERS.DELETE_USERS, syncDeleteUserSaga);
+}
 export function* syncVenueConfig() {
   yield fork(rsf.database.sync, `venues/${venueId}`, {
     successActionCreator: syncConfig
   });
+}
+export function* createUserWatcher() {
+  yield takeLatest(types.userTypes.CREATE_USER_REQUEST, createUserSaga);
 }
 
 export default function* root() {
@@ -161,6 +223,10 @@ export default function* root() {
     syncVenuesWatcher(),
     syncUsersWatcher(),
     syncUserWatcher(),
-    syncConfigWatcher()
+    syncConfigWatcher(),
+    updatePermissionsWatcher(),
+    deleteUsersWatcher(),
+    createEventRequestWatcher(),
+    createUserWatcher()
   ]);
 }

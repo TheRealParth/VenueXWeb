@@ -54,11 +54,9 @@ class Toolbar extends React.Component {
         </div>
         <div>
           {' '}
-          {/* <AddEventModal isOpen={this.state.isAddingEvent} onClose={() => this.setState({ isAddingEvent: false })} /> */}
           <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
             <PersonalMenu {...this.props.currentUser} />
-            <AddButton onClick={() => console.log('start here')} />
-            {/* <AddEventModal isOpen={true} /> */}
+            <AddButton onClick={this.props.openModal} />
           </div>
         </div>
 

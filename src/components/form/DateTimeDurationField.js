@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import DatePicker from '../DatePicker';
+// import DatePicker from '../DatePicker';
 import BaseInput from '../form/BaseInput';
-
+import DatePicker from 'react-datepicker'
 const Spacing = styled.div`
   padding: 0px 5px;
 `;
@@ -35,12 +35,7 @@ export default props => {
     <BaseInput {...props}>
       <div style={{ display: 'flex' }}>
         <Spacing>
-          <DatePicker
-            width="130px"
-            selected={value.date}
-            onChange={handleChangeDate}
-            {...props}
-          />
+          <DatePicker {...props} width="130px" selected={value.date} onChange={handleChangeDate} />
         </Spacing>
         <Spacing>
           <DatePicker

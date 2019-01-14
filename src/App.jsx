@@ -10,6 +10,8 @@ import PublicRoute from './components/PublicRoute';
 import ManageStaff from './pages/ManageStaff';
 import Billing from './pages/Billing';
 import AddEmployeeModal from './components/StaffTable/AddEmployeeModal';
+
+
 import Events from './pages/Events';
 import { SignInPage } from './pages/SignIn';
 import * as actions from './actions';
@@ -36,7 +38,7 @@ class App extends React.Component {
                   <PrivateRoute path="/events" component={Events} />
                   <PrivateRoute path="/manageStaff" component={ManageStaff}>
                     <Switch>
-                      <PrivateRoute path="/manageStaff/add" component={AddEmployeeModal} />} />
+                      <PrivateRoute path="/manageStaff/add" component={AddEmployeeModal} />
                     </Switch>
                   </PrivateRoute>
                   <PrivateRoute path="/billing" component={Billing} />

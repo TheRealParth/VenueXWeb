@@ -1,30 +1,25 @@
 import React from 'react';
 import Button from '../Button';
-import {
-  BillingSummaryContainer,
-  BillingSummaryItem,
-  label,
-  value
-} from './index.module.scss';
+import { BillingSummaryContainer, BillingSummaryItem, label, value } from './index.module.scss';
 
-const BillingSummary = () => (
+const BillingSummary = props => (
   <>
     <div className={BillingSummaryContainer}>
       <div className={BillingSummaryItem}>
         <div className={label}>Total Events</div>
-        <div className={value}>20</div>
+        <div className={value}>{props.totalEvents}</div>
       </div>
       <div className={BillingSummaryItem}>
         <div className={label}>Total Guests</div>
-        <div className={value}>4000</div>
+        <div className={value}>{props.totalGuests}</div>
       </div>
       <div className={BillingSummaryItem}>
         <div className={label}>Current Balance</div>
-        <div className={value}>$250</div>
+        <div className={value}>${props.balance}</div>
       </div>
       <div className={BillingSummaryItem}>
         <div className={label}>Due date:&nbsp;</div>
-        <div className={value}>Jan 8</div>
+        <div className={value}>{props.dueDate.format('MMM d, YYYY')}</div>
       </div>
       <div>
         <Button kind="success" label="Download Invoice" />

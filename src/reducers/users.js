@@ -2,14 +2,17 @@ import { userTypes } from '../types';
 import { orderBy } from 'lodash';
 import { createSelector } from 'reselect';
 import { some } from 'lodash';
-import { select } from 'redux-saga/effects';
+
 const {
   USERS,
   SET_SORT_KEY,
   SELECT_ALL_USERS,
   UNSELECT_ALL_USERS,
   UNSELECT_SINGLE_USER,
-  SELECT_SINGLE_USER
+  SELECT_SINGLE_USER,
+  CREATE_USER_FAILURE,
+  CREATE_USER_SUCCESS,
+  CREATE_USER_REQUEST
 } = userTypes;
 
 const initialState = {
@@ -22,6 +25,7 @@ const initialState = {
     email: null,
     created: null
   },
+  creatingUser: false,
   orderBy: null
 };
 
@@ -39,7 +43,10 @@ export const users = (state = initialState, action) => {
     case USERS.SYNC:
       return {
         ...state,
-        list: action.users.map(user => ({ ...user, checked: false }))
+        list: action.users.map(user => ({ ...user, checked: false })),
+        anyChecked: false,
+        allChecked: false,
+        selectedCount: 0
       };
     case SET_SORT_KEY:
       return {
@@ -78,6 +85,21 @@ export const users = (state = initialState, action) => {
         list
       };
     }
+    case CREATE_USER_REQUEST:
+      return {
+        ...state,
+        creatingUser: true
+      };
+    case CREATE_USER_FAILURE:
+      return {
+        ...state,
+        creatingUser: false
+      };
+    case CREATE_USER_SUCCESS:
+      return {
+        ...state,
+        creatingUser: false
+      };
     case SELECT_SINGLE_USER: {
       const list = state.list.map(user => {
         if (user.id === action.userId) {
