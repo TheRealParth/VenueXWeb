@@ -8,6 +8,10 @@ import {
   value
 } from './index.module.scss';
 
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 const BillingSummary = props => (
   <>
     <div className={BillingSummaryContainer}>
@@ -21,7 +25,7 @@ const BillingSummary = props => (
       </div>
       <div className={BillingSummaryItem}>
         <div className={label}>Current Balance</div>
-        <div className={value}>${props.balance}</div>
+        <div className={value}>$ {numberWithCommas(props.balance)}</div>
       </div>
       <div className={BillingSummaryItem}>
         <div className={label}>Due date:&nbsp;</div>
