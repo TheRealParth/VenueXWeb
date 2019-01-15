@@ -1,6 +1,12 @@
 import React from 'react';
 import Button from '../Button';
-import { BillingSummaryContainer, BillingSummaryItem, label, value } from './index.module.scss';
+import {
+  BillingSummaryContainer,
+  BillingSummaryItem,
+  InvoiceButton,
+  label,
+  value
+} from './index.module.scss';
 
 const BillingSummary = props => (
   <>
@@ -19,9 +25,11 @@ const BillingSummary = props => (
       </div>
       <div className={BillingSummaryItem}>
         <div className={label}>Due date:&nbsp;</div>
-        <div className={value}>{props.dueDate.format('MMM d, YYYY')}</div>
+        <div className={value} style={{ minWidth: '213px' }}>
+          {props.dueDate.format('MMM d, YYYY')}
+        </div>
       </div>
-      <div>
+      <div className={InvoiceButton}>
         <Button kind="success" label="Download Invoice" />
       </div>
     </div>
