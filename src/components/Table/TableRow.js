@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const TableRow = styled.div`
-  height: 70px;
+  height: ${props => (props.height ? props.height : '70px')};
   background-color: #ffffff;
   border-bottom: solid 1px #eeeeee;
   padding-left: 25px;
