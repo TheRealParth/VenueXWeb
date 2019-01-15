@@ -11,7 +11,12 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
+  height: 80px;
+  border-bottom: 1px solid #ededed;
+  padding: 0px 18px;
+  > div {
+    flex: 1 0 0;
+  }
 `;
 
 class ManageStaff extends Component {
@@ -34,18 +39,20 @@ class ManageStaff extends Component {
   }
   openModal = () => {
     this.setState({
-      isOpen: true,
+      isOpen: true
     });
-    console.log(this.state)
-  }
+    console.log(this.state);
+  };
   closeModal = () => {
     this.setState({
-      isOpen: false,
-    })
-  }
+      isOpen: false
+    });
+  };
 
   render() {
     const { isOpen, users } = this.state;
+    const primary = this.props ? this.props.config.theme.colors.primary : '';
+    console.log(this.props.config.theme.colors.primary);
     return (
       <>
         <AddEmployeeModal isOpen={isOpen} onRequestClose={this.closeModal} />
@@ -57,10 +64,7 @@ class ManageStaff extends Component {
           </div>
         </Header>
 
-        <StaffTable
-          {...this.props}
-          users={users}
-        />
+        <StaffTable {...this.props} users={users} primary={primary} />
         <InjectStyles />
       </>
     );
