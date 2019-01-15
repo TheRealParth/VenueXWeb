@@ -2,19 +2,17 @@ import styled, { css } from 'styled-components';
 
 const TableCell = styled.div`
   font-family: Montserrat;
-  font-size: 12px;
+  font-size: 15px;
+  font-weight: 600;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: 0.3px;
+  color: ${props => (props.selected ? '#7d7d7d' : '#222222')};
   display: flex;
+  justify-content: ${props => (props.center ? 'center' : '')};
+  text-transform: capitalize;
   min-width: 50px;
-  ${props =>
-    props.selected === true &&
-    css`
-      font-weight: bold;
-      color: #181818;
-    `};
+
   ${props =>
     props.width &&
     css`

@@ -6,7 +6,7 @@ const TableContainer = styled.div`
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   color: #222222;
-  margin-bottom: 20px;
+  margin: 30px 17px 28px 13px;
 `;
 const StyledTableRow = styled(Table.Row)`
   .actions {
@@ -27,45 +27,45 @@ const StyledTableRow = styled(Table.Row)`
 const BillingTable = ({ events }) => (
   <TableContainer>
     <Table>
-      <Table.Row>
-        <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => ''} title="Client" />
+      <Table.Row style={{ height: '63px' }}>
+        <Table.Cell width="19%">
+          <Table.HeaderCell onClick={() => ''} title="Client" center />
         </Table.Cell>
-        <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => ''} title="Event" />
+        <Table.Cell width="19%">
+          <Table.HeaderCell onClick={() => ''} title="Event" center />
         </Table.Cell>
-        <Table.Cell width="16%">
+        <Table.Cell width="12%">
           <Table.HeaderCell onClick={() => ''} title="Event Type" />
         </Table.Cell>
-        <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => ''} title="Guests" />
+        <Table.Cell width="10%">
+          <Table.HeaderCell onClick={() => ''} title="Guests" center />
         </Table.Cell>
-        <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => ''} title="Event Date" />
+        <Table.Cell width="20%">
+          <Table.HeaderCell onClick={() => ''} title="Event Date" selected center />
         </Table.Cell>
-        <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => ''} title="Created By" />
+        <Table.Cell width="20%">
+          <Table.HeaderCell onClick={() => ''} title="Created By" center />
         </Table.Cell>
       </Table.Row>
       <Table.Body>
         {events.map(event => (
           <StyledTableRow key={event.id}>
-            <Table.Cell width="16%" component="th" scope="row">
+            <Table.Cell width="19%" component="th" scope="row">
               {event.client}
             </Table.Cell>
-            <Table.Cell width="16%" component="th" scope="row">
+            <Table.Cell width="19%" component="th" scope="row">
               {event.title}
             </Table.Cell>
-            <Table.Cell width="16%" component="th" scope="row">
+            <Table.Cell width="12%" component="th" scope="row">
               {event.eventType}
             </Table.Cell>
-            <Table.Cell width="16%" component="th" scope="row">
+            <Table.Cell width="10%" component="th" scope="row" center>
               {event.guests}
             </Table.Cell>
-            <Table.Cell width="16%" component="th" scope="row">
+            <Table.Cell width="20%" component="th" scope="row" center selected>
               {moment(event.start).format('MM/DD/YYYY')}
             </Table.Cell>
-            <Table.Cell width="16%" component="th" scope="row">
+            <Table.Cell width="20%" component="th" scope="row">
               {event.createdBy}
             </Table.Cell>
           </StyledTableRow>
