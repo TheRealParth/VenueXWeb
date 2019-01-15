@@ -139,8 +139,8 @@ const StaffTable = ({
                       setUsersSortKey('fullName', sort.orderBy === 'asc' ? 'desc' : 'asc')
                     }
                     title={'Name'}
-                    center
                     selected
+                    style={{ paddingLeft: '49px' }}
                   />
                 </Table.Cell>
                 <Table.Cell width="20%">

@@ -10,7 +10,7 @@ const Name = styled.div`
 `;
 
 const Picture = styled.img`
-  width: 50px;
+  width: 40px;
   object-fit: contain;
   border-radius: 50%;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
