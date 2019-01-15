@@ -141,6 +141,7 @@ const StaffTable = ({
                     }
                     title={'Name'}
                     center
+                    selected
                   />
                 </Table.Cell>
                 <Table.Cell width="20%">
@@ -221,7 +222,7 @@ const StaffTable = ({
                   </IconsContainer>
                 </Table.Cell>
 
-                <Table.Cell width="20%" center>
+                <Table.Cell width="20%" center selected>
                   {moment(user.createdAt).format('MM/DD/YYYY')}
                 </Table.Cell>
 

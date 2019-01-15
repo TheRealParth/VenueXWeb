@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
 const Name = styled.div`
-
   color: #222222;
-  font-weight: 500;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const Picture = styled.img`
