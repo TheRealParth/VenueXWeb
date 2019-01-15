@@ -8,10 +8,13 @@ const TableCell = styled.div`
   font-stretch: normal;
   line-height: normal;
   color: ${props => (props.selected ? '#7d7d7d' : '#222222')};
-  display: flex;
-  justify-content: ${props => (props.center ? 'center' : '')};
+  text-align: ${props => (props.center ? 'center' : '')};
   text-transform: capitalize;
   min-width: 50px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0px 10px;
 
   ${props =>
     props.width &&

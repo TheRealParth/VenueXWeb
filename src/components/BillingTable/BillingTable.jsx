@@ -27,7 +27,7 @@ const StyledTableRow = styled(Table.Row)`
 const BillingTable = ({ events }) => (
   <TableContainer>
     <Table>
-      <Table.Row style={{ height: '63px' }}>
+      <Table.Row style={{ height: '63px' }} header>
         <Table.Cell width="19%">
           <Table.HeaderCell onClick={() => ''} title="Client" center />
         </Table.Cell>

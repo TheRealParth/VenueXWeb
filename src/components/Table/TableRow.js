@@ -15,7 +15,7 @@ const TableRow = styled.div`
   }
 
   &:hover {
-    background-color: #fafafa;
+    background-color: ${props => (props.header ? '' : '#fafafa')};
   }
 `;
 
