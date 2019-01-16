@@ -52,6 +52,15 @@ const Button = styled.div`
       color: #fff;
       border: solid 1px #ededed;
     `}
+
+    ${props =>
+      props.kind === 'disabled' &&
+      css`
+        background-color: #d8d8d8;
+        color: #fff;
+        border: solid 1px #ededed;
+        cursor: not-allowed;
+      `}
 `;
 
 export default ({ label, onClick, disabled, ...restProps }) => (

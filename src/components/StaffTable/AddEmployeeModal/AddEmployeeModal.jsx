@@ -13,10 +13,8 @@ import calendarDeleteBlackIcon from '../../../assets/calendar-delete-black.svg';
 import billBlackIcon from '../../../assets/bill-black.svg';
 import peopleBlackIcon from '../../../assets/people-black.svg';
 
-
 //background-color: ${props => props.theme.colors.primary}66;
 const Header = styled.div`
-  
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   padding: 30px 0px;
   font-size: 24px;
@@ -45,14 +43,13 @@ const Icon = styled.img`
 `;
 
 class AddEmployeeModal extends PureComponent {
-
   state = {
     viewEventsOnly: false,
     createAndEditEvents: false,
     deleteEvents: false,
     viewBilling: false,
     manageStaffPermissions: false,
-    isLoading: false,
+    isLoading: false
   };
 
   handleCreateEmpoyee = () => {
@@ -63,7 +60,7 @@ class AddEmployeeModal extends PureComponent {
       fullName,
       permissions,
       password: 'Welcome123'
-    })
+    });
     this.props.onRequestClose();
   };
 
@@ -76,18 +73,9 @@ class AddEmployeeModal extends PureComponent {
         </Header>
 
         <Content>
-          <Field
-            name="fullName"
-            label="Full name:"
-            component={Input}
-          />
+          <Field name="fullName" label="Full name:" component={Input} />
 
-          <Field
-            name="email"
-            label="Email:"
-            component={Input}
-            type="email"
-          />
+          <Field name="email" label="Email:" component={Input} type="email" />
           <BaseInput label="Permissions:">
             <PermissionItem>
               <Checkbox
@@ -138,14 +126,9 @@ class AddEmployeeModal extends PureComponent {
         </Content>
 
         <Modal.Footer>
+          <StyledButton label="Discard" onClick={onRequestClose} />
           <StyledButton
-            label="Discard"
-            onClick={onRequestClose}
-          />
-          <StyledButton
-            label={this.props.isLoading ?
-              'Creating account...' :
-              'Create account'}
+            label={this.props.isLoading ? 'Creating account...' : 'Create account'}
             kind="primary"
             onClick={this.handleCreateEmpoyee}
           />
