@@ -182,14 +182,14 @@ class EventModalForm extends PureComponent {
             placeholder="Client Name"
             component={Input}
             validate={user === 0 ? NotEmptyValidator : ''}
-          // only first one is needed
+            // only first one is needed
           />
           <SmallInput
             name={'clientEmail' + user + 1}
             placeholder="Client Email"
             component={Input}
             validate={user === 0 ? NotEmptyValidator : ''}
-          /* current validator is set to require a minimum of one client, but needs to validate email if client Name is entered */
+            /* current validator is set to require a minimum of one client, but needs to validate email if client Name is entered */
           />
         </User>
       );
@@ -305,11 +305,9 @@ class EventModalForm extends PureComponent {
               component={Select}
               placeholder="Current User"
               validate={NotEmptyValidator}
-              options={
-                this.props.users
-                  .filter(({ permissions }) => permissions.createAndEditEvents)
-                  .map(({ id, fullName }) => ({ value: id, label: fullName }))
-              }
+              options={this.props.users
+                .filter(({ permissions }) => permissions.createAndEditEvents)
+                .map(({ id, fullName }) => ({ value: id, label: fullName }))}
             />
             <Field
               name="eventTeam"
@@ -336,9 +334,9 @@ class EventModalForm extends PureComponent {
                 options={
                   config
                     ? eventTypes.map(type => ({
-                      label: type.name,
-                      value: type.typeId
-                    }))
+                        label: type.name,
+                        value: type.typeId
+                      }))
                     : []
                 }
               />
@@ -369,8 +367,8 @@ class EventModalForm extends PureComponent {
                 ]}
               />
             ) : (
-                ''
-              )}
+              ''
+            )}
             <User>
               <Field
                 name="room"
@@ -380,9 +378,9 @@ class EventModalForm extends PureComponent {
                 options={
                   config
                     ? rooms.map(room => ({
-                      label: room.name,
-                      value: room.roomId
-                    }))
+                        label: room.name,
+                        value: room.roomId
+                      }))
                     : []
                 }
               />
@@ -394,9 +392,9 @@ class EventModalForm extends PureComponent {
                 options={
                   config
                     ? rooms.map(room => ({
-                      label: room.name,
-                      value: room.roomId
-                    }))
+                        label: room.name,
+                        value: room.roomId
+                      }))
                     : []
                 }
               />
@@ -447,19 +445,17 @@ class EventModalForm extends PureComponent {
   }
 }
 
-
 EventModalForm = reduxForm({
   form: 'EventForm'
 })(EventModalForm);
-const selector = formValueSelector('EventForm')
+const selector = formValueSelector('EventForm');
 export default connect(state => {
   // can select values individually
-  const formValues = selector(state, 'eventTeam', 'consultant')
+  const formValues = selector(state, 'eventTeam', 'consultant');
   // const favoriteColorValue = selector(state, 'favoriteColor')
   // or together as a group
   // const { firstName, lastName } = selector(state, 'firstName', 'lastName')
   return {
     ...formValues
-  }
+  };
 })(EventModalForm);
-
