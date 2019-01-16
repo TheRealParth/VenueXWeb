@@ -92,7 +92,6 @@ const Stat = styled.div`
 `;
 
 const TableContainer = styled.div`
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   color: #222222;
   margin-bottom: 20px;
@@ -120,7 +119,7 @@ const StaffTable = ({
     <>
       <TableContainer>
         <Table>
-          <Table.Row header>
+          <Table.Row header height="75px" style={{ paddingTop: '10px' }}>
             <Table.Cell width="5%">
               <Table.HeaderCell
                 title={
@@ -140,7 +139,8 @@ const StaffTable = ({
                       setUsersSortKey('fullName', sort.orderBy === 'asc' ? 'desc' : 'asc')
                     }
                     title={'Name'}
-                    center
+                    selected
+                    style={{ paddingLeft: '49px' }}
                   />
                 </Table.Cell>
                 <Table.Cell width="20%">
@@ -154,7 +154,7 @@ const StaffTable = ({
                   />
                 </Table.Cell>
                 <Table.Cell width="20%">
-                  <Table.HeaderCell onClick={() => {}} title="Permissions" center noSort />
+                  <Table.HeaderCell onClick={() => {}} title="Permission" center noSort />
                 </Table.Cell>
                 <Table.Cell width="20%">
                   <Table.HeaderCell
@@ -221,7 +221,7 @@ const StaffTable = ({
                   </IconsContainer>
                 </Table.Cell>
 
-                <Table.Cell width="20%" center>
+                <Table.Cell width="20%" center selected>
                   {moment(user.createdAt).format('MM/DD/YYYY')}
                 </Table.Cell>
 

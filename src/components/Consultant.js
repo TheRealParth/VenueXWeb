@@ -1,15 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
 const Name = styled.div`
-
   color: #222222;
-  font-weight: 500;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const Picture = styled.img`
-  width: 50px;
+  width: 40px;
   object-fit: contain;
   border-radius: 50%;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
