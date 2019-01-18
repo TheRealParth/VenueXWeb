@@ -19,32 +19,11 @@ import Input from '../form/Input';
 import TitleInput from '../form/TitleInput';
 import SmallInput from '../form/SmallInput';
 import Icons from '../../assets/icons';
-
-const Header = styled.div`
-  padding: 30px 0px;
-  font-size: 24px;
-  text-align: center;
-  color: #181818;
-  width: 610px;
-  height: 110px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  background-color: rgba(188, 172, 150, 0.4);
-  font-family: Lora;
-  font-size: 24px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: -0.6px;
-  text-align: center;
-  color: #181818;
-  z-index: 1200;
-`;
-//background-color: ${props => props.theme.colors.primary}66;
-const Content = styled.div`
-  padding: 20px 30px;
-  overflow: scroll;
-`;
+import {
+  AddEventModalHeader,
+  AddEventModalContent,
+  AddEventModalSection
+} from './index.module.scss';
 
 //may want to add help text, tbd, leaving for now
 const Help = styled.div`
@@ -274,10 +253,10 @@ class EventModalForm extends PureComponent {
 
     return (
       <Modal isOpen={this.props.isOpen} onRequestClose={this.props.onClose} width="610px">
-        <Header>
+        <div className={AddEventModalHeader}>
           <div>Add New Event</div>
-        </Header>
-        <Content>
+        </div>
+        <div className={AddEventModalContent}>
           <Field
             name="name"
             component={TitleInput}
@@ -285,7 +264,7 @@ class EventModalForm extends PureComponent {
             placeholder="Event Name"
           />
 
-          <Section>
+          <div className={AddEventModalSection}>
             <SectionTitle>Users</SectionTitle>
 
             {this.renderNewUserFields()}
@@ -295,8 +274,8 @@ class EventModalForm extends PureComponent {
                 <Icons.Plus />
               </div>
             </AddMore>
-          </Section>
-          <Section>
+          </div>
+          <div className={AddEventModalSection}>
             <SectionTitle>Event Staff</SectionTitle>
 
             <Field
@@ -316,8 +295,8 @@ class EventModalForm extends PureComponent {
               validate={NotEmptyValidator}
               options={this.props.users.map(({ id, fullName }) => ({ value: id, label: fullName }))}
             />
-          </Section>
-          <Section>
+          </div>
+          <div className={AddEventModalSection}>
             <SectionTitle>Event Details</SectionTitle>
             <Field
               name="dateTimeDuration"
@@ -419,9 +398,9 @@ class EventModalForm extends PureComponent {
                 </div>
               </div>
             )}
-          </Section>
+          </div>
 
-          <Section>
+          <div className={AddEventModalSection}>
             <SectionTitle>Payment Schedule</SectionTitle>
             {this.renderPaymentFields()}
             <AddMore onClick={this.addPayment}>
@@ -429,12 +408,12 @@ class EventModalForm extends PureComponent {
                 <Icons.Plus />
               </div>
             </AddMore>
-          </Section>
-          <Section>
+          </div>
+          <div className={AddEventModalSection}>
             <SectionTitle>Notes</SectionTitle>
             <Field name="notes" component={Textarea} />
-          </Section>
-        </Content>
+          </div>
+        </div>
 
         <Modal.Footer>
           <StyledButton label="Discard" onClick={this.props.onClose} />

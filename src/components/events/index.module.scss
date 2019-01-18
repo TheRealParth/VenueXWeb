@@ -1,0 +1,32 @@
+.AddEventModalHeader {
+  padding: 30px 0px;
+  font-size: 24px;
+  text-align: center;
+  color: #181818;
+  width: 610px;
+  height: 110px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  background-color: rgba(188, 172, 150, 0.4);
+  font-family: Lora;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.6px;
+  text-align: center;
+  color: #181818;
+  z-index: 1200;
+}
+
+.AddEventModalContent {
+  padding: 20px 30px;
+  overflow: scroll;
+}
+
+.AddEventModalSection {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  margin: 20px 0 45px 0px;
+}
