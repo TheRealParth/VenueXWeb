@@ -8,22 +8,7 @@ import Button from '../Button';
 import Icons from '../../assets/icons';
 import ConsultantLabel from '../Consultant';
 import EditStaffPermissionsDropdown from './EditStaffPermissionsDropdown';
-
-const Container = styled.div`
-  border: solid 1px #ededed;
-  background-color: #fafafa;
-  padding: 0px 15px;
-`;
-const IconsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-
-  svg {
-    margin: 0px 5px;
-  }
-`;
+import { StaffTableContainer, IconsContainer } from './index.module.scss';
 
 const StyledTableRow = styled(Table.Row)`
   .actions {
@@ -39,66 +24,6 @@ const StyledTableRow = styled(Table.Row)`
       display: block;
     }
   }
-`;
-
-const MonthPicker = styled.div`
-  display: flex;
-  font-size: 20px;
-  color: #222222;
-  align-items: center;
-`;
-
-const ArrowIcon = styled.img`
-  height: 17px;
-  object-fit: contain;
-  margin: 0px 20px;
-  cursor: pointer;
-`;
-
-const Stats = styled.div`
-  background-color: #fff;
-  margin: 15px 0px;
-  border: solid 1px #fafafa;
-  border-radius: 2px;
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Stat = styled.div`
-  color: #181818;
-  font-size: 15px;
-  padding-left: 30px;
-  margin-left: 30px;
-  border-left: solid 1px #b0b0b0;
-  font-family: Lora;
-  font-weight: 500;
-
-  &:first-child {
-    border-left: none;
-    margin-left: 0px;
-    padding-left: 0px;
-  }
-
-  .label {
-    color: #b0b0b0;
-    font-weight: 500;
-  }
-
-  .value {
-    font-size: 40px;
-  }
-`;
-
-const TableContainer = styled.div`
-  border-radius: 2px;
-  color: #222222;
-  margin-bottom: 20px;
-`;
-
-const DueLabel = styled.span`
-  color: ${props => props.color || '#b0b0b0'};
 `;
 
 const StaffTable = ({
@@ -117,7 +42,7 @@ const StaffTable = ({
 }) => {
   return (
     <>
-      <TableContainer>
+      <div className={StaffTableContainer}>
         <Table>
           <Table.Row header height="75px" style={{ paddingTop: '10px' }}>
             <Table.Cell width="5%">
@@ -201,7 +126,7 @@ const StaffTable = ({
                 <Table.Cell width="20%">{user.email}</Table.Cell>
 
                 <Table.Cell width="20%" center>
-                  <IconsContainer>
+                  <div className={IconsContainer}>
                     <Icons.CalendarEdit
                       size={24}
                       color={!user.permissions.createAndEditEvents ? '#d8d8d8' : primary}
@@ -218,7 +143,7 @@ const StaffTable = ({
                       size={24}
                       color={!user.permissions.manageStaffPermissions ? '#d8d8d8' : primary}
                     />
-                  </IconsContainer>
+                  </div>
                 </Table.Cell>
 
                 <Table.Cell width="20%" center selected>
@@ -235,7 +160,7 @@ const StaffTable = ({
             ))}
           </Table.Body>
         </Table>
-      </TableContainer>
+      </div>
     </>
   );
 };
