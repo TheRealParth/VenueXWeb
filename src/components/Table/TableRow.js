@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const TableRow = styled.div`
-  height: 75px; /* not sure what to set this as */
+  height: ${props => (props.height ? props.height : '70px')};
   background-color: #ffffff;
   border-bottom: solid 1px #eeeeee;
   padding-left: 25px;
@@ -15,7 +15,7 @@ const TableRow = styled.div`
   }
 
   &:hover {
-    background-color: #fafafa;
+    background-color: ${props => (props.header ? '' : '#fafafa')};
   }
 `;
 

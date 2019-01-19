@@ -1,17 +1,31 @@
 import React from 'react';
 import { ContactInfo } from '../BillingHeader/index.module.scss';
+import { EmployeeModalHeader, FormSection } from '../StaffTable/styles.module.scss';
+import { AddEventModalHeader, AddEventModalSection } from '../events/index.module.scss';
+import { PrimaryButton } from '../Button/index.module.scss';
+
 const InjectStyles = ({ colors }) => (
   <style>{`
-    .${ContactInfo} {
-      color: ${colors.primary};
+    .${AddEventModalHeader} {
+      background-color: ${colors.primary}66;
+      }
+    .${EmployeeModalHeader} {
+      background-color: ${colors.primary}66;
+      }
+    .${PrimaryButton} {
+      background-color: ${colors.primary};
     }
-  `}</style>
+    .${FormSection} {
+      border: 1px solid ${colors.primary}66;
+    }
+   .${AddEventModalSection}{
+      border: 1px solid ${colors.primary}66;
+    }
+    `}</style>
 );
 
 InjectStyles.defaultProps = {
-  colors: {
-
-  }
-}
+  colors: {}
+};
 
 export { InjectStyles };

@@ -3,9 +3,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { sortUsersSelector } from '../../reducers/users';
+import { get } from 'lodash';
 
-function mapStateToProps({ events, users, auth }) {
+function mapStateToProps({ events, config, users, auth }) {
+  const newConf = get(config, 'config', {});
   return {
+    config: newConf,
     events: events.list,
     users: users.list,
     currentUser: auth.user

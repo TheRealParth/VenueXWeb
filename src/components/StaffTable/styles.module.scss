@@ -1,3 +1,57 @@
+.EmployeeModalContent {
+  padding: 10px 50px;
+}
+.EmployeeModalHeader {
+  padding: 30px 0px;
+  font-size: 24px;
+  text-align: center;
+  color: #181818;
+  width: 610px;
+  height: 95px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  font-family: Lora;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.6px;
+  text-align: center;
+  color: #181818;
+  z-index: 1200;
+}
+
+.FormSection {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  margin: 29px 0px 30px 0px;
+}
+
+.FormSectionTitle {
+  background-color: white;
+  margin-top: -27px;
+  padding: 0px 10px;
+  width: fit-content;
+  align-self: center;
+  color: #222222;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.FormRow {
+  display: flex;
+}
+
+.PermissionItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 0px;
+  font-size: 12px;
+  color: #7d7d7d;
+}
+
 // .rowHeaderTitle {
 //   display: inline-block;
 //   min-width: 100px;

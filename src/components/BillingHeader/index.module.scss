@@ -2,19 +2,49 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 56px;
-  padding: 0;
+  height: 80px;
+  border-bottom: 1px solid #ededed;
+  padding: 0px 18px;
+  > div {
+    flex: 1 0 0;
+  }
 }
 .ContactInfo {
   width: 308px;
   height: 15px;
   font-family: Montserrat;
   font-size: 12px;
-  font-weight: normal;
+  font-weight: 600;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
   color: #7d7d7d;
   display: flex;
+}
+
+.MonthNavigator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  margin: auto;
+}
+
+.MonthNavigatorButton {
+  cursor: pointer;
+}
+
+.MonthNavigatorLabel {
+  flex-grow: 1;
+  padding: 0 10px;
+  text-align: center;
+  font-family: Lora;
+  font-size: 20px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  text-align: center;
+  margin: 0px 8px;
 }

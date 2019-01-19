@@ -6,13 +6,7 @@ import AddEmployeeModal from '../../components/StaffTable/AddEmployeeModal';
 import PersonalMenu from '../../components/PersonalMenu';
 import AddButton from '../../components/AddButton';
 import InjectStyles from '../../components/InjectStyles';
-
-const Header = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
-`;
+import { ManageStaffHeader } from './index.module.scss';
 
 class ManageStaff extends Component {
   constructor(props) {
@@ -34,33 +28,31 @@ class ManageStaff extends Component {
   }
   openModal = () => {
     this.setState({
-      isOpen: true,
+      isOpen: true
     });
-    console.log(this.state)
-  }
+    console.log(this.state);
+  };
   closeModal = () => {
     this.setState({
-      isOpen: false,
-    })
-  }
+      isOpen: false
+    });
+  };
 
   render() {
     const { isOpen, users } = this.state;
+    const primary = this.props ? this.props.config.theme.colors.primary : '';
     return (
       <>
         <AddEmployeeModal isOpen={isOpen} onRequestClose={this.closeModal} />
-        <Header>
+        <div className={ManageStaffHeader}>
           <div />
           <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
             <PersonalMenu {...this.props.currentUser} />
             <AddButton onClick={this.openModal} />
           </div>
-        </Header>
+        </div>
 
-        <StaffTable
-          {...this.props}
-          users={users}
-        />
+        <StaffTable {...this.props} users={users} primary={primary} />
         <InjectStyles />
       </>
     );
