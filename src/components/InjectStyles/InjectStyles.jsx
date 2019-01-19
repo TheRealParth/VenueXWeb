@@ -2,7 +2,8 @@ import React from 'react';
 import { ContactInfo } from '../BillingHeader/index.module.scss';
 import { EmployeeModalHeader, FormSection } from '../StaffTable/styles.module.scss';
 import { AddEventModalHeader, AddEventModalSection } from '../events/index.module.scss';
-import { PrimaryButton } from '../index.module.scss';
+import { PrimaryButton } from '../Button/index.module.scss';
+
 const InjectStyles = ({ colors }) => (
   <style>{`
     .${(EmployeeModalHeader, AddEventModalHeader)} {
