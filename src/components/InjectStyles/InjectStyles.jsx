@@ -7,6 +7,8 @@ const InjectStyles = ({ colors }) => (
   <style>{`
     .${(EmployeeModalHeader, AddEventModalHeader)} {
       background-color: ${colors.primary}66;
+    .${ContactInfo} {
+      
     }
     .${PrimaryButton} {
       background-color: ${colors.primary};

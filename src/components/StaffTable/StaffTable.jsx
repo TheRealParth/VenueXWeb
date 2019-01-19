@@ -79,7 +79,7 @@ const StaffTable = ({
                   />
                 </Table.Cell>
                 <Table.Cell width="20%">
-                  <Table.HeaderCell onClick={() => {}} title="Permission" center noSort />
+                  <Table.HeaderCell onClick={() => { }} title="Permission" center noSort />
                 </Table.Cell>
                 <Table.Cell width="20%">
                   <Table.HeaderCell
@@ -93,21 +93,21 @@ const StaffTable = ({
                 <Table.Cell width="15%" />
               </>
             ) : (
-              <>
-                <Table.Cell width="80%">
-                  <EditStaffPermissionsDropdown
-                    selectedCount={selectedCount}
-                    selectedEmployees={users.filter(user => user.checked)}
-                  />
-                  &nbsp;
+                <>
+                  <Table.Cell width="80%">
+                    <EditStaffPermissionsDropdown
+                      selectedCount={selectedCount}
+                      selectedEmployees={users.filter(user => user.checked)}
+                    />
+                    &nbsp;
                   <Button
-                    label={`Delete ${selectedCount} staff member${selectedCount > 1 ? 's' : ''}`}
-                    kind="danger"
-                    onClick={() => deleteUsers({ users: users.filter(user => user.checked) })}
-                  />
-                </Table.Cell>
-              </>
-            )}
+                      label={`Delete ${selectedCount} staff member${selectedCount > 1 ? 's' : ''}`}
+                      kind="danger"
+                      onClick={() => deleteUsers({ users: users.filter(user => user.checked) })}
+                    />
+                  </Table.Cell>
+                </>
+              )}
           </Table.Row>
           <Table.Body>
             {users.map(user => (
