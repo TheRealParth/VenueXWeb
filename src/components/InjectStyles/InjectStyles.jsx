@@ -6,17 +6,22 @@ import { PrimaryButton } from '../Button/index.module.scss';
 
 const InjectStyles = ({ colors }) => (
   <style>{`
-    .${(EmployeeModalHeader, AddEventModalHeader)} {
+    .${AddEventModalHeader} {
       background-color: ${colors.primary}66;
-    .${ContactInfo} {
-      
-    }
+      }
+    .${EmployeeModalHeader} {
+      background-color: ${colors.primary}66;
+      }
     .${PrimaryButton} {
       background-color: ${colors.primary};
     }
-   .${(FormSection, AddEventModalSection)} {
+    .${FormSection} {
       border: 1px solid ${colors.primary}66;
-    } `}</style>
+    }
+   .${AddEventModalSection}{
+      border: 1px solid ${colors.primary}66;
+    }
+    `}</style>
 );
 
 InjectStyles.defaultProps = {

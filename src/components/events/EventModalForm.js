@@ -5,17 +5,11 @@ import styled from 'styled-components';
 import Switch from '../form/Switch';
 import Button from '../Button';
 import Modal from '../Modal';
-import ConsultantsPicker from '../form/ConsultantsPicker';
-import {
-  DateTimeDurationFilled,
-  OwnerSelectedValidator,
-  NotEmptyValidator
-} from '../../utils/formValidators';
+import { DateTimeDurationFilled, NotEmptyValidator } from '../../utils/formValidators';
 import Select from '../form/Select';
 import MultiSelect from '../form/MultiSelect';
 import Textarea from '../form/Textarea';
 import DateTimeDurationField from '../form/DateTimeDurationField';
-import DatePickerField from '../form/DatePickerField';
 import Input from '../form/Input';
 import TitleInput from '../form/TitleInput';
 import SmallInput from '../form/SmallInput';
@@ -162,14 +156,14 @@ class EventModalForm extends PureComponent {
             placeholder="Client Name"
             component={Input}
             validate={user === 0 ? NotEmptyValidator : ''}
-          // only first one is needed
+            // only first one is needed
           />
           <SmallInput
             name={'clientEmail' + user + 1}
             placeholder="Client Email"
             component={Input}
             validate={user === 0 ? NotEmptyValidator : ''}
-          /* current validator is set to require a minimum of one client, but needs to validate email if client Name is entered */
+            /* current validator is set to require a minimum of one client, but needs to validate email if client Name is entered */
           />
         </User>
       );
@@ -238,6 +232,7 @@ class EventModalForm extends PureComponent {
   };
 
   render() {
+    const primaryColor = '#419ad4';
     const { selectedRoom, type, config } = this.props;
     console.log('HERE', this.props);
     let rooms = [];
@@ -250,7 +245,6 @@ class EventModalForm extends PureComponent {
         eventTypes.push(config.eventTypes[type]);
       }
     }
-    console.log(eventTypes);
 
     return (
       <Modal isOpen={this.props.isOpen} onRequestClose={this.props.onClose} width="610px">
@@ -285,6 +279,7 @@ class EventModalForm extends PureComponent {
                 <Select
                   value={props.input.value}
                   onChange={props.input.onChange}
+                  primaryColor={primaryColor}
                   options={this.props.users.map(({ id, fullName }) => ({
                     value: id,
                     label: fullName
@@ -333,9 +328,9 @@ class EventModalForm extends PureComponent {
                 options={
                   config
                     ? eventTypes.map(type => ({
-                      label: type.name,
-                      value: type.typeId
-                    }))
+                        label: type.name,
+                        value: type.typeId
+                      }))
                     : []
                 }
               />
@@ -366,8 +361,8 @@ class EventModalForm extends PureComponent {
                 ]}
               />
             ) : (
-                ''
-              )}
+              ''
+            )}
             <User>
               <Field
                 name="room"
@@ -377,9 +372,9 @@ class EventModalForm extends PureComponent {
                 options={
                   config
                     ? rooms.map(room => ({
-                      label: room.name,
-                      value: room.roomId
-                    }))
+                        label: room.name,
+                        value: room.roomId
+                      }))
                     : []
                 }
               />
@@ -391,9 +386,9 @@ class EventModalForm extends PureComponent {
                 options={
                   config
                     ? rooms.map(room => ({
-                      label: room.name,
-                      value: room.roomId
-                    }))
+                        label: room.name,
+                        value: room.roomId
+                      }))
                     : []
                 }
               />
