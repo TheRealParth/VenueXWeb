@@ -41,10 +41,6 @@ const customStyles = props => {
       color: '#222222',
       top: '16.4px'
     }),
-    dropdownIndicator: provided => ({
-      ...provided,
-      border: 'none'
-    }),
     indicatorSeparator: provided => ({
       ...provided,
       display: 'none'
@@ -63,7 +59,6 @@ const customStyles = props => {
       marginTop: '0px',
       backgroundColor: props.primaryColor
     }),
-
     dropdownIndicator: provided => ({
       ...provided,
       padding: '0px'
@@ -71,15 +66,14 @@ const customStyles = props => {
   };
 };
 
-export default props => (
+const StyledSelect = props => (
   <BaseInput {...props}>
-    <Select {...props.input} {...props} styles={customStyles} defaultMenuIsOpen>
+    <Select {...props.input} {...props} styles={customStyles(props)} defaultMenuIsOpen>
       {props.options.map(o => (
         <option value={o.value}>{o.label}</option>
       ))}
     </Select>
   </BaseInput>
 );
-function newFunction(props) {
-  return props.primaryColor;
-}
+
+export default StyledSelect;

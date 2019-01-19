@@ -156,14 +156,14 @@ class EventModalForm extends PureComponent {
             placeholder="Client Name"
             component={Input}
             validate={user === 0 ? NotEmptyValidator : ''}
-            // only first one is needed
+          // only first one is needed
           />
           <SmallInput
             name={'clientEmail' + user + 1}
             placeholder="Client Email"
             component={Input}
             validate={user === 0 ? NotEmptyValidator : ''}
-            /* current validator is set to require a minimum of one client, but needs to validate email if client Name is entered */
+          /* current validator is set to require a minimum of one client, but needs to validate email if client Name is entered */
           />
         </User>
       );
@@ -279,6 +279,7 @@ class EventModalForm extends PureComponent {
                 <Select
                   value={props.input.value}
                   onChange={props.input.onChange}
+
                   primaryColor={primaryColor}
                   options={this.props.users.map(({ id, fullName }) => ({
                     value: id,
@@ -328,9 +329,9 @@ class EventModalForm extends PureComponent {
                 options={
                   config
                     ? eventTypes.map(type => ({
-                        label: type.name,
-                        value: type.typeId
-                      }))
+                      label: type.name,
+                      value: type.typeId
+                    }))
                     : []
                 }
               />
@@ -361,8 +362,8 @@ class EventModalForm extends PureComponent {
                 ]}
               />
             ) : (
-              ''
-            )}
+                ''
+              )}
             <User>
               <Field
                 name="room"
@@ -372,9 +373,9 @@ class EventModalForm extends PureComponent {
                 options={
                   config
                     ? rooms.map(room => ({
-                        label: room.name,
-                        value: room.roomId
-                      }))
+                      label: room.name,
+                      value: room.roomId
+                    }))
                     : []
                 }
               />
@@ -386,9 +387,9 @@ class EventModalForm extends PureComponent {
                 options={
                   config
                     ? rooms.map(room => ({
-                        label: room.name,
-                        value: room.roomId
-                      }))
+                      label: room.name,
+                      value: room.roomId
+                    }))
                     : []
                 }
               />

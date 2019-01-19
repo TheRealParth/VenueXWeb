@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import BaseInput from '../form/BaseInput';
-import dropdownCaretDown from '../../assets/caret-down-custom.svg';
 import Select from 'react-select';
 
 const Container = styled.div`
@@ -14,7 +13,7 @@ const Container = styled.div`
     top: calc(50% - 4px);
     width: 13px;
     height: 8px;
-    background-image: url(${dropdownCaretDown});
+    background-image: url(../../assets/caret-down-custom.svg);
     background-size: cover;
   }
 `;
