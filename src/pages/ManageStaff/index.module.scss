@@ -1,0 +1,10 @@
+.ManageStaffHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  padding: 0px 18px;
+  > div {
+    flex: 1 0 0;
+  }
+}

@@ -6,34 +6,25 @@ import Checkbox from '../../Checkbox';
 import Modal from '../../Modal';
 import Button from '../../Button';
 import Input from '../../form/Input';
+import SmallInput from '../../form/SmallInput';
 import BaseInput from '../../form/BaseInput';
 import calendarViewBlackIcon from '../../../assets/calendar-view-black.svg';
 import calendarEditBlackIcon from '../../../assets/calendar-edit-black.svg';
 import calendarDeleteBlackIcon from '../../../assets/calendar-delete-black.svg';
 import billBlackIcon from '../../../assets/bill-black.svg';
 import peopleBlackIcon from '../../../assets/people-black.svg';
-
-//background-color: ${props => props.theme.colors.primary}66;
-const Header = styled.div`
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  padding: 30px 0px;
-  font-size: 24px;
-  text-align: center;
-  color: #181818;
-`;
+import Icons from '../../../assets/icons';
+import {
+  EmployeeModalHeader,
+  EmployeeModalContent,
+  FormSection,
+  FormSectionTitle,
+  FormRow,
+  PermissionItem
+} from '../styles.module.scss';
 
 const StyledButton = styled(Button)`
   margin: 0px 5px;
-`;
-
-const Content = styled.div`
-  padding: 50px;
-`;
-
-const PermissionItem = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 10px 0px;
 `;
 
 const Icon = styled.img`
@@ -67,63 +58,70 @@ class AddEmployeeModal extends PureComponent {
   render() {
     const { isOpen, onRequestClose } = this.props;
     return (
-      <Modal isOpen={isOpen} onRequestClose={onRequestClose} bottom="initial">
-        <Header>
+      <Modal isOpen={isOpen} onRequestClose={onRequestClose} bottom="initial" width="610px">
+        <div className={EmployeeModalHeader}>
           <div>Add New Employee</div>
-        </Header>
+        </div>
 
-        <Content>
-          <Field name="fullName" label="Full name:" component={Input} />
-
-          <Field name="email" label="Email:" component={Input} type="email" />
-          <BaseInput label="Permissions:">
-            <PermissionItem>
-              <Checkbox
-                onCheck={() => this.setState({ viewEventsOnly: true })}
-                onUncheck={() => this.setState({ viewEventsOnly: false })}
-                checked={this.state.viewEventsOnly}
-              />
-              <Icon src={calendarViewBlackIcon} />
-              <div>View events only</div>
-            </PermissionItem>
-            <PermissionItem>
-              <Checkbox
-                onCheck={() => this.setState({ createAndEditEvents: true })}
-                onUncheck={() => this.setState({ createAndEditEvents: false })}
-                checked={this.state.createAndEditEvents}
-              />
-              <Icon src={calendarEditBlackIcon} />
-              <div>Create & Edit Events</div>
-            </PermissionItem>
-            <PermissionItem>
-              <Checkbox
-                onCheck={() => this.setState({ deleteEvents: true })}
-                onUncheck={() => this.setState({ deleteEvents: false })}
-                checked={this.state.deleteEvents}
-              />
-              <Icon src={calendarDeleteBlackIcon} />
-              <div>Delete Events</div>
-            </PermissionItem>
-            <PermissionItem>
-              <Checkbox
-                onCheck={() => this.setState({ viewBilling: true })}
-                onUncheck={() => this.setState({ viewBilling: false })}
-                checked={this.state.viewBilling}
-              />
-              <Icon src={billBlackIcon} />
-              <div>View Billing</div>
-            </PermissionItem>
-            <PermissionItem>
-              <Checkbox
-                onCheck={() => this.setState({ manageStaffPermissions: true })}
-                onUncheck={() => this.setState({ manageStaffPermissions: false })}
-                checked={this.state.manageStaffPermissions}
-              />
-              <Icon src={peopleBlackIcon} />
-              <div>Manage Staff Permissions</div>
-            </PermissionItem>
-          </BaseInput>
-        </Content>
+        <div className={EmployeeModalContent}>
+          <div className={FormSection}>
+            <div className={FormSectionTitle}>User Info</div>
+            <div className={FormRow}>
+              <Field name="fullName" placeholder="Full Name" component={SmallInput} />
+              <Field name="email" placeholder="Email" component={SmallInput} type="email" />
+            </div>
+          </div>
+          <div className={FormSection}>
+            <div className={FormSectionTitle}> Permissions</div>
+            <BaseInput>
+              <div className={PermissionItem}>
+                <Checkbox
+                  onCheck={() => this.setState({ viewEventsOnly: true })}
+                  onUncheck={() => this.setState({ viewEventsOnly: false })}
+                  checked={true}
+                />
+                <Icons.CalendarBlank color="#7d7d7d" />
+                <div> View Events</div>
+              </div>
+              <div className={PermissionItem}>
+                <Checkbox
+                  onCheck={() => this.setState({ createAndEditEvents: true })}
+                  onUncheck={() => this.setState({ createAndEditEvents: false })}
+                  checked={this.state.createAndEditEvents}
+                />
+                <Icons.CalendarEdit color="#7d7d7d" />
+                <div> Create & Edit Events</div>
+              </div>
+              <div className={PermissionItem}>
+                <Checkbox
+                  onCheck={() => this.setState({ deleteEvents: true })}
+                  onUncheck={() => this.setState({ deleteEvents: false })}
+                  checked={this.state.deleteEvents}
+                />
+                <Icons.CalendarDelete color="#7d7d7d" />
+                <div>Delete Events</div>
+              </div>
+              <div className={PermissionItem}>
+                <Checkbox
+                  onCheck={() => this.setState({ viewBilling: true })}
+                  onUncheck={() => this.setState({ viewBilling: false })}
+                  checked={this.state.viewBilling}
+                />
+                <Icons.Billing color="#7d7d7d" />
+                <div>View Billing</div>
+              </div>
+              <div className={PermissionItem}>
+                <Checkbox
+                  onCheck={() => this.setState({ manageStaffPermissions: true })}
+                  onUncheck={() => this.setState({ manageStaffPermissions: false })}
+                  checked={this.state.manageStaffPermissions}
+                />
+                <Icons.People color="#7d7d7d" />
+                <div>Manage Staff Permissions</div>
+              </div>
+            </BaseInput>
+          </div>
+        </div>
 
         <Modal.Footer>
           <StyledButton label="Discard" onClick={onRequestClose} />

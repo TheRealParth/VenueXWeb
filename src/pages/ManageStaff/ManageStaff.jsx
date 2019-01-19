@@ -6,17 +6,7 @@ import AddEmployeeModal from '../../components/StaffTable/AddEmployeeModal';
 import PersonalMenu from '../../components/PersonalMenu';
 import AddButton from '../../components/AddButton';
 import InjectStyles from '../../components/InjectStyles';
-
-const Header = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 80px;
-  padding: 0px 18px;
-  > div {
-    flex: 1 0 0;
-  }
-`;
+import { ManageStaffHeader } from './index.module.scss';
 
 class ManageStaff extends Component {
   constructor(props) {
@@ -51,17 +41,16 @@ class ManageStaff extends Component {
   render() {
     const { isOpen, users } = this.state;
     const primary = this.props ? this.props.config.theme.colors.primary : '';
-    console.log(this.props.config.theme.colors.primary);
     return (
       <>
         <AddEmployeeModal isOpen={isOpen} onRequestClose={this.closeModal} />
-        <Header>
+        <div className={ManageStaffHeader}>
           <div />
           <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
             <PersonalMenu {...this.props.currentUser} />
             <AddButton onClick={this.openModal} />
           </div>
-        </Header>
+        </div>
 
         <StaffTable {...this.props} users={users} primary={primary} />
         <InjectStyles />

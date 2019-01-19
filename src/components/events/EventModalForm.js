@@ -12,6 +12,7 @@ import {
   NotEmptyValidator
 } from '../../utils/formValidators';
 import Select from '../form/Select';
+import MultiSelect from '../form/MultiSelect';
 import Textarea from '../form/Textarea';
 import DateTimeDurationField from '../form/DateTimeDurationField';
 import DatePickerField from '../form/DatePickerField';
@@ -19,32 +20,11 @@ import Input from '../form/Input';
 import TitleInput from '../form/TitleInput';
 import SmallInput from '../form/SmallInput';
 import Icons from '../../assets/icons';
-
-const Header = styled.div`
-  padding: 30px 0px;
-  font-size: 24px;
-  text-align: center;
-  color: #181818;
-  width: 610px;
-  height: 110px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  background-color: rgba(188, 172, 150, 0.4);
-  font-family: Lora;
-  font-size: 24px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: -0.6px;
-  text-align: center;
-  color: #181818;
-  z-index: 1200;
-`;
-//background-color: ${props => props.theme.colors.primary}66;
-const Content = styled.div`
-  padding: 20px 30px;
-  overflow: scroll;
-`;
+import {
+  AddEventModalHeader,
+  AddEventModalContent,
+  AddEventModalSection
+} from './index.module.scss';
 
 //may want to add help text, tbd, leaving for now
 const Help = styled.div`
@@ -182,14 +162,14 @@ class EventModalForm extends PureComponent {
             placeholder="Client Name"
             component={Input}
             validate={user === 0 ? NotEmptyValidator : ''}
-          // only first one is needed
+            // only first one is needed
           />
           <SmallInput
             name={'clientEmail' + user + 1}
             placeholder="Client Email"
             component={Input}
             validate={user === 0 ? NotEmptyValidator : ''}
-          /* current validator is set to require a minimum of one client, but needs to validate email if client Name is entered */
+            /* current validator is set to require a minimum of one client, but needs to validate email if client Name is entered */
           />
         </User>
       );
@@ -274,10 +254,10 @@ class EventModalForm extends PureComponent {
 
     return (
       <Modal isOpen={this.props.isOpen} onRequestClose={this.props.onClose} width="610px">
-        <Header>
+        <div className={AddEventModalHeader}>
           <div>Add New Event</div>
-        </Header>
-        <Content>
+        </div>
+        <div className={AddEventModalContent}>
           <Field
             name="name"
             component={TitleInput}
@@ -285,7 +265,7 @@ class EventModalForm extends PureComponent {
             placeholder="Event Name"
           />
 
-          <Section>
+          <div className={AddEventModalSection}>
             <SectionTitle>Users</SectionTitle>
 
             {this.renderNewUserFields()}
@@ -295,31 +275,48 @@ class EventModalForm extends PureComponent {
                 <Icons.Plus />
               </div>
             </AddMore>
-          </Section>
-          <Section>
+          </div>
+          <div className={AddEventModalSection}>
             <SectionTitle>Event Staff</SectionTitle>
 
             <Field
               name="consultant"
-              label="Consultant:"
-              component={Select}
+              component={props => (
+                <Select
+                  currentValue={{ val: props.value }}
+                  thingsChanged={param => props.onChange(param.val)}
+                  options={this.props.users.map(({ id, fullName }) => ({
+                    value: id,
+                    label: fullName
+                  }))}
+                  label="Consultant:"
+                />
+              )}
               placeholder="Current User"
               validate={NotEmptyValidator}
-              options={
-                this.props.users
-                  .filter(({ permissions }) => permissions.createAndEditEvents)
-                  .map(({ id, fullName }) => ({ value: id, label: fullName }))
-              }
+              options={this.props.users
+                .filter(({ permissions }) => permissions.createAndEditEvents)
+                .map(({ id, fullName }) => ({ value: id, label: fullName }))}
             />
             <Field
               name="eventTeam"
-              label="Event Team:"
-              component={Select}
+              component={props => (
+                <MultiSelect
+                  currentValue={{ val: props.value }}
+                  thingsChanged={param => props.onChange(param.val)}
+                  options={this.props.users.map(({ id, fullName }) => ({
+                    value: id,
+                    label: fullName
+                  }))}
+                  label="Event Team:"
+                />
+              )}
+              type="select"
               validate={NotEmptyValidator}
               options={this.props.users.map(({ id, fullName }) => ({ value: id, label: fullName }))}
             />
-          </Section>
-          <Section>
+          </div>
+          <div className={AddEventModalSection}>
             <SectionTitle>Event Details</SectionTitle>
             <Field
               name="dateTimeDuration"
@@ -336,9 +333,9 @@ class EventModalForm extends PureComponent {
                 options={
                   config
                     ? eventTypes.map(type => ({
-                      label: type.name,
-                      value: type.typeId
-                    }))
+                        label: type.name,
+                        value: type.typeId
+                      }))
                     : []
                 }
               />
@@ -369,8 +366,8 @@ class EventModalForm extends PureComponent {
                 ]}
               />
             ) : (
-                ''
-              )}
+              ''
+            )}
             <User>
               <Field
                 name="room"
@@ -380,9 +377,9 @@ class EventModalForm extends PureComponent {
                 options={
                   config
                     ? rooms.map(room => ({
-                      label: room.name,
-                      value: room.roomId
-                    }))
+                        label: room.name,
+                        value: room.roomId
+                      }))
                     : []
                 }
               />
@@ -394,9 +391,9 @@ class EventModalForm extends PureComponent {
                 options={
                   config
                     ? rooms.map(room => ({
-                      label: room.name,
-                      value: room.roomId
-                    }))
+                        label: room.name,
+                        value: room.roomId
+                      }))
                     : []
                 }
               />
@@ -421,9 +418,9 @@ class EventModalForm extends PureComponent {
                 </div>
               </div>
             )}
-          </Section>
+          </div>
 
-          <Section>
+          <div className={AddEventModalSection}>
             <SectionTitle>Payment Schedule</SectionTitle>
             {this.renderPaymentFields()}
             <AddMore onClick={this.addPayment}>
@@ -431,12 +428,12 @@ class EventModalForm extends PureComponent {
                 <Icons.Plus />
               </div>
             </AddMore>
-          </Section>
-          <Section>
+          </div>
+          <div className={AddEventModalSection}>
             <SectionTitle>Notes</SectionTitle>
             <Field name="notes" component={Textarea} />
-          </Section>
-        </Content>
+          </div>
+        </div>
 
         <Modal.Footer>
           <StyledButton label="Discard" onClick={this.props.onClose} />
@@ -447,19 +444,17 @@ class EventModalForm extends PureComponent {
   }
 }
 
-
 EventModalForm = reduxForm({
   form: 'EventForm'
 })(EventModalForm);
-const selector = formValueSelector('EventForm')
+const selector = formValueSelector('EventForm');
 export default connect(state => {
   // can select values individually
-  const formValues = selector(state, 'eventTeam', 'consultant')
+  const formValues = selector(state, 'eventTeam', 'consultant');
   // const favoriteColorValue = selector(state, 'favoriteColor')
   // or together as a group
   // const { firstName, lastName } = selector(state, 'firstName', 'lastName')
   return {
     ...formValues
-  }
+  };
 })(EventModalForm);
-
