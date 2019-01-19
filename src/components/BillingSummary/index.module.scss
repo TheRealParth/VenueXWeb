@@ -1,20 +1,21 @@
 .BillingSummaryContainer {
   background-color: #fff;
-  margin: 15px 0px;
+  margin: 30px 17px 28px 13px;
   border: solid 1px #fafafa;
   border-radius: 2px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 25px 30px;
   display: flex;
   justify-content: space-between;
+  height: 130px;
 }
 
 .BillingSummaryItem {
   color: #181818;
   font-size: 15px;
-  padding-left: 30px;
-  margin-left: 30px;
-  border-left: solid 1px #b0b0b0;
+  padding-left: 45px;
+  padding-right: 30px;
+  border-left: solid 2px #b0b0b0;
   font-family: Lora;
   font-weight: 500;
 
@@ -26,10 +27,24 @@
 }
 
 .label {
+  font-family: Montserrat;
+  font-size: 15px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.3px;
   color: #b0b0b0;
-  font-weight: 500;
+  margin-bottom: 10px;
 }
 
 .value {
   font-size: 40px;
+  letter-spacing: -0.86px;
+}
+
+.InvoiceButton {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 3px;
 }

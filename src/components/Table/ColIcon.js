@@ -15,7 +15,6 @@ const Icon = styled.div`
   width: 12px;
   height: 12px;
   margin-left: 10.5px;
-  display: none;
   cursor: pointer;
 
   ${props =>

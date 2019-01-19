@@ -18,14 +18,14 @@ class Billing extends Component {
   }
   handleNextMonth = () => {
     this.setState({
-      currentDate: moment(this.state.currentDate.add(1, 'M')),
+      currentDate: moment(this.state.currentDate.add(1, 'M'))
     });
-  }
+  };
   handlePrevMonth = () => {
     this.setState({
-      currentDate: moment(this.state.currentDate.subtract(1, 'M')),
+      currentDate: moment(this.state.currentDate.subtract(1, 'M'))
     });
-  }
+  };
   eventsThisMonth = () => {
     const currentMonth = this.state.currentDate.format('YYYY-MM');
     const eventsThisMonth = this.props.events.filter(event => {
@@ -38,18 +38,20 @@ class Billing extends Component {
     const { events } = this.props;
     const { currentDate } = this.state;
     const eventsThisMonth = this.eventsThisMonth();
-
-    const totalGuests = eventsThisMonth.reduce((accumulator, currentValue) =>
-      accumulator + parseInt((currentValue.guests || 0), 10)
-      , 0);
-
-    const dueDate = moment(currentDate).add(1, 'M');
-
-    const balance = (
-      this.props.config.billingMethod === 'payPerGuest' ?
-        totalGuests : 250 * eventsThisMonth.length
+    let dueDate = moment(currentDate).add(1, 'M');
+    const totalGuests = eventsThisMonth.reduce(
+      (accumulator, currentValue) => accumulator + parseInt(currentValue.guests || 0, 10),
+      0
     );
 
+    const price = this.props.config.price;
+    let balance = this.props.config.balance;
+    if (!this.props.config.balance) {
+      balance =
+        this.props.config.billingMethod === 'payPerGuest'
+          ? totalGuests * price
+          : price * eventsThisMonth.length;
+    }
 
     const daysUntilDue = dueDate.diff(moment(), 'days');
 
