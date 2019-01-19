@@ -9,6 +9,7 @@ const initialState = {
 };
 
 export const events = (state = initialState, action) => {
+  //TOODO add case SET_EVENT_SORT_KEY
   switch (action.type) {
     case eventTypes.EVENTS.SYNC:
       return {

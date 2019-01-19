@@ -8,10 +8,12 @@ function mapStateToProps({ events, users, auth }) {
   return {
     events: events.list,
     users: users.list,
-    currentUser: auth.user ? users.list.find((user) => {
-      console.log(user)
-      return (user.id === auth.user.uid);
-    }) : {},
+    currentUser: auth.user
+      ? users.list.find(user => {
+          console.log(user);
+          return user.id === auth.user.uid;
+        })
+      : {},
     anyChecked: users.anyChecked,
     allChecked: users.allChecked,
     selectedCount: users.selectedCount,

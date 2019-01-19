@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import Table from '../Table';
 import styled from 'styled-components';
+
 const TableContainer = styled.div`
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
   border-radius: 2px;
@@ -29,22 +30,22 @@ const BillingTable = ({ events }) => (
     <Table>
       <Table.Row>
         <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => ''} title="Client" />
+          <Table.HeaderCell onClick={() => ''} title="Client" sortable />
         </Table.Cell>
         <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => ''} title="Event" />
+          <Table.HeaderCell onClick={() => ''} title="Event" sortable />
         </Table.Cell>
         <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => ''} title="Event Type" />
+          <Table.HeaderCell onClick={() => ''} title="Event Type" sortable />
         </Table.Cell>
         <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => ''} title="Guests" />
+          <Table.HeaderCell onClick={() => ''} title="Guests" sortable />
         </Table.Cell>
         <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => ''} title="Event Date" />
+          <Table.HeaderCell onClick={() => ''} title="Event Date" sortable />
         </Table.Cell>
         <Table.Cell width="16%">
-          <Table.HeaderCell onClick={() => ''} title="Created By" />
+          <Table.HeaderCell onClick={() => ''} title="Created By" sortable />
         </Table.Cell>
       </Table.Row>
       <Table.Body>

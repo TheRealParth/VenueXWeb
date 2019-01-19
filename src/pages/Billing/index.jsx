@@ -10,6 +10,10 @@ function mapStateToProps({ events, users, config, auth }) {
     events: events.list,
     users: users.list,
     currentUser: users && users.list.find(user => user.id === auth.user.uid),
+    sort: {
+      sortKey: users.sortKey,
+      orderBy: users.orderBy
+    },
     sortedUsers: sortUsersSelector(users),
     config: get(config, 'config', {})
   };

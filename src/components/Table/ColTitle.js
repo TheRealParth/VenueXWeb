@@ -13,6 +13,14 @@ const ColTitle = styled.div`
   color: #888888;
   display: flex;
   align-content: center;
+  cursor: default;
+  /* Disables text highlighting */
+  webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Chrome and Opera */
   ${props =>
     props.selected === true &&
     css`
