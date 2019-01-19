@@ -12,6 +12,7 @@ import {
   NotEmptyValidator
 } from '../../utils/formValidators';
 import Select from '../form/Select';
+import MultiSelect from '../form/MultiSelect';
 import Textarea from '../form/Textarea';
 import DateTimeDurationField from '../form/DateTimeDurationField';
 import DatePickerField from '../form/DatePickerField';
@@ -280,8 +281,17 @@ class EventModalForm extends PureComponent {
 
             <Field
               name="consultant"
-              label="Consultant:"
-              component={Select}
+              component={props => (
+                <Select
+                  currentValue={{ val: props.value }}
+                  thingsChanged={param => props.onChange(param.val)}
+                  options={this.props.users.map(({ id, fullName }) => ({
+                    value: id,
+                    label: fullName
+                  }))}
+                  label="Consultant:"
+                />
+              )}
               placeholder="Current User"
               validate={NotEmptyValidator}
               options={this.props.users
@@ -290,8 +300,18 @@ class EventModalForm extends PureComponent {
             />
             <Field
               name="eventTeam"
-              label="Event Team:"
-              component={Select}
+              component={props => (
+                <MultiSelect
+                  currentValue={{ val: props.value }}
+                  thingsChanged={param => props.onChange(param.val)}
+                  options={this.props.users.map(({ id, fullName }) => ({
+                    value: id,
+                    label: fullName
+                  }))}
+                  label="Event Team:"
+                />
+              )}
+              type="select"
               validate={NotEmptyValidator}
               options={this.props.users.map(({ id, fullName }) => ({ value: id, label: fullName }))}
             />

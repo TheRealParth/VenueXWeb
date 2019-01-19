@@ -1,11 +1,14 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { ButtonStyles, Button, PrimaryButton } from './index.module.scss';
+import { ButtonStyles, Button, SuccessButton, PrimaryButton } from './index.module.scss';
 
 function buttonType(props) {
   if (props) {
     if (props.kind === 'primary') {
       return PrimaryButton;
+    }
+    if (props.kind === 'success') {
+      return SuccessButton;
     } else return Button;
   } else return Button;
 }

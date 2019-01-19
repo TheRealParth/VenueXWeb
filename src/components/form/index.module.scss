@@ -1,0 +1,14 @@
+.SelectStyle {
+  :first-child {
+    background-color: red;
+  }
+}
+
+.selectStyle__control {
+  background-color: red;
+}
+
+.react-select__control {
+  border: none;
+  border-bottom: 1px solid black;
+}
