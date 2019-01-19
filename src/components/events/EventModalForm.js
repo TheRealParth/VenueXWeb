@@ -5,17 +5,11 @@ import styled from 'styled-components';
 import Switch from '../form/Switch';
 import Button from '../Button';
 import Modal from '../Modal';
-import ConsultantsPicker from '../form/ConsultantsPicker';
-import {
-  DateTimeDurationFilled,
-  OwnerSelectedValidator,
-  NotEmptyValidator
-} from '../../utils/formValidators';
+import { DateTimeDurationFilled, NotEmptyValidator } from '../../utils/formValidators';
 import Select from '../form/Select';
 import MultiSelect from '../form/MultiSelect';
 import Textarea from '../form/Textarea';
 import DateTimeDurationField from '../form/DateTimeDurationField';
-import DatePickerField from '../form/DatePickerField';
 import Input from '../form/Input';
 import TitleInput from '../form/TitleInput';
 import SmallInput from '../form/SmallInput';
@@ -238,6 +232,7 @@ class EventModalForm extends PureComponent {
   };
 
   render() {
+    const primaryColor = '#419ad4';
     const { selectedRoom, type, config } = this.props;
     console.log('HERE', this.props);
     let rooms = [];
@@ -250,7 +245,6 @@ class EventModalForm extends PureComponent {
         eventTypes.push(config.eventTypes[type]);
       }
     }
-    console.log(eventTypes);
 
     return (
       <Modal isOpen={this.props.isOpen} onRequestClose={this.props.onClose} width="610px">
@@ -283,8 +277,9 @@ class EventModalForm extends PureComponent {
               name="consultant"
               component={props => (
                 <Select
-                  currentValue={{ val: props.value }}
-                  thingsChanged={param => props.onChange(param.val)}
+                  value={props.input.value}
+                  onChange={props.input.onChange}
+                  primaryColor={primaryColor}
                   options={this.props.users.map(({ id, fullName }) => ({
                     value: id,
                     label: fullName
@@ -302,8 +297,8 @@ class EventModalForm extends PureComponent {
               name="eventTeam"
               component={props => (
                 <MultiSelect
-                  currentValue={{ val: props.value }}
-                  thingsChanged={param => props.onChange(param.val)}
+                  value={props.input.value}
+                  onChange={props.input.onChange}
                   options={this.props.users.map(({ id, fullName }) => ({
                     value: id,
                     label: fullName

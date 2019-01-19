@@ -9,9 +9,8 @@ import {
 import CaretLeft from '../../assets/icons/CaretLeft';
 import CaretRight from '../../assets/icons/CaretRight';
 import PersonalMenu from '../PersonalMenu';
-import AddButton from '../AddButton';
 
-const BillingHeader = ({ handlePrevMonth, handleNextMonth, currentUser, openModal, label }) => (
+const BillingHeader = ({ handlePrevMonth, handleNextMonth, currentUser, label }) => (
   <>
     <div className={BillingHeaderContainer}>
       <div className={ContactInfo}>VenueX: 201-448-9419 | billing@teamvenuex.com</div>
