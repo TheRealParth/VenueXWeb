@@ -1,6 +1,12 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { ButtonStyles, Button, SuccessButton, PrimaryButton } from './index.module.scss';
+import {
+  ButtonStyles,
+  Button,
+  SuccessButton,
+  PrimaryButton,
+  DangerButton
+} from './index.module.scss';
 
 function buttonType(props) {
   if (props) {
@@ -9,6 +15,9 @@ function buttonType(props) {
     }
     if (props.kind === 'success') {
       return SuccessButton;
+    }
+    if (props.kind === 'danger') {
+      return DangerButton;
     } else return Button;
   } else return Button;
 }
