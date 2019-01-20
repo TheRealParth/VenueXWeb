@@ -56,19 +56,26 @@ const customStyles = props => {
       borderRadius: '0px',
       width: '94.9%',
       left: '11px',
-      marginTop: '0px',
-      backgroundColor: props.primaryColor
+      marginTop: '0px'
     }),
     dropdownIndicator: provided => ({
       ...provided,
       padding: '0px'
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? props.primaryColor : '#ffffff',
+      color: state.isSelected ? '#222222' : '#222222',
+      '&:hover': {
+        backgroundColor: `${props.primaryColor}66`
+      }
     })
   };
 };
 
 const StyledSelect = props => (
   <BaseInput {...props}>
-    <Select {...props.input} {...props} styles={customStyles(props)} defaultMenuIsOpen>
+    <Select {...props.input} {...props} styles={customStyles(props)}>
       {props.options.map(o => (
         <option value={o.value}>{o.label}</option>
       ))}
