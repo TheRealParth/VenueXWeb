@@ -15,7 +15,7 @@ class Billing extends Component {
   }
   componentDidMount() {
     this.props.getEventsRequest();
-    this.props.setEventsSortKey('client', 'asc');
+    this.props.setEventsSortKey('start', 'asc');
   }
   handleNextMonth = () => {
     this.setState({
@@ -40,6 +40,7 @@ class Billing extends Component {
     const { currentDate } = this.state;
     const eventsThisMonth = this.eventsThisMonth();
     let dueDate = moment(currentDate).add(1, 'M');
+    let buttonState = this.props.setEventsSortKey;
     const totalGuests = eventsThisMonth.reduce(
       (accumulator, currentValue) => accumulator + parseInt(currentValue.guests || 0, 10),
       0

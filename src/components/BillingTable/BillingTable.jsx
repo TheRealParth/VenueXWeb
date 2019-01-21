@@ -2,7 +2,6 @@ import React from 'react';
 import moment from 'moment';
 import Table from '../Table';
 import styled from 'styled-components';
-//import { setEventsSortKey } from '../../actions/events';
 
 const TableContainer = styled.div`
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
@@ -10,6 +9,7 @@ const TableContainer = styled.div`
   color: #222222;
   margin: 30px 17px 28px 13px;
 `;
+
 const StyledTableRow = styled(Table.Row)`
   .actions {
     display: none;

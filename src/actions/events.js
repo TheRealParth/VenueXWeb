@@ -18,7 +18,6 @@ export const createEventRequest = event => {
   };
 };
 
-//TODO created setEventSortKey
 export const setEventsSortKey = (sortKey, orderBy) => {
   return {
     type: eventTypes.SET_EVENT_SORT_KEY,

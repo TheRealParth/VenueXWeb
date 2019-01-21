@@ -4,7 +4,6 @@ import { orderBy } from 'lodash';
 
 const initialState = {
   list: [],
-  //sortKey: '',
   sortKey: {
     date: null,
     client: null
@@ -29,11 +28,6 @@ export const events = (state = initialState, action) => {
       return {
         ...state,
         list: action.events
-      };
-    case eventTypes.SET_SORT_KEY:
-      return {
-        ...state,
-        sortKey: action.sortKey
       };
     case eventTypes.SET_EVENT_SORT_KEY:
       return {
