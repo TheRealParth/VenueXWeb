@@ -5,7 +5,7 @@ import Modal from '../../Modal';
 import ConfirmationModal from '../../ConfirmationModal';
 import Button from '../../Button';
 import SideTabs from '../../SideTabs';
-import ConsultantLabel from '../../Consultant';
+import ConsultantLabel from './Consultant';
 import Switch from '../../Switch';
 import EventModalForm from '../../events/EventModalForm';
 import { humanize } from '../../../utils';
@@ -20,7 +20,11 @@ import {
   EventDetailTitle,
   EventBadge,
   EventDetailHeaderContent,
-  EventDetailSubtitle
+  EventDetailSubtitle,
+  ConsultantRow,
+  ConsultantTitle,
+  ConsultantImage,
+  EventDetailContentRow
 } from './index.module.scss';
 
 const DescriptionList = styled.dl`
@@ -38,11 +42,13 @@ const DescriptionList = styled.dl`
     display: inline-block;
     color: #7d7d7d;
     white-space: nowrap;
+    letter-spacing: -0.28px;
   }
   dd {
     display: inline-block;
     color: #222222;
-    margin-left: 15px;
+    margin-left: 6px;
+    letter-spacing: -0.28px;
   }
 `;
 
@@ -183,18 +189,24 @@ class EventDetailModal extends PureComponent {
 
   render() {
     const { firebase, config, event, ...restProps } = this.props;
+    let venueConfig = config.config;
     if (!event) {
       return <div />;
     }
-    let room, numberOfTables;
+    let room, numberOfTables, primaryColor;
 
-    if (config.rooms) {
-      numberOfTables = room.layouts[event.tableLayout];
-      room = config.rooms[event.room];
+    /* if (venueConfig.rooms) {
+      numberOfTables = venueConfig.rooms.layouts[event.tableLayout];
+      room = venueConfig.rooms[event.room];
+      console.log('AAAAAAAAAAAAAAAA');
+    } */
+
+    if (venueConfig.theme) {
+      primaryColor = venueConfig.theme.colors.primary;
     }
 
     const { guestsPerTable } = event;
-
+    console.log('HERE HERE', primaryColor, 'CONFIG', config);
     if (this.state.isEditing) {
       return (
         <EventModalForm
@@ -228,7 +240,7 @@ class EventDetailModal extends PureComponent {
     }
     console.log('event:', event);
     return (
-      <Modal {...restProps} isOpen={Boolean(event)}>
+      <Modal {...restProps} isOpen={Boolean(event)} height="530px">
         <div className={EventDetailHeader}>
           <div className={EventBadge}>
             <img src={ringsImage} />
@@ -246,63 +258,67 @@ class EventDetailModal extends PureComponent {
             onConfirm={this.handleConfirmDelete}
           />
           <SideTabs
+            primaryColor={primaryColor}
             tabs={[
               {
                 title: 'Event overview',
-                icon: <Icons.CalendarBlank size={20} />,
+                icon: 'CalendarBlank',
                 content: (
                   <DescriptionList>
-                    <div className="row">
-                      <dt>Consultant:</dt>
-                      <dd>
-                        <ConsultantLabel
-                          picture="https://placehold.it/100x100"
-                          name="Matthew chow"
-                        />
-                      </dd>
+                    <div className={ConsultantRow}>
+                      <div className={ConsultantTitle}>Consultant:</div>
+
+                      <img src="https://placehold.it/100x100" className={ConsultantImage} />
+
+                      <div>Thomas Daidone</div>
                     </div>
 
-                    <div className="row">
+                    <div className={EventDetailContentRow}>
                       <dt>Event Type:</dt>
+                      <dd> Wedding </dd>
                       {/* <dd>{humanize(event.type)}</dd> */}
                     </div>
-
-                    <div className="row">
+                    <div className={EventDetailContentRow}>
+                      <dt>Ceremony:</dt>
+                      <dd>Off-Site</dd>
+                      {/* <dd>{humanize(event.type)}</dd> */}
+                    </div>
+                    <div className={EventDetailContentRow}>
                       <dt>Start Time:</dt>
-                      <dd>{moment(event.start).format('HH:mm a')}</dd>
+                      <dd>5:00 pm</dd>
                     </div>
 
-                    <div className="row">
+                    <div className={EventDetailContentRow}>
                       <dt>End Time:</dt>
-                      <dd>{moment(event.end).format('HH:mm a')}</dd>
+                      <dd>10:00 pm</dd>
                     </div>
                   </DescriptionList>
                 )
               },
               {
                 title: 'Client details',
-                icon: <Icons.User size={20} />,
+                icon: 'User',
                 content: (
                   <DescriptionList>
-                    <div className="row">
+                    <div className={EventDetailContentRow}>
                       <dt>Client Name:</dt>
                       <dd>{event.clientName}</dd>
                     </div>
 
-                    <div className="row">
+                    <div className={EventDetailContentRow}>
                       <dt>Client email:</dt>
                       <dd>{event.clientEmail}</dd>
                     </div>
 
-                    <div className="row">
+                    <div className={EventDetailContentRow}>
                       <dt>Client phone:</dt>
                       <dd>{event.clientPhone}</dd>
                     </div>
 
-                    <div className="row" style={{ paddingRight: 15 }}>
+                    <div className={EventDetailContentRow} style={{ paddingRight: 15 }}>
                       <dt>Payment:</dt>
                       <dd>
-                        <div className="row">
+                        <div className={EventDetailContentRow}>
                           <Flex>
                             <div style={{ marginRight: 10 }}>
                               <dt>1st:</dt>
@@ -314,7 +330,7 @@ class EventDetailModal extends PureComponent {
                             </div>
                           </Flex>
                         </div>
-                        <div className="row">
+                        <div className={EventDetailContentRow}>
                           <Flex>
                             <div style={{ marginRight: 10 }}>
                               <dt>2st:</dt>
@@ -326,7 +342,7 @@ class EventDetailModal extends PureComponent {
                             </div>
                           </Flex>
                         </div>
-                        <div className="row">
+                        <div className={EventDetailContentRow}>
                           <Flex>
                             <div style={{ marginRight: 10 }}>
                               <dt>2st:</dt>
@@ -338,7 +354,7 @@ class EventDetailModal extends PureComponent {
                             </div>
                           </Flex>
                         </div>
-                        <div className="row">
+                        <div className={EventDetailContentRow}>
                           <div>
                             <dt>Payment Notification:</dt>
                             <dd>
@@ -355,7 +371,7 @@ class EventDetailModal extends PureComponent {
                             </dd>
                           </div>
                         </div>
-                        <div className="row">
+                        <div className={EventDetailContentRow}>
                           <dt>
                             <div>Reminder Email:</div>
                             {event.lastRemindedAt && (
@@ -380,18 +396,18 @@ class EventDetailModal extends PureComponent {
               },
               {
                 title: 'Room & Layout',
-                icon: <Icons.Room size={20} />,
+                icon: 'Room',
                 content: (
                   <DescriptionList>
-                    <div className="row">
+                    <div className={EventDetailContentRow}>
                       <dt>Room:</dt>
                       {/* <dd>{room.name}</dd> */}
                     </div>
-                    <div className="row">
+                    <div className={EventDetailContentRow}>
                       <dt>Layout:</dt>
                       <dd>{numberOfTables}</dd>
                     </div>
-                    <div className="row">
+                    <div className={EventDetailContentRow}>
                       <dt>Guests per table</dt>
                       <dd>{guestsPerTable}</dd>
                     </div>
@@ -400,10 +416,10 @@ class EventDetailModal extends PureComponent {
               },
               {
                 title: 'Notes',
-                icon: <Icons.Notes size={20} />,
+                icon: 'Notes',
                 content: (
                   <DescriptionList>
-                    <div className="row">
+                    <div className={EventDetailContentRow}>
                       <dt>Notes</dt>
                       <dd>{event.notes}</dd>
                     </div>

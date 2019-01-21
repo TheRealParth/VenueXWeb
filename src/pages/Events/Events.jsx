@@ -13,7 +13,7 @@ class Events extends Component {
   state = {
     events: [],
     isAddingEvent: false,
-    currentEvent: null,
+    currentEvent: null
   };
   componentDidMount() {
     this.props.getEventsRequest();
@@ -29,7 +29,7 @@ class Events extends Component {
   openAddingModal = () => this.setState({ isAddingEvent: true });
   closeAddingModal = () => this.setState({ isAddingEvent: false });
   selectEventHandler = event => {
-    this.setState({ currentEvent: event })
+    this.setState({ currentEvent: event });
   };
   render() {
     const { events, isAddingEvent } = this.state;
@@ -37,19 +37,14 @@ class Events extends Component {
     return (
       <>
         <EventDetailModal {...this.props} event={this.state.currentEvent} />
-        <AddEventModal
-          isOpen={isAddingEvent}
-          onClose={this.closeAddingModal}
-        />
+        <AddEventModal isOpen={isAddingEvent} onClose={this.closeAddingModal} />
         <BigCalendar
           onSelectEvent={this.selectEventHandler}
           localizer={localizer}
           components={{
-            toolbar: (props) => <Toolbar
-              {...props}
-              currentUser={currentUser}
-              openModal={this.openAddingModal}
-            />
+            toolbar: props => (
+              <Toolbar {...props} currentUser={currentUser} openModal={this.openAddingModal} />
+            )
           }}
           events={events}
           startAccessor="start"

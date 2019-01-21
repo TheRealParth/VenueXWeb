@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
+import Icons from '../assets/icons';
 
 const Container = styled.div`
   display: flex;
@@ -32,7 +33,7 @@ const Tab = styled.div`
   ${props =>
     props.isActive &&
     css`
-      color: #c0b59d;
+      color: props.primaryColor;
 
       &:after {
         content: '';
@@ -41,7 +42,7 @@ const Tab = styled.div`
         bottom: 0px;
         right: 0px;
         width: 4px;
-        background-color: #c0b59d;
+        background-color: ${props.primaryColor};
         box-shadow: -2px 0 4px 0 rgba(0, 0, 0, 0.15);
       }
     `}
@@ -67,18 +68,34 @@ class SideTabs extends PureComponent {
 
   render() {
     const { tabs } = this.props;
+
     return (
       <Container>
         <Tabs>
-          {tabs.map((tab, i) => (
-            <Tab
-              isActive={i === this.state.activeTab}
-              onClick={() => this.setState({ activeTab: i })}
-            >
-              <Icon>{tab.icon}</Icon>
-              <div>{tab.title}</div>
-            </Tab>
-          ))}
+          {tabs.map((tab, i) => {
+            if (i === this.state.activeTab) {
+              console.log(tab.icon);
+            }
+
+            return (
+              <Tab
+                isActive={i === this.state.activeTab}
+                onClick={() => this.setState({ activeTab: i })}
+                primaryColor={this.props.primaryColor}
+                style={{
+                  color: i === this.state.activeTab ? this.props.primaryColor : '#b0b0b0'
+                }}
+              >
+                <Icon>
+                  {React.createElement(Icons[tab.icon], {
+                    color: i === this.state.activeTab ? this.props.primaryColor : '#b0b0b0',
+                    size: 20
+                  })}
+                </Icon>
+                <div>{tab.title}</div>
+              </Tab>
+            );
+          })}
         </Tabs>
         <Content>{tabs[this.state.activeTab].content}</Content>
       </Container>
