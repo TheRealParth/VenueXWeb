@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import Table from '../Table';
 import styled from 'styled-components';
+//import { setEventsSortKey } from '../../actions/events';
 
 const TableContainer = styled.div`
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
@@ -25,27 +26,51 @@ const StyledTableRow = styled(Table.Row)`
   }
 `;
 
-const BillingTable = ({ events }) => (
+const BillingTable = ({ events, sort, setEventsSortKey }) => (
   <TableContainer>
     <Table>
       <Table.Row style={{ height: '63px' }} header>
         <Table.Cell width="19%">
-          <Table.HeaderCell onClick={() => ''} title="Client" center />
+          <Table.HeaderCell
+            onClick={() => setEventsSortKey('client', sort.orderBy === 'asc' ? 'desc' : 'asc')}
+            title="Client"
+            center
+          />
         </Table.Cell>
         <Table.Cell width="19%">
-          <Table.HeaderCell onClick={() => ''} title="Event" center />
+          <Table.HeaderCell
+            onClick={() => setEventsSortKey('title', sort.orderBy === 'asc' ? 'desc' : 'asc')}
+            title="Event"
+            center
+          />
         </Table.Cell>
         <Table.Cell width="12%">
-          <Table.HeaderCell onClick={() => ''} title="Event Type" />
+          <Table.HeaderCell
+            onClick={() => setEventsSortKey('eventType', sort.orderBy === 'asc' ? 'desc' : 'asc')}
+            title="Event Type"
+          />
         </Table.Cell>
         <Table.Cell width="10%">
-          <Table.HeaderCell onClick={() => ''} title="Guests" center />
+          <Table.HeaderCell
+            onClick={() => setEventsSortKey('guests', sort.orderBy === 'asc' ? 'desc' : 'asc')}
+            title="Guests"
+            center
+          />
         </Table.Cell>
         <Table.Cell width="20%">
-          <Table.HeaderCell onClick={() => ''} title="Event Date" selected center />
+          <Table.HeaderCell
+            onClick={() => setEventsSortKey('start', sort.orderBy === 'asc' ? 'desc' : 'asc')}
+            title="Event Date"
+            selected
+            center
+          />
         </Table.Cell>
         <Table.Cell width="20%">
-          <Table.HeaderCell onClick={() => ''} title="Created By" center />
+          <Table.HeaderCell
+            onClick={() => setEventsSortKey('createdBy', sort.orderBy === 'asc' ? 'desc' : 'asc')}
+            title="Created By"
+            center
+          />
         </Table.Cell>
       </Table.Row>
       <Table.Body>
