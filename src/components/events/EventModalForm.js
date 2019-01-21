@@ -232,12 +232,14 @@ class EventModalForm extends PureComponent {
   };
 
   render() {
-    const primaryColor = '#419ad4';
     const { selectedRoom, type, config } = this.props;
+
     console.log('HERE', this.props);
     let rooms = [];
+    let primaryColor;
     let eventTypes = [];
-    if (config) {
+    if (config.theme !== undefined) {
+      primaryColor = config.theme.colors.primary;
       for (let room in config.rooms) {
         rooms.push(config.rooms[room]);
       }
@@ -299,6 +301,7 @@ class EventModalForm extends PureComponent {
                 <MultiSelect
                   value={props.input.value}
                   onChange={props.input.onChange}
+                  primaryColor={primaryColor}
                   options={this.props.users.map(({ id, fullName }) => ({
                     value: id,
                     label: fullName
@@ -322,17 +325,23 @@ class EventModalForm extends PureComponent {
             <User>
               <Field
                 name="type"
-                label="Event Type:"
-                component={Select}
+                component={props => (
+                  <Select
+                    value={props.input.value}
+                    onChange={props.input.onChange}
+                    primaryColor={primaryColor}
+                    options={
+                      config
+                        ? eventTypes.map(type => ({
+                            label: type.name,
+                            value: type.typeId
+                          }))
+                        : []
+                    }
+                    label="Event Type:"
+                  />
+                )}
                 validate={NotEmptyValidator}
-                options={
-                  config
-                    ? eventTypes.map(type => ({
-                        label: type.name,
-                        value: type.typeId
-                      }))
-                    : []
-                }
               />
               <Field
                 name="minimumGuests"
@@ -366,31 +375,43 @@ class EventModalForm extends PureComponent {
             <User>
               <Field
                 name="room"
-                label="Room:"
-                component={Select}
+                component={props => (
+                  <Select
+                    value={props.input.value}
+                    onChange={props.input.onChange}
+                    primaryColor={primaryColor}
+                    options={
+                      config
+                        ? rooms.map(room => ({
+                            label: room.name,
+                            value: room.roomId
+                          }))
+                        : []
+                    }
+                    label="Room:"
+                  />
+                )}
                 validate={NotEmptyValidator}
-                options={
-                  config
-                    ? rooms.map(room => ({
-                        label: room.name,
-                        value: room.roomId
-                      }))
-                    : []
-                }
               />
               <Field
                 name="layout"
-                label="Layout:"
-                component={Select}
+                component={props => (
+                  <Select
+                    value={props.input.value}
+                    onChange={props.input.onChange}
+                    primaryColor={primaryColor}
+                    options={
+                      config
+                        ? rooms.map(room => ({
+                            label: room.name,
+                            value: room.roomId
+                          }))
+                        : []
+                    }
+                    label="Layout:"
+                  />
+                )}
                 validate={NotEmptyValidator}
-                options={
-                  config
-                    ? rooms.map(room => ({
-                        label: room.name,
-                        value: room.roomId
-                      }))
-                    : []
-                }
               />
             </User>
 
