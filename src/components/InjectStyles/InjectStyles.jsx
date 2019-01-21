@@ -3,6 +3,7 @@ import { ContactInfo } from '../BillingHeader/index.module.scss';
 import { EmployeeModalHeader, FormSection } from '../StaffTable/styles.module.scss';
 import { AddEventModalHeader, AddEventModalSection } from '../events/index.module.scss';
 import { PrimaryButton } from '../Button/index.module.scss';
+import { EventDetailHeader } from '../events/EventDetailModal/index.module.scss';
 
 const InjectStyles = ({ colors }) => (
   <style>{`
@@ -20,6 +21,9 @@ const InjectStyles = ({ colors }) => (
     }
    .${AddEventModalSection}{
       border: 1px solid ${colors.primary}66;
+    }
+    .${EventDetailHeader} {
+      background-color: ${colors.primary}66;
     }
     `}</style>
 );
