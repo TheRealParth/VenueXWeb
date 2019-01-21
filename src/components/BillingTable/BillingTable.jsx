@@ -34,6 +34,7 @@ const BillingTable = ({ events, sort, setEventsSortKey }) => (
           <Table.HeaderCell
             onClick={() => setEventsSortKey('client', sort.orderBy === 'asc' ? 'desc' : 'asc')}
             title="Client"
+            rotate={sort.orderBy === 'desc' && sort.sortKey === 'client' ? 'asc' : 'desc'}
             center
           />
         </Table.Cell>
@@ -41,6 +42,7 @@ const BillingTable = ({ events, sort, setEventsSortKey }) => (
           <Table.HeaderCell
             onClick={() => setEventsSortKey('title', sort.orderBy === 'asc' ? 'desc' : 'asc')}
             title="Event"
+            rotate={sort.orderBy === 'desc' && sort.sortKey === 'title' ? 'asc' : 'desc'}
             center
           />
         </Table.Cell>
@@ -48,12 +50,16 @@ const BillingTable = ({ events, sort, setEventsSortKey }) => (
           <Table.HeaderCell
             onClick={() => setEventsSortKey('eventType', sort.orderBy === 'asc' ? 'desc' : 'asc')}
             title="Event Type"
+            rotate={sort.orderBy === 'desc' && sort.sortKey === 'eventType' ? 'asc' : 'desc'}
           />
         </Table.Cell>
         <Table.Cell width="10%">
           <Table.HeaderCell
-            onClick={() => setEventsSortKey('guests', sort.orderBy === 'asc' ? 'desc' : 'asc')}
+            onClick={() =>
+              setEventsSortKey('guests', sort.orderBy === 'asc' ? 'desc' : 'asc', true)
+            }
             title="Guests"
+            rotate={sort.orderBy === 'desc' && sort.sortKey === 'guests' ? 'asc' : 'desc'}
             center
           />
         </Table.Cell>
@@ -61,6 +67,7 @@ const BillingTable = ({ events, sort, setEventsSortKey }) => (
           <Table.HeaderCell
             onClick={() => setEventsSortKey('start', sort.orderBy === 'asc' ? 'desc' : 'asc')}
             title="Event Date"
+            rotate={sort.orderBy === 'desc' && sort.sortKey === 'start' ? 'asc' : 'desc'}
             selected
             center
           />
@@ -69,6 +76,7 @@ const BillingTable = ({ events, sort, setEventsSortKey }) => (
           <Table.HeaderCell
             onClick={() => setEventsSortKey('createdBy', sort.orderBy === 'asc' ? 'desc' : 'asc')}
             title="Created By"
+            rotate={sort.orderBy === 'desc' && sort.sortKey === 'createdBy' ? 'asc' : 'desc'}
             center
           />
         </Table.Cell>

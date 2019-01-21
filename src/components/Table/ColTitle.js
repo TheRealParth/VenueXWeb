@@ -33,6 +33,7 @@ const ColTitle = styled.div`
 
   #sortButton {
     display: ${props => (props.noSort ? 'none' : '')};
+    transform: ${props => (props.rotate === 'asc' ? 'rotate(180deg)' : 'rotate(0deg)')};
   }
 `;
 

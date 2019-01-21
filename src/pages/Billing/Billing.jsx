@@ -40,7 +40,6 @@ class Billing extends Component {
     const { currentDate } = this.state;
     const eventsThisMonth = this.eventsThisMonth();
     let dueDate = moment(currentDate).add(1, 'M');
-    let buttonState = this.props.setEventsSortKey;
     const totalGuests = eventsThisMonth.reduce(
       (accumulator, currentValue) => accumulator + parseInt(currentValue.guests || 0, 10),
       0
