@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import plusIcon from '../../assets/plus.svg';
 import filterIcon from '../../assets/filter.svg';
 import Icons from '../../assets/icons';
-import Button from '../../components/Button';
+import Button from '../Button';
 import RoundButton from '../../components/RoundButton';
 
 const ManageStaffHeader = styled.div`

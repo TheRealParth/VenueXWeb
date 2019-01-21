@@ -7,6 +7,7 @@ import PersonalMenu from '../../components/PersonalMenu';
 import AddButton from '../../components/AddButton';
 import InjectStyles from '../../components/InjectStyles';
 import { ManageStaffHeader } from './index.module.scss';
+import { get } from 'lodash';
 
 class ManageStaff extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class ManageStaff extends Component {
 
   render() {
     const { isOpen, users } = this.state;
-    const primary = this.props ? this.props.config.theme.colors.primary : '';
+    const primary = get(this.props, 'config.theme.colors.primary', '');
     return (
       <>
         <AddEmployeeModal isOpen={isOpen} onRequestClose={this.closeModal} />
