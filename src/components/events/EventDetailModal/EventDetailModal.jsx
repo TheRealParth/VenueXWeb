@@ -249,7 +249,7 @@ class EventDetailModal extends PureComponent {
           <div className={EventDetailHeaderContent}>
             <div className={EventDetailTitle}>{event.title}</div>
             <div className={EventDetailSubtitle}>
-              {moment(event.start).format('dddd MMMM DD, YYYY')}
+              {moment(event.start).format('dddd MMMM D, YYYY')}
             </div>
           </div>
         </div>
@@ -431,7 +431,7 @@ class EventDetailModal extends PureComponent {
                 content: (
                   <DescriptionList>
                     <div className={EventDetailContentRow}>
-                      <dt style={{alignSelf: 'flex-start'}}>Notes:</dt>
+                      <dt style={{ alignSelf: 'flex-start' }}>Notes:</dt>
                       <dd>{event.eventNotes}</dd>
                     </div>
                   </DescriptionList>

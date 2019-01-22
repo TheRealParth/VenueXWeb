@@ -4,6 +4,7 @@ import { EmployeeModalHeader, FormSection } from '../StaffTable/styles.module.sc
 import { AddEventModalHeader, AddEventModalSection } from '../events/index.module.scss';
 import { PrimaryButton } from '../Button/index.module.scss';
 import { EventDetailHeader } from '../events/EventDetailModal/index.module.scss';
+import { SideBarItem, SideBarActiveItem } from '../Sidebar/index.module.scss';
 
 const InjectStyles = ({ colors }) => (
   <style>{`
@@ -25,6 +26,19 @@ const InjectStyles = ({ colors }) => (
     .${EventDetailHeader} {
       background-color: ${colors.primary}66;
     }
+    .${SideBarItem}:hover { 
+      background-color: ${colors.primary}4D;
+
+    }
+    .${SideBarActiveItem} { 
+      background-color: ${colors.primary}99;
+      border-left: 5px solid ${colors.primary};
+    }
+    .${SideBarActiveItem}:hover { 
+      background-color: ${colors.primary}4D;
+     
+    }
+
     `}</style>
 );
 
