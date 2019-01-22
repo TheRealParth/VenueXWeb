@@ -33,7 +33,7 @@ const Tab = styled.div`
   ${props =>
     props.isActive &&
     css`
-      color: props.primaryColor;
+      color: ${props.primaryColor};
 
       &:after {
         content: '';
@@ -82,9 +82,6 @@ class SideTabs extends PureComponent {
                 isActive={i === this.state.activeTab}
                 onClick={() => this.setState({ activeTab: i })}
                 primaryColor={this.props.primaryColor}
-                style={{
-                  color: i === this.state.activeTab ? this.props.primaryColor : '#b0b0b0'
-                }}
               >
                 <Icon>
                   {React.createElement(Icons[tab.icon], {

@@ -24,7 +24,8 @@ import {
   ConsultantRow,
   ConsultantTitle,
   ConsultantImage,
-  EventDetailContentRow
+  EventDetailContentRow,
+  EventDetailPaymentTitle
 } from './index.module.scss';
 
 const DescriptionList = styled.dl`
@@ -206,7 +207,7 @@ class EventDetailModal extends PureComponent {
     }
 
     const { guestsPerTable } = event;
-    console.log('HERE HERE', primaryColor, 'CONFIG', config);
+    console.log('yo');
     if (this.state.isEditing) {
       return (
         <EventModalForm
@@ -247,7 +248,9 @@ class EventDetailModal extends PureComponent {
           </div>
           <div className={EventDetailHeaderContent}>
             <div className={EventDetailTitle}>{event.title}</div>
-            <div className={EventDetailSubtitle}>Friday, September 12th</div>
+            <div className={EventDetailSubtitle}>
+              {moment(event.start).format('dddd MMMM DD, YYYY')}
+            </div>
           </div>
         </div>
         <div style={{ flex: 1, overflow: 'hidden' }}>
@@ -270,27 +273,31 @@ class EventDetailModal extends PureComponent {
 
                       <img src="https://placehold.it/100x100" className={ConsultantImage} />
 
-                      <div>Thomas Daidone</div>
+                      <div>{event.consultant}</div>
                     </div>
 
                     <div className={EventDetailContentRow}>
                       <dt>Event Type:</dt>
-                      <dd> Wedding </dd>
+                      <dd> {event.eventType} </dd>
                       {/* <dd>{humanize(event.type)}</dd> */}
                     </div>
-                    <div className={EventDetailContentRow}>
-                      <dt>Ceremony:</dt>
-                      <dd>Off-Site</dd>
-                      {/* <dd>{humanize(event.type)}</dd> */}
-                    </div>
+
+                    {event.eventType === 'wedding' ? (
+                      <div className={EventDetailContentRow}>
+                        <dt>Ceremony:</dt>
+                        <dd>{event.ceremony}</dd>
+                      </div>
+                    ) : (
+                      ''
+                    )}
                     <div className={EventDetailContentRow}>
                       <dt>Start Time:</dt>
-                      <dd>5:00 pm</dd>
+                      <dd>{moment(event.start).format('h:mm A')}</dd>
                     </div>
 
                     <div className={EventDetailContentRow}>
                       <dt>End Time:</dt>
-                      <dd>10:00 pm</dd>
+                      <dd>{moment(event.end).format('h:mm A')}</dd>
                     </div>
                   </DescriptionList>
                 )
@@ -302,21 +309,21 @@ class EventDetailModal extends PureComponent {
                   <DescriptionList>
                     <div className={EventDetailContentRow}>
                       <dt>Client Name:</dt>
-                      <dd>{event.clientName}</dd>
+                      <dd>{event.client}</dd>
                     </div>
 
                     <div className={EventDetailContentRow}>
-                      <dt>Client email:</dt>
+                      <dt>Client Email:</dt>
                       <dd>{event.clientEmail}</dd>
                     </div>
 
                     <div className={EventDetailContentRow}>
-                      <dt>Client phone:</dt>
+                      <dt>Client Phone:</dt>
                       <dd>{event.clientPhone}</dd>
                     </div>
 
-                    <div className={EventDetailContentRow} style={{ paddingRight: 15 }}>
-                      <dt>Payment:</dt>
+                    {/*   <div className={EventDetailContentRow} style={{ paddingRight: 15 }}>
+                      <dt className={EventDetailPaymentTitle}>Payment:</dt>
                       <dd>
                         <div className={EventDetailContentRow}>
                           <Flex>
@@ -390,7 +397,7 @@ class EventDetailModal extends PureComponent {
                           </dd>
                         </div>
                       </dd>
-                    </div>
+                    </div> */}
                   </DescriptionList>
                 )
               },
@@ -401,15 +408,19 @@ class EventDetailModal extends PureComponent {
                   <DescriptionList>
                     <div className={EventDetailContentRow}>
                       <dt>Room:</dt>
-                      {/* <dd>{room.name}</dd> */}
+                      {event.roomName}
                     </div>
                     <div className={EventDetailContentRow}>
                       <dt>Layout:</dt>
-                      <dd>{numberOfTables}</dd>
+                      <dd>{event.layoutName}</dd>
                     </div>
                     <div className={EventDetailContentRow}>
-                      <dt>Guests per table</dt>
-                      <dd>{guestsPerTable}</dd>
+                      <dt>Minimum Guests:</dt>
+                      <dd>{event.guestMinimum}</dd>
+                    </div>
+                    <div className={EventDetailContentRow}>
+                      <dt>Guests Per Table:</dt>
+                      <dd>{event.guestsPerTable}</dd>
                     </div>
                   </DescriptionList>
                 )
@@ -420,8 +431,8 @@ class EventDetailModal extends PureComponent {
                 content: (
                   <DescriptionList>
                     <div className={EventDetailContentRow}>
-                      <dt>Notes</dt>
-                      <dd>{event.notes}</dd>
+                      <dt style={{alignSelf: 'flex-start'}}>Notes:</dt>
+                      <dd>{event.eventNotes}</dd>
                     </div>
                   </DescriptionList>
                 )
