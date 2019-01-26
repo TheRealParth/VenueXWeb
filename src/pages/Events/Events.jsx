@@ -38,6 +38,7 @@ class Events extends Component {
       <>
         <EventDetailModal {...this.props} event={this.state.currentEvent} />
         <AddEventModal
+          {...this.props}
           isOpen={isAddingEvent}
           onClose={this.closeAddingModal}
         />

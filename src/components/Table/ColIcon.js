@@ -18,12 +18,7 @@ const Icon = styled.div`
   cursor: pointer;
 
   ${props =>
-    props.sortable === true &&
-    css`
-      display: block;
-    `};
-  ${props =>
-    props.sortable === true &&
+    props.sortable &&
     css`
       display: block;
     `};

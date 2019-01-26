@@ -2,15 +2,20 @@ import { Billing } from './Billing';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import { sortUsersSelector } from '../../reducers/users';
+import { sortEventsSelector } from '../../reducers/events';
 import { get } from 'lodash';
 
+//TODO
 function mapStateToProps({ events, users, config, auth }) {
   return {
     events: events.list,
     users: users.list,
     currentUser: users && users.list.find(user => user.id === auth.user.uid),
-    sortedUsers: sortUsersSelector(users),
+    sort: {
+      sortKey: events.sortKey,
+      orderBy: events.orderBy
+    },
+    sortedEvents: sortEventsSelector(events),
     config: get(config, 'config', {})
   };
 }

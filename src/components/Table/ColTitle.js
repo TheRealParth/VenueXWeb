@@ -14,11 +14,26 @@ const ColTitle = styled.div`
   color: ${props => (props.selected ? '#181818' : '#888888')};
   display: flex;
   align-content: center;
+  cursor: default;
+  /* Disables text highlighting */
+  webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Chrome and Opera */
+  ${props =>
+    props.selected === true &&
+    css`
+      font-weight: bold;
+      color: #181818;
+    `};
   justify-content: ${props => (props.center ? 'center' : '')};
   width: 100%;
 
   #sortButton {
     display: ${props => (props.noSort ? 'none' : '')};
+    transform: ${props => (props.rotate === 'asc' ? 'rotate(180deg)' : 'rotate(0deg)')};
   }
 `;
 

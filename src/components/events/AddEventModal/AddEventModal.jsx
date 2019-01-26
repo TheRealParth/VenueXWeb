@@ -2,11 +2,12 @@ import React, { PureComponent } from 'react';
 import moment from 'moment';
 import EventModalForm from '../EventModalForm';
 import generateId from '../../../utils/generateId';
+import { firebaseApp } from '../../../firebase';
 
 class AddEventModal extends PureComponent {
 
   handleSubmitted = async values => {
-    await this.props.firebase.database().ref(`events/${generateId()}`).set({
+    this.props.createEventRequest({
       start: parseInt(
         moment(
           `${values.dateTimeDuration.date.format('YYYY-MM-DD')} ${values.dateTimeDuration.startTime.format('HH:mm')}`,

@@ -15,11 +15,13 @@ export const createEventRequest = event => {
   return {
     type: eventTypes.CREATE_EVENT_REQUEST,
     event
-  }
-}
-export const setEventsSortKey = sortKey => {
+  };
+};
+
+export const setEventsSortKey = (sortKey, orderBy) => {
   return {
-    type: eventTypes.SET_SORT_KEY,
-    sortKey
+    type: eventTypes.SET_EVENT_SORT_KEY,
+    sortKey, //field
+    orderBy //asc or desc
   };
 };

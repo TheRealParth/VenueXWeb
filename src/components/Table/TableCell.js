@@ -13,7 +13,6 @@ const TableCell = styled.div`
   min-width: 50px;
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden;
   margin: 0px 10px;
 
   ${props =>
