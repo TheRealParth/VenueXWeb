@@ -1,23 +1,19 @@
 import React, { PureComponent } from 'react';
-import { withRouter } from 'react-router';
-import { compose } from 'redux';
-import { withFirebase, firebaseConnect } from 'react-redux-firebase';
 import moment from 'moment';
 import styled from 'styled-components';
-import Modal from '../Modal';
-import ConfirmationModal from '../ConfirmationModal';
-import Button from '../Button';
-import SideTabs from '../SideTabs';
-import ConsultantLabel from '../Consultant';
-import Switch from '../Switch';
-import EventModalForm from '../events/EventModalForm';
-import { withVenueConfig } from '../../containers/VenueConfigProvider';
-import { humanize } from '../../utils';
-import ringsImage from '../../assets/rings.svg';
-import calendarIcon from '../../assets/calendar-gray.svg';
-import notesIcon from '../../assets/notes-icon.svg';
-import clientDetailsIcon from '../../assets/client-details-icon.svg';
-import grayRoomIcon from '../../assets/room-gray.svg';
+import Modal from '../../Modal';
+import ConfirmationModal from '../../ConfirmationModal';
+import Button from '../../Button';
+import SideTabs from '../../SideTabs';
+import ConsultantLabel from '../../Consultant';
+import Switch from '../../Switch';
+import EventModalForm from '../../events/EventModalForm';
+import { humanize } from '../../../utils';
+import ringsImage from '../../../assets/rings.svg';
+import calendarIcon from '../../../assets/calendar-gray.svg';
+import notesIcon from '../../../assets/notes-icon.svg';
+import clientDetailsIcon from '../../../assets/client-details-icon.svg';
+import grayRoomIcon from '../../../assets/room-gray.svg';
 
 
 const Header = styled.div`
@@ -218,7 +214,7 @@ class EventDetailModal extends PureComponent {
   render() {
     const {
       firebase,
-      venueConfig,
+      config,
       event,
       ...restProps
     } = this.props;
@@ -226,7 +222,7 @@ class EventDetailModal extends PureComponent {
       return <div />;
     }
 
-    const room = venueConfig.rooms[event.room];
+    const room = config.rooms[event.room];
 
     const { numberOfTables } = room.layouts[event.tableLayout];
 
@@ -381,11 +377,11 @@ class EventDetailModal extends PureComponent {
                             <dd>
                               <Switch
                                 value={Boolean(event.isPaymentBannerEnabled)}
-                                onChange={newVal =>
-                                  firebase
-                                    .database()
-                                    .ref(`events/${event.id}/isPaymentBannerEnabled`)
-                                    .set(newVal)
+                                onChange={newVal => console.log(newVal)
+                                  // firebase
+                                  //   .database()
+                                  //   .ref(`events/${event.id}/isPaymentBannerEnabled`)
+                                  //   .set(newVal)
                                 }
                               />
                             </dd>
@@ -477,9 +473,4 @@ class EventDetailModal extends PureComponent {
   }
 }
 
-export default compose(
-  withVenueConfig,
-  withRouter,
-  firebaseConnect(),
-  withFirebase,
-)(EventDetailModal);
+export { EventDetailModal };

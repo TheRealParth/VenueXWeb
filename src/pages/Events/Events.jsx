@@ -6,12 +6,14 @@ import '../../components/BigCalendar/less/styles.scss';
 import AddEventModal from '../../components/events/AddEventModal';
 import InjectStyles from '../../components/InjectStyles';
 import Toolbar from '../../components/BigCalendar/Toolbar';
+import EventDetailModal from '../../components/events/EventDetailModal';
 
 const localizer = BigCalendar.momentLocalizer(moment);
 class Events extends Component {
   state = {
     events: [],
-    isAddingEvent: false
+    isAddingEvent: false,
+    currentEvent: null,
   };
   componentDidMount() {
     this.props.getEventsRequest();
@@ -27,13 +29,14 @@ class Events extends Component {
   openAddingModal = () => this.setState({ isAddingEvent: true });
   closeAddingModal = () => this.setState({ isAddingEvent: false });
   selectEventHandler = event => {
-    console.log(event);
+    this.setState({ currentEvent: event })
   };
   render() {
     const { events, isAddingEvent } = this.state;
     const { currentUser } = this.props;
     return (
       <>
+        <EventDetailModal {...this.props} event={this.state.currentEvent} />
         <AddEventModal
           {...this.props}
           isOpen={isAddingEvent}
