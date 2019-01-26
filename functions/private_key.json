@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "venuex-dreamstack",
+  "private_key_id": "de7c522f1b4c1eabfb9b51eb9007604635bc6c4d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDZRMlsKKDPgX9f\n7k/s7DD36tzydyTqcRanW1X8bd+A/pt5RDYAoGP8yk0G6UeCcEzpc+udtEc3sFbp\nd3UOX+ArjIebxwqpXfU4m+Y8l92gE8OeUq8QVoT7Q2RsG3tDRWJwZvl/b/SmJeAD\n8eqTWb/Yx/cFKwmUY1ZKaQOEABhgZAiYbVKN7LtZc9RUEovfxT8DgFJyHGlfbBqw\nIByOrgwiGjWIr4WotFW3fU5bjqdyi8iQ+l9SUnknsvnXmpliNpBaV9Buh/t5b88d\nK5o5c/kgyW3FBqsb+AtqSSkTKC64z0IBDN3ld7VKrpsSFeXdMhwAwUzcWN+G3hEP\nCNl0NvKXAgMBAAECggEAPdycDTO0NeEFR2cvUqIdfzlcF51c4XO5o4UaAnm2PaBA\n3FJTnfINBhkDvYgGWFlpTL84wvplnLGUzXy505Hw3fVxVyVhH8Ak5i1dbLtA2ydF\nd3rLZbd8vZ3+pdldS1YiJSbsuyBBZF08X2MuCy5utWaaKtqKK7ntA9rKqXbteeP7\nQ9vDvPKjodsg4ygzSOW/lQJxGslLIL8acdYLWLiOUll9B7yJk4BNMH1fKMYoanjh\nOC6cQNkzBvKsxD/SzBfL4c28bZltjn7YsPP2OSdoUGFMYnwhLNhJE++YPDDzv4ak\ngudTZZV4MEmlFIyjpFPKol2o5Uj2ffLD5qomCwUsAQKBgQDyjhyS8xtxX34aGRpz\nW32EhBPZ+7x5z11Rnzpf1qFIFDZ1JLDEIM6CXtJURIjkubtgxrI/tbz4cIB0hkcR\nruBcwKQa4gOTUsZzAPVAohIB7Xp1vpZoTFz1ldYTmQvZnOw0UbVm5kvfWm/fO0ap\nJKY8942irm9EXOejv5sIQU0LFwKBgQDlT9uJipil8WqFvKDA3Q58SNk1DpHm+VXq\nsUugh3w7z3FJgsJtrbyoliZKLjeglHfIog812Br2+RS6A5zbxdl3khtXOZKvthqU\n6Q7npuPy0C3QE+5fVWAQ/2inq+wmyVHLUVcMlAo6EHzH07Z8MzQjN9fPrLUJiTYd\nD5RGrIgEgQKBgQDTRxKAth5LbQCsvv0ZSrJUwa+BCxQrjoMc2/O/E3e9D044T9Nh\no6n+SZYwLNqJUXd0Xt9ZO3b1eRmLZoN1Vby9TlgjyoeOxmVyO31l5UaGQ1OOSIs/\nInU+vluRCpkV3uio0huPHD8uuNoFut5b6z6akI/hCsyE4eAr9HSYhjkT1QKBgQCQ\napy+oJTGXaZSl5s+G3oV9+MjsQteRcVAS2xvqyQontqgC0Pbw0E/g2CV80mBTj+q\nEbY2mOVSiUfuZnwRRSdSUKf7ZPzmwG85PRXv+oEw2L8hfovvaltYGSKWBoZxXvSu\ncYm7GDjgnKWZS9JvoefCDldSKVjSqqFz5+3gHKSFAQKBgCxCMAJKy8RjyYJYK0HN\neqq5Ly7qkZU5TERwDf9jMFCDfMA/8ywrsSkriJiJAtcyLXEAKP+mQRc8CxmPCcDZ\nwwshcOLYHUq9ypSmGXZL3tSwOWhw7JhOmpDzk3tQyt+q8tEcx0WhICU8j2ivFvaT\nxvsZ/wc8xjTXecjagDfJiq4F\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-sqbqh@venuex-dreamstack.iam.gserviceaccount.com",
+  "client_id": "117556187406752568795",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-sqbqh%40venuex-dreamstack.iam.gserviceaccount.com"
+}
