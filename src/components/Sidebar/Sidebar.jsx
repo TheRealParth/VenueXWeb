@@ -9,6 +9,7 @@ const Sidebar = withRouter(({ children, location }) => (
   <>
     <div className={styles.layout}>
       <div className={styles.container}>
+        <img src="https://via.placeholder.com/150" className={styles.logo} />
         {menuItems.map(({ id, label, route, icon }) => (
           <Link
             key={id}
