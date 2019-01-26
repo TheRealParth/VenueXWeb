@@ -35,6 +35,7 @@ class Events extends Component {
     return (
       <>
         <AddEventModal
+          {...this.props}
           isOpen={isAddingEvent}
           onClose={this.closeAddingModal}
         />

@@ -94,14 +94,11 @@ const StaffTable = ({
               </>
             ) : (
                 <>
-                  <Table.Cell width="38%">
+                  <Table.Cell width="80%">
                     <EditStaffPermissionsDropdown
                       selectedCount={selectedCount}
                       selectedEmployees={users.filter(user => user.checked)}
                     />
-
-                  </Table.Cell>
-                  <Table.Cell width="40%">
                     <Button
                       label={`Delete ${selectedCount} staff member${selectedCount > 1 ? 's' : ''}`}
                       kind="danger"
