@@ -47,6 +47,7 @@ const StaffTable = ({
           <Table.Row header height="75px" style={{ paddingTop: '10px' }}>
             <Table.Cell width="5%">
               <Table.HeaderCell
+                noSort
                 title={
                   <Checkbox
                     onCheck={selectAllUsers}
@@ -63,9 +64,10 @@ const StaffTable = ({
                     onClick={() =>
                       setUsersSortKey('fullName', sort.orderBy === 'asc' ? 'desc' : 'asc')
                     }
+                    rotate={sort.orderBy === 'desc' && sort.sortKey === 'fullName' ? 'asc' : 'desc'}
                     title={'Name'}
                     selected
-                    style={{ paddingLeft: '49px' }}
+                    //style={{ paddingLeft: '49px' }} /* fixes padding issue, though incorrectly.. */
                   />
                 </Table.Cell>
                 <Table.Cell width="20%">
@@ -73,19 +75,21 @@ const StaffTable = ({
                     onClick={() =>
                       setUsersSortKey('email', sort.orderBy === 'asc' ? 'desc' : 'asc')
                     }
+                    rotate={sort.orderBy === 'desc' && sort.sortKey === 'email' ? 'asc' : 'desc'}
                     numeric
                     title="Email"
                     center
                   />
                 </Table.Cell>
                 <Table.Cell width="20%">
-                  <Table.HeaderCell onClick={() => { }} title="Permission" center noSort />
+                  <Table.HeaderCell onClick={() => {}} title="Permission" center noSort />
                 </Table.Cell>
                 <Table.Cell width="20%">
                   <Table.HeaderCell
                     onClick={() =>
                       setUsersSortKey('created', sort.orderBy === 'asc' ? 'desc' : 'asc')
                     }
+                    rotate={sort.orderBy === 'desc' && sort.sortKey === 'created' ? 'asc' : 'desc'}
                     title="Date Added"
                     center
                   />
@@ -93,23 +97,22 @@ const StaffTable = ({
                 <Table.Cell width="15%" />
               </>
             ) : (
-                <>
-                  <Table.Cell width="38%">
-                    <EditStaffPermissionsDropdown
-                      selectedCount={selectedCount}
-                      selectedEmployees={users.filter(user => user.checked)}
-                    />
-
-                  </Table.Cell>
-                  <Table.Cell width="40%">
-                    <Button
-                      label={`Delete ${selectedCount} staff member${selectedCount > 1 ? 's' : ''}`}
-                      kind="danger"
-                      onClick={() => deleteUsers({ users: users.filter(user => user.checked) })}
-                    />
-                  </Table.Cell>
-                </>
-              )}
+              <>
+                <Table.Cell width="38%">
+                  <EditStaffPermissionsDropdown
+                    selectedCount={selectedCount}
+                    selectedEmployees={users.filter(user => user.checked)}
+                  />
+                </Table.Cell>
+                <Table.Cell width="40%">
+                  <Button
+                    label={`Delete ${selectedCount} staff member${selectedCount > 1 ? 's' : ''}`}
+                    kind="danger"
+                    onClick={() => deleteUsers({ users: users.filter(user => user.checked) })}
+                  />
+                </Table.Cell>
+              </>
+            )}
           </Table.Row>
           <Table.Body>
             {users.map(user => (
