@@ -1,0 +1,84 @@
+.EventDetailHeader {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.EventDetailHeaderContent {
+  margin-bottom: 7px;
+}
+
+.EventBadge {
+  height: 120px;
+  width: 120px;
+  background-color: #fff;
+  border-radius: 50%;
+  margin-right: 15px;
+  margin-top: 1px;
+  box-shadow: 0px 2px 4px rgba(125, 125, 125, 0.2);
+  > img {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.EventDetailTitle {
+  font-family: Lora;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.73px;
+  color: #181818;
+}
+
+.EventDetailSubtitle {
+  font-size: 14px;
+  color: #7d7d7d;
+  font-weight: 500;
+  padding-top: 5px;
+}
+
+.ConsultantRow {
+  display: flex;
+  margin-top: 24px;
+  padding-top: 0px;
+  padding-left: 4px;
+  font-weight: 600;
+  > div {
+    display: flex;
+    align-items: flex-end;
+    letter-spacing: -0.5px;
+    margin-top: -3px;
+  }
+}
+
+.ConsultantImage {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  margin-right: 7px;
+  margin-left: 10px;
+}
+
+.ConsultantTitle {
+  color: #7d7d7d;
+}
+
+.EventDetailContentRow {
+  padding: 24.3px 4px 0px 4px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.5px;
+  text-transform: capitalize;
+}
+
+.EventDetailPaymentTitle {
+  align-self: flex-start;
+}
