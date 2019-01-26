@@ -1,12 +1,26 @@
 import { eventTypes } from '../types';
 import { createSelector } from 'reselect';
-import { sortBy } from 'lodash';
+import { orderBy } from 'lodash';
 
 const initialState = {
   list: [],
-  sortKey: '',
-  addEmployee: { isOpen: false }
+  sortKey: {
+    date: null,
+    client: null
+  },
+  addEmployee: { isOpen: false },
+  orderBy: null
 };
+
+//Added
+const eventsSelector = events => events.list;
+const sortKeySelector = events => events.sortKey;
+const orderBySelector = events => events.orderBy;
+
+export const sortEventsSelector = createSelector(
+  [eventsSelector, sortKeySelector, orderBySelector],
+  orderBy
+);
 
 export const events = (state = initialState, action) => {
   switch (action.type) {
@@ -15,10 +29,11 @@ export const events = (state = initialState, action) => {
         ...state,
         list: action.events
       };
-    case eventTypes.SET_SORT_KEY:
+    case eventTypes.SET_EVENT_SORT_KEY:
       return {
         ...state,
-        sortKey: action.sortKey
+        sortKey: action.sortKey,
+        orderBy: action.orderBy
       };
     case eventTypes.SET_ADD_EMPLOYEE_OPEN:
       return {

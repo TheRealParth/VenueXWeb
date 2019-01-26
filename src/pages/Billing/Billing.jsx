@@ -15,6 +15,7 @@ class Billing extends Component {
   }
   componentDidMount() {
     this.props.getEventsRequest();
+    this.props.setEventsSortKey('start', 'asc');
   }
   handleNextMonth = () => {
     this.setState({
@@ -28,7 +29,7 @@ class Billing extends Component {
   };
   eventsThisMonth = () => {
     const currentMonth = this.state.currentDate.format('YYYY-MM');
-    const eventsThisMonth = this.props.events.filter(event => {
+    const eventsThisMonth = this.props.sortedEvents.filter(event => {
       const eventMonth = moment(event.start).format('YYYY-MM');
       return eventMonth === currentMonth;
     });
@@ -71,7 +72,11 @@ class Billing extends Component {
           daysUntilDue={daysUntilDue}
         />
         <div style={{ backgroundColor: '#fafafa' }}>
-          <BillingTable events={eventsThisMonth} />
+          <BillingTable
+            setEventsSortKey={this.props.setEventsSortKey}
+            sort={this.props.sort}
+            events={eventsThisMonth}
+          />
         </div>
         <InjectStyles />
       </>

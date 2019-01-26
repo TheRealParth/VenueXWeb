@@ -3,20 +3,26 @@ import styled, { css } from 'styled-components';
 import DatePicker from 'react-datepicker';
 
 const DatePickerWrapper = styled.div`
+  .react-datepicker-popper {
+    z-index: 200;
+  }
   .react-datepicker {
     border: none;
     border-radius: 2px;
     box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.2);
     padding: 5px 10px;
     font-family: inherit;
-
+    background-color: #fff !important;
+    
     ${props =>
     props.showTimeSelect &&
     css`
         padding: 0px;
       `}
   }
-
+  li {
+    list-style: none;
+  }
   .react-datepicker__triangle {
     display: none;
   }
@@ -42,6 +48,7 @@ const DatePickerWrapper = styled.div`
     color: #7d7d7d;
     font-size: 14px;
     display: inline-block;
+    text-align: center;
   }
 
   .react-datepicker__day--today {

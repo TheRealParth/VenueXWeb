@@ -164,9 +164,7 @@ export function* syncDeleteUserSaga({ payload }) {
   });
 }
 export function* syncCreateEventSaga({ payload }) {
-  yield fork(rsf.firestore.addDocument, `venues/${venueId}/events`, {
-    //TODO
-  });
+  yield fork(rsf.firestore.addDocument, `venues/${venueId}/events`, payload.event);
 }
 export function* createUserSaga({ user }) {
   console.log(user)
