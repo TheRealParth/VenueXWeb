@@ -110,7 +110,8 @@ const styles = theme => ({
     height: '100vh',
     overflow: 'auto',
     backgroundColor: ' #fafafa',
-    border: '1px solid #ededed'
+    border: '1px solid #ededed',
+    margin: 0,
   },
   chartContainer: {
     marginLeft: -22
