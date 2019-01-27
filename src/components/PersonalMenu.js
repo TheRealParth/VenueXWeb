@@ -25,7 +25,7 @@ const MissingProfilePicture = {
   color: 'black',
   verticalAlign: 'middle',
   lineHeight: '50px',
-  fontFamily: 'Lora'
+  fontFamily: 'Montserrat-Bold'
 };
 
 const NameSection = styled.div`
