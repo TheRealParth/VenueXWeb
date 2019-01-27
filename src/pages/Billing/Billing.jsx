@@ -36,7 +36,7 @@ class Billing extends Component {
     return eventsThisMonth;
   };
   render() {
-    const { events } = this.props;
+    const { users } = this.props;
     const { currentDate } = this.state;
     const eventsThisMonth = this.eventsThisMonth();
     let dueDate = moment(currentDate).add(1, 'M');
@@ -76,7 +76,10 @@ class Billing extends Component {
             theme={this.props.config.theme}
             setEventsSortKey={this.props.setEventsSortKey}
             sort={this.props.sort}
-            events={eventsThisMonth}
+            events={eventsThisMonth.map((event) => ({
+              ...event,
+              createdBy: users.find((user) => user.id === event.createdBy)
+            }))}
           />
         </div>
         <InjectStyles />

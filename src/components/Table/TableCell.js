@@ -14,6 +14,9 @@ const TableCell = styled.div`
   white-space: nowrap;
   text-overflow: ellipsis;
   margin: 0px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   ${props =>
     props.width &&

@@ -32,7 +32,6 @@ class ManageStaff extends Component {
     this.setState({
       isOpen: true
     });
-    console.log(this.state);
   };
   closeModal = () => {
     this.setState({
@@ -42,9 +41,7 @@ class ManageStaff extends Component {
   openEditModal = userId => {
 
   }
-  openDeleteModal = userId => {
-
-
+  openDeleteModal = () => {
     this.setState({
       deleteModalOpen: true
     })
@@ -56,8 +53,20 @@ class ManageStaff extends Component {
         <ConfirmationModal
           label="Are you sure you want to delete this user?"
           isOpen={deleteModalOpen}
-          onConfirm={() => { this.setState({ deleteModalOpen: false }); this.props.deleteUsers({ users: users.filter(user => user.checked) }) }}
-          onCancel={() => { this.setState({ deleteModalOpen: false }); this.props.unSelectAllUsers() }}
+          onConfirm={
+            () => {
+              this.setState({ deleteModalOpen: false });
+              this.props.deleteUsers({
+                users: users.filter(user => user.checked)
+              })
+            }
+          }
+          onCancel={
+            () => {
+              this.setState({ deleteModalOpen: false });
+              this.props.unSelectAllUsers()
+            }
+          }
         />
         <AddEmployeeModal isOpen={isOpen} onRequestClose={this.closeModal} />
         <div className={ManageStaffHeader}>
@@ -70,8 +79,14 @@ class ManageStaff extends Component {
 
         <StaffTable
           {...this.props}
+          singleDeleteModal={
+            (userId) => {
+              this.props.unSelectAllUsers();
+              this.props.selectSingleUser(userId);
+              this.openDeleteModal();
+            }
+          }
           editModal={this.openEditModal}
-          singleDeleteModal={(userId) => { this.props.unSelectAllUsers(); this.props.selectSingleUser(userId); this.openDeleteModal(); }}
           deleteModal={this.openDeleteModal}
           theme={this.props.config.theme}
           users={users}

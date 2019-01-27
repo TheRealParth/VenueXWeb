@@ -106,7 +106,7 @@ const BillingTable = ({ events, theme, sort, setEventsSortKey }) => (
               {moment(event.start).format('MM/DD/YYYY')}
             </Table.Cell>
             <Table.Cell width="20%" component="th" scope="row">
-              {event.createdBy}
+              {event.createdBy.fullName}
             </Table.Cell>
           </StyledTableRow>
         ))}

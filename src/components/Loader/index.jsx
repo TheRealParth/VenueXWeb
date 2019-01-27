@@ -1,10 +1,6 @@
 import { Loader } from './Loader';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { sortEventsSelector } from '../../reducers/events';
-import { get } from 'lodash';
 
-//TODO
 function mapStateToProps({ config, auth }) {
   return {
     config,
@@ -12,7 +8,4 @@ function mapStateToProps({ config, auth }) {
   };
 }
 
-
-export default connect(
-  mapStateToProps
-)(Loader);
+export default connect(mapStateToProps)(Loader);
