@@ -26,12 +26,13 @@ const StyledTableRow = styled(Table.Row)`
   }
 `;
 
-const BillingTable = ({ events, sort, setEventsSortKey }) => (
+const BillingTable = ({ events, theme, sort, setEventsSortKey }) => (
   <TableContainer>
     <Table>
       <Table.Row style={{ height: '63px' }} header>
         <Table.Cell width="19%">
           <Table.HeaderCell
+            theme={theme}
             onClick={() => setEventsSortKey('client', sort.orderBy === 'asc' ? 'desc' : 'asc')}
             title="Client"
             rotate={sort.orderBy === 'desc' && sort.sortKey === 'client' ? 'asc' : 'desc'}
@@ -40,6 +41,7 @@ const BillingTable = ({ events, sort, setEventsSortKey }) => (
         </Table.Cell>
         <Table.Cell width="19%">
           <Table.HeaderCell
+            theme={theme}
             onClick={() => setEventsSortKey('title', sort.orderBy === 'asc' ? 'desc' : 'asc')}
             title="Event"
             rotate={sort.orderBy === 'desc' && sort.sortKey === 'title' ? 'asc' : 'desc'}
@@ -48,6 +50,7 @@ const BillingTable = ({ events, sort, setEventsSortKey }) => (
         </Table.Cell>
         <Table.Cell width="12%">
           <Table.HeaderCell
+            theme={theme}
             onClick={() => setEventsSortKey('eventType', sort.orderBy === 'asc' ? 'desc' : 'asc')}
             title="Event Type"
             rotate={sort.orderBy === 'desc' && sort.sortKey === 'eventType' ? 'asc' : 'desc'}
@@ -55,6 +58,7 @@ const BillingTable = ({ events, sort, setEventsSortKey }) => (
         </Table.Cell>
         <Table.Cell width="10%">
           <Table.HeaderCell
+            theme={theme}
             onClick={() =>
               setEventsSortKey('guests', sort.orderBy === 'asc' ? 'desc' : 'asc', true)
             }
@@ -65,6 +69,7 @@ const BillingTable = ({ events, sort, setEventsSortKey }) => (
         </Table.Cell>
         <Table.Cell width="20%">
           <Table.HeaderCell
+            theme={theme}
             onClick={() => setEventsSortKey('start', sort.orderBy === 'asc' ? 'desc' : 'asc')}
             title="Event Date"
             rotate={sort.orderBy === 'desc' && sort.sortKey === 'start' ? 'asc' : 'desc'}
@@ -74,6 +79,7 @@ const BillingTable = ({ events, sort, setEventsSortKey }) => (
         </Table.Cell>
         <Table.Cell width="20%">
           <Table.HeaderCell
+            theme={theme}
             onClick={() => setEventsSortKey('createdBy', sort.orderBy === 'asc' ? 'desc' : 'asc')}
             title="Created By"
             rotate={sort.orderBy === 'desc' && sort.sortKey === 'createdBy' ? 'asc' : 'desc'}

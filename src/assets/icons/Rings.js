@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
+import withStyles from './withIconStyles';
 
 const Rings = ({ color = '#c0b69b', size = 25, theme }) => (
   <svg width={size} height={size} viewBox="0 0 54 68">
@@ -15,4 +15,4 @@ Rings.defaultProps = {
   size: 24
 };
 
-export default withTheme(Rings);
+export default withStyles(Rings);

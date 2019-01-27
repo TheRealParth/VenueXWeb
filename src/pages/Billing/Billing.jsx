@@ -73,6 +73,7 @@ class Billing extends Component {
         />
         <div style={{ backgroundColor: '#fafafa' }}>
           <BillingTable
+            theme={this.props.config.theme}
             setEventsSortKey={this.props.setEventsSortKey}
             sort={this.props.sort}
             events={eventsThisMonth}

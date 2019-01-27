@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
+import withStyles from './withIconStyles';
 
 const ManageStaffIcon = props => (
   <svg width={props.size} height={props.size} {...props} viewBox="0 0 25 22">
@@ -18,4 +18,4 @@ ManageStaffIcon.defaultProps = {
   size: 24
 };
 
-export default ManageStaffIcon;
+export default withStyles(ManageStaffIcon);

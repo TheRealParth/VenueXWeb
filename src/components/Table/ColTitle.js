@@ -40,6 +40,6 @@ const ColTitle = styled.div`
 export default ({ title, ...restProps }) => (
   <ColTitle {...restProps}>
     <div>{title}</div>
-    <ColIcon {...restProps} id="sortButton" color="#c0b59d" />
+    <ColIcon {...restProps} id="sortButton" />
   </ColTitle>
 );
