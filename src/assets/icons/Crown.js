@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
+import withStyles from './withIconStyles';
 
 const Crown = props => (
   <svg width={props.size} height={props.size} {...props} viewBox="0 0 17 13">
@@ -14,4 +14,4 @@ Crown.defaultProps = {
   size: 24
 };
 
-export default withTheme(Crown);
+export default withStyles(Crown);

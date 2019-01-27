@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
+import withStyles from './withIconStyles';
 
 const Exclamation = props => (
   <svg width={props.size} height={props.size} {...props} viewBox="0 0 4 14">
@@ -13,4 +13,4 @@ Exclamation.defaultProps = {
   size: 24
 };
 
-export default withTheme(Exclamation);
+export default withStyles(Exclamation);

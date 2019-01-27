@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
+import withStyles from './withIconStyles';
 
 const Celebration = props => (
   <svg width={props.size} height={props.size} {...props} viewBox="0 0 63 63">
@@ -17,4 +17,4 @@ Celebration.defaultProps = {
   size: 24
 };
 
-export default withTheme(Celebration);
+export default withStyles(Celebration);

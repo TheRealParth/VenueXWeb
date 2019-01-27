@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
+import withStyles from './withIconStyles';
 
 const Checkmark = props => (
   <svg width={props.size} height={props.size} {...props} viewBox="0 0 12 12">
@@ -13,4 +13,4 @@ Checkmark.defaultProps = {
   size: 24
 };
 
-export default withTheme(Checkmark);
+export default withStyles(Checkmark);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
+import withStyles from './withIconStyles';
 
 const Delete = ({ color = '#c0b69b', size = 25, theme }) => (
   <svg width={size} height={size} viewBox="0 0 21 21">
@@ -15,4 +15,4 @@ Delete.defaultProps = {
   size: 24
 };
 
-export default withTheme(Delete);
+export default withStyles(Delete);

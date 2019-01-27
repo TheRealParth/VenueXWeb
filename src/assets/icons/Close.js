@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
+import withStyles from './withIconStyles';
 
 const Close = props => (
   <svg width={props.size} height={props.size} {...props} viewBox="0 0 10 10">
@@ -15,4 +15,4 @@ Close.defaultProps = {
   size: 24
 };
 
-export default withTheme(Close);
+export default withStyles(Close);

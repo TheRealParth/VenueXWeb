@@ -41,7 +41,6 @@ class ManageStaff extends Component {
 
   render() {
     const { isOpen, users } = this.state;
-    const primary = get(this.props, 'config.theme.colors.primary', '');
     return (
       <>
         <AddEmployeeModal isOpen={isOpen} onRequestClose={this.closeModal} />
@@ -53,7 +52,7 @@ class ManageStaff extends Component {
           </div>
         </div>
 
-        <StaffTable {...this.props} users={users} primary={primary} />
+        <StaffTable {...this.props} theme={this.props.config.theme} users={users} />
         <InjectStyles />
       </>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
+import withStyles from './withIconStyles';
 
 const User = props => (
   <svg width={props.size} height={props.size} {...props} viewBox="0 0 19 21">
@@ -17,4 +17,4 @@ User.defaultProps = {
   size: 24
 };
 
-export default withTheme(User);
+export default withStyles(User);

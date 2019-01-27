@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
+import withStyles from './withIconStyles';
 
 const CalendarEdit = props => (
   <svg width={props.size} height={props.size} {...props} viewBox="0 0 26 22">
@@ -33,4 +33,4 @@ CalendarEdit.defaultProps = {
   size: 24
 };
 
-export default withTheme(CalendarEdit);
+export default withStyles(CalendarEdit);

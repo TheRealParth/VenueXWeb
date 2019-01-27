@@ -38,7 +38,7 @@ const StaffTable = ({
   unSelectSingleUser,
   selectedCount,
   deleteUsers,
-  primary
+  theme,
 }) => {
   return (
     <>
@@ -48,6 +48,7 @@ const StaffTable = ({
             <Table.Cell width="5%">
               <Table.HeaderCell
                 noSort
+                theme={theme}
                 title={
                   <Checkbox
                     onCheck={selectAllUsers}
@@ -61,17 +62,19 @@ const StaffTable = ({
               <>
                 <Table.Cell width="20%">
                   <Table.HeaderCell
+                    theme={theme}
                     onClick={() =>
                       setUsersSortKey('fullName', sort.orderBy === 'asc' ? 'desc' : 'asc')
                     }
                     rotate={sort.orderBy === 'desc' && sort.sortKey === 'fullName' ? 'asc' : 'desc'}
                     title={'Name'}
                     selected
-                    //style={{ paddingLeft: '49px' }} /* fixes padding issue, though incorrectly.. */
+                  //style={{ paddingLeft: '49px' }} /* fixes padding issue, though incorrectly.. */
                   />
                 </Table.Cell>
                 <Table.Cell width="20%">
                   <Table.HeaderCell
+                    theme={theme}
                     onClick={() =>
                       setUsersSortKey('email', sort.orderBy === 'asc' ? 'desc' : 'asc')
                     }
@@ -82,10 +85,17 @@ const StaffTable = ({
                   />
                 </Table.Cell>
                 <Table.Cell width="20%">
-                  <Table.HeaderCell onClick={() => {}} title="Permission" center noSort />
+                  <Table.HeaderCell
+                    theme={theme}
+                    onClick={() => { }}
+                    title="Permission"
+                    center
+                    noSort
+                  />
                 </Table.Cell>
                 <Table.Cell width="20%">
                   <Table.HeaderCell
+                    theme={theme}
                     onClick={() =>
                       setUsersSortKey('created', sort.orderBy === 'asc' ? 'desc' : 'asc')
                     }
@@ -97,22 +107,22 @@ const StaffTable = ({
                 <Table.Cell width="15%" />
               </>
             ) : (
-              <>
-                <Table.Cell width="38%">
-                  <EditStaffPermissionsDropdown
-                    selectedCount={selectedCount}
-                    selectedEmployees={users.filter(user => user.checked)}
-                  />
-                </Table.Cell>
-                <Table.Cell width="40%">
-                  <Button
-                    label={`Delete ${selectedCount} staff member${selectedCount > 1 ? 's' : ''}`}
-                    kind="danger"
-                    onClick={() => deleteUsers({ users: users.filter(user => user.checked) })}
-                  />
-                </Table.Cell>
-              </>
-            )}
+                <>
+                  <Table.Cell width="38%">
+                    <EditStaffPermissionsDropdown
+                      selectedCount={selectedCount}
+                      selectedEmployees={users.filter(user => user.checked)}
+                    />
+                  </Table.Cell>
+                  <Table.Cell width="40%">
+                    <Button
+                      label={`Delete ${selectedCount} staff member${selectedCount > 1 ? 's' : ''}`}
+                      kind="danger"
+                      onClick={() => deleteUsers({ users: users.filter(user => user.checked) })}
+                    />
+                  </Table.Cell>
+                </>
+              )}
           </Table.Row>
           <Table.Body>
             {users.map(user => (
@@ -134,19 +144,19 @@ const StaffTable = ({
                   <div className={IconsContainer}>
                     <Icons.CalendarEdit
                       size={24}
-                      color={!user.permissions.createAndEditEvents ? '#d8d8d8' : primary}
+                      color={!user.permissions.createAndEditEvents ? '#d8d8d8' : theme.colors.primary}
                     />
                     <Icons.CalendarDelete
                       size={24}
-                      color={!user.permissions.deleteEvents ? '#d8d8d8' : primary}
+                      color={!user.permissions.deleteEvents ? '#d8d8d8' : theme.colors.primary}
                     />
                     <Icons.Billing
                       size={24}
-                      color={!user.permissions.viewBilling ? '#d8d8d8' : primary}
+                      color={!user.permissions.viewBilling ? '#d8d8d8' : theme.colors.primary}
                     />
                     <Icons.ManageStaff
                       size={24}
-                      color={!user.permissions.manageStaffPermissions ? '#d8d8d8' : primary}
+                      color={!user.permissions.manageStaffPermissions ? '#d8d8d8' : theme.colors.primary}
                     />
                   </div>
                 </Table.Cell>

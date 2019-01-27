@@ -18,7 +18,6 @@ const BillingHeader = ({ handlePrevMonth, handleNextMonth, currentUser, label })
         <div className={MonthNavigator}>
           <CaretLeft
             size={16}
-            color="#c0b69b"
             onClick={handlePrevMonth}
             className={MonthNavigatorButton}
           />
@@ -27,7 +26,6 @@ const BillingHeader = ({ handlePrevMonth, handleNextMonth, currentUser, label })
 
           <CaretRight
             size={16}
-            color="#c0b69b"
             onClick={handleNextMonth}
             className={MonthNavigatorButton}
           />

@@ -6,16 +6,15 @@ import { sortUsersSelector } from '../../reducers/users';
 import { get } from 'lodash';
 
 function mapStateToProps({ events, config, users, auth }) {
-  const newConf = get(config, 'config', {});
   return {
-    config: newConf,
+    config: get(config, 'config', { theme: {} }),
     events: events.list,
     users: users.list,
     currentUser: auth.user
       ? users.list.find(user => {
-          console.log(user);
-          return user.id === auth.user.uid;
-        })
+        console.log(user);
+        return user.id === auth.user.uid;
+      })
       : {},
     anyChecked: users.anyChecked,
     allChecked: users.allChecked,

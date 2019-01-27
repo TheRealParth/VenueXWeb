@@ -1,7 +1,7 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
+import withStyles from './withIconStyles';
 
-const People = props => (
+const People = (props = {}) => (
   <svg width={props.size} height={props.size} {...props} viewBox="0 0 24 24">
     <g fill={props.color ? props.color : props.theme.colors.primary}>
       <path d="M.043 18.195c0 .674.079 1.34.234 1.988a.782.782 0 0 0 1.52-.366 6.983 6.983 0 0 1 6.796-8.607 6.982 6.982 0 0 1 6.986 6.985c0 .55-.063 1.093-.187 1.62a.782.782 0 1 0 1.522.362c.152-.648.23-1.311.23-1.982 0-4.718-3.831-8.55-8.55-8.55-4.718 0-8.551 3.833-8.551 8.55z" />
@@ -14,4 +14,4 @@ People.defaultProps = {
   size: 24
 };
 
-export default withTheme(People);
+export default withStyles(People);
