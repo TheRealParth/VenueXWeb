@@ -1,14 +1,21 @@
 import React from 'react';
-import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import styles from './index.module.scss';
 import classNames from 'classnames';
 import menuItems from './menuItems';
 
-const Sidebar = withRouter(({ children, location }) => (
+// class Sidebar extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.props;
+//   }
+// }
+
+const Sidebar = ({ children, location, config }) => (
   <>
     <div className={styles.layout}>
       <div className={styles.container}>
+        <img src={config.theme.logo} className={styles.logo} />
         {menuItems.map(({ id, label, route, icon }) => (
           <Link
             key={id}
@@ -30,6 +37,6 @@ const Sidebar = withRouter(({ children, location }) => (
 
     `}</styles>
   </>
-));
+);
 
 export { Sidebar };
