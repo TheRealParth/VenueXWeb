@@ -9,3 +9,7 @@ export const syncConfig = config => ({
   type: configTypes.CONFIG.SYNC,
   config
 });
+
+export const getConfigRequest = () => ({
+  type: configTypes.GET_CONFIG_REQUEST
+});

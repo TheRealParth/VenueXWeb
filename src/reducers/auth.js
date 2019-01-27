@@ -14,6 +14,7 @@ export function auth(state = initialState, action) {
         ...state,
         user: action.user
       };
+    case userTypes.LOGIN_WITH_TOKEN:
     case authTypes.LOGIN_REQUEST:
       return {
         ...state,
@@ -24,12 +25,14 @@ export function auth(state = initialState, action) {
       return {
         ...state,
         loggedIn: true,
+        loggingIn: false,
         user: action.user
       };
     case authTypes.LOGIN_FAILURE:
       return {
         ...state,
         loggingIn: false,
+        loggedIn: false,
         error: action.error
       };
     case authTypes.REGISTER_SUCCESS:

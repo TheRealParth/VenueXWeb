@@ -15,11 +15,13 @@ import AddEmployeeModal from './components/StaffTable/AddEmployeeModal';
 import Events from './pages/Events';
 import { SignInPage } from './pages/SignIn';
 import * as actions from './actions';
+import Loader from './components/Loader';
 import './App.scss';
 
 class App extends React.Component {
   componentDidMount() {
     console.log(this.props)
+    this.props.getConfigRequest();
     const access_token = localStorage.getItem('access_token');
     if (access_token) this.props.loginWithTokenRequest({ access_token });
 
@@ -46,6 +48,7 @@ class App extends React.Component {
               </Dashboard>
             </Switch>
           </Router>
+          <Loader />
         </main>
       </div>
     );
@@ -58,6 +61,6 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(
   // eslint-disable-next-line prettier/prettier
-  () => { },
+  ({ auth, config }) => ({ auth, config }),
   mapDispatchToProps
 )(App);

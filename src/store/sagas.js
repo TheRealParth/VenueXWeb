@@ -22,12 +22,14 @@ export function* loginWatcher() {
 }
 
 export function* loginFlow(action) {
+  yield put({
+    type: types.configTypes.GET_CONFIG_REQUEST
+  });
   try {
     const { email, password } = action.user;
 
     const user = yield call(AuthService.login, email, password, venueId);
-    yield call(httpUtils.signInWithCustomToken, user);
-    yield call(syncUserWatcher);
+
     yield put({
       type: types.authTypes.LOGIN_SUCCESS,
       user
@@ -35,6 +37,8 @@ export function* loginFlow(action) {
     yield put({
       type: types.dashboardTypes.GET_DASHBOARD_REQUEST
     });
+    yield fork(httpUtils.signInWithCustomToken, user);
+    yield fork(syncUserWatcher);
   } catch (error) {
     yield put({
       type: types.authTypes.LOGIN_FAILURE,
@@ -44,6 +48,12 @@ export function* loginFlow(action) {
 }
 
 export function* loginWithToken({ payload }) {
+  yield put({
+    type: types.configTypes.GET_CONFIG_REQUEST
+  });
+  yield put({
+    type: types.authTypes.LOGIN_REQUEST
+  });
   try {
     const { user } = yield call(httpUtils.signInWithCustomToken, payload);
     yield put({
@@ -53,7 +63,7 @@ export function* loginWithToken({ payload }) {
     yield put({
       type: types.dashboardTypes.GET_DASHBOARD_REQUEST
     });
-    yield call(syncUserWatcher);
+    yield fork(syncUserWatcher);
   } catch (error) {
     yield put({
       type: types.authTypes.LOGIN_FAILURE,
@@ -84,9 +94,6 @@ export function* dashboardWatcher() {
 
 export function* loadDashboard() {
   try {
-    yield put({
-      type: types.configTypes.GET_CONFIG_REQUEST
-    });
     yield put({
       type: types.eventTypes.GET_EVENTS_REQUEST
     });

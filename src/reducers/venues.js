@@ -2,7 +2,8 @@ import { venueTypes, configTypes } from '../types';
 
 const initialState = {
   list: [],
-  config: {}
+  config: {},
+  loaded: false,
 };
 
 export const venues = (state = initialState, action) => {
@@ -24,7 +25,8 @@ export const config = (state = {}, action) => {
     case configTypes.CONFIG.SYNC:
       return {
         ...state,
-        config: action.config
+        config: action.config,
+        loaded: true,
       };
     default:
       return state;
