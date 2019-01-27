@@ -1,0 +1,114 @@
+.AddEventModalHeader {
+  padding: 30px 0px;
+  font-size: 24px;
+  text-align: center;
+  color: #181818;
+  width: 610px;
+  height: 110px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  background-color: rgba(188, 172, 150, 0.4);
+  font-family: Lora;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.6px;
+  text-align: center;
+  color: #181818;
+  z-index: 1200;
+}
+.AddMore {
+  align-self: center;
+  margin-bottom: -29px;
+  background-color: white;
+  border: 1px solid #c0b59d;
+  border-radius: 100%;
+  padding: 4px;
+  margin: 0px 5px -33px 5px;
+  cursor: pointer;
+}
+.AddEventModalContent {
+  padding: 20px 30px;
+  overflow: scroll;
+}
+.AddEventModalSection {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  margin: 20px 0 45px 0px;
+}
+.UserNumber {
+  border: 1px solid #7d7d7d;
+  height: 25px !important;
+  width: 25px !important;
+  min-width: 25px;
+  border-radius: 50%;
+  padding: 5px;
+  text-align: center;
+  color: #7d7d7d;
+  font-weight: 600;
+  align-self: center;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.UserChip {
+  display: inline-block;
+  padding: 0px 17px;
+  height: 32px;
+  font-size: 10px;
+  line-height: 32px;
+  border-radius: 25px;
+  background-color: #f1f1f1;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.User {
+  display: flex;
+  animation: fadeIn 1s;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      diplay: none;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
+.SectionTitle {
+  background-color: white;
+  margin-top: -27px;
+  padding: 0px 10px;
+  width: fit-content;
+  align-self: center;
+  color: #222222;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.Section {
+    display: flex;
+  flex-direction: column;
+  border: 1px solid #c0b59d66;
+  padding: 16px 20px;
+  margin: 20px 0 45px 0px;
+}
+.CloseButton {
+  padding-left: 10px;
+  color: #888;
+  font-weight: bold;
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}
+.Help {
+  text-align: right;
+  color: #b0b0b0;
+}
+.ChipContainer {
+
+}

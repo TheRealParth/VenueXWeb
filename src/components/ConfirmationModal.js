@@ -31,7 +31,7 @@ export default ({
             onClick={onCancel}
           />
           &nbsp;
-        <Button
+      <Button
             kind="danger"
             label="Yes, Delete"
             onClick={onConfirm}

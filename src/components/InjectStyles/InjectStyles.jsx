@@ -1,7 +1,7 @@
 import React from 'react';
 import { ContactInfo } from '../BillingHeader/index.module.scss';
 import { EmployeeModalHeader, FormSection } from '../StaffTable/styles.module.scss';
-import { AddEventModalHeader, AddEventModalSection } from '../events/index.module.scss';
+import { AddEventModalHeader, AddEventModalSection } from '../events/EventModalForm/index.module.scss';
 import { PrimaryButton } from '../Button/index.module.scss';
 import { EventDetailHeader } from '../events/EventDetailModal/index.module.scss';
 import { SideBarItem, SideBarActiveItem } from '../Sidebar/index.module.scss';

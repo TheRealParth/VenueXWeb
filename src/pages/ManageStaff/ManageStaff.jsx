@@ -7,7 +7,7 @@ import PersonalMenu from '../../components/PersonalMenu';
 import AddButton from '../../components/AddButton';
 import InjectStyles from '../../components/InjectStyles';
 import { ManageStaffHeader } from './index.module.scss';
-import { get } from 'lodash';
+import ConfirmationModal from '../../components/ConfirmationModal';
 
 class ManageStaff extends Component {
   constructor(props) {
@@ -15,7 +15,8 @@ class ManageStaff extends Component {
     const { list } = props.users;
     this.state = {
       users: list,
-      isOpen: false
+      isOpen: false,
+      deleteModalOpen: false,
     };
   }
   componentDidMount() {
@@ -38,11 +39,26 @@ class ManageStaff extends Component {
       isOpen: false
     });
   };
+  openEditModal = userId => {
 
+  }
+  openDeleteModal = userId => {
+
+
+    this.setState({
+      deleteModalOpen: true
+    })
+  }
   render() {
-    const { isOpen, users } = this.state;
+    const { isOpen, users, deleteModalOpen } = this.state;
     return (
       <>
+        <ConfirmationModal
+          label="Are you sure you want to delete this user?"
+          isOpen={deleteModalOpen}
+          onConfirm={() => { this.setState({ deleteModalOpen: false }); this.props.deleteUsers({ users: users.filter(user => user.checked) }) }}
+          onCancel={() => { this.setState({ deleteModalOpen: false }); this.props.unSelectAllUsers() }}
+        />
         <AddEmployeeModal isOpen={isOpen} onRequestClose={this.closeModal} />
         <div className={ManageStaffHeader}>
           <div />
@@ -52,7 +68,14 @@ class ManageStaff extends Component {
           </div>
         </div>
 
-        <StaffTable {...this.props} theme={this.props.config.theme} users={users} />
+        <StaffTable
+          {...this.props}
+          editModal={this.openEditModal}
+          singleDeleteModal={(userId) => { this.props.unSelectAllUsers(); this.props.selectSingleUser(userId); this.openDeleteModal(); }}
+          deleteModal={this.openDeleteModal}
+          theme={this.props.config.theme}
+          users={users}
+        />
         <InjectStyles />
       </>
     );

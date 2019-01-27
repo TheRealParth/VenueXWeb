@@ -15,7 +15,7 @@ const Content = styled.div`
   top: calc(100% + 5px);
   right: 0px;
   padding: 5px;
-    top: 122px;
+  top: 50px;
 `;
 
 class Dropdown extends PureComponent {

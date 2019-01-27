@@ -38,6 +38,7 @@ import Checklist from './Checklist';
 import MoneyIcon from './MoneyIcon';
 import Photos from './Photos';
 import RSVP from './RSVP';
+import Edit from './Edit';
 
 const Icons = {};
 
@@ -81,5 +82,5 @@ Icons.Checklist = Checklist;
 Icons.MoneyIcon = MoneyIcon;
 Icons.Photos = Photos;
 Icons.RSVP = RSVP;
-
+Icons.Edit = Edit;
 export default Icons;

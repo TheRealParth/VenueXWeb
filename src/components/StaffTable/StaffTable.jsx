@@ -39,6 +39,9 @@ const StaffTable = ({
   selectedCount,
   deleteUsers,
   theme,
+  editModal,
+  singleDeleteModal,
+  deleteModal
 }) => {
   return (
     <>
@@ -118,7 +121,7 @@ const StaffTable = ({
                     <Button
                       label={`Delete ${selectedCount} staff member${selectedCount > 1 ? 's' : ''}`}
                       kind="danger"
-                      onClick={() => deleteUsers({ users: users.filter(user => user.checked) })}
+                      onClick={() => deleteModal()}
                     />
                   </Table.Cell>
                 </>
@@ -167,8 +170,8 @@ const StaffTable = ({
 
                 <Table.Cell width="15%">
                   <div className="actions">
-                    <Icons.Delete size={24} color="#7d7d7d" />
-                    <Icons.Delete size={24} color="#7d7d7d" />
+                    <Icons.Edit onClick={() => { editModal(user.id) }} size={24} color="#7d7d7d" />
+                    <a onClick={() => { singleDeleteModal(user.id) }}><Icons.Delete size={24} color="#7d7d7d" /></a>
                   </div>
                 </Table.Cell>
               </StyledTableRow>

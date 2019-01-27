@@ -1,110 +1,56 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import React, { Component } from 'react';
+import uuid from 'uuid';
+import { Field } from 'redux-form';
 import styled from 'styled-components';
-import Switch from '../form/Switch';
-import Button from '../Button';
-import Modal from '../Modal';
-import { DateTimeDurationFilled, NotEmptyValidator } from '../../utils/formValidators';
-import Select from '../form/Select';
-import MultiSelect from '../form/MultiSelect';
-import Textarea from '../form/Textarea';
-import DateTimeDurationField from '../form/DateTimeDurationField';
-import Input from '../form/Input';
-import TitleInput from '../form/TitleInput';
-import SmallInput from '../form/SmallInput';
-import Icons from '../../assets/icons';
+import Switch from '../../form/Switch';
+import Button from '../../Button';
+import Modal from '../../Modal';
+import { DateTimeDurationFilled, NotEmptyValidator } from '../../../utils/formValidators';
+import Select from '../../form/Select';
+import MultiSelect from '../../form/MultiSelect';
+import Textarea from '../../form/Textarea';
+import DateTimeDurationField from '../../form/DateTimeDurationField';
+import Input from '../../form/Input';
+import TitleInput from '../../form/TitleInput';
+import SmallInput from '../../form/SmallInput';
+import Icons from '../../../assets/icons';
 import {
   AddEventModalHeader,
   AddEventModalContent,
-  AddEventModalSection
+  AddEventModalSection,
+  UserChip,
+  CloseButton,
+  SectionTitle,
+  User,
+  ChipContainer,
+  AddMore
 } from './index.module.scss';
 
-//may want to add help text, tbd, leaving for now
-const Help = styled.div`
-  text-align: right;
-  color: #b0b0b0;
-`;
 
 //from old code, not sure if needed
 const StyledButton = styled(Button)`
   margin: 0px 5px;
 `;
 
-//Individual section styling
-const Section = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #c0b59d66;
-  padding: 16px 20px;
-  margin: 20px 0 45px 0px;
-`;
 
-// section title styling,
-const SectionTitle = styled.div`
-  background-color: white;
-  margin-top: -27px;
-  padding: 0px 10px;
-  width: fit-content;
-  align-self: center;
-  color: #222222;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-`;
-
-//bad naming, used also for payment fields
-
-const User = styled.div`
-  display: flex;
-  animation: fadeIn 1s;
-
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-      diplay: none;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-`;
 //bad naming, used also for payment fields
 //TO-DO: make real circle, current version is uneven
-const UserNumber = styled.div`
-  border: 1px solid #7d7d7d;
-  height: 25px !important;
-  width: 25px !important;
-  min-width: 25px;
-  border-radius: 50%;
-  padding: 5px;
-  text-align: center;
-  color: #7d7d7d;
-  font-weight: 600;
-  align-self: center;
-  margin-right: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 
 //styling plus button for the add more of users & payment fields
 // TO-DO: add space on left and right
-const AddMore = styled.div`
-  align-self: center;
-  margin-bottom: -29px;
-  background-color: white;
-  border: 1px solid #c0b59d;
-  border-radius: 100%;
-  padding: 4px;
-  margin: 0px 5px -33px 5px;
-  cursor: pointer;
-`;
 
-class EventModalForm extends PureComponent {
+class EventModalForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { users: 1, payments: 1 };
+    this.state = {
+      newUsers: [],
+      currentNewUser: {
+        name: '',
+        email: ''
+      },
+      users: 1,
+      payments: 1
+    };
     this.addUsers = this.addUsers.bind(this);
     this.addPayment = this.addPayment.bind(this);
   }
@@ -129,16 +75,47 @@ class EventModalForm extends PureComponent {
   //TO-DO: Add Space between Client Name & Email.
   // Make it so if client Name is entered, email is required.
   // allow deleting of specific row
-
-  renderNewUserFields() {
-    let { users } = this.state;
-    let userFields = [];
-    for (let i = 0; i < users; i++) {
-      userFields.push(i);
+  handleNewUser = () => {
+    const { name, email } = this.state.currentNewUser;
+    if (name && email) {
+      this.setState({
+        newUsers: [
+          ...this.state.newUsers,
+          {
+            id: uuid(),
+            name,
+            email
+          }
+        ]
+      })
+      this.setState({
+        currentNewUser: {
+          name: '',
+          email: ''
+        }
+      })
     }
-    return userFields.map(user => {
-      return (
-        <User>
+  }
+  handleRemoveNewUser = (id) => {
+    this.setState({
+      newUsers: this.state.newUsers.filter((user) => user.id !== id),
+    })
+  }
+  renderNewUserFields() {
+    const { newUsers } = this.state;
+    return (
+      <>
+        <div className={ChipContainer}>
+          {
+            newUsers.map(({ name, email, id }) => (
+              <div className={UserChip} key={id}>
+                {`${name} (${email})`}
+                <span onClick={() => this.handleRemoveNewUser(id)} className={CloseButton}>&times;</span>
+              </div>
+            ))
+          }
+        </div>
+        <div className={User}>
           <Icons.User
             style={{
               alignSelf: 'center',
@@ -152,22 +129,37 @@ class EventModalForm extends PureComponent {
             color="#fff"
           />
           <SmallInput
-            name={'clientName' + user + 1}
+            name={'clientName'}
             placeholder="Client Name"
             component={Input}
-            validate={user === 0 ? NotEmptyValidator : ''}
-          // only first one is needed
+            value={this.state.currentNewUser.name}
+            // validate={user === 0 ? NotEmptyValidator : ''}
+            // only first one is needed
+            onChange={(e) => this.setState({
+              currentNewUser: {
+                ...this.state.currentNewUser,
+                name: e.target.value
+              }
+            })}
           />
           <SmallInput
-            name={'clientEmail' + user + 1}
+            name={'clientEmail'}
             placeholder="Client Email"
             component={Input}
-            validate={user === 0 ? NotEmptyValidator : ''}
+            value={this.state.currentNewUser.email}
+            onChange={(e) => this.setState({
+              currentNewUser: {
+                ...this.state.currentNewUser,
+                email: e.target.value
+              }
+            })}
+            onBlur={this.handleNewUser}
+          // validate={user === 0 ? NotEmptyValidator : ''}
           /* current validator is set to require a minimum of one client, but needs to validate email if client Name is entered */
           />
-        </User>
-      );
-    });
+        </div>
+      </>
+    );
   }
 
   // function to add additional user lines
@@ -187,14 +179,14 @@ class EventModalForm extends PureComponent {
     }
     return paymentFields.map(payment => {
       return (
-        <User>
+        <div className={User}>
           <Field
             label={payment + 1 + 'st' + ' Payment Date:'}
             name={'payment' + payment + 1}
             component={Input}
             validate={NotEmptyValidator}
           />
-        </User>
+        </div>
       );
     });
   }
@@ -238,7 +230,7 @@ class EventModalForm extends PureComponent {
     let rooms = [];
     let primaryColor;
     let eventTypes = [];
-    if (config.theme !== undefined) {
+    if (config.theme) {
       primaryColor = config.theme.colors.primary;
       for (let room in config.rooms) {
         rooms.push(config.rooms[room]);
@@ -262,18 +254,18 @@ class EventModalForm extends PureComponent {
           />
 
           <div className={AddEventModalSection}>
-            <SectionTitle>Users</SectionTitle>
+            <div className={SectionTitle}>Users</div>
 
             {this.renderNewUserFields()}
 
-            <AddMore onClick={this.addUsers}>
+            <div className={AddMore} onClick={this.addUsers}>
               <div style={{ height: '24px', width: '24px' }}>
                 <Icons.Plus />
               </div>
-            </AddMore>
+            </div>
           </div>
           <div className={AddEventModalSection}>
-            <SectionTitle>Event Staff</SectionTitle>
+            <div className={SectionTitle}>Event Staff</div>
 
             <Field
               name="consultant"
@@ -315,14 +307,14 @@ class EventModalForm extends PureComponent {
             />
           </div>
           <div className={AddEventModalSection}>
-            <SectionTitle>Event Details</SectionTitle>
+            <div className={SectionTitle}>Event Details</div>
             <Field
               name="dateTimeDuration"
               label="Event Date & Time:"
               component={DateTimeDurationField}
               validate={DateTimeDurationFilled}
             />
-            <User>
+            <div className={User}>
               <Field
                 name="type"
                 component={props => (
@@ -350,7 +342,7 @@ class EventModalForm extends PureComponent {
                 type="number"
                 validate={NotEmptyValidator}
               />
-            </User>
+            </div>
 
             {type === 'wedding' ? (
               <Field
@@ -372,7 +364,7 @@ class EventModalForm extends PureComponent {
             ) : (
                 ''
               )}
-            <User>
+            <div className={User}>
               <Field
                 name="room"
                 component={props => (
@@ -413,7 +405,7 @@ class EventModalForm extends PureComponent {
                 )}
                 validate={NotEmptyValidator}
               />
-            </User>
+            </div>
 
             {selectedRoom && (
               <div style={{ display: 'flex' }}>
@@ -437,40 +429,27 @@ class EventModalForm extends PureComponent {
           </div>
 
           <div className={AddEventModalSection}>
-            <SectionTitle>Payment Schedule</SectionTitle>
+            <div className={SectionTitle}>Payment Schedule</div>
             {this.renderPaymentFields()}
-            <AddMore onClick={this.addPayment}>
+            <div className={AddMore} onClick={this.addPayment}>
               <div style={{ height: '24px', width: '24px' }}>
                 <Icons.Plus />
               </div>
-            </AddMore>
+            </div>
           </div>
           <div className={AddEventModalSection}>
-            <SectionTitle>Notes</SectionTitle>
+            <div className={SectionTitle}>Notes</div>
             <Field name="notes" component={Textarea} />
           </div>
         </div>
 
         <Modal.Footer>
           <StyledButton label="Discard" onClick={this.props.onClose} />
-          <StyledButton label="Save" kind="primary" onClick={this.props.handleSubmit} />
+          <StyledButton label="Save" kind="primary" onClick={(values) => this.props.handleSubmit({ ...values, newUsers: this.state.newUsers })} />
         </Modal.Footer>
       </Modal>
     );
   }
 }
 
-EventModalForm = reduxForm({
-  form: 'EventForm'
-})(EventModalForm);
-const selector = formValueSelector('EventForm');
-export default connect(state => {
-  // can select values individually
-  const formValues = selector(state, 'eventTeam', 'consultant');
-  // const favoriteColorValue = selector(state, 'favoriteColor')
-  // or together as a group
-  // const { firstName, lastName } = selector(state, 'firstName', 'lastName')
-  return {
-    ...formValues
-  };
-})(EventModalForm);
+export { EventModalForm }
