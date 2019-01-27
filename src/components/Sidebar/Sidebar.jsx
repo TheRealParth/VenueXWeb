@@ -19,10 +19,11 @@ const Sidebar = ({ children, location, config }) => (
         {menuItems.map(({ id, label, route, icon }) => (
           <Link
             key={id}
-            className={classNames({
-              [styles.item]: true,
-              [styles.active]: location.pathname.toLowerCase().indexOf(route) !== -1
-            })}
+            className={
+              location.pathname.toLowerCase().indexOf(route) !== -1
+                ? styles.SideBarActiveItem
+                : styles.SideBarItem
+            }
             to={route}
           >
             <img className={styles.icon} src={icon} />

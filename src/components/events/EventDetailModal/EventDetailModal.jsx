@@ -5,7 +5,7 @@ import Modal from '../../Modal';
 import ConfirmationModal from '../../ConfirmationModal';
 import Button from '../../Button';
 import SideTabs from '../../SideTabs';
-import ConsultantLabel from '../../Consultant';
+import ConsultantLabel from './Consultant';
 import Switch from '../../Switch';
 import EventModalForm from '../../events/EventModalForm';
 import { humanize } from '../../../utils';
@@ -13,44 +13,20 @@ import ringsImage from '../../../assets/rings.svg';
 import calendarIcon from '../../../assets/calendar-gray.svg';
 import notesIcon from '../../../assets/notes-icon.svg';
 import clientDetailsIcon from '../../../assets/client-details-icon.svg';
+import Icons from '../../../assets/icons';
 import grayRoomIcon from '../../../assets/room-gray.svg';
-
-
-const Header = styled.div`
-  height: 160px;
-  box-shadow: box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  background-color: ${props => props.theme.colors.primary}66;
-  padding: 0px 20px;
-`;
-
-const EventKindBadge = styled.div`
-  height: 120px;
-  width: 120px;
-  background-color: #FFF;
-  border-radius: 50%;
-  margin-right: 15px;
-  box-shadow: 0px 2px 4px rgba(125, 125, 125, 0.2);
-`;
-
-const KindImage = styled.img`
-  width: 120px;
-  height: 120px;
-`;
-
-const Title = styled.div`
-  font-weight: 500;
-  font-size: 24px;
-  color: #181818;
-  margin-bottom: 5px;
-`;
-
-const SubTitle = styled.div`
-  font-size: 14px;
-  color: #7d7d7d;
-  font-weight: 500;
-`;
+import {
+  EventDetailHeader,
+  EventDetailTitle,
+  EventBadge,
+  EventDetailHeaderContent,
+  EventDetailSubtitle,
+  ConsultantRow,
+  ConsultantTitle,
+  ConsultantImage,
+  EventDetailContentRow,
+  EventDetailPaymentTitle
+} from './index.module.scss';
 
 const DescriptionList = styled.dl`
   padding-left: 35px;
@@ -67,11 +43,13 @@ const DescriptionList = styled.dl`
     display: inline-block;
     color: #7d7d7d;
     white-space: nowrap;
+    letter-spacing: -0.28px;
   }
   dd {
     display: inline-block;
     color: #222222;
-    margin-left: 15px;
+    margin-left: 6px;
+    letter-spacing: -0.28px;
   }
 `;
 
@@ -97,47 +75,47 @@ const StyledButton = styled(Button)`
 `;
 
 const ReminderSentLabel = styled.div`
-  color: #7D7D7D;
+  color: #7d7d7d;
   font-size: 12px;
   text-transform: lowercase;
 `;
 
-const StyledTitle = styled(Title)`
-  font-family: Lora;
-  font-size: 24px;
-`;
-
 class EventDetailModal extends PureComponent {
-
   state = {
     isSendingReminder: false,
     isDeleteConfirmationOpen: false,
-    isEditing: false,
+    isEditing: false
   };
 
   handleStartEditing = () => {
     this.setState({
-      isEditing: true,
+      isEditing: true
     });
-  }
+  };
 
   handleEdit = async values => {
     const { event } = this.props;
     const valuesToEdit = {
-      start: parseInt(
-        moment(
-          `${values.dateTimeDuration.date.format('YYYY-MM-DD')} ${values.dateTimeDuration.startTime.format('HH:mm')}`,
-          'YYYY-MM-DD HH:mm'
-        ).format('X'),
-        10
-      ) * 1000,
-      end: parseInt(
-        moment(
-          `${values.dateTimeDuration.date.format('YYYY-MM-DD')} ${values.dateTimeDuration.endTime.format('HH:mm')}`,
-          'YYYY-MM-DD HH:mm'
-        ).format('X'),
-        10
-      ) * 1000,
+      start:
+        parseInt(
+          moment(
+            `${values.dateTimeDuration.date.format(
+              'YYYY-MM-DD'
+            )} ${values.dateTimeDuration.startTime.format('HH:mm')}`,
+            'YYYY-MM-DD HH:mm'
+          ).format('X'),
+          10
+        ) * 1000,
+      end:
+        parseInt(
+          moment(
+            `${values.dateTimeDuration.date.format(
+              'YYYY-MM-DD'
+            )} ${values.dateTimeDuration.endTime.format('HH:mm')}`,
+            'YYYY-MM-DD HH:mm'
+          ).format('X'),
+          10
+        ) * 1000,
       name: values.name,
       notes: values.notes,
       type: values.type,
@@ -151,7 +129,7 @@ class EventDetailModal extends PureComponent {
       firstPaymentDue: parseInt(values.firstPaymentDue.format('X'), 10) * 1000,
       secondPaymentDue: parseInt(values.secondPaymentDue.format('X'), 10) * 1000,
       thirdPaymentDue: parseInt(values.thirdPaymentDue.format('X'), 10) * 1000,
-      ceremonyKind: values.ceremonyKind,
+      ceremonyKind: values.ceremonyKind
     };
 
     const edits = {};
@@ -160,74 +138,76 @@ class EventDetailModal extends PureComponent {
       edits[`/events/${event.id}/${key}`] = valuesToEdit[key];
     });
 
-    await this.props.firebase.database().ref().update(edits);
+    await this.props.firebase
+      .database()
+      .ref()
+      .update(edits);
 
     this.setState({ isEditing: false });
   };
 
   handleDelete = () => {
     this.setState({
-      isDeleteConfirmationOpen: true,
+      isDeleteConfirmationOpen: true
     });
-  }
+  };
 
   handleCancelDeleting = () => {
     this.setState({
-      isDeleteConfirmationOpen: false,
+      isDeleteConfirmationOpen: false
     });
-  }
+  };
 
   handleConfirmDelete = async () => {
-    await this.props.firebase
-      .remove(`/events/${this.props.event.id}`);
+    await this.props.firebase.remove(`/events/${this.props.event.id}`);
     this.props.history.push('/events');
-  }
+  };
 
   handleSendReminder = async () => {
     this.setState({
-      isSendingReminder: true,
+      isSendingReminder: true
     });
     const { firebase } = this.props;
-    const sendPaymentReminderMail = firebase
-      .functions()
-      .httpsCallable('sendPaymentReminderMail');
+    const sendPaymentReminderMail = firebase.functions().httpsCallable('sendPaymentReminderMail');
 
     try {
       await sendPaymentReminderMail({
-        eventId: this.props.event.id,
+        eventId: this.props.event.id
       });
     } catch (err) {
       const { code, message, details } = err;
       console.log(code, message, details);
     }
 
-    firebase.database().ref(
-      `/events/${this.props.event.id}/lastRemindedAt`
-    ).set(
-      parseInt(moment().format('X'), 10) * 1000
-    );
+    firebase
+      .database()
+      .ref(`/events/${this.props.event.id}/lastRemindedAt`)
+      .set(parseInt(moment().format('X'), 10) * 1000);
     this.setState({
-      isSendingReminder: false,
+      isSendingReminder: false
     });
   };
 
   render() {
-    const {
-      firebase,
-      config,
-      event,
-      ...restProps
-    } = this.props;
+    const { firebase, config, event, ...restProps } = this.props;
+    let venueConfig = config.config;
     if (!event) {
       return <div />;
     }
+    let room, numberOfTables, primaryColor;
 
-    const room = config.rooms[event.room];
+    /* if (venueConfig.rooms) {
+      numberOfTables = venueConfig.rooms.layouts[event.tableLayout];
+      room = venueConfig.rooms[event.room];
+      console.log('AAAAAAAAAAAAAAAA');
+    } */
 
-    const { numberOfTables } = room.layouts[event.tableLayout];
+    if (venueConfig.theme) {
+      primaryColor = venueConfig.theme.colors.primary;
+    }
 
     const { guestsPerTable } = event;
-
+    console.log('yo');
     if (this.state.isEditing) {
       return (
         <EventModalForm
@@ -236,13 +216,13 @@ class EventDetailModal extends PureComponent {
           initialValues={{
             consultants: {
               owner: event.owner,
-              picked: [event.owner],
+              picked: [event.owner]
             },
             name: event.name,
             dateTimeDuration: {
               date: moment(event.start),
               startTime: moment(event.start),
-              endTime: moment(event.end),
+              endTime: moment(event.end)
             },
             minimumGuests: event.minimumGuests,
             type: event.type,
@@ -254,23 +234,25 @@ class EventDetailModal extends PureComponent {
             firstPaymentDue: moment(event.firstPaymentDue),
             secondPaymentDue: moment(event.secondPaymentDue),
             thirdPaymentDue: moment(event.thirdPaymentDue),
-            ceremonyKind: event.ceremonyKind,
+            ceremonyKind: event.ceremonyKind
           }}
         />
       );
     }
-
+    console.log('event:', event);
     return (
-      <Modal {...restProps} isOpen={Boolean(event)}>
-        <Header>
-          <EventKindBadge>
-            <KindImage src={ringsImage} />
-          </EventKindBadge>
-          <div>
-            <StyledTitle>{event.name}</StyledTitle>
-            <SubTitle>Friday, September 12th</SubTitle>
+      <Modal {...restProps} isOpen={Boolean(event)} height="530px">
+        <div className={EventDetailHeader}>
+          <div className={EventBadge}>
+            <img src={ringsImage} />
           </div>
-        </Header>
+          <div className={EventDetailHeaderContent}>
+            <div className={EventDetailTitle}>{event.title}</div>
+            <div className={EventDetailSubtitle}>
+              {moment(event.start).format('dddd MMMM D, YYYY')}
+            </div>
+          </div>
+        </div>
         <div style={{ flex: 1, overflow: 'hidden' }}>
           <ConfirmationModal
             label="Are you sure you want to delete this event?"
@@ -279,63 +261,71 @@ class EventDetailModal extends PureComponent {
             onConfirm={this.handleConfirmDelete}
           />
           <SideTabs
+            primaryColor={primaryColor}
             tabs={[
               {
                 title: 'Event overview',
-                icon: calendarIcon,
+                icon: 'CalendarBlank',
                 content: (
                   <DescriptionList>
-                    <div className="row">
-                      <dt>Consultant:</dt>
-                      <dd>
-                        <ConsultantLabel
-                          picture="https://placehold.it/100x100"
-                          name="Matthew chow"
-                        />
-                      </dd>
+                    <div className={ConsultantRow}>
+                      <div className={ConsultantTitle}>Consultant:</div>
+
+                      <img src="https://placehold.it/100x100" className={ConsultantImage} />
+
+                      <div>{event.consultant}</div>
                     </div>
 
-                    <div className="row">
+                    <div className={EventDetailContentRow}>
                       <dt>Event Type:</dt>
-                      <dd>{humanize(event.type)}</dd>
+                      <dd> {event.eventType} </dd>
+                      {/* <dd>{humanize(event.type)}</dd> */}
                     </div>
 
-                    <div className="row">
+                    {event.eventType === 'wedding' ? (
+                      <div className={EventDetailContentRow}>
+                        <dt>Ceremony:</dt>
+                        <dd>{event.ceremony}</dd>
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                    <div className={EventDetailContentRow}>
                       <dt>Start Time:</dt>
-                      <dd>{moment(event.start).format('HH:mm a')}</dd>
+                      <dd>{moment(event.start).format('h:mm A')}</dd>
                     </div>
 
-                    <div className="row">
+                    <div className={EventDetailContentRow}>
                       <dt>End Time:</dt>
-                      <dd>{moment(event.end).format('HH:mm a')}</dd>
+                      <dd>{moment(event.end).format('h:mm A')}</dd>
                     </div>
                   </DescriptionList>
                 )
               },
               {
                 title: 'Client details',
-                icon: clientDetailsIcon,
+                icon: 'User',
                 content: (
                   <DescriptionList>
-                    <div className="row">
+                    <div className={EventDetailContentRow}>
                       <dt>Client Name:</dt>
-                      <dd>{event.clientName}</dd>
+                      <dd>{event.client}</dd>
                     </div>
 
-                    <div className="row">
-                      <dt>Client email:</dt>
+                    <div className={EventDetailContentRow}>
+                      <dt>Client Email:</dt>
                       <dd>{event.clientEmail}</dd>
                     </div>
 
-                    <div className="row">
-                      <dt>Client phone:</dt>
+                    <div className={EventDetailContentRow}>
+                      <dt>Client Phone:</dt>
                       <dd>{event.clientPhone}</dd>
                     </div>
 
-                    <div className="row" style={{ paddingRight: 15 }}>
-                      <dt>Payment:</dt>
+                    {/*   <div className={EventDetailContentRow} style={{ paddingRight: 15 }}>
+                      <dt className={EventDetailPaymentTitle}>Payment:</dt>
                       <dd>
-                        <div className="row">
+                        <div className={EventDetailContentRow}>
                           <Flex>
                             <div style={{ marginRight: 10 }}>
                               <dt>1st:</dt>
@@ -347,7 +337,7 @@ class EventDetailModal extends PureComponent {
                             </div>
                           </Flex>
                         </div>
-                        <div className="row">
+                        <div className={EventDetailContentRow}>
                           <Flex>
                             <div style={{ marginRight: 10 }}>
                               <dt>2st:</dt>
@@ -359,7 +349,7 @@ class EventDetailModal extends PureComponent {
                             </div>
                           </Flex>
                         </div>
-                        <div className="row">
+                        <div className={EventDetailContentRow}>
                           <Flex>
                             <div style={{ marginRight: 10 }}>
                               <dt>2st:</dt>
@@ -371,13 +361,14 @@ class EventDetailModal extends PureComponent {
                             </div>
                           </Flex>
                         </div>
-                        <div className="row">
+                        <div className={EventDetailContentRow}>
                           <div>
                             <dt>Payment Notification:</dt>
                             <dd>
                               <Switch
                                 value={Boolean(event.isPaymentBannerEnabled)}
-                                onChange={newVal => console.log(newVal)
+                                onChange={
+                                  newVal => console.log(newVal)
                                   // firebase
                                   //   .database()
                                   //   .ref(`events/${event.id}/isPaymentBannerEnabled`)
@@ -387,84 +378,76 @@ class EventDetailModal extends PureComponent {
                             </dd>
                           </div>
                         </div>
-                        <div className="row">
+                        <div className={EventDetailContentRow}>
                           <dt>
                             <div>Reminder Email:</div>
-                            {event.lastRemindedAt &&
+                            {event.lastRemindedAt && (
                               <ReminderSentLabel>
                                 last sent {moment(event.lastRemindedAt).format('YYYY-MM-DD')}
-                              </ReminderSentLabel>}
+                              </ReminderSentLabel>
+                            )}
                           </dt>
                           <dd>
                             <Button
                               size="small"
-                              label={
-                                this.state.isSendingReminder ?
-                                  'Sending...' :
-                                  'Send now'
-                              }
+                              label={this.state.isSendingReminder ? 'Sending...' : 'Send now'}
                               disabled={this.state.isSendingReminder}
                               onClick={this.handleSendReminder}
                             />
                           </dd>
                         </div>
                       </dd>
-                    </div>
+                    </div> */}
                   </DescriptionList>
-                ),
+                )
               },
               {
                 title: 'Room & Layout',
-                icon: grayRoomIcon,
+                icon: 'Room',
                 content: (
                   <DescriptionList>
-                    <div className="row">
+                    <div className={EventDetailContentRow}>
                       <dt>Room:</dt>
-                      <dd>{room.name}</dd>
+                      {event.roomName}
                     </div>
-                    <div className="row">
+                    <div className={EventDetailContentRow}>
                       <dt>Layout:</dt>
-                      <dd>{numberOfTables}</dd>
+                      <dd>{event.layoutName}</dd>
                     </div>
-                    <div className="row">
-                      <dt>Guests per table</dt>
-                      <dd>{guestsPerTable}</dd>
+                    <div className={EventDetailContentRow}>
+                      <dt>Minimum Guests:</dt>
+                      <dd>{event.guestMinimum}</dd>
+                    </div>
+                    <div className={EventDetailContentRow}>
+                      <dt>Guests Per Table:</dt>
+                      <dd>{event.guestsPerTable}</dd>
                     </div>
                   </DescriptionList>
                 )
               },
               {
                 title: 'Notes',
-                icon: notesIcon,
+                icon: 'Notes',
                 content: (
                   <DescriptionList>
-                    <div className="row">
-                      <dt>Notes</dt>
-                      <dd>{event.notes}</dd>
+                    <div className={EventDetailContentRow}>
+                      <dt style={{ alignSelf: 'flex-start' }}>Notes:</dt>
+                      <dd>{event.eventNotes}</dd>
                     </div>
                   </DescriptionList>
                 )
-              },
+              }
             ]}
           />
         </div>
         <Modal.Footer>
           <FooterButtons>
             <div>
-              <StyledButton
-                label="Download seating chart"
-              />
+              <StyledButton label="Download seating chart" />
             </div>
             <div>
-              <StyledButton
-                label="Delete"
-                kind="danger"
-                onClick={this.handleDelete}
-              />
-              <StyledButton
-                label="Edit"
-                onClick={this.handleStartEditing}
-              />
+              <StyledButton label="Delete" kind="danger" onClick={this.handleDelete} />
+              <StyledButton label="Edit" onClick={this.handleStartEditing} />
             </div>
           </FooterButtons>
         </Modal.Footer>
