@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import Table from '../Table';
 import styled from 'styled-components';
+import { get } from 'lodash';
 
 const TableContainer = styled.div`
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
@@ -106,7 +107,7 @@ const BillingTable = ({ events, theme, sort, setEventsSortKey }) => (
               {moment(event.start).format('MM/DD/YYYY')}
             </Table.Cell>
             <Table.Cell width="20%" component="th" scope="row">
-              {event.createdBy.fullName}
+              {get(event, 'createdBy.fullName', '')}
             </Table.Cell>
           </StyledTableRow>
         ))}
