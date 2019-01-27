@@ -4,18 +4,13 @@ import styles from './index.module.scss';
 import classNames from 'classnames';
 import menuItems from './menuItems';
 
-// class Sidebar extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.props;
-//   }
-// }
-
 const Sidebar = ({ children, location, config }) => (
   <>
     <div className={styles.layout}>
       <div className={styles.container}>
-        <img src={config.theme.logo} className={styles.logo} />
+        <div>
+          <img src={config.theme.logo} className={styles.logo} />
+        </div>
         {menuItems.map(({ id, label, route, icon }) => (
           <Link
             key={id}

@@ -7,7 +7,6 @@ import { EventDetailHeader } from '../events/EventDetailModal/index.module.scss'
 import { SideBarItem, SideBarActiveItem } from '../Sidebar/index.module.scss';
 import { AddButton } from '../AddButton/index.module.scss';
 
-
 const InjectStyles = ({ colors }) => (
   <style>{`
     .${AddEventModalHeader},
