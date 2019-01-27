@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
+import withStyles from './withIconStyles';
 
 const Lock = props => (
   <svg width={props.size} height={props.size} {...props} viewBox="0 0 24 24">
@@ -13,4 +13,4 @@ Lock.defaultProps = {
   size: 24
 };
 
-export default withTheme(Lock);
+export default withStyles(Lock);

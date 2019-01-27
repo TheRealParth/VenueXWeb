@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
+import withStyles from './withIconStyles';
 
 const Bell = ({ color = '#c0b69b', size = 25, theme, ...rest }) => (
   <svg width={size} height={size} {...rest} viewBox="0 0 22 24">
@@ -18,4 +18,4 @@ Bell.defaultProps = {
   size: 24
 };
 
-export default withTheme(Bell);
+export default withStyles(Bell);

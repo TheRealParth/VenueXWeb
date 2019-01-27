@@ -5,7 +5,7 @@ import { navigate } from './utils/constants';
 import CaretLeft from '../../assets/icons/CaretLeft';
 import CaretRight from '../../assets/icons/CaretRight';
 import PersonalMenu from '../../components/PersonalMenu';
-import AddButton from '../../components/AddButton';
+import AddButton from '../AddButton';
 import AddEventModal from '../events/AddEventModal';
 
 class Toolbar extends React.Component {
@@ -39,7 +39,7 @@ class Toolbar extends React.Component {
             className={'rbc-btn-navi-left'}
             onClick={this.navigate.bind(null, navigate.PREVIOUS)}
           >
-            <CaretLeft size={16} color="#c0b69b" />
+            <CaretLeft size={16} />
           </button>
 
           <div className="rbc-toolbar-label">{label}</div>
@@ -49,13 +49,14 @@ class Toolbar extends React.Component {
             className={'rbc-btn-navi-right'}
             onClick={this.navigate.bind(null, navigate.NEXT)}
           >
-            <CaretRight size={16} color="#c0b69b" />
+            <CaretRight size={16} />
           </button>
         </div>
         <div>
           {' '}
           <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
             <PersonalMenu {...this.props.currentUser} />
+            {console.log(this.props.currentUser)}
             <AddButton onClick={this.props.openModal} />
           </div>
         </div>

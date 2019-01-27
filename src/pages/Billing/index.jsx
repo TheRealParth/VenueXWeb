@@ -16,7 +16,7 @@ function mapStateToProps({ events, users, config, auth }) {
       orderBy: events.orderBy
     },
     sortedEvents: sortEventsSelector(events),
-    config: get(config, 'config', {})
+    config: get(config, 'config', { theme: {} })
   };
 }
 function mapDispatchToProps(dispatch) {

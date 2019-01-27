@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
+import withStyles from './withIconStyles';
 
 const Billing = props => (
   <svg width={props.size} height={props.size} viewBox="0 0 25 20" {...props}>
@@ -21,4 +21,4 @@ Billing.defaultProps = {
   size: 24
 };
 
-export default withTheme(Billing);
+export default withStyles(Billing);

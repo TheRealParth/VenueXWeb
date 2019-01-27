@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
+import withStyles from './withIconStyles';
 
 const Search = props => (
   <svg width={props.size} height={props.size} {...props} viewBox="0 0 14 14">
@@ -13,4 +13,4 @@ Search.defaultProps = {
   size: 24
 };
 
-export default withTheme(Search);
+export default withStyles(Search);
