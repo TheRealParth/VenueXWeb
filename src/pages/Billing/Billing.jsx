@@ -3,7 +3,7 @@ import BillingHeader from '../../components/BillingHeader';
 import BillingSummary from '../../components/BillingSummary';
 import BillingTable from '../../components/BillingTable';
 import InjectStyles from '../../components/InjectStyles';
-import { firebaseConnect } from 'react-redux-firebase';
+//import { firebaseConnect } from 'react-redux-firebase';
 
 import moment from 'moment';
 class Billing extends Component {
