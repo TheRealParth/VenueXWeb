@@ -39,7 +39,8 @@ class Billing extends Component {
     const { events } = this.props;
     const { currentDate } = this.state;
     const eventsThisMonth = this.eventsThisMonth();
-    let dueDate = moment(currentDate).add(1, 'M');
+    //let dueDate = moment(currentDate).add(1, 'M'); //TODO should pull from fireabse - currently hardcoded
+    let dueDate = moment(currentDate).add(2, 'day');
     const totalGuests = eventsThisMonth.reduce(
       (accumulator, currentValue) => accumulator + parseInt(currentValue.guests || 0, 10),
       0

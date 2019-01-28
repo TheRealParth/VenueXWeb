@@ -5,7 +5,8 @@ import {
   BillingSummaryItem,
   InvoiceButton,
   label,
-  value
+  value,
+  dueDateLessThan7Days
 } from './index.module.scss';
 import moment from 'moment';
 
@@ -29,7 +30,14 @@ const BillingSummary = props => (
         <div className={value}>$ {numberWithCommas(props.balance)}</div>
       </div>
       <div className={BillingSummaryItem}>
-        <div className={label}>Due date:{props.daysUntilDue}</div>
+        <div className={label}>
+          <div>
+            Due date:{' '}
+            <span className={props.daysUntilDue <= 7 ? dueDateLessThan7Days : label}>
+              in {props.daysUntilDue} days
+            </span>{' '}
+          </div>
+        </div>
         <div className={value} style={{ minWidth: '213px' }}>
           {props.dueDate.format('MMM d, YYYY')}
         </div>
