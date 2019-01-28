@@ -3,6 +3,8 @@ import BillingHeader from '../../components/BillingHeader';
 import BillingSummary from '../../components/BillingSummary';
 import BillingTable from '../../components/BillingTable';
 import InjectStyles from '../../components/InjectStyles';
+import { firebaseConnect } from 'react-redux-firebase';
+
 import moment from 'moment';
 class Billing extends Component {
   constructor(props) {
@@ -39,8 +41,12 @@ class Billing extends Component {
     const { events } = this.props;
     const { currentDate } = this.state;
     const eventsThisMonth = this.eventsThisMonth();
-    //let dueDate = moment(currentDate).add(1, 'M'); //TODO should pull from fireabse - currently hardcoded
+
+    //TODO should pull from fireabse - currently hardcoded
+    //let dueDate = moment(currentDate).add(1, 'M');
     let dueDate = moment(currentDate).add(2, 'day');
+    //firebaseConnect([{ type: 'once', path: 'config/dueDates/due' }]);
+
     const totalGuests = eventsThisMonth.reduce(
       (accumulator, currentValue) => accumulator + parseInt(currentValue.guests || 0, 10),
       0
