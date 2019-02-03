@@ -15,16 +15,10 @@ const Icon = styled.div`
   width: 12px;
   height: 12px;
   margin-left: 10.5px;
-  display: none;
   cursor: pointer;
 
   ${props =>
-    props.sortable === true &&
-    css`
-      display: block;
-    `};
-  ${props =>
-    props.sortable === true &&
+    props.sortable &&
     css`
       display: block;
     `};

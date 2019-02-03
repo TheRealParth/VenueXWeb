@@ -1,80 +1,206 @@
 import React, { PureComponent } from 'react';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import styled from 'styled-components';
 import Switch from '../form/Switch';
 import Button from '../Button';
 import Modal from '../Modal';
-import ConsultantsPicker from '../form/ConsultantsPicker';
-import {
-  DateTimeDurationFilled,
-  OwnerSelectedValidator,
-  NotEmptyValidator,
-} from '../../utils/formValidators';
+import { DateTimeDurationFilled, NotEmptyValidator } from '../../utils/formValidators';
 import Select from '../form/Select';
+import MultiSelect from '../form/MultiSelect';
 import Textarea from '../form/Textarea';
 import DateTimeDurationField from '../form/DateTimeDurationField';
-import { withVenueConfig } from '../../containers/VenueConfigProvider';
-import DatePickerField from '../form/DatePickerField';
 import Input from '../form/Input';
+import TitleInput from '../form/TitleInput';
+import SmallInput from '../form/SmallInput';
+import Icons from '../../assets/icons';
+import {
+  AddEventModalHeader,
+  AddEventModalContent,
+  AddEventModalSection
+} from './index.module.scss';
 
-const Header = styled.div`
-  background-color: ${props => props.theme.colors.primary}66;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  padding: 30px 0px;
-  font-size: 24px;
-  text-align: center;
-  color: #181818;
-`;
-
-const Content = styled.div`
-  padding: 50px;
-  overflow: scroll;
-`;
-
+//may want to add help text, tbd, leaving for now
 const Help = styled.div`
   text-align: right;
   color: #b0b0b0;
 `;
 
-const PaymentSchedule = styled.div`
-  display: flex;
-`;
-
-const Label = styled.div`
-  font-size: 15px;
-  color: #7d7d7d;
-  font-weight: 500;
-  padding-top: 20px;
-  padding-right: 15px;
-`;
-
+//from old code, not sure if needed
 const StyledButton = styled(Button)`
   margin: 0px 5px;
 `;
 
+//Individual section styling
+const Section = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #c0b59d66;
+  padding: 16px 20px;
+  margin: 20px 0 45px 0px;
+`;
+
+// section title styling,
+const SectionTitle = styled.div`
+  background-color: white;
+  margin-top: -27px;
+  padding: 0px 10px;
+  width: fit-content;
+  align-self: center;
+  color: #222222;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+`;
+
+//bad naming, used also for payment fields
+
+const User = styled.div`
+  display: flex;
+  animation: fadeIn 1s;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      diplay: none;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`;
+//bad naming, used also for payment fields
+//TO-DO: make real circle, current version is uneven
+const UserNumber = styled.div`
+  border: 1px solid #7d7d7d;
+  height: 25px !important;
+  width: 25px !important;
+  min-width: 25px;
+  border-radius: 50%;
+  padding: 5px;
+  text-align: center;
+  color: #7d7d7d;
+  font-weight: 600;
+  align-self: center;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+//styling plus button for the add more of users & payment fields
+// TO-DO: add space on left and right
+const AddMore = styled.div`
+  align-self: center;
+  margin-bottom: -29px;
+  background-color: white;
+  border: 1px solid #c0b59d;
+  border-radius: 100%;
+  padding: 4px;
+  margin: 0px 5px -33px 5px;
+  cursor: pointer;
+`;
 
 class EventModalForm extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = { users: 1, payments: 1 };
+    this.addUsers = this.addUsers.bind(this);
+    this.addPayment = this.addPayment.bind(this);
+  }
 
   componentDidUpdate(prevProps) {
     if (prevProps.selectedLayout !== this.props.selectedLayout) {
       if (!this.props.selectedLayout) {
         this.props.change('guestsPerTable', '');
       } else {
-        this.props.change(
-          'guestsPerTable',
-          this.props.venueConfig.rooms[
-            this.props.selectedRoom
-          ].layouts[
-            this.props.selectedLayout
-          ].perTable
-        );
       }
     }
   }
 
-  renderCustomField = (field) => {
+  // function to add additional user lines
+  addUsers() {
+    let { users } = this.state;
+    users++;
+    this.setState({ users: users++ });
+  }
+
+  // function to render user lines
+  //TO-DO: Add Space between Client Name & Email.
+  // Make it so if client Name is entered, email is required.
+  // allow deleting of specific row
+
+  renderNewUserFields() {
+    let { users } = this.state;
+    let userFields = [];
+    for (let i = 0; i < users; i++) {
+      userFields.push(i);
+    }
+    return userFields.map(user => {
+      return (
+        <User>
+          <Icons.User
+            style={{
+              alignSelf: 'center',
+              backgroundColor: '#c4c4c4',
+              borderRadius: '50%',
+              minWidth: '25px',
+              padding: '3px',
+              marginRight: '10px'
+            }}
+            size={25}
+            color="#fff"
+          />
+          <SmallInput
+            name={'clientName' + user + 1}
+            placeholder="Client Name"
+            component={Input}
+            validate={user === 0 ? NotEmptyValidator : ''}
+          // only first one is needed
+          />
+          <SmallInput
+            name={'clientEmail' + user + 1}
+            placeholder="Client Email"
+            component={Input}
+            validate={user === 0 ? NotEmptyValidator : ''}
+          /* current validator is set to require a minimum of one client, but needs to validate email if client Name is entered */
+          />
+        </User>
+      );
+    });
+  }
+
+  // function to add additional user lines
+  addPayment() {
+    let { payments } = this.state;
+    payments++;
+    this.setState({ payments: payments });
+  }
+
+  // function to render additional payment fields
+  // TO-DO: make date picker, not regular input. Style to fit better.
+  renderPaymentFields() {
+    let { payments } = this.state;
+    let paymentFields = [];
+    for (let i = 0; i < payments; i++) {
+      paymentFields.push(i);
+    }
+    return paymentFields.map(payment => {
+      return (
+        <User>
+          <Field
+            label={payment + 1 + 'st' + ' Payment Date:'}
+            name={'payment' + payment + 1}
+            component={Input}
+            validate={NotEmptyValidator}
+          />
+        </User>
+      );
+    });
+  }
+
+  // from old code, renders custom fields, not a current priority, but will want to add soon
+  renderCustomField = field => {
     let FieldComponent;
     let validators;
     switch (field.kind) {
@@ -103,189 +229,248 @@ class EventModalForm extends PureComponent {
         validate={validators}
       />
     );
-  }
+  };
 
   render() {
-    const { venueConfig } = this.props;
-    const { selectedRoom } = this.props;
-    const customFields = (
-      Object.keys(venueConfig.eventsExtraFields).map(fieldId => ({
-        id: fieldId,
-        label: venueConfig.eventsExtraFields[fieldId].label,
-        kind: venueConfig.eventsExtraFields[fieldId].kind,
-        options: venueConfig.eventsExtraFields[fieldId].options,
-      }))
-    );
+    const { selectedRoom, type, config } = this.props;
+
+    console.log('HERE', this.props);
+    let rooms = [];
+    let primaryColor;
+    let eventTypes = [];
+    if (config.theme !== undefined) {
+      primaryColor = config.theme.colors.primary;
+      for (let room in config.rooms) {
+        rooms.push(config.rooms[room]);
+      }
+      for (let type in config.eventTypes) {
+        eventTypes.push(config.eventTypes[type]);
+      }
+    }
 
     return (
-      <Modal
-        isOpen={this.props.isOpen}
-        onRequestClose={this.props.onClose}
-      >
-        <Header>
+      <Modal isOpen={this.props.isOpen} onRequestClose={this.props.onClose} width="610px">
+        <div className={AddEventModalHeader}>
           <div>Add New Event</div>
-        </Header>
-        <Content>
-          <Help>* All fields are required except the Notes.</Help>
-
-          <Field
-            name="consultants"
-            component={ConsultantsPicker}
-            validate={OwnerSelectedValidator}
-          />
-
+        </div>
+        <div className={AddEventModalContent}>
           <Field
             name="name"
-            label="Event name"
-            component={Input}
+            component={TitleInput}
             validate={NotEmptyValidator}
+            placeholder="Event Name"
           />
 
-          <Field
-            name="dateTimeDuration"
-            label="Event Date & Time"
-            component={DateTimeDurationField}
-            validate={DateTimeDurationFilled}
-          />
+          <div className={AddEventModalSection}>
+            <SectionTitle>Users</SectionTitle>
 
-          <Field
-            name="minimumGuests"
-            label="Guest minimum"
-            component={Input}
-            type="number"
-            validate={NotEmptyValidator}
-          />
+            {this.renderNewUserFields()}
 
-          <Field
-            name="type"
-            label="Event Type"
-            component={Select}
-            validate={NotEmptyValidator}
-            options={[
-              { value: 'wedding', label: 'Wedding' },
-            ]}
-          />
+            <AddMore onClick={this.addUsers}>
+              <div style={{ height: '24px', width: '24px' }}>
+                <Icons.Plus />
+              </div>
+            </AddMore>
+          </div>
+          <div className={AddEventModalSection}>
+            <SectionTitle>Event Staff</SectionTitle>
 
-          <Field
-            name="room"
-            label="Room"
-            component={Select}
-            validate={NotEmptyValidator}
-            options={Object.keys(venueConfig.rooms).map(roomId => ({
-              label: venueConfig.rooms[roomId].name,
-              value: roomId,
-            }))}
-          />
+            <Field
+              name="consultant"
+              component={props => (
+                <Select
+                  value={props.input.value}
+                  onChange={props.input.onChange}
+                  primaryColor={primaryColor}
+                  options={this.props.users.map(({ id, fullName }) => ({
+                    value: id,
+                    label: fullName
+                  }))}
+                  label="Consultant:"
+                />
+              )}
+              placeholder="Current User"
+              validate={NotEmptyValidator}
+              options={this.props.users
+                .filter(({ permissions }) => permissions.createAndEditEvents)
+                .map(({ id, fullName }) => ({ value: id, label: fullName }))}
+            />
+            <Field
+              name="eventTeam"
+              component={props => (
+                <MultiSelect
+                  value={props.input.value}
+                  onChange={props.input.onChange}
+                  primaryColor={primaryColor}
+                  options={this.props.users.map(({ id, fullName }) => ({
+                    value: id,
+                    label: fullName
+                  }))}
+                  label="Event Team:"
+                />
+              )}
+              type="select"
+              validate={NotEmptyValidator}
+              options={this.props.users.map(({ id, fullName }) => ({ value: id, label: fullName }))}
+            />
+          </div>
+          <div className={AddEventModalSection}>
+            <SectionTitle>Event Details</SectionTitle>
+            <Field
+              name="dateTimeDuration"
+              label="Event Date & Time:"
+              component={DateTimeDurationField}
+              validate={DateTimeDurationFilled}
+            />
+            <User>
+              <Field
+                name="type"
+                component={props => (
+                  <Select
+                    value={props.input.value}
+                    onChange={props.input.onChange}
+                    primaryColor={primaryColor}
+                    options={
+                      config
+                        ? eventTypes.map(type => ({
+                          label: type.name,
+                          value: type.typeId
+                        }))
+                        : []
+                    }
+                    label="Event Type:"
+                  />
+                )}
+                validate={NotEmptyValidator}
+              />
+              <Field
+                name="minimumGuests"
+                label="Guest Minimum:"
+                component={Input}
+                type="number"
+                validate={NotEmptyValidator}
+              />
+            </User>
 
-          {selectedRoom &&
-            <div style={{ display: 'flex' }}>
-              <div style={{ flex: 4 }}>
-                <Field
-                  name="tableLayout"
-                  label="Table Layout"
-                  component={Select}
-                  options={
-                    Object.keys(venueConfig.rooms[selectedRoom].layouts).map(layoutId => ({
-                      label: `${venueConfig.rooms[selectedRoom].layouts[layoutId].numberOfTables} tables`,
-                      value: layoutId,
-                    }))
+            {type === 'wedding' ? (
+              <Field
+                name="ceremonyKind"
+                label="Ceremony:"
+                component={Select}
+                validate={NotEmptyValidator}
+                options={[
+                  {
+                    label: 'Onsite',
+                    value: 'onsite'
+                  },
+                  {
+                    label: 'Offsite',
+                    value: 'offsite'
                   }
-                />
+                ]}
+              />
+            ) : (
+                ''
+              )}
+            <User>
+              <Field
+                name="room"
+                component={props => (
+                  <Select
+                    value={props.input.value}
+                    onChange={props.input.onChange}
+                    primaryColor={primaryColor}
+                    options={
+                      config
+                        ? rooms.map(room => ({
+                          label: room.name,
+                          value: room.roomId
+                        }))
+                        : []
+                    }
+                    label="Room:"
+                  />
+                )}
+                validate={NotEmptyValidator}
+              />
+              <Field
+                name="layout"
+                component={props => (
+                  <Select
+                    value={props.input.value}
+                    onChange={props.input.onChange}
+                    primaryColor={primaryColor}
+                    options={
+                      config
+                        ? rooms.map(room => ({
+                          label: room.name,
+                          value: room.roomId
+                        }))
+                        : []
+                    }
+                    label="Layout:"
+                  />
+                )}
+                validate={NotEmptyValidator}
+              />
+            </User>
+
+            {selectedRoom && (
+              <div style={{ display: 'flex' }}>
+                <div style={{ flex: 4 }}>
+                  <Field
+                    name="tableLayout"
+                    label="Room Table Layout:"
+                    component={Select}
+                    options={[].map(layoutId => ({
+                      label: `0 tables`,
+                      value: layoutId
+                    }))}
+                  />
+                </div>
+
+                <div style={{ flex: 3 }}>
+                  <Field name="guestsPerTable" label="Guests per table" component={Input} />
+                </div>
               </div>
+            )}
+          </div>
 
-              <div style={{ flex: 3 }}>
-                <Field
-                  name="guestsPerTable"
-                  label="Guests per table"
-                  component={Input}
-                />
+          <div className={AddEventModalSection}>
+            <SectionTitle>Payment Schedule</SectionTitle>
+            {this.renderPaymentFields()}
+            <AddMore onClick={this.addPayment}>
+              <div style={{ height: '24px', width: '24px' }}>
+                <Icons.Plus />
               </div>
-            </div>}
-
-          <Field
-            name="clientName"
-            label="Client name"
-            component={Input}
-            validate={NotEmptyValidator}
-          />
-
-          <Field
-            name="notes"
-            label="Notes"
-            component={Textarea}
-          />
-
-          <PaymentSchedule>
-            <Label>Payment schedule:</Label>
-            <div style={{ flex: 1 }}>
-              <Field
-                label="1st:"
-                name="firstPaymentDue"
-                component={DatePickerField}
-                validate={NotEmptyValidator}
-              />
-              <Field
-                label="2nd:"
-                name="secondPaymentDue"
-                component={DatePickerField}
-                validate={NotEmptyValidator}
-              />
-
-              <Field
-                label="3rd:"
-                name="thirdPaymentDue"
-                component={DatePickerField}
-                validate={NotEmptyValidator}
-              />
-            </div>
-          </PaymentSchedule>
-
-          <Field
-            name="ceremonyKind"
-            label="Ceremony"
-            component={Select}
-            validate={NotEmptyValidator}
-            options={[
-              {
-                label: 'Onsite',
-                value: 'onsite',
-              },
-              {
-                label: 'Offsite',
-                value: 'offsite',
-              }
-            ]}
-          />
-
-          {customFields.map(this.renderCustomField)}
-
-        </Content>
+            </AddMore>
+          </div>
+          <div className={AddEventModalSection}>
+            <SectionTitle>Notes</SectionTitle>
+            <Field name="notes" component={Textarea} />
+          </div>
+        </div>
 
         <Modal.Footer>
-          <StyledButton
-            label="Discard"
-            onClick={this.props.onClose}
-          />
-          <StyledButton
-            label="Save"
-            kind="primary"
-            onClick={this.props.handleSubmit}
-          />
+          <StyledButton label="Discard" onClick={this.props.onClose} />
+          <StyledButton label="Save" kind="primary" onClick={this.props.handleSubmit} />
         </Modal.Footer>
       </Modal>
     );
   }
 }
 
-const selector = formValueSelector('Event form');
-
-export default compose(
-  withVenueConfig,
-  connect(state => ({
-    selectedRoom: selector(state, 'room'),
-    selectedLayout: selector(state, 'tableLayout'),
-  })),
-  reduxForm({
-    form: 'Event form',
-  })
-)(EventModalForm);
+EventModalForm = reduxForm({
+  form: 'EventForm'
+})(EventModalForm);
+const selector = formValueSelector('EventForm');
+export default connect(state => {
+  // can select values individually
+  const formValues = selector(state, 'eventTeam', 'consultant');
+  // const favoriteColorValue = selector(state, 'favoriteColor')
+  // or together as a group
+  // const { firstName, lastName } = selector(state, 'firstName', 'lastName')
+  return {
+    ...formValues
+  };
+})(EventModalForm);

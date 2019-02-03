@@ -1,5 +1,4 @@
 import React from 'react';
-import { withTheme } from 'styled-components';
 
 const AddGroup = props => (
   <svg width={props.size} height={props.size} {...props} viewBox="0 0 41 22">
@@ -18,4 +17,4 @@ AddGroup.defaultProps = {
   size: 24
 };
 
-export default withTheme(AddGroup);
+export default AddGroup;

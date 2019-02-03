@@ -31,6 +31,7 @@ class SignInScreen extends Component {
   }
 
   render() {
+
     const { classes } = this.props;
     const { auth, alert, form } = this.props;
     const { loggingIn } = auth;
@@ -62,11 +63,9 @@ class SignInScreen extends Component {
               />
               <Field
                 component={GenericInput}
-                type="text"
                 className="form-control"
                 type="password"
                 name="password"
-                type="password"
                 label="Password"
                 autoComplete="current-password"
               />

@@ -3,21 +3,16 @@ import './assets/styles/normalize.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
-import store from './store/store.jsx';
-import { createBrowserHistory } from 'history';
+import store from './store/store';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './index.scss';
 
-const render = () => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.getElementById('root')
-  );
-};
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
 
-render();
 serviceWorker.unregister();

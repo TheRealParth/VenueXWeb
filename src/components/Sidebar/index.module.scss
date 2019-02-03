@@ -13,7 +13,7 @@
   height: 24px;
   margin-right: 10px;
 }
-.item {
+.SideBarItem {
   color: #fff;
   text-decoration: none;
   height: 70px;
@@ -25,9 +25,9 @@
   font-weight: bold;
   text-transform: uppercase;
   font-size: 12px;
-  transition-duration: 0.3s;
+  transition-duration: 0.2s;
 
-  &:hover {
+  /*&:hover {
     background-color: #3333334d;
   }
   &.active {
@@ -46,6 +46,9 @@
       width: 5px;
       background-color: '#333333';
       box-shadow: 3px 0 4px 0 rgba(0, 0, 0, 0.1);
-    }
-  }
+    } *
+  }  */
+}
+.SideBarActiveItem {
+  @extend .SideBarItem;
 }

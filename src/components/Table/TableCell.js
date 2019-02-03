@@ -2,19 +2,19 @@ import styled, { css } from 'styled-components';
 
 const TableCell = styled.div`
   font-family: Montserrat;
-  font-size: 12px;
+  font-size: 15px;
+  font-weight: 600;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
-  letter-spacing: 0.3px;
-  display: flex;
+  color: ${props => (props.selected ? '#7d7d7d' : '#222222')};
+  text-align: ${props => (props.center ? 'center' : '')};
+  text-transform: capitalize;
   min-width: 50px;
-  ${props =>
-    props.selected === true &&
-    css`
-      font-weight: bold;
-      color: #181818;
-    `};
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0px 10px;
+
   ${props =>
     props.width &&
     css`

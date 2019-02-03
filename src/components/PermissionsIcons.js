@@ -10,9 +10,8 @@ const PermissionIcons = styled.div`
 `;
 
 export default props => {
-  console.log(props);
   return (
-    <PermissionIcons {...props}>
+    <PermissionIcons style={{ maxWidth: '120px', minWidth: '0px', margin: 'auto' }} {...props}>
       <Icons.CalendarEdit {...props} color={props.events.create ? '#c0b69b' : '#D8D8D8'} />
       <Icons.CalendarDelete {...props} color={props.events.delete ? '#c0b69b' : '#D8D8D8'} />
       <Icons.Billing {...props} color={props.billing.create ? '#c0b69b' : '#D8D8D8'} />

@@ -3,9 +3,14 @@ import { connect } from 'react-redux';
 import { Events } from './Events';
 import * as actions from '../../actions';
 
-function mapStateToProps({ events }) {
+function mapStateToProps({ events, config, users, auth }) {
   return {
-    events: events.list
+    events: events.list,
+    config,
+    currentUser: auth.user ? users.list.find((user) => {
+      console.log(user)
+      return (user.id === auth.user.uid);
+    }) : {},
   };
 }
 function mapDispatchToProps(dispatch) {

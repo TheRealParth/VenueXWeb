@@ -6,6 +6,6 @@ export const syncVenues = venues => ({
 });
 
 export const syncConfig = config => ({
-  type: configTypes.GET_CONFIG_REQUEST,
+  type: configTypes.CONFIG.SYNC,
   config
 });

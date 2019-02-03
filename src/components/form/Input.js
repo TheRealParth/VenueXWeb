@@ -7,22 +7,25 @@ const Input = styled.input`
   border-bottom: solid 1px #d8d8d8;
   display: block;
   width: 100%;
-  padding: 5px;
   transition-duration: 0.3s;
+  margin-right: 20px;
 
   &:focus {
     outline: none;
-    border-bottom: solid 1px ${props => props.theme.colors.primary};
+    border-bottom: solid 1px #c0b59d;
   }
 
-  ${props => props.meta && props.meta.error && props.meta.touched && css`
-    border-bottom: solid 1px #c02026;
-  `}
-
+  ${props =>
+    props.meta &&
+    props.meta.error &&
+    props.meta.touched &&
+    css`
+      border-bottom: solid 1px #c02026;
+    `}
 `;
 
 export default props => (
   <BaseInput {...props}>
-    <Input type="text" {...props.input} {...props} />
+    <Input type="text" {...props.input} {...props} autoComplete="off" />
   </BaseInput>
 );

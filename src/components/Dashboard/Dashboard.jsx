@@ -35,9 +35,7 @@ class Dashboard extends React.Component {
         >
           <Sidebar />
         </Drawer>
-        <main className={classes.content}>
-          {children}
-        </main>
+        <main className={classes.content}>{children}</main>
       </div>
     );
   }
@@ -108,9 +106,11 @@ const styles = theme => ({
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    margin: theme.spacing.unit * 3,
     height: '100vh',
-    overflow: 'auto'
+    overflow: 'auto',
+    backgroundColor: ' #fafafa',
+    border: '1px solid #ededed'
   },
   chartContainer: {
     marginLeft: -22

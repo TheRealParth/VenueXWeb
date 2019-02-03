@@ -1,33 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import Grid from '@material-ui/core/Grid';
 import PersonIcon from '@material-ui/icons/Person';
 import { get } from 'lodash';
 
-const styles = {
-  container: {
-    direction: 'row',
-    alignItems: 'center'
-  },
-  avatar: {
-    margin: 10
-  }
-};
-
 const UserAvatar = ({ user, classes }) => {
   return (
-    <Grid styles={classes.container}>
+    <div className={classes.userInfo}>
       {user.picture ? (
-        <Avatar src={user.picture} className={classes.avatar} />
+        <Avatar src={user.picture} />
       ) : (
-        <Avatar className={classes.avatar}>
-          <PersonIcon />
-        </Avatar>
-      )}
-      {get(user, 'fullName', 'Full Name')}
-    </Grid>
+          <Avatar>
+            <PersonIcon />
+          </Avatar>
+        )}
+      <span className={classes.fullName}>
+        {get(user, 'fullName', 'Full Name')}
+      </span>
+    </div>
   );
 };
 
@@ -36,4 +26,4 @@ UserAvatar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(UserAvatar);
+export default UserAvatar;

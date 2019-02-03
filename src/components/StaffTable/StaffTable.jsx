@@ -1,51 +1,172 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import Checkbox from '../Checkbox.js';
+import Table from '../Table';
+import styled from 'styled-components';
 import moment from 'moment';
-import UserAvatar from './UserAvatar';
-import PermissionsIcons from '../PermissionsIcons';
+import Button from '../Button';
+import Icons from '../../assets/icons';
+import ConsultantLabel from '../Consultant';
+import EditStaffPermissionsDropdown from './EditStaffPermissionsDropdown';
+import { StaffTableContainer, IconsContainer } from './index.module.scss';
 
-const StaffTable = props => {
-  console.log(props);
-  const { users, classes } = props;
-  const { root, table } = classes;
+const StyledTableRow = styled(Table.Row)`
+  .actions {
+    display: none;
+
+    svg {
+      margin: 0px 3px;
+    }
+  }
+
+  &:hover {
+    .actions {
+      display: block;
+    }
+  }
+`;
+
+const StaffTable = ({
+  users,
+  sort,
+  setUsersSortKey,
+  anyChecked,
+  allChecked,
+  selectAllUsers,
+  unSelectAllUsers,
+  selectSingleUser,
+  unSelectSingleUser,
+  selectedCount,
+  deleteUsers,
+  primary
+}) => {
   return (
-    <Paper className={root}>
-      <Table className={table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell numeric>Email</TableCell>
-            <TableCell numeric>Permission</TableCell>
-            <TableCell numeric>Date Added</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {users.map(user => {
-            console.log(user);
-            const formattedDate = moment(user.created).format('MM/DD/YYYY');
+    <>
+      <div className={StaffTableContainer}>
+        <Table>
+          <Table.Row header height="75px" style={{ paddingTop: '10px' }}>
+            <Table.Cell width="5%">
+              <Table.HeaderCell
+                noSort
+                title={
+                  <Checkbox
+                    onCheck={selectAllUsers}
+                    onUncheck={unSelectAllUsers}
+                    checked={allChecked}
+                  />
+                }
+              />
+            </Table.Cell>
+            {!anyChecked ? (
+              <>
+                <Table.Cell width="20%">
+                  <Table.HeaderCell
+                    onClick={() =>
+                      setUsersSortKey('fullName', sort.orderBy === 'asc' ? 'desc' : 'asc')
+                    }
+                    rotate={sort.orderBy === 'desc' && sort.sortKey === 'fullName' ? 'asc' : 'desc'}
+                    title={'Name'}
+                    selected
+                    //style={{ paddingLeft: '49px' }} /* fixes padding issue, though incorrectly.. */
+                  />
+                </Table.Cell>
+                <Table.Cell width="20%">
+                  <Table.HeaderCell
+                    onClick={() =>
+                      setUsersSortKey('email', sort.orderBy === 'asc' ? 'desc' : 'asc')
+                    }
+                    rotate={sort.orderBy === 'desc' && sort.sortKey === 'email' ? 'asc' : 'desc'}
+                    numeric
+                    title="Email"
+                    center
+                  />
+                </Table.Cell>
+                <Table.Cell width="20%">
+                  <Table.HeaderCell onClick={() => {}} title="Permission" center noSort />
+                </Table.Cell>
+                <Table.Cell width="20%">
+                  <Table.HeaderCell
+                    onClick={() =>
+                      setUsersSortKey('created', sort.orderBy === 'asc' ? 'desc' : 'asc')
+                    }
+                    rotate={sort.orderBy === 'desc' && sort.sortKey === 'created' ? 'asc' : 'desc'}
+                    title="Date Added"
+                    center
+                  />
+                </Table.Cell>
+                <Table.Cell width="15%" />
+              </>
+            ) : (
+              <>
+                <Table.Cell width="38%">
+                  <EditStaffPermissionsDropdown
+                    selectedCount={selectedCount}
+                    selectedEmployees={users.filter(user => user.checked)}
+                  />
+                </Table.Cell>
+                <Table.Cell width="40%">
+                  <Button
+                    label={`Delete ${selectedCount} staff member${selectedCount > 1 ? 's' : ''}`}
+                    kind="danger"
+                    onClick={() => deleteUsers({ users: users.filter(user => user.checked) })}
+                  />
+                </Table.Cell>
+              </>
+            )}
+          </Table.Row>
+          <Table.Body>
+            {users.map(user => (
+              <StyledTableRow key={user.id}>
+                <Table.Cell width="5%">
+                  <Checkbox
+                    onCheck={() => selectSingleUser(user.id)}
+                    onUncheck={() => unSelectSingleUser(user.id)}
+                    checked={user.checked}
+                  />
+                </Table.Cell>
+                <Table.Cell width="20%">
+                  <ConsultantLabel name={user.fullName} picture={user.picture} />
+                </Table.Cell>
 
-            return (
-              <TableRow key={user.id}>
-                <TableCell component="th" scope="row">
-                  <UserAvatar user={user} />
-                </TableCell>
-                <TableCell numeric>{user.email}</TableCell>
-                <TableCell numeric>
-                  <PermissionsIcons {...user.permissions} />
-                </TableCell>
-                <TableCell numeric>{formattedDate}</TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </Paper>
+                <Table.Cell width="20%">{user.email}</Table.Cell>
+
+                <Table.Cell width="20%" center>
+                  <div className={IconsContainer}>
+                    <Icons.CalendarEdit
+                      size={24}
+                      color={!user.permissions.createAndEditEvents ? '#d8d8d8' : primary}
+                    />
+                    <Icons.CalendarDelete
+                      size={24}
+                      color={!user.permissions.deleteEvents ? '#d8d8d8' : primary}
+                    />
+                    <Icons.Billing
+                      size={24}
+                      color={!user.permissions.viewBilling ? '#d8d8d8' : primary}
+                    />
+                    <Icons.ManageStaff
+                      size={24}
+                      color={!user.permissions.manageStaffPermissions ? '#d8d8d8' : primary}
+                    />
+                  </div>
+                </Table.Cell>
+
+                <Table.Cell width="20%" center selected>
+                  {moment(user.createdAt).format('MM/DD/YYYY')}
+                </Table.Cell>
+
+                <Table.Cell width="15%">
+                  <div className="actions">
+                    <Icons.Delete size={24} color="#7d7d7d" />
+                    <Icons.Delete size={24} color="#7d7d7d" />
+                  </div>
+                </Table.Cell>
+              </StyledTableRow>
+            ))}
+          </Table.Body>
+        </Table>
+      </div>
+    </>
   );
 };
 

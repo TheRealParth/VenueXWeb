@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-
 import styled from 'styled-components';
 import Dropdown from './Dropdown';
 import LogOut from '../assets/icons/LogOut';
@@ -11,10 +9,24 @@ const ProfilePicture = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, .10);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   margin: 0px 5px;
   cursor: pointer;
 `;
+
+const MissingProfilePicture = {
+  width: '50px',
+  height: '50px',
+  borderRadius: '50%',
+  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+  margin: '0px 5px',
+  cursor: 'pointer',
+  textAlign: 'center',
+  color: 'black',
+  verticalAlign: 'middle',
+  lineHeight: '50px',
+  fontFamily: 'Montserrat-Bold'
+};
 
 const NameSection = styled.div`
   padding: 10px 0px;
@@ -37,19 +49,21 @@ const Item = styled.div`
   }
 `;
 
-const PersonalMenu = ({ currentUser }) => (
+const PersonalMenu = ({ picture, fullName }) => (
   <div>
     <Dropdown
       toggle={
-        <ProfilePicture
-          src="https://placehold.it/100x100"
-        />
+        picture === undefined ? (
+          <div style={MissingProfilePicture}>
+            {fullName === undefined ? '' : fullName.charAt(0).toUpperCase()}
+          </div>
+        ) : (
+          <ProfilePicture src={picture} />
+        )
       }
     >
       <div>
-        <NameSection>
-          Hi, {currentUser.displayName}
-        </NameSection>
+        <NameSection>{`Hi, ${fullName}`}</NameSection>
 
         <Item>
           <Camera color="#b0b0b0" />
@@ -70,6 +84,4 @@ const PersonalMenu = ({ currentUser }) => (
   </div>
 );
 
-export default connect(state => ({
-  currentUser: () => { },
-}))(PersonalMenu);
+export default PersonalMenu;
